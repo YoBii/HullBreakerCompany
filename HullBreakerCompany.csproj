@@ -3,8 +3,8 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <AssemblyName>HullBreakerCompany</AssemblyName>
-        <Description>Making it more difficult to work for a company</Description>
-        <Version>1.0.0</Version>
+        <Description>Making it more challenging to work for the company</Description>
+        <Version>1.1.0</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>

@@ -15,5 +15,7 @@ public enum GameEvents
     Slime,
     DevochkaPizdec,
     EnemyBounty,
-    
+    OneForAll,
+    OpenTheNoor,
+    OnAPowderKeg,
 }
