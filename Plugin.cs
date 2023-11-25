@@ -55,7 +55,7 @@ namespace HullBreakerCompany
             //Events & stopCoroutine
             _bountyIsActive = false;
             _oneForAllIsActive = false;
-            
+            ResetLevelUnits(newLevel);
             
             var n = newLevel;
             var randomEvents = RandomEnumSelector.GetRandomGameEvents();
@@ -64,7 +64,7 @@ namespace HullBreakerCompany
 
             n.maxScrap += Random.Range(10, 30);
             n.maxTotalScrapValue += 800;
-            n.outsideEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe(0f, 0f));
+            n.outsideEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 0));;
             
             foreach (GameEvents gameEvent in randomEvents)
             {
@@ -218,11 +218,11 @@ namespace HullBreakerCompany
             return true;
         }
         
-        private static SelectableLevel LevelUnits(SelectableLevel n, bool turret = false, bool landmine = false)
+        private static void LevelUnits(SelectableLevel n, bool turret = false, bool landmine = false)
         {
             
             Mls.LogInfo($"Turret: {turret}, Landmine: {landmine}");
-            var curve = new AnimationCurve(new Keyframe(0f, 100f),
+            var curve = new AnimationCurve(new Keyframe(0f, 64f),
                 new Keyframe(1f, 25));
 
             foreach (var unit in n.spawnableMapObjects)
@@ -235,8 +235,14 @@ namespace HullBreakerCompany
                     unit.numberToSpawn = curve;
                 }
             }
-
-            return n;
+            
+        }
+        private static void ResetLevelUnits(SelectableLevel level)
+        {
+            foreach (var unit in level.spawnableMapObjects)
+            {
+                unit.numberToSpawn = new AnimationCurve(new Keyframe(0f, 4f));
+            }
         }
 
         [HarmonyPostfix]
