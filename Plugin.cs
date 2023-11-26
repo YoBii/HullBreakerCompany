@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using BepInEx;
@@ -137,8 +136,8 @@ namespace HullBreakerCompany
                         HullManager.Instance.ExecuteAfterDelay(() => { CloseBigDoors(); }, 10f);
                         break;
                     case GameEvents.OnAPowderKeg:
-                        message = "<color=red>CAUTION</color>, <color=white>landmines can detonate at any time</color>";
-                        HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(); }, Random.Range(80, 640));
+                        message = "<color=red>CAUTION,</color> <color=white>landmines can detonate at any time</color>";
+                        HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(); }, Random.Range(60, 700));
                         break;
                     case GameEvents.Nothing:
                         message = "<color=white>...</color>";
@@ -211,9 +210,7 @@ namespace HullBreakerCompany
             foreach (Landmine landmine in landmines)
             {
                 landmine.ExplodeMineServerRpc();
-                
             }
-            
             Mls.LogInfo("Detonate landmine");
             return true;
         }
