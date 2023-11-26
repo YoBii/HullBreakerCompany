@@ -8,7 +8,6 @@ using HarmonyLib;
 using HullBreakerCompany.Event;
 using HullBreakerCompany.Events;
 using HullBreakerCompany.hull;
-using LC_API;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -24,7 +23,7 @@ namespace HullBreakerCompany
         public static bool OneForAllIsActive;
         public static bool BountyIsActive;
         
-        Harmony _harmony = new(MyPluginInfo.PLUGIN_GUID);
+        Harmony _harmony = new("HULLBREAKER");
 
         private void Awake()
         {
@@ -93,6 +92,15 @@ namespace HullBreakerCompany
                 new (32f, -64f),
                 new (32f, 16f)
             });
+
+            if (!randomEvents.Contains(GameEvents.Hell))
+            {
+                componentRarity.Add(typeof(JesterAI), 1);
+            }
+            if (!randomEvents.Contains(GameEvents.SpringMan))
+            {
+                componentRarity.Add(typeof(SpringManAI), 10);
+            }
             
             foreach (GameEvents gameEvent in randomEvents)
             {

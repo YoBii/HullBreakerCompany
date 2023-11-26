@@ -9,7 +9,7 @@ public class ArachnophobiaEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         string message = "<color=white>Possible habitat of spiders</color>";
-        componentRarity.Add(typeof(SandSpiderAI), 512);
+        componentRarity.Add(typeof(SandSpiderAI), 256);
         HUDManager.Instance.AddTextToChatOnServer(message);
     }
 }

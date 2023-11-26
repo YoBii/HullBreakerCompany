@@ -12,7 +12,7 @@ public class BeeEvent : HullEvent
         string message = "<color=white>Possibly a large amount of bee hives</color>";
         foreach (var unit in level.DaytimeEnemies.Where(unit => unit.enemyType.enemyPrefab.GetComponent<RedLocustBees>() != null))
         {
-            unit.rarity = 512;
+            unit.rarity = 256;
             break;
         }
         HUDManager.Instance.AddTextToChatOnServer(message);

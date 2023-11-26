@@ -4,7 +4,7 @@
         <TargetFramework>netstandard2.1</TargetFramework>
         <AssemblyName>HullBreakerCompany</AssemblyName>
         <Description>Making it more challenging to work for the company</Description>
-        <Version>1.1.6</Version>
+        <Version>1.1.7</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
@@ -21,9 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Reference  Include="LC_API">
-            <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\plugins\LC_API.dll</HintPath>
-        </Reference>
         <Reference Include="Assembly-CSharp">
             <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath> 
         </Reference>

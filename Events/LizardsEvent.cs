@@ -9,7 +9,7 @@ public class LizardsEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         string message = "<color=white>Horrible smell from toxic lizards</color>";
-        componentRarity.Add(typeof(PufferAI), 512);
+        componentRarity.Add(typeof(PufferAI), 64);
         HUDManager.Instance.AddTextToChatOnServer(message);
     }
 }

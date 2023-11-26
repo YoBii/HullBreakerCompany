@@ -11,7 +11,7 @@ public class HellEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         string message = "<color=orange>It says here that there is total hell happening on the this moon</color>";
-        componentRarity.Add(typeof(JesterAI), 128);
+        componentRarity.Add(typeof(JesterAI), 64);
         
         HUDManager.Instance.AddTextToChatOnServer(message);
         RoundManager.Instance.hourTimeBetweenEnemySpawnBatches = 1;
@@ -27,9 +27,7 @@ public class HellEvent : HullEvent
             if (enemyVent.Length > 0)
             {
                 EnemyVent randomVent = enemyVent[Random.Range(0, enemyVent.Length)];
-                var rm = RoundManager.Instance;
                 RoundManager.Instance.SpawnEnemyFromVent(randomVent);
-                rm.SpawnEnemyOnServer(rm.allEnemyVents[Random.Range(0, rm.allEnemyVents.Length)].floorNode.position, rm.allEnemyVents[i].floorNode.eulerAngles.y, rm.currentLevel.Enemies.IndexOf(rm.currentLevel.Enemies[Random.Range(0, rm.currentLevel.Enemies.Count)]));
             }
         }
 
