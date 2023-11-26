@@ -38,6 +38,21 @@ internal class HullManager : MonoBehaviour
     {
         StartCoroutine(DelayedExecution(action, delay));
     }
+    
+    public void RepeatingExecute(Action action, float delay, float interval)
+    {
+        StartCoroutine(RepeatingExecution(action, delay, interval));
+    }
+
+    private IEnumerator RepeatingExecution(Action action, float delay, float interval)
+    {
+        yield return new WaitForSeconds(delay);
+        while (true)
+        {
+            action.Invoke();
+            yield return new WaitForSeconds(interval);
+        }
+    }
 
     private IEnumerator DelayedExecution(Action action, float delay)
     {

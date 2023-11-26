@@ -8,7 +8,7 @@ public abstract class RandomEnumSelector
     private static Random _random = new();
     public static List<GameEvents> GetRandomGameEvents()
     {
-        var gameEvents = GetWeightedRandomGameEvents(ConfigManager.GetWeights(), 3);
+        var gameEvents = GetWeightedRandomGameEvents(ConfigManager.GetWeights(), ConfigManager.GetEventCount());
         return gameEvents;
     }
 
