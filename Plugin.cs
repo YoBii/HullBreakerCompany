@@ -40,6 +40,8 @@ namespace HullBreakerCompany
                 DontDestroyOnLoad(hullManager);
                 hullManager.AddComponent<HullManager>();
                 
+                Mls.LogInfo("HullManager created");
+                
                 _loaded = true;
             }
         }
@@ -187,7 +189,7 @@ namespace HullBreakerCompany
             tl.groupCredits += 30;
             tl.SyncGroupCreditsServerRpc(tl.groupCredits, tl.numberOfItemsInDropship);
             
-            HUDManager.Instance.AddTextToChatOnServer($"<color=green>Workers get paid for killing enemy</color>");
+            HullManager.SendChatMessage("<color=green>Workers get paid for killing enemy</color>");
         }
         
         [HarmonyPostfix]
@@ -200,7 +202,7 @@ namespace HullBreakerCompany
             gc.timeOfDay.votedShipToLeaveEarlyThisRound = true;
             gc.timeOfDay.SetShipLeaveEarlyServerRpc();
             
-            HUDManager.Instance.AddTextToChatOnServer($"<color=red>One of the workers died, the ship will go into orbit in an hour</color>");
+            HullManager.SendChatMessage("<color=red>One of the workers died, the ship will go into orbit in an hour</color>");
         }
 
     }

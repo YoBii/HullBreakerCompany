@@ -10,10 +10,10 @@ public class HellEvent : HullEvent
 {
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        string message = "<color=orange>It says here that there is total hell happening on the this moon</color>";
+        const string message = "<color=orange>It says here that there is total hell happening on the this moon</color>";
         componentRarity.Add(typeof(JesterAI), 64);
         
-        HUDManager.Instance.AddTextToChatOnServer(message);
+        HullManager.SendChatMessage(message);
         RoundManager.Instance.hourTimeBetweenEnemySpawnBatches = 1;
 
         HullManager.Instance.ExecuteAfterDelay(() => { Hell(); }, 15f);

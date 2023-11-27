@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using HullBreakerCompany.Event;
+using HullBreakerCompany.hull;
 
 namespace HullBreakerCompany.Events;
 
@@ -8,8 +9,8 @@ public class LizardsEvent : HullEvent
 {
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        string message = "<color=white>Horrible smell from toxic lizards</color>";
+        const string message = "<color=white>Horrible smell from toxic lizards</color>";
         componentRarity.Add(typeof(PufferAI), 64);
-        HUDManager.Instance.AddTextToChatOnServer(message);
+        HullManager.SendChatMessage(message);
     }
 }

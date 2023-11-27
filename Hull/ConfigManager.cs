@@ -72,6 +72,7 @@ namespace HullBreakerCompany.hull
             sw.WriteLine("OneForAll = 2");
             sw.WriteLine("OpenTheNoor = 3");
             sw.WriteLine("OnAPowderKeg = 1");
+            sw.WriteLine("Hell = 1");
         }
     }
 }

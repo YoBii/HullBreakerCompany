@@ -9,9 +9,9 @@ public class OnAPowderKegEvent : HullEvent
 {
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        string message = "<color=red>CAUTION,</color> <color=white>landmines can detonate at any time</color>";
+        const string message = "<color=red>CAUTION,</color> <color=white>landmines can detonate at any time</color>";
         HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(); }, UnityEngine.Random.Range(60, 700));
-        HUDManager.Instance.AddTextToChatOnServer(message);
+        HullManager.SendChatMessage(message);
     }
 
     private void DetonateLandMine()

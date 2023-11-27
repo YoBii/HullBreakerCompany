@@ -59,4 +59,14 @@ internal class HullManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         action.Invoke();
     }
+    
+    public static void SendChatMessage(String message)
+    {
+        if (HUDManager.Instance != null && message != null)
+        {
+            HUDManager.Instance.AddTextToChatOnServer(message);
+        } else {
+            Plugin.Mls.LogInfo("Could not find HUDManager instance" +  "\n" + message);
+        }
+    }
 }
