@@ -8,6 +8,7 @@ namespace HullBreakerCompany.Events;
 
 public class OutSideEnemyDayEvent : HullEvent
 {
+    public override string ID() => "OutSideEnemyDay";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=white>Increased amount of enemies on the surface during the daytime</color>";

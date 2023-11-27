@@ -7,6 +7,7 @@ namespace HullBreakerCompany.Events;
 
 public class HoarderBugEvent : HullEvent
 {
+    public override string ID() => "HoarderBug";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=white>Keep an eye on the loot, Hoarding Bugs nearby</color>";

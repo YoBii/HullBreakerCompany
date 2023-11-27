@@ -7,6 +7,7 @@ namespace HullBreakerCompany.Events;
 
 public class SlimeEvent : HullEvent
 {
+    public override string ID() => "Slime";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=white>Inhabited with slime</color>";

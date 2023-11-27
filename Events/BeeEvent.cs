@@ -8,6 +8,8 @@ namespace HullBreakerCompany.Events;
 
 public class BeeEvent : HullEvent
 {
+    public override string ID() => "Bee";
+    
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=white>Possibly a large amount of bee hives</color>";

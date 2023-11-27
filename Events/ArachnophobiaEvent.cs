@@ -7,6 +7,7 @@ namespace HullBreakerCompany.Events;
 
 public class ArachnophobiaEvent : HullEvent
 {
+    public override string ID() => "Arachnophobia";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=white>Possible habitat of spiders</color>";

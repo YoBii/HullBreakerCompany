@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.hull;
 
-public abstract class RandomEnumSelector
+public abstract class RandomSelector
 {
     private static Random _random = new();
-    public static List<GameEvents> GetRandomGameEvents()
+    public static List<String> GetRandomGameEvents()
     {
         var gameEvents = GetWeightedRandomGameEvents(ConfigManager.GetWeights(), ConfigManager.GetEventCount());
         return gameEvents;

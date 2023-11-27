@@ -7,6 +7,7 @@ namespace HullBreakerCompany.Events;
 
 public class LizardsEvent : HullEvent
 {
+    public override string ID() => "Lizards";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=white>Horrible smell from toxic lizards</color>";

@@ -14,29 +14,29 @@ namespace HullBreakerCompany.hull
             EnsureConfigExists();
             return _configFile.Bind("Settings", "EventCount", 3).Value;
         }
-        public static Dictionary<GameEvents, int> GetWeights()
+        public static Dictionary<string, int> GetWeights()
         {
             EnsureConfigExists();
 
-            return new Dictionary<GameEvents, int>()
+            return new Dictionary<string, int>()
             {
-                { GameEvents.Nothing, _configFile.Bind("Weights", "Nothing", 30).Value },
-                { GameEvents.FlowerMan, _configFile.Bind("Weights", "FlowerMan", 20).Value },
-                { GameEvents.SpringMan, _configFile.Bind("Weights", "SpringMan", 10).Value },
-                { GameEvents.HoarderBug, _configFile.Bind("Weights", "HoarderBug", 50).Value },
-                { GameEvents.Turret, _configFile.Bind("Weights", "Turret", 10).Value },
-                { GameEvents.LandMine, _configFile.Bind("Weights", "LandMine", 30).Value },
-                { GameEvents.OutSideEnemyDay, _configFile.Bind("Weights", "OutSideEnemyDay", 10).Value },
-                { GameEvents.Lizards, _configFile.Bind("Weights", "Lizards", 15).Value },
-                { GameEvents.Arachnophobia, _configFile.Bind("Weights", "Arachnophobia", 20).Value },
-                { GameEvents.Bee, _configFile.Bind("Weights", "Bee", 30).Value },
-                { GameEvents.Slime, _configFile.Bind("Weights", "Slime", 20).Value },
-                { GameEvents.DevochkaPizdec, _configFile.Bind("Weights", "DevochkaPizdec", 4).Value },
-                { GameEvents.EnemyBounty, _configFile.Bind("Weights", "EnemyBounty", 50).Value },
-                { GameEvents.OneForAll, _configFile.Bind("Weights", "OneForAll", 10).Value },
-                { GameEvents.OpenTheNoor, _configFile.Bind("Weights", "OpenTheNoor", 20).Value },
-                { GameEvents.OnAPowderKeg, _configFile.Bind("Weights", "OnAPowderKeg", 10).Value },
-                { GameEvents.Hell, _configFile.Bind("Weights", "Hell", 1).Value }
+                { "Nothing", _configFile.Bind("Weights", "Nothing", 30).Value },
+                { "FlowerMan", _configFile.Bind("Weights", "FlowerMan", 20).Value },
+                { "SpringMan", _configFile.Bind("Weights", "SpringMan", 10).Value },
+                { "HoarderBug", _configFile.Bind("Weights", "HoarderBug", 50).Value },
+                { "Turret", _configFile.Bind("Weights", "Turret", 10).Value },
+                { "LandMine", _configFile.Bind("Weights", "LandMine", 30).Value },
+                { "OutSideEnemyDay", _configFile.Bind("Weights", "OutSideEnemyDay", 10).Value },
+                { "Lizards", _configFile.Bind("Weights", "Lizards", 15).Value },
+                { "Arachnophobia", _configFile.Bind("Weights", "Arachnophobia", 20).Value },
+                { "Bee", _configFile.Bind("Weights", "Bee", 30).Value },
+                { "Slime", _configFile.Bind("Weights", "Slime", 20).Value },
+                { "DevochkaPizdec", _configFile.Bind("Weights", "DevochkaPizdec", 4).Value },
+                { "EnemyBounty", _configFile.Bind("Weights", "EnemyBounty", 50).Value },
+                { "OneForAll", _configFile.Bind("Weights", "OneForAll", 10).Value },
+                { "OpenTheNoor", _configFile.Bind("Weights", "OpenTheNoor", 20).Value },
+                { "OnAPowderKeg", _configFile.Bind("Weights", "OnAPowderKeg", 10).Value },
+                { "Hell", _configFile.Bind("Weights", "Hell", 1).Value }
             };
         }
 

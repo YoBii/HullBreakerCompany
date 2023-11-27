@@ -7,6 +7,7 @@ namespace HullBreakerCompany.Events;
 
 public class OnAPowderKegEvent : HullEvent
 {
+    public override string ID() => "OnAPowderKeg";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=red>CAUTION,</color> <color=white>landmines can detonate at any time</color>";

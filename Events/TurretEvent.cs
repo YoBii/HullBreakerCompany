@@ -7,6 +7,7 @@ namespace HullBreakerCompany.Events;
 
 public class TurretEvent : HullEvent
 {
+    public override string ID() => "Turret";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=white>Alert, turrets detected</color>";

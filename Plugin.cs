@@ -59,28 +59,28 @@ namespace HullBreakerCompany
             ResetLevelUnits(newLevel);
             
             var n = newLevel;
-            var randomEvents = RandomEnumSelector.GetRandomGameEvents();
+            var randomEvents = RandomSelector.GetRandomGameEvents();
             var componentRarity = new Dictionary<Type, int>();
             componentRarity.Clear();
-            var eventDictionary = new Dictionary<GameEvents, HullEvent>
+            var eventDictionary = new List<HullEvent>
             {
-                { GameEvents.FlowerMan, new FlowerManEvent() },
-                { GameEvents.Turret, new TurretEvent() },
-                { GameEvents.LandMine, new LandMineEvent() },
-                { GameEvents.HoarderBug, new HoarderBugEvent() },
-                { GameEvents.SpringMan, new SpringManEvent() },
-                { GameEvents.Lizards, new LizardsEvent() },
-                { GameEvents.Arachnophobia, new ArachnophobiaEvent() },
-                { GameEvents.Bee, new BeeEvent() },
-                { GameEvents.Slime, new SlimeEvent() },
-                { GameEvents.DevochkaPizdec, new DevochkaPizdecEvent() },
-                { GameEvents.EnemyBounty, new EnemyBountyEvent() },
-                { GameEvents.OneForAll, new OneForAllEvent() },
-                { GameEvents.OpenTheNoor, new OpenTheNoorEvent() },
-                { GameEvents.OnAPowderKeg, new OnAPowderKegEvent() },
-                { GameEvents.OutSideEnemyDay, new OutSideEnemyDayEvent()},
-                { GameEvents.Hell, new HellEvent()},
-                { GameEvents.Nothing, new NothingEvent()}
+                { new FlowerManEvent() },
+                { new TurretEvent() },
+                { new LandMineEvent() },
+                { new HoarderBugEvent() },
+                { new SpringManEvent() },
+                { new LizardsEvent() },
+                { new ArachnophobiaEvent() },
+                { new BeeEvent() },
+                { new SlimeEvent() },
+                { new DevochkaPizdecEvent() },
+                { new EnemyBountyEvent() },
+                { new OneForAllEvent() },
+                { new OpenTheNoorEvent() },
+                { new OnAPowderKegEvent() },
+                { new OutSideEnemyDayEvent()},
+                { new HellEvent()},
+                { new NothingEvent()}
                 
             };
             
@@ -95,33 +95,24 @@ namespace HullBreakerCompany
                 new (32f, 16f)
             });
 
-            if (!randomEvents.Contains(GameEvents.Hell))
+            if (!randomEvents.Contains("Hell"))
             {
                 componentRarity.Add(typeof(JesterAI), 1);
             }
-            if (!randomEvents.Contains(GameEvents.SpringMan))
+            if (!randomEvents.Contains("SpringMan"))
             {
                 componentRarity.Add(typeof(SpringManAI), 10);
             }
             
-            foreach (GameEvents gameEvent in randomEvents)
+            foreach (string gameEvent in randomEvents)
             {
                 try
                 {
-                    if (eventDictionary.TryGetValue(gameEvent, out HullEvent hullEvent))
+                    HullEvent hullEvent = eventDictionary.FirstOrDefault(e => e.ID() == gameEvent);
+                    if (hullEvent != null)
                     {
                         hullEvent.Execute(newLevel, componentRarity);
                         Mls.LogInfo($"Event: {gameEvent}");
-                    }
-
-                    if (componentRarity.Count <= 0) continue;
-                    foreach (var unit in newLevel.Enemies)
-                    {
-                        foreach (var componentRarityPair in componentRarity.Where(componentRarityPair => unit.enemyType.enemyPrefab.GetComponent(componentRarityPair.Key) != null))
-                        {
-                            unit.rarity = componentRarityPair.Value;
-                            break;
-                        }
                     }
                 }
                 catch (NullReferenceException ex)

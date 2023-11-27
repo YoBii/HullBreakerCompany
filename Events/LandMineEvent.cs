@@ -7,6 +7,7 @@ namespace HullBreakerCompany.Events;
 
 public class LandMineEvent : HullEvent
 {
+    public override string ID() => "LandMine";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=white>Watch your step, there are a lot of landmines</color>";

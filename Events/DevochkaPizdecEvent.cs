@@ -7,6 +7,7 @@ namespace HullBreakerCompany.Events;
 
 public class DevochkaPizdecEvent : HullEvent
 {
+    public override string ID() => "DevochkaPizdec";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=white>A lot of workers are going crazy here</color>";

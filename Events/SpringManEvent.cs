@@ -7,6 +7,7 @@ namespace HullBreakerCompany.Events;
 
 public class SpringManEvent : HullEvent
 {
+    public override string ID() => "SpringMan";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=white>It's impossible not to look at them</color>";

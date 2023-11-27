@@ -8,6 +8,7 @@ namespace HullBreakerCompany.Events;
 
 public class HellEvent : HullEvent
 {
+    public override string ID() => "Hell";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=orange>It says here that there is total hell happening on the this moon</color>";

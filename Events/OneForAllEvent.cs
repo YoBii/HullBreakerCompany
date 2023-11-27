@@ -8,6 +8,7 @@ namespace HullBreakerCompany.Events;
 
 public class OneForAllEvent : HullEvent
 {
+    public override string ID() => "OneForAll";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
         const string message = "<color=white>The ship will fly into orbit in an hour if one of the workers dies</color>";
