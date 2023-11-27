@@ -106,22 +106,29 @@ namespace HullBreakerCompany
             
             foreach (GameEvents gameEvent in randomEvents)
             {
-                if (eventDictionary.TryGetValue(gameEvent, out HullEvent hullEvent))
+                try
                 {
-                    hullEvent.Execute(newLevel, componentRarity);
-                    Mls.LogInfo($"Event: {gameEvent}");
-                }
-
-                if (componentRarity.Count <= 0) continue;
-                foreach (var unit in newLevel.Enemies)
-                {
-                    foreach (var componentRarityPair in componentRarity.Where(componentRarityPair => unit.enemyType.enemyPrefab.GetComponent(componentRarityPair.Key) != null))
+                    if (eventDictionary.TryGetValue(gameEvent, out HullEvent hullEvent))
                     {
-                        unit.rarity = componentRarityPair.Value;
-                        break;
+                        hullEvent.Execute(newLevel, componentRarity);
+                        Mls.LogInfo($"Event: {gameEvent}");
+                    }
+
+                    if (componentRarity.Count <= 0) continue;
+                    foreach (var unit in newLevel.Enemies)
+                    {
+                        foreach (var componentRarityPair in componentRarity.Where(componentRarityPair => unit.enemyType.enemyPrefab.GetComponent(componentRarityPair.Key) != null))
+                        {
+                            unit.rarity = componentRarityPair.Value;
+                            break;
+                        }
                     }
                 }
-
+                catch (NullReferenceException ex)
+                {
+                    Mls.LogError($"NullReferenceException caught while processing event: {gameEvent}. Exception message: {ex.Message}");
+                    Mls.LogError("Try set false BepInEx.cfg [ChainLoader] HideManagerGameObject");
+                }
             }
             
             //debug logs
