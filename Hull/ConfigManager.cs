@@ -14,32 +14,39 @@ namespace HullBreakerCompany.hull
             EnsureConfigExists();
             return _configFile.Bind("Settings", "EventCount", 3).Value;
         }
+        public static bool GetIncreaseEventCountPerDay()
+        {
+            EnsureConfigExists();
+            return _configFile.Bind("Settings", "IncreaseEventCountPerDay", false, "The number of events will increase every day. Visit the company building to reset").Value;
+        }
+        public static float GetBunkerEnemyScale()
+        {
+            EnsureConfigExists();
+            return _configFile.Bind("Settings", "BunkerEnemyScale", 256, "Should change global bunker enemy spawn rate, not sure if its work").Value;
+        }
+        public static float GetLandMineTurretScale()
+        {
+            EnsureConfigExists();
+            return _configFile.Bind("Settings", "LandMineTurretScale", 64, "Should change amount of Landmines & Turrets when these events are active: (Landmine & Turret)").Value;
+        }
+        public static bool GetUseShortChatMessages()
+        {
+            EnsureConfigExists();
+            return _configFile.Bind("Settings", "UseShortChatMessages", false, "Use short event message (one/two words), can add surprise effect & difficulty").Value;
+        }
         public static Dictionary<string, int> GetWeights()
         {
             EnsureConfigExists();
 
-            return new Dictionary<string, int>()
-            {
-                { "Nothing", _configFile.Bind("Weights", "Nothing", 30).Value },
-                { "FlowerMan", _configFile.Bind("Weights", "FlowerMan", 20).Value },
-                { "SpringMan", _configFile.Bind("Weights", "SpringMan", 10).Value },
-                { "HoarderBug", _configFile.Bind("Weights", "HoarderBug", 50).Value },
-                { "Turret", _configFile.Bind("Weights", "Turret", 10).Value },
-                { "LandMine", _configFile.Bind("Weights", "LandMine", 30).Value },
-                { "OutSideEnemyDay", _configFile.Bind("Weights", "OutSideEnemyDay", 10).Value },
-                { "Lizards", _configFile.Bind("Weights", "Lizards", 15).Value },
-                { "Arachnophobia", _configFile.Bind("Weights", "Arachnophobia", 20).Value },
-                { "Bee", _configFile.Bind("Weights", "Bee", 30).Value },
-                { "Slime", _configFile.Bind("Weights", "Slime", 20).Value },
-                { "DevochkaPizdec", _configFile.Bind("Weights", "DevochkaPizdec", 4).Value },
-                { "EnemyBounty", _configFile.Bind("Weights", "EnemyBounty", 50).Value },
-                { "OneForAll", _configFile.Bind("Weights", "OneForAll", 10).Value },
-                { "OpenTheNoor", _configFile.Bind("Weights", "OpenTheNoor", 20).Value },
-                { "OnAPowderKeg", _configFile.Bind("Weights", "OnAPowderKeg", 10).Value },
-                { "Hell", _configFile.Bind("Weights", "Hell", 1).Value }
-            };
-        }
+            var weights = new Dictionary<string, int>();
 
+            foreach (var hullEvent in Plugin.eventDictionary)
+            {
+                weights[hullEvent.ID()] = _configFile.Bind("Weights", hullEvent.ID(), hullEvent.GetWeight(), hullEvent.GetDescription()).Value;
+            }
+
+            return weights;
+        }
         private static void EnsureConfigExists()
         {
             if (_configFile == null)
@@ -56,23 +63,10 @@ namespace HullBreakerCompany.hull
         {
             using StreamWriter sw = File.CreateText(_configPath);
             sw.WriteLine("[Weights]");
-            sw.WriteLine("Nothing = 1");
-            sw.WriteLine("FlowerMan = 2");
-            sw.WriteLine("SpringMan = 1");
-            sw.WriteLine("HoarderBug = 4");
-            sw.WriteLine("Turret = 1");
-            sw.WriteLine("LandMine = 4");
-            sw.WriteLine("OutSideEnemyDay = 1");
-            sw.WriteLine("Lizards = 1");
-            sw.WriteLine("Arachnophobia = 1");
-            sw.WriteLine("Bee = 2");
-            sw.WriteLine("Slime = 1");
-            sw.WriteLine("DevochkaPizdec = 1");
-            sw.WriteLine("EnemyBounty = 4");
-            sw.WriteLine("OneForAll = 2");
-            sw.WriteLine("OpenTheNoor = 3");
-            sw.WriteLine("OnAPowderKeg = 1");
-            sw.WriteLine("Hell = 1");
+            foreach (var hullEvent in Plugin.eventDictionary)
+            {
+                sw.WriteLine(hullEvent.ID() + "=" + hullEvent.GetWeight());
+            }
         }
     }
 }

@@ -9,12 +9,15 @@ namespace HullBreakerCompany.Events;
 public class HellEvent : HullEvent
 {
     public override string ID() => "Hell";
+    public override int GetWeight() => 1;
+    public override string GetDescription() => "Increased chance of spawning Jester and more enemies";
+    public override string GetMessage() => "<color=orange>It says here that there is total hell happening on the this moon</color>";
+    public override string GetShortMessage() => "<color=white>HELL</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        const string message = "<color=orange>It says here that there is total hell happening on the this moon</color>";
         componentRarity.Add(typeof(JesterAI), 64);
         
-        HullManager.SendChatMessage(message);
+        HullManager.SendChatEventMessage(this);
         RoundManager.Instance.hourTimeBetweenEnemySpawnBatches = 1;
 
         HullManager.Instance.ExecuteAfterDelay(() => { Hell(); }, 15f);
