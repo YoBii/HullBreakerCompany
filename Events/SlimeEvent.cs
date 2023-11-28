@@ -7,10 +7,14 @@ namespace HullBreakerCompany.Events;
 
 public class SlimeEvent : HullEvent
 {
+    public override string ID() => "Slime";
+    public override int GetWeight() => 20;
+    public override string GetDescription() => "Increased chance of slime spawn";
+    public override string GetMessage() => "<color=white>Inhabited with slime</color>";
+    public override string GetShortMessage() => "<color=white>SO SLIMY</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        const string message = "<color=white>Inhabited with slime</color>";
         componentRarity.Add(typeof(BlobAI), 128);
-        HullManager.SendChatMessage(message);
+        HullManager.SendChatEventMessage(this);
     }
 }

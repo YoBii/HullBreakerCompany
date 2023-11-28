@@ -8,10 +8,14 @@ namespace HullBreakerCompany.Events;
 
 public class OneForAllEvent : HullEvent
 {
+    public override string ID() => "OneForAll";
+    public override int GetWeight() => 10;
+    public override string GetDescription() => "The ship will fly into orbit in an hour if one of the workers dies";
+    public override string GetMessage() => "<color=white>The ship will fly into orbit in an hour if one of the workers dies</color>";
+    public override string GetShortMessage() => "<color=red>ONE FOR ALL!</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        const string message = "<color=white>The ship will fly into orbit in an hour if one of the workers dies</color>";
         Plugin.OneForAllIsActive = true;
-        HullManager.SendChatMessage(message);
+        HullManager.SendChatEventMessage(this);
     }
 }

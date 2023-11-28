@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using HullBreakerCompany.Event;
 using UnityEngine;
 
 namespace HullBreakerCompany.hull;
 internal class HullManager : MonoBehaviour
 {
     public TimeOfDay timeOfDay;
+    
     public void Update()
     {
         if (timeOfDay == null)
@@ -33,7 +36,7 @@ internal class HullManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
     public void ExecuteAfterDelay(Action action, float delay)
     {
         StartCoroutine(DelayedExecution(action, delay));
@@ -60,7 +63,19 @@ internal class HullManager : MonoBehaviour
         action.Invoke();
     }
     
-    public static void SendChatMessage(String message)
+    public static void SendChatEventMessage(HullEvent hEvent)
+    {
+        if (HUDManager.Instance != null && hEvent != null)
+        {
+            var message = !Plugin.UseShortChatMessages ? hEvent.GetMessage() : hEvent.GetShortMessage();
+            
+            HUDManager.Instance.AddTextToChatOnServer(message);
+        } else {
+            Plugin.Mls.LogInfo("Could not find HUDManager instance" +  "\n" + hEvent.GetMessage());
+        }
+    }
+    
+    public static void SendChatEventMessage(string message)
     {
         if (HUDManager.Instance != null && message != null)
         {

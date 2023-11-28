@@ -7,10 +7,14 @@ namespace HullBreakerCompany.Events;
 
 public class TurretEvent : HullEvent
 {
+    public override string ID() => "Turret";
+    public override int GetWeight() => 10;
+    public override string GetDescription() => "Increased chance of turrets spawning";
+    public override string GetMessage() => "<color=white>Alert, turrets detected</color>";
+    public override string GetShortMessage() => "<color=white>TURRETS</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        const string message = "<color=white>Alert, turrets detected</color>";
         Plugin.LevelUnits(level, true);
-        HullManager.SendChatMessage(message);
+        HullManager.SendChatEventMessage(this);
     }
 }

@@ -7,11 +7,15 @@ namespace HullBreakerCompany.Events;
 
 public class OpenTheNoorEvent : HullEvent
 {
+    public override string ID() => "OpenTheNoor";
+    public override int GetWeight() => 20;
+    public override string GetDescription() => "All big doors are locked in the level";
+    public override string GetMessage() => "<color=white>All big doors are locked in the level</color>";
+    public override string GetShortMessage() => "<color=white>OPEN THE NOOR...</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        const string message = "<color=white>All big doors are locked in the level</color>";
         HullManager.Instance.ExecuteAfterDelay(() => { CloseBigDoors(); }, 10f);
-        HullManager.SendChatMessage(message);
+        HullManager.SendChatEventMessage(this);
     }
     
     private void CloseBigDoors()

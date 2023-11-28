@@ -20,10 +20,98 @@ Upon landing on a moon, a few random events are selected and printed in the chat
 
 The notes contain information about the challenge, inhabitants of the planet, and cautionary messages.
 
+Changeable HullBreaker values in config
 
+Different event modes: Increase event amount per day / Const events for moon
 
+Creating custom events!
 
+# CREATING CUSTOM EVENT 
 
+For now, custom events support only mode when you increase enemy spawn rate, but in the next update i will add more modes & functions. 
+
+How can I create custom event?
+
+1. Create new folder in `\Lethal Company\BepInEx\HullEvents` 
+2. In folder create `.cfg` file with name of event, like `CrawlerEvent.cfg`
+3. In `{NameEvent}.cfg` file write like this:
+```cfg
+[CustomEvent]
+
+EventID = Crawler
+
+EventWeight = 10
+
+InGameMessage = Crawlers coming
+
+InGameShortMessage = CRAWLER
+
+SpawnableEnemies = crawler,hoarderbug
+
+EnemyRarity = 128
+```
+
+`EventID` - ID of event, must be unique
+
+`EventWeight` - Weight of event, its default value, you can change later in HullBreaker.cfg after event creation
+
+`InGameMessage` - Message that will be printed in chat when event starts
+
+`InGameShortMessage` - Short message, when short mode is on
+
+`SpawnableEnemies` - Enemies that will be spawned, on your event, enemies must be in list down below, without quotes, separated by commas
+```c#
+{ "flowerman",}, // https://lethal.miraheze.org/wiki/Bracken
+{ "hoarderbug",}, // https://lethal.miraheze.org/wiki/Hoarding_Bug
+{ "springman",}, // https://lethal.miraheze.org/wiki/Coil-Head
+{ "crawler",}, // https://lethal.miraheze.org/wiki/Thumper
+{ "sandspider",}, // https://lethal.miraheze.org/wiki/Bunker_Spider
+{ "jester",}, // https://lethal.miraheze.org/wiki/Jester
+{ "centipede",}, // https://lethal.miraheze.org/wiki/Snare_Flea
+{ "blobai",}, // https://lethal.miraheze.org/wiki/Hygrodere
+{ "dressgirl",}, // https://lethal.miraheze.org/wiki/Ghost_Girl
+{ "pufferenemy",}, // https://lethal.miraheze.org/wiki/Spore_Lizard
+```
+
+`EnemyRarity` - Rarity of enemies, increase this value to increase enemies spawn chance
+
+[Text Color for message](https://docs.unity3d.com/Packages/com.unity.textmeshpro@4.0/manual/RichTextColor.html)
+
+### Examples of events 
+
+CrawlerEvent.cfg
+```cfg
+[CustomEvent]
+
+EventID = Crawler
+
+EventWeight = 10
+
+InGameMessage = Crawlers coming
+
+InGameShortMessage = CRAWLER
+
+SpawnableEnemies = crawler,hoarderbug
+
+EnemyRarity = 128
+```
+CentipedeEvent.cfg
+
+```cfg
+[CustomEvent]
+
+EventID = Centipede
+
+EventWeight = 10
+    
+InGameMessage = Centipede near
+
+InGameShortMessage = CENTIPEDE
+
+SpawnableEnemies = centipede
+
+EnemyRarity = 128
+```
 
 
 

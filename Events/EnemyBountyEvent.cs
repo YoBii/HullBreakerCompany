@@ -8,10 +8,15 @@ namespace HullBreakerCompany.Events;
 
 public class EnemyBountyEvent : HullEvent
 {
+    public override string ID() => "EnemyBounty";
+    
+    public override int GetWeight() => 50;
+    public override string GetDescription() => "Company pays money for killing the enemies / 60 per enemy";
+    public override string GetMessage() => "<color=white>Company pays money for killing the enemies!</color>";
+    public override string GetShortMessage() => "<color=white>ENEMY BOUNTY</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        const string message = "<color=white>Company pays money for killing the enemies!</color>";
         Plugin.BountyIsActive = true;
-        HullManager.SendChatMessage(message);
+        HullManager.SendChatEventMessage(this);
     }
 }

@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.hull;
 
-public abstract class RandomEnumSelector
+namespace HullBreakerCompany.Hull;
+
+public abstract class RandomSelector
 {
     private static Random _random = new();
-    public static List<GameEvents> GetRandomGameEvents()
+    public static List<string> GetRandomGameEvents()
     {
-        var gameEvents = GetWeightedRandomGameEvents(ConfigManager.GetWeights(), ConfigManager.GetEventCount());
+        var increaseEventCountPerDay = ConfigManager.GetIncreaseEventCountPerDay();
+        var eventCount = increaseEventCountPerDay ? Plugin.DaysPassed : ConfigManager.GetEventCount();
+        
+        var gameEvents = GetWeightedRandomGameEvents(ConfigManager.GetWeights(), eventCount);
         return gameEvents;
     }
 
