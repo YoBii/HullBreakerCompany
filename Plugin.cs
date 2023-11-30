@@ -28,7 +28,8 @@ namespace HullBreakerCompany
         public static float BunkerEnemyScale;
         public static float LandMineTurretScale;
         public static bool UseShortChatMessages;
-
+        public static List<SpawnableItemWithRarity> NotModifiedSpawnableItemsWithRarity = new();
+        
         public static Dictionary<String, Type> EnemyBase = new ()
         {
             { "flowerman", typeof(FlowermanAI) },
@@ -124,6 +125,7 @@ namespace HullBreakerCompany
                 DaysPassed = 0;
                 return true;
             }
+            
             DaysPassed++;
             Mls.LogInfo($"Days passed: {DaysPassed}");
             
@@ -136,6 +138,12 @@ namespace HullBreakerCompany
             var randomEvents = RandomSelector.GetRandomGameEvents();
             var componentRarity = new Dictionary<Type, int>();
             componentRarity.Clear();
+            
+            NotModifiedSpawnableItemsWithRarity.Clear();
+            foreach (var item  in n.spawnableScrap)
+            {
+                NotModifiedSpawnableItemsWithRarity.Add(item);
+            }
             
             HUDManager.Instance.AddTextToChatOnServer("<color=red>NOTES ABOUT MOON:</color>\"");
             
@@ -150,7 +158,7 @@ namespace HullBreakerCompany
 
             if (!randomEvents.Contains("Hell"))
             {
-                componentRarity.Add(typeof(JesterAI), 1);
+                componentRarity.Add(typeof(JesterAI), Random.Range(1, 16));
             }
             if (!randomEvents.Contains("Bee"))
             {
@@ -162,7 +170,7 @@ namespace HullBreakerCompany
             }
             if (!randomEvents.Contains("SpringMan"))
             {
-                componentRarity.Add(typeof(SpringManAI), 10);
+                componentRarity.Add(typeof(SpringManAI), Random.Range(10, 32));
             }
             
             foreach (string gameEvent in randomEvents)
@@ -282,6 +290,13 @@ namespace HullBreakerCompany
         public List<Dictionary<string, string>> LoadEventDataFromCfgFiles()
         {
             string directoryPath = BepInEx.Paths.BepInExRootPath + @"\HullEvents";
+    
+            if (!Directory.Exists(directoryPath))
+            {
+                Mls.LogError($"Directory does not exist: {directoryPath}");
+                return new List<Dictionary<string, string>>();
+            }
+
             string[] cfgFiles = Directory.GetFiles(directoryPath, "*.cfg");
             List<Dictionary<string, string>> allEventData = new List<Dictionary<string, string>>();
 
@@ -328,6 +343,5 @@ namespace HullBreakerCompany
         {
             DaysPassed = 0;
         }
-
     }
 }

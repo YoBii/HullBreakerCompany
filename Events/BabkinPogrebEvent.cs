@@ -17,7 +17,18 @@ public class BabkinPogrebEvent : HullEvent
         level.spawnableScrap.RemoveAll(item => item.spawnableItem.itemName != "Jar of pickles");
         level.spawnableScrap[0].rarity = 100;
         
+        HullManager.Instance.ExecuteAfterDelay(() => { DelayedReturnList(level); }, 15f);
         HullManager.SendChatEventMessage(this);
+    }
+
+    public void DelayedReturnList(SelectableLevel level)
+    {
+        Plugin.Mls.LogInfo("Resetting spawnable items...");
+        level.spawnableScrap.Clear();
+        foreach (var item  in Plugin.NotModifiedSpawnableItemsWithRarity)
+        {
+            level.spawnableScrap.Add(item);
+        }
     }
 
 }
