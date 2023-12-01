@@ -16,7 +16,6 @@ namespace HullBreakerCompany.hull
         }
         
         public static void SetConfigValue() {
-            
             Plugin.BunkerEnemyScale = GetConfigValue("BunkerEnemyScale", 256, "Should change global bunker enemy spawn rate, not sure if its work");
             Plugin.LandMineTurretScale = GetConfigValue("LandMineTurretScale", 64, "Should change amount of Landmines & Turrets when these events are active: (Landmine & Turret)");
             Plugin.UseShortChatMessages = GetConfigValue("UseShortChatMessages", false, "Use short event message (one/two words), can add surprise effect & difficulty");
@@ -46,7 +45,7 @@ namespace HullBreakerCompany.hull
 
             var weights = new Dictionary<string, int>();
 
-            foreach (var hullEvent in Plugin.eventDictionary)
+            foreach (var hullEvent in Plugin.EventDictionary)
             {
                 weights[hullEvent.ID()] = _configFile.Bind("Weights", hullEvent.ID(), hullEvent.GetWeight(), hullEvent.GetDescription()).Value;
             }
@@ -69,7 +68,7 @@ namespace HullBreakerCompany.hull
         {
             using StreamWriter sw = File.CreateText(_configPath);
             sw.WriteLine("[Weights]");
-            foreach (var hullEvent in Plugin.eventDictionary)
+            foreach (var hullEvent in Plugin.EventDictionary)
             {
                 sw.WriteLine(hullEvent.ID() + "=" + hullEvent.GetWeight());
             }

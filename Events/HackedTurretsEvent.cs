@@ -14,7 +14,7 @@ public class HackedTurretsEvent : HullEvent
     public override string GetShortMessage() => "<color=white>SYSTEM FAILURE</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        HullManager.Instance.ExecuteAfterDelay(() => { HackTurrets(); }, 10f);
+        HullManager.Instance.ExecuteAfterDelay(() => { HackTurrets(); }, 16f);
         HullManager.SendChatEventMessage(this);
     }
     

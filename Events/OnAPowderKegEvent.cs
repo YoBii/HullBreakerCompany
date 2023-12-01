@@ -14,7 +14,7 @@ public class OnAPowderKegEvent : HullEvent
     public override string GetShortMessage() => "<color=red>ON A POWDER KEG</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(); }, UnityEngine.Random.Range(60, 700));
+        HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(); }, UnityEngine.Random.Range(30, 680));
         HullManager.SendChatEventMessage(this);
     }
 

@@ -20,7 +20,7 @@ public class HellEvent : HullEvent
         HullManager.SendChatEventMessage(this);
         RoundManager.Instance.hourTimeBetweenEnemySpawnBatches = 1;
 
-        HullManager.Instance.ExecuteAfterDelay(() => { Hell(); }, 15f);
+        HullManager.Instance.ExecuteAfterDelay(() => { Hell(); }, 16f);
     }
     private void Hell()
     {

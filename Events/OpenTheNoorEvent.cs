@@ -14,7 +14,7 @@ public class OpenTheNoorEvent : HullEvent
     public override string GetShortMessage() => "<color=white>OPEN THE NOOR...</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        HullManager.Instance.ExecuteAfterDelay(() => { CloseBigDoors(); }, 10f);
+        HullManager.Instance.ExecuteAfterDelay(() => { CloseBigDoors(); }, 16f);
         HullManager.SendChatEventMessage(this);
     }
     

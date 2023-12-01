@@ -62,7 +62,7 @@ namespace HullBreakerCompany
             { "pufferenemy", typeof(PufferAI) },
         };
         
-        public static List<HullEvent> eventDictionary = new()
+        public static List<HullEvent> EventDictionary = new()
         {
             { new FlowerManEvent() },
             { new TurretEvent() },
@@ -106,7 +106,7 @@ namespace HullBreakerCompany
                     customEvent.SetMessage(hullEvent["InGameMessage"]);
                     customEvent.SetShortMessage(hullEvent["InGameShortMessage"]);
 
-                    eventDictionary.Add(customEvent);
+                    EventDictionary.Add(customEvent);
                 }
             }
             ConfigManager.SetConfigValue();
@@ -114,16 +114,14 @@ namespace HullBreakerCompany
 
         public void OnDestroy()
         {
-            if (!_loaded)
-            {
-                var hullManager = new GameObject("HullManager");
-                DontDestroyOnLoad(hullManager);
-                hullManager.AddComponent<HullManager>();
+            if (_loaded) return;
+            var hullManager = new GameObject("HullManager");
+            DontDestroyOnLoad(hullManager);
+            hullManager.AddComponent<HullManager>();
                 
-                Mls.LogInfo("HullManager created");
+            Mls.LogInfo("HullManager created");
                 
-                _loaded = true;
-            }
+            _loaded = true;
         }
 
         [HarmonyPatch(typeof(RoundManager), nameof(RoundManager.LoadNewLevel))]
@@ -161,13 +159,15 @@ namespace HullBreakerCompany
                 NotModifiedSpawnableItemsWithRarity.Add(item);
             }
             
-            HUDManager.Instance.AddTextToChatOnServer("<color=red>NOTES ABOUT MOON:</color>\"");
+            if (EventCount != 0) {
+                HUDManager.Instance.AddTextToChatOnServer("<color=red>NOTES ABOUT MOON:</color>\"");
+            }
             
             foreach (string gameEvent in randomEvents)
             {
                 try
                 {
-                    HullEvent hullEvent = eventDictionary.FirstOrDefault(e => e.ID() == gameEvent);
+                    HullEvent hullEvent = EventDictionary.FirstOrDefault(e => e.ID() == gameEvent);
                     if (hullEvent == null) continue;
                     
                     hullEvent.Execute(newLevel, componentRarity);
@@ -195,7 +195,6 @@ namespace HullBreakerCompany
                     Mls.LogError("Try set false BepInEx.cfg [ChainLoader] HideManagerGameObject");
                 }
             }
-            
             //debug logs
             Mls.LogInfo("\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1bENEMIES RARITY\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b");
             foreach (var unit in newLevel.Enemies)
@@ -233,7 +232,7 @@ namespace HullBreakerCompany
             if (UseHullBreakerLevelSettings)
             {
                 nl.maxEnemyPowerCount += 8;
-                nl.maxOutsideEnemyPowerCount += 16;
+                nl.maxOutsideEnemyPowerCount += 32;
                 
                 nl.maxScrap += Random.Range(1, 12);
                 nl.maxTotalScrapValue += 64;
@@ -313,9 +312,9 @@ namespace HullBreakerCompany
             HullManager.SendChatEventMessage("<color=red>One of the workers died, the ship will go into orbit in an hour</color>");
         }
 
-        public List<Dictionary<string, string>> LoadEventDataFromCfgFiles()
+        private static List<Dictionary<string, string>> LoadEventDataFromCfgFiles()
         {
-            string directoryPath = BepInEx.Paths.BepInExRootPath + @"\HullEvents";
+            string directoryPath = Paths.BepInExRootPath + @"\HullEvents";
     
             if (!Directory.Exists(directoryPath))
             {
@@ -352,7 +351,7 @@ namespace HullBreakerCompany
 
         private static void DebugLoadCustomEvents()
         {
-            foreach (var hullEvent in eventDictionary)
+            foreach (var hullEvent in EventDictionary)
             {
                 if (hullEvent is CustomEvent customEvent)
                 {
