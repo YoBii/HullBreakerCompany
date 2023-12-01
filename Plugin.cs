@@ -28,6 +28,16 @@ namespace HullBreakerCompany
         public static float BunkerEnemyScale;
         public static float LandMineTurretScale;
         public static bool UseShortChatMessages;
+        
+        //Level Variables
+        public static bool useHullBreakerLevelSettings;
+        
+        public static int maxEnemyPowerCount;
+        public static int maxOutsideEnemyPowerCount;
+        public static int maxDaytimeEnemyPowerCount;
+        public static int maxScrap;
+        public static int maxTotalScrapValue;
+        
         public static List<SpawnableItemWithRarity> NotModifiedSpawnableItemsWithRarity = new();
         
         public static Dictionary<String, Type> EnemyBase = new ()
@@ -91,9 +101,7 @@ namespace HullBreakerCompany
                     eventDictionary.Add(customEvent);
                 }
             }
-            BunkerEnemyScale = ConfigManager.GetBunkerEnemyScale();
-            LandMineTurretScale = ConfigManager.GetLandMineTurretScale();
-            UseShortChatMessages = ConfigManager.GetUseShortChatMessages();
+            ConfigManager.SetConfigValue();
         }
 
         public void OnDestroy()
@@ -114,7 +122,6 @@ namespace HullBreakerCompany
         [HarmonyPrefix]
         static bool ModifiedLoad(ref SelectableLevel newLevel)
         {
-            //Debug
             DebugLoadCustomEvents();
             
             Mls.LogInfo("Client is host: " + RoundManager.Instance.IsHost);
@@ -123,6 +130,14 @@ namespace HullBreakerCompany
             {
                 Mls.LogInfo("Level is company, skipping");
                 DaysPassed = 0;
+                return true;
+            }
+            
+            HullManager.SaveLevel(newLevel.levelID.ToString(), newLevel);
+            if (HullManager.store.ContainsKey(newLevel.levelID.ToString()))
+            {
+                Mls.LogInfo("Level is in store, loading");
+                newLevel = HullManager.RestoreLevel(newLevel.levelID.ToString());
                 return true;
             }
             
@@ -147,14 +162,10 @@ namespace HullBreakerCompany
             
             HUDManager.Instance.AddTextToChatOnServer("<color=red>NOTES ABOUT MOON:</color>\"");
             
+            //Scrap
             n.maxScrap += Random.Range(10, 30);
             n.maxTotalScrapValue += 800;
-            n.outsideEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe[3]
-            {
-                new (0f, -64f),
-                new (32f, -64f),
-                new (32f, 16f)
-            });
+            
 
             if (!randomEvents.Contains("Hell"))
             {
