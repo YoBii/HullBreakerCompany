@@ -28,7 +28,18 @@ namespace HullBreakerCompany
         public static float BunkerEnemyScale;
         public static float LandMineTurretScale;
         public static bool UseShortChatMessages;
-
+        
+        //Level Variables
+        public static bool useHullBreakerLevelSettings;
+        
+        public static int maxEnemyPowerCount;
+        public static int maxOutsideEnemyPowerCount;
+        public static int maxDaytimeEnemyPowerCount;
+        public static int maxScrap;
+        public static int maxTotalScrapValue;
+        
+        public static List<SpawnableItemWithRarity> NotModifiedSpawnableItemsWithRarity = new();
+        
         public static Dictionary<String, Type> EnemyBase = new ()
         {
             { "flowerman", typeof(FlowermanAI) },
@@ -90,9 +101,7 @@ namespace HullBreakerCompany
                     eventDictionary.Add(customEvent);
                 }
             }
-            BunkerEnemyScale = ConfigManager.GetBunkerEnemyScale();
-            LandMineTurretScale = ConfigManager.GetLandMineTurretScale();
-            UseShortChatMessages = ConfigManager.GetUseShortChatMessages();
+            ConfigManager.SetConfigValue();
         }
 
         public void OnDestroy()
@@ -113,7 +122,6 @@ namespace HullBreakerCompany
         [HarmonyPrefix]
         static bool ModifiedLoad(ref SelectableLevel newLevel)
         {
-            //Debug
             DebugLoadCustomEvents();
             
             Mls.LogInfo("Client is host: " + RoundManager.Instance.IsHost);
@@ -124,6 +132,15 @@ namespace HullBreakerCompany
                 DaysPassed = 0;
                 return true;
             }
+            
+            HullManager.SaveLevel(newLevel.levelID.ToString(), newLevel);
+            if (HullManager.store.ContainsKey(newLevel.levelID.ToString()))
+            {
+                Mls.LogInfo("Level is in store, loading");
+                newLevel = HullManager.RestoreLevel(newLevel.levelID.ToString());
+                return true;
+            }
+            
             DaysPassed++;
             Mls.LogInfo($"Days passed: {DaysPassed}");
             
@@ -137,20 +154,22 @@ namespace HullBreakerCompany
             var componentRarity = new Dictionary<Type, int>();
             componentRarity.Clear();
             
+            NotModifiedSpawnableItemsWithRarity.Clear();
+            foreach (var item  in n.spawnableScrap)
+            {
+                NotModifiedSpawnableItemsWithRarity.Add(item);
+            }
+            
             HUDManager.Instance.AddTextToChatOnServer("<color=red>NOTES ABOUT MOON:</color>\"");
             
+            //Scrap
             n.maxScrap += Random.Range(10, 30);
             n.maxTotalScrapValue += 800;
-            n.outsideEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe[3]
-            {
-                new (0f, -64f),
-                new (32f, -64f),
-                new (32f, 16f)
-            });
+            
 
             if (!randomEvents.Contains("Hell"))
             {
-                componentRarity.Add(typeof(JesterAI), 1);
+                componentRarity.Add(typeof(JesterAI), Random.Range(1, 16));
             }
             if (!randomEvents.Contains("Bee"))
             {
@@ -162,7 +181,7 @@ namespace HullBreakerCompany
             }
             if (!randomEvents.Contains("SpringMan"))
             {
-                componentRarity.Add(typeof(SpringManAI), 10);
+                componentRarity.Add(typeof(SpringManAI), Random.Range(10, 32));
             }
             
             foreach (string gameEvent in randomEvents)
@@ -282,6 +301,13 @@ namespace HullBreakerCompany
         public List<Dictionary<string, string>> LoadEventDataFromCfgFiles()
         {
             string directoryPath = BepInEx.Paths.BepInExRootPath + @"\HullEvents";
+    
+            if (!Directory.Exists(directoryPath))
+            {
+                Mls.LogError($"Directory does not exist: {directoryPath}");
+                return new List<Dictionary<string, string>>();
+            }
+
             string[] cfgFiles = Directory.GetFiles(directoryPath, "*.cfg");
             List<Dictionary<string, string>> allEventData = new List<Dictionary<string, string>>();
 
@@ -328,6 +354,5 @@ namespace HullBreakerCompany
         {
             DaysPassed = 0;
         }
-
     }
 }

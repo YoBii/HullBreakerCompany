@@ -9,31 +9,28 @@ namespace HullBreakerCompany.hull
     {
         private static string _configPath = Path.Combine(Paths.ConfigPath, "HullBreakerCompany.cfg");
         private static ConfigFile _configFile;
-        public static int GetEventCount()
+        public static T GetConfigValue<T>(string key, T defaultValue, string description = null)
         {
             EnsureConfigExists();
-            return _configFile.Bind("Settings", "EventCount", 3).Value;
+            return _configFile.Bind("Settings", key, defaultValue, description).Value;
         }
-        public static bool GetIncreaseEventCountPerDay()
-        {
-            EnsureConfigExists();
-            return _configFile.Bind("Settings", "IncreaseEventCountPerDay", false, "The number of events will increase every day. Visit the company building to reset").Value;
+        
+        public static void SetConfigValue() {
+            
+            Plugin.BunkerEnemyScale = ConfigManager.GetConfigValue("BunkerEnemyScale", 256, "Should change global bunker enemy spawn rate, not sure if its work");
+            Plugin.LandMineTurretScale = ConfigManager.GetConfigValue("LandMineTurretScale", 64, "Should change amount of Landmines & Turrets when these events are active: (Landmine & Turret)");
+            Plugin.UseShortChatMessages = ConfigManager.GetConfigValue("UseShortChatMessages", false, "Use short event message (one/two words), can add surprise effect & difficulty");
+            
+            Plugin.useHullBreakerLevelSettings = ConfigManager.GetConfigValue("useHullBreakerLevelSettings", false, "Use HullBreaker level settings, if false, use default level settings");
+            
+            Plugin.maxEnemyPowerCount = ConfigManager.GetConfigValue("maxEnemyPowerCount", 2000, "Max enemy power count");
+            Plugin.maxOutsideEnemyPowerCount = ConfigManager.GetConfigValue("maxOutsideEnemyPowerCount", 20, "Max outside enemy power count");
+            Plugin.maxDaytimeEnemyPowerCount = ConfigManager.GetConfigValue("maxDaytimeEnemyPowerCount", 200, "Max daytime enemy power count");
+            Plugin.maxScrap = ConfigManager.GetConfigValue("maxScrap", 30, "Max scrap");
+            Plugin.maxTotalScrapValue = ConfigManager.GetConfigValue("maxTotalScrapValue", 800, "Max total scrap value");
+            
         }
-        public static float GetBunkerEnemyScale()
-        {
-            EnsureConfigExists();
-            return _configFile.Bind("Settings", "BunkerEnemyScale", 256, "Should change global bunker enemy spawn rate, not sure if its work").Value;
-        }
-        public static float GetLandMineTurretScale()
-        {
-            EnsureConfigExists();
-            return _configFile.Bind("Settings", "LandMineTurretScale", 64, "Should change amount of Landmines & Turrets when these events are active: (Landmine & Turret)").Value;
-        }
-        public static bool GetUseShortChatMessages()
-        {
-            EnsureConfigExists();
-            return _configFile.Bind("Settings", "UseShortChatMessages", false, "Use short event message (one/two words), can add surprise effect & difficulty").Value;
-        }
+        
         public static Dictionary<string, int> GetWeights()
         {
             EnsureConfigExists();

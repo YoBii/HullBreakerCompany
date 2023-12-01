@@ -10,8 +10,8 @@ public abstract class RandomSelector
     private static Random _random = new();
     public static List<string> GetRandomGameEvents()
     {
-        var increaseEventCountPerDay = ConfigManager.GetIncreaseEventCountPerDay();
-        var eventCount = increaseEventCountPerDay ? Plugin.DaysPassed : ConfigManager.GetEventCount();
+        var increaseEventCountPerDay = ConfigManager.GetConfigValue("IncreaseEventCountPerDay", false, "The number of events will increase every day. Visit the company building to reset");
+        var eventCount = increaseEventCountPerDay ? Plugin.DaysPassed : ConfigManager.GetConfigValue("EventCount", 3, "The number of events that will be active at the same time");
         
         var gameEvents = GetWeightedRandomGameEvents(ConfigManager.GetWeights(), eventCount);
         return gameEvents;
