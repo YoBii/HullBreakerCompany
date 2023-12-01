@@ -26,7 +26,7 @@ public class HellEvent : HullEvent
     {
         EnemyVent[] enemyVent = UnityEngine.Object.FindObjectsOfType<EnemyVent>();
 
-        for (int i = 0; i < 32; i++)
+        for (int i = 0; i < 8; i++)
         {
             if (enemyVent.Length > 0)
             {

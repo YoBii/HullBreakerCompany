@@ -15,8 +15,6 @@ public class OutSideEnemyDayEvent : HullEvent
     public override string GetShortMessage() => "<color=red>SILENCE SEASON</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        level.minScrap = 28;
-        level.maxScrap = 28;
         level.outsideEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe(0f, 512f));
         
         HullManager.SendChatEventMessage(this);

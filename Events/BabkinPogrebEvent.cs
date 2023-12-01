@@ -14,11 +14,18 @@ public class BabkinPogrebEvent : HullEvent
     public override string GetShortMessage() => "<color=white>ITEM MYSTERY</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
     {
-        level.spawnableScrap.RemoveAll(item => item.spawnableItem.itemName != "Jar of pickles");
-        level.spawnableScrap[0].rarity = 100;
-        
-        HullManager.Instance.ExecuteAfterDelay(() => { DelayedReturnList(level); }, 15f);
-        HullManager.SendChatEventMessage(this);
+        try
+        {
+            level.spawnableScrap.RemoveAll(item => item.spawnableItem.itemName != "Jar of pickles");
+            level.spawnableScrap[0].rarity = 100;
+
+            HullManager.Instance.ExecuteAfterDelay(() => { DelayedReturnList(level); }, 15f);
+            HullManager.SendChatEventMessage(this);
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            Plugin.Mls.LogError($"ArgumentOutOfRangeException caught in BabkinPogrebEvent.Execute: {ex.Message}");
+        }
     }
 
     public void DelayedReturnList(SelectableLevel level)

@@ -29,14 +29,22 @@ namespace HullBreakerCompany
         public static float LandMineTurretScale;
         public static bool UseShortChatMessages;
         
-        //Level Variables
-        public static bool useHullBreakerLevelSettings;
+        public static bool UseHullBreakerLevelSettings;
+        public static bool UseDefaultGameSettings;
         
-        public static int maxEnemyPowerCount;
-        public static int maxOutsideEnemyPowerCount;
-        public static int maxDaytimeEnemyPowerCount;
-        public static int maxScrap;
-        public static int maxTotalScrapValue;
+        public static int MaxEnemyPowerCount;
+        public static int MaxOutsideEnemyPowerCount;
+        public static int MaxDaytimeEnemyPowerCount;
+        public static int MinScrap;
+        public static int MaxScrap;
+        public static int MinTotalScrapValue;
+        public static int MaxTotalScrapValue;
+        
+        public static bool ChangeQuotaValue;
+        public static int QuotaIncrease;
+        
+        public static bool IncreaseEventCountPerDay;
+        public static int EventCount;
         
         public static List<SpawnableItemWithRarity> NotModifiedSpawnableItemsWithRarity = new();
         
@@ -70,7 +78,7 @@ namespace HullBreakerCompany
             { new OneForAllEvent() },
             { new OpenTheNoorEvent() },
             { new OnAPowderKegEvent() },
-            { new OutSideEnemyDayEvent()},
+            //{ new OutSideEnemyDayEvent()},
             { new HellEvent()},
             { new NothingEvent()},
             { new HackedTurretsEvent()},
@@ -133,18 +141,11 @@ namespace HullBreakerCompany
                 return true;
             }
             
-            HullManager.SaveLevel(newLevel.levelID.ToString(), newLevel);
-            if (HullManager.store.ContainsKey(newLevel.levelID.ToString()))
-            {
-                Mls.LogInfo("Level is in store, loading");
-                newLevel = HullManager.RestoreLevel(newLevel.levelID.ToString());
-                return true;
-            }
-            
             DaysPassed++;
             Mls.LogInfo($"Days passed: {DaysPassed}");
             
             //Events & stopCoroutine
+            
             BountyIsActive = false;
             OneForAllIsActive = false;
             ResetLevelUnits(newLevel);
@@ -161,28 +162,6 @@ namespace HullBreakerCompany
             }
             
             HUDManager.Instance.AddTextToChatOnServer("<color=red>NOTES ABOUT MOON:</color>\"");
-            
-            //Scrap
-            n.maxScrap += Random.Range(10, 30);
-            n.maxTotalScrapValue += 800;
-            
-
-            if (!randomEvents.Contains("Hell"))
-            {
-                componentRarity.Add(typeof(JesterAI), Random.Range(1, 16));
-            }
-            if (!randomEvents.Contains("Bee"))
-            {
-                foreach (var unit in n.DaytimeEnemies.Where(unit => unit.enemyType.enemyPrefab.GetComponent<RedLocustBees>() != null))
-                {
-                    unit.rarity = 22;
-                    break;
-                }
-            }
-            if (!randomEvents.Contains("SpringMan"))
-            {
-                componentRarity.Add(typeof(SpringManAI), Random.Range(10, 32));
-            }
             
             foreach (string gameEvent in randomEvents)
             {
@@ -234,13 +213,50 @@ namespace HullBreakerCompany
                 Mls.LogInfo($"{unit.enemyType.enemyPrefab.name} - {unit.rarity}");
             }
             
-            n.maxEnemyPowerCount += 2000;
-            n.maxOutsideEnemyPowerCount += 20;
-            n.maxDaytimeEnemyPowerCount += 200;
+            if (!randomEvents.Contains("Hell"))
+            {
+                componentRarity.Add(typeof(JesterAI), Random.Range(1, 8));
+            }
+            if (!randomEvents.Contains("Bee"))
+            {
+                foreach (var unit in n.DaytimeEnemies.Where(unit => unit.enemyType.enemyPrefab.GetComponent<RedLocustBees>() != null))
+                {
+                    unit.rarity = 22;
+                    break;
+                }
+            }
+            if (!randomEvents.Contains("SpringMan"))
+            {
+                componentRarity.Add(typeof(SpringManAI), Random.Range(10, 32));
+            }
 
-            n.daytimeEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe(0f, 5f), new Keyframe(0.5f, 5f));
-            n.enemySpawnChanceThroughoutDay = new AnimationCurve(new Keyframe(0f, BunkerEnemyScale));
-
+            if (UseHullBreakerLevelSettings)
+            {
+                n.maxEnemyPowerCount += 2000;
+                n.maxOutsideEnemyPowerCount += 20;
+                n.maxDaytimeEnemyPowerCount += 200;
+                n.daytimeEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe(0f, 5f), new Keyframe(0.5f, 5f));
+                n.enemySpawnChanceThroughoutDay = new AnimationCurve(new Keyframe(0f, BunkerEnemyScale));
+                
+                //Scrap
+                n.maxScrap += Random.Range(10, 30);
+                n.maxTotalScrapValue += 800;
+            }
+            else if (UseDefaultGameSettings)
+            {
+                Mls.LogInfo("Default settings");
+            }
+            else
+            {
+                n.maxEnemyPowerCount = MaxEnemyPowerCount;
+                n.maxOutsideEnemyPowerCount = MaxOutsideEnemyPowerCount;
+                n.maxDaytimeEnemyPowerCount = MaxDaytimeEnemyPowerCount;
+                n.minScrap = MinScrap;
+                n.maxScrap = MaxScrap;
+                n.minTotalScrapValue = MinTotalScrapValue;
+                n.maxTotalScrapValue = MaxTotalScrapValue;
+            }
+            
             newLevel = n;
 
             return true;
