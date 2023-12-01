@@ -150,13 +150,13 @@ namespace HullBreakerCompany
             OneForAllIsActive = false;
             ResetLevelUnits(newLevel);
             
-            var n = newLevel;
+            var nl = newLevel;
             var randomEvents = RandomSelector.GetRandomGameEvents();
             var componentRarity = new Dictionary<Type, int>();
             componentRarity.Clear();
             
             NotModifiedSpawnableItemsWithRarity.Clear();
-            foreach (var item  in n.spawnableScrap)
+            foreach (var item  in nl.spawnableScrap)
             {
                 NotModifiedSpawnableItemsWithRarity.Add(item);
             }
@@ -219,7 +219,7 @@ namespace HullBreakerCompany
             }
             if (!randomEvents.Contains("Bee"))
             {
-                foreach (var unit in n.DaytimeEnemies.Where(unit => unit.enemyType.enemyPrefab.GetComponent<RedLocustBees>() != null))
+                foreach (var unit in nl.DaytimeEnemies.Where(unit => unit.enemyType.enemyPrefab.GetComponent<RedLocustBees>() != null))
                 {
                     unit.rarity = 22;
                     break;
@@ -232,15 +232,14 @@ namespace HullBreakerCompany
 
             if (UseHullBreakerLevelSettings)
             {
-                n.maxEnemyPowerCount += 2000;
-                n.maxOutsideEnemyPowerCount += 20;
-                n.maxDaytimeEnemyPowerCount += 200;
-                n.daytimeEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe(0f, 5f), new Keyframe(0.5f, 5f));
-                n.enemySpawnChanceThroughoutDay = new AnimationCurve(new Keyframe(0f, BunkerEnemyScale));
+                nl.maxEnemyPowerCount += 8;
+                nl.maxOutsideEnemyPowerCount += 16;
                 
-                //Scrap
-                n.maxScrap += Random.Range(10, 30);
-                n.maxTotalScrapValue += 800;
+                nl.maxScrap += Random.Range(1, 12);
+                nl.maxTotalScrapValue += 64;
+                
+                nl.daytimeEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe(0f, 5f), new Keyframe(0.5f, 5f));
+                nl.enemySpawnChanceThroughoutDay = new AnimationCurve(new Keyframe(0f, BunkerEnemyScale));
             }
             else if (UseDefaultGameSettings)
             {
@@ -248,16 +247,16 @@ namespace HullBreakerCompany
             }
             else
             {
-                n.maxEnemyPowerCount = MaxEnemyPowerCount;
-                n.maxOutsideEnemyPowerCount = MaxOutsideEnemyPowerCount;
-                n.maxDaytimeEnemyPowerCount = MaxDaytimeEnemyPowerCount;
-                n.minScrap = MinScrap;
-                n.maxScrap = MaxScrap;
-                n.minTotalScrapValue = MinTotalScrapValue;
-                n.maxTotalScrapValue = MaxTotalScrapValue;
+                nl.maxEnemyPowerCount = MaxEnemyPowerCount;
+                nl.maxOutsideEnemyPowerCount = MaxOutsideEnemyPowerCount;
+                nl.maxDaytimeEnemyPowerCount = MaxDaytimeEnemyPowerCount;
+                nl.minScrap = MinScrap;
+                nl.maxScrap = MaxScrap;
+                nl.minTotalScrapValue = MinTotalScrapValue;
+                nl.maxTotalScrapValue = MaxTotalScrapValue;
             }
             
-            newLevel = n;
+            newLevel = nl;
 
             return true;
         }
