@@ -180,18 +180,16 @@ namespace HullBreakerCompany
                         for (int j = componentRarity.Count - 1; j >= 0; j--)
                         {
                             var componentRarityPair = componentRarity.ElementAt(j);
-                            if (unit.enemyType.enemyPrefab.GetComponent(componentRarityPair.Key) != null)
-                            {
-                                unit.rarity = componentRarityPair.Value;
-                                componentRarity.Remove(componentRarityPair.Key);
-                                break;
-                            }
+                            if (unit.enemyType.enemyPrefab.GetComponent(componentRarityPair.Key) == null) continue;
+                            unit.rarity = componentRarityPair.Value;
+                            componentRarity.Remove(componentRarityPair.Key);
+                            break;
                         }
                     }
                 }
                 catch (NullReferenceException ex)
                 {
-                    Mls.LogError($"NullReferenceException caught while processing event: {gameEvent}. Exception message: {ex.Message}");
+                    Mls.LogError($"NullReferenceException caught while processing event: {gameEvent}. Exception message: {ex.Message}. Caused : {ex.InnerException}");
                     Mls.LogError("Try set false BepInEx.cfg [ChainLoader] HideManagerGameObject");
                 }
             }
