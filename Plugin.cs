@@ -18,6 +18,8 @@ namespace HullBreakerCompany
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
+        private static Dictionary<int, SelectableLevelState> _levelStates = new();
+        
         private static bool _loaded;
         public static ManualLogSource Mls;
         
@@ -60,12 +62,16 @@ namespace HullBreakerCompany
             { "blobai", typeof(BlobAI) },
             { "dressgirl", typeof(DressGirlAI) },
             { "pufferenemy", typeof(PufferAI) },
+            { "eyelessdogs", typeof(MouthDogAI) },
+            { "foresgiant", typeof(ForestGiantAI) },
+            { "sandworm", typeof(SandWormAI) },
+            { "baboonbird", typeof(BaboonBirdAI)}
         };
         
         public static List<HullEvent> EventDictionary = new()
         {
             { new FlowerManEvent() },
-            { new TurretEvent() },
+            //{ new TurretEvent() },
             { new LandMineEvent() },
             { new HoarderBugEvent() },
             { new SpringManEvent() },
@@ -78,7 +84,7 @@ namespace HullBreakerCompany
             { new OneForAllEvent() },
             { new OpenTheNoorEvent() },
             { new OnAPowderKegEvent() },
-            //{ new OutSideEnemyDayEvent()},
+            { new OutSideEnemyDayEvent()},
             { new HellEvent()},
             { new NothingEvent()},
             { new HackedTurretsEvent()},
@@ -93,7 +99,33 @@ namespace HullBreakerCompany
             Mls = BepInEx.Logging.Logger.CreateLogSource("HULLBREAKER " + PluginInfo.PLUGIN_VERSION);
             Mls.LogInfo("Ready to break hull; HullBreakerCompany");
             _harmony.PatchAll(typeof(Plugin));
+            
+            if (_loaded) return;
+            Initialize();
+        }
+        public void Start()
+        {
+            if (_loaded) return;
+            Initialize();
+        }
 
+        public void OnDestroy()
+        {
+            if (_loaded) return;
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            ConfigManager.SetConfigValue();
+            
+            GameObject hullManager = new GameObject("HullManager");
+            DontDestroyOnLoad(hullManager);
+            hullManager.hideFlags = (HideFlags)61;
+            hullManager.AddComponent<HullManager>();
+                
+            Mls.LogInfo("HullManager created");
+            
             var customEvents = LoadEventDataFromCfgFiles();
             if (customEvents.Count != 0) {
                 foreach (var hullEvent in customEvents)
@@ -102,28 +134,25 @@ namespace HullBreakerCompany
                     customEvent.SetID(hullEvent["EventID"]);
                     customEvent.SetWeight(int.Parse(hullEvent["EventWeight"]));
                     customEvent.Rarity = int.Parse(hullEvent["EnemyRarity"]);
-                    customEvent.SpawnList = hullEvent["SpawnableEnemies"].Split(',').ToList();
+                    if (hullEvent.ContainsKey("SpawnableEnemies"))
+                    {
+                        customEvent.EnemySpawnList = hullEvent["SpawnableEnemies"].Split(',').ToList();
+                    }
+
+                    if (hullEvent.ContainsKey("SpawnableOutsideEnemies"))
+                    {
+                        customEvent.OutsideSpawnList = hullEvent["SpawnableOutsideEnemies"].Split(',').ToList();
+                    }
                     customEvent.SetMessage(hullEvent["InGameMessage"]);
                     customEvent.SetShortMessage(hullEvent["InGameShortMessage"]);
 
                     EventDictionary.Add(customEvent);
                 }
             }
-            ConfigManager.SetConfigValue();
-        }
-
-        public void OnDestroy()
-        {
-            if (_loaded) return;
-            var hullManager = new GameObject("HullManager");
-            DontDestroyOnLoad(hullManager);
-            hullManager.AddComponent<HullManager>();
-                
-            Mls.LogInfo("HullManager created");
-                
+            
             _loaded = true;
         }
-
+        
         [HarmonyPatch(typeof(RoundManager), nameof(RoundManager.LoadNewLevel))]
         [HarmonyPrefix]
         static bool ModifiedLoad(ref SelectableLevel newLevel)
@@ -131,7 +160,16 @@ namespace HullBreakerCompany
             DebugLoadCustomEvents();
             
             Mls.LogInfo("Client is host: " + RoundManager.Instance.IsHost);
+            
             if (!RoundManager.Instance.IsHost) return true;
+
+            int levelID = newLevel.levelID;
+            if (!_levelStates.ContainsKey(levelID)) {
+                _levelStates[levelID] = new SelectableLevelState(newLevel);
+            } else {
+                _levelStates[levelID].RestoreState(newLevel);
+            }
+            
             if (newLevel.levelID == 3)
             {
                 Mls.LogInfo("Level is company, skipping");
@@ -142,16 +180,15 @@ namespace HullBreakerCompany
             DaysPassed++;
             Mls.LogInfo($"Days passed: {DaysPassed}");
             
-            //Events & stopCoroutine
-            
             BountyIsActive = false;
             OneForAllIsActive = false;
             ResetLevelUnits(newLevel);
             
             var nl = newLevel;
             var randomEvents = RandomSelector.GetRandomGameEvents();
-            var componentRarity = new Dictionary<Type, int>();
-            componentRarity.Clear();
+            var enemyComponentRarity = new Dictionary<Type, int>();
+            var outsideComponentRarity = new Dictionary<Type, int>();
+            enemyComponentRarity.Clear();
             
             NotModifiedSpawnableItemsWithRarity.Clear();
             foreach (var item  in nl.spawnableScrap)
@@ -170,19 +207,33 @@ namespace HullBreakerCompany
                     HullEvent hullEvent = EventDictionary.FirstOrDefault(e => e.ID() == gameEvent);
                     if (hullEvent == null) continue;
                     
-                    hullEvent.Execute(newLevel, componentRarity);
+                    hullEvent.Execute(newLevel, enemyComponentRarity, outsideComponentRarity);
                     Mls.LogInfo($"Event: {gameEvent}");
                     
-                    if (componentRarity.Count <= 0) continue;
+                    //Enemies
+                    if (enemyComponentRarity.Count <= 0) continue;
                     for (int i = newLevel.Enemies.Count - 1; i >= 0; i--)
                     {
                         var unit = newLevel.Enemies[i];
-                        for (int j = componentRarity.Count - 1; j >= 0; j--)
+                        for (int j = enemyComponentRarity.Count - 1; j >= 0; j--)
                         {
-                            var componentRarityPair = componentRarity.ElementAt(j);
-                            if (unit.enemyType.enemyPrefab.GetComponent(componentRarityPair.Key) == null) continue;
-                            unit.rarity = componentRarityPair.Value;
-                            componentRarity.Remove(componentRarityPair.Key);
+                            var enemyComponentRarityPair = enemyComponentRarity.ElementAt(j);
+                            if (unit.enemyType.enemyPrefab.GetComponent(enemyComponentRarityPair.Key) == null) continue;
+                            unit.rarity = enemyComponentRarityPair.Value;
+                            enemyComponentRarity.Remove(enemyComponentRarityPair.Key);
+                            break;
+                        }
+                    }
+                    //Outside Enemies, should work
+                    for (int i = newLevel.OutsideEnemies.Count - 1; i >= 0; i--)
+                    {
+                        var unit = newLevel.OutsideEnemies[i];
+                        for (int j = enemyComponentRarity.Count - 1; j >= 0; j--)
+                        {
+                            var enemyComponentRarityPair = enemyComponentRarity.ElementAt(j);
+                            if (unit.enemyType.enemyPrefab.GetComponent(enemyComponentRarityPair.Key) == null) continue;
+                            unit.rarity = enemyComponentRarityPair.Value;
+                            enemyComponentRarity.Remove(enemyComponentRarityPair.Key);
                             break;
                         }
                     }
@@ -190,7 +241,6 @@ namespace HullBreakerCompany
                 catch (NullReferenceException ex)
                 {
                     Mls.LogError($"NullReferenceException caught while processing event: {gameEvent}. Exception message: {ex.Message}. Caused : {ex.InnerException}");
-                    Mls.LogError("Try set false BepInEx.cfg [ChainLoader] HideManagerGameObject");
                 }
             }
             //debug logs
@@ -212,7 +262,7 @@ namespace HullBreakerCompany
             
             if (!randomEvents.Contains("Hell"))
             {
-                componentRarity.Add(typeof(JesterAI), Random.Range(1, 8));
+                enemyComponentRarity.Add(typeof(JesterAI), Random.Range(1, 8));
             }
             if (!randomEvents.Contains("Bee"))
             {
@@ -224,16 +274,16 @@ namespace HullBreakerCompany
             }
             if (!randomEvents.Contains("SpringMan"))
             {
-                componentRarity.Add(typeof(SpringManAI), Random.Range(10, 32));
+                enemyComponentRarity.Add(typeof(SpringManAI), Random.Range(10, 32));
             }
 
             if (UseHullBreakerLevelSettings)
             {
-                nl.maxEnemyPowerCount += 8;
-                nl.maxOutsideEnemyPowerCount += 32;
+                nl.maxEnemyPowerCount += 16;
+                nl.maxOutsideEnemyPowerCount += 20;
                 
-                nl.maxScrap += Random.Range(1, 12);
-                nl.maxTotalScrapValue += 64;
+                nl.maxScrap += Random.Range(6, 24);
+                nl.maxTotalScrapValue += Random.Range(400, 800);
                 
                 nl.daytimeEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe(0f, 5f), new Keyframe(0.5f, 5f));
                 nl.enemySpawnChanceThroughoutDay = new AnimationCurve(new Keyframe(0f, BunkerEnemyScale));
@@ -259,7 +309,6 @@ namespace HullBreakerCompany
         }
         public static void LevelUnits(SelectableLevel n, bool turret = false, bool landmine = false)
         {
-            
             Mls.LogInfo($"Turret: {turret}, Landmine: {landmine}");
             var curve = new AnimationCurve(new Keyframe(0f, LandMineTurretScale),
                 new Keyframe(1f, 25));
@@ -280,7 +329,11 @@ namespace HullBreakerCompany
         {
             foreach (var unit in level.spawnableMapObjects)
             {
-                unit.numberToSpawn = new AnimationCurve(new Keyframe(0f, 4f));
+                var landmineComponent = unit.prefabToSpawn.GetComponentInChildren<Landmine>();
+                if (landmineComponent != null)
+                {
+                    unit.numberToSpawn = new AnimationCurve(new Keyframe(0f, 2.5f));
+                }
             }
         }
         
@@ -354,7 +407,8 @@ namespace HullBreakerCompany
                 if (hullEvent is CustomEvent customEvent)
                 {
                     Mls.LogInfo($"Event ID: {customEvent.ID()}");
-                    Mls.LogInfo($"Spawnable Enemies: {string.Join(", ", customEvent.SpawnList)}");
+                    Mls.LogInfo($"Spawnable Enemies: {string.Join(", ", customEvent.EnemySpawnList)}");
+                    Mls.LogInfo($"Spawnable Outside Enemies: {string.Join(", ", customEvent.OutsideSpawnList)}");
                     Mls.LogInfo($"Message: {customEvent.GetMessage()}");
                 }
             }

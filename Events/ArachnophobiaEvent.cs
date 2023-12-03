@@ -12,9 +12,10 @@ public class ArachnophobiaEvent : HullEvent
     public override string GetDescription() => "Increased chance of spider spawning";
     public override string GetMessage() => "<color=white>Possible habitat of spiders</color>";
     public override string GetShortMessage() => "<color=white>ARACHNOPHOBIA</color>";
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
+    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+        Dictionary<Type, int> outsideComponentRarity)
     {
-        componentRarity.Add(typeof(SandSpiderAI), 256);
+        enemyComponentRarity.Add(typeof(SandSpiderAI), 256);
         HullManager.SendChatEventMessage(this);
     }
 }

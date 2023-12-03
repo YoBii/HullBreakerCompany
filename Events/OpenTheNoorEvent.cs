@@ -12,7 +12,8 @@ public class OpenTheNoorEvent : HullEvent
     public override string GetDescription() => "All big doors are locked in the level";
     public override string GetMessage() => "<color=white>All big doors are locked in the level</color>";
     public override string GetShortMessage() => "<color=white>OPEN THE NOOR...</color>";
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
+    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+        Dictionary<Type, int> outsideComponentRarity)
     {
         if (HullManager.Instance == null)
         {

@@ -12,7 +12,8 @@ public class HackedTurretsEvent : HullEvent
     public override string GetDescription() => "Turrets dont work on the moon";
     public override string GetMessage() => "<color=white>The company's hackers have disabled all turrets on this moon, you can breathe easy</color>";
     public override string GetShortMessage() => "<color=white>SYSTEM FAILURE</color>";
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
+    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+        Dictionary<Type, int> outsideComponentRarity)
     {
         if (HullManager.Instance == null)
         {

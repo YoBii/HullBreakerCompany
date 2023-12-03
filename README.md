@@ -28,6 +28,8 @@ Creating custom events!
 
 # CREATING CUSTOM EVENT 
 
+#### After v1.3.0 events may not work, you need to add `SpawnableOutsideEnemies = off` to your cfg
+
 For now, custom events support only mode when you increase enemy spawn rate, but in the next update i will add more modes & functions. 
 
 How can I create custom event?
@@ -61,6 +63,8 @@ EnemyRarity = 128
 
 `SpawnableEnemies` - Enemies that will be spawned, on your event, enemies must be in list down below, without quotes, separated by commas
 ```c#
+SpawnableEnemies
+    
 { "flowerman",}, // https://lethal.miraheze.org/wiki/Bracken
 { "hoarderbug",}, // https://lethal.miraheze.org/wiki/Hoarding_Bug
 { "springman",}, // https://lethal.miraheze.org/wiki/Coil-Head
@@ -71,6 +75,13 @@ EnemyRarity = 128
 { "blobai",}, // https://lethal.miraheze.org/wiki/Hygrodere
 { "dressgirl",}, // https://lethal.miraheze.org/wiki/Ghost_Girl
 { "pufferenemy",}, // https://lethal.miraheze.org/wiki/Spore_Lizard
+    
+SpawnableOutsideEnemies 
+
+{ "eyelessdogs"}, //https://lethal.miraheze.org/wiki/Eyeless_Dog
+{ "foresgiant"}, //https://lethal.miraheze.org/wiki/Forest_Keeper
+{ "sandworm",}, //https://lethal.miraheze.org/wiki/Earth_Leviathan
+{ "baboonbird",} //https://lethal.miraheze.org/wiki/Baboon_Hawk
 ```
 
 `EnemyRarity` - Rarity of enemies, increase this value to increase enemies spawn chance
@@ -93,22 +104,26 @@ InGameShortMessage = CRAWLER
 
 SpawnableEnemies = crawler,hoarderbug
 
+SpawnableOutsideEnemies = off
+
 EnemyRarity = 128
 ```
-CentipedeEvent.cfg
+BaboonEvent.cfg
 
 ```cfg
 [CustomEvent]
 
-EventID = Centipede
+EventID = Baboon
 
 EventWeight = 10
-    
-InGameMessage = Centipede near
 
-InGameShortMessage = CENTIPEDE
+InGameMessage = Baboon bird coming
 
-SpawnableEnemies = centipede
+InGameShortMessage = BIGBIRDS
+
+SpawnableEnemies = off
+
+SpawnableOutsideEnemies = baboonbird
 
 EnemyRarity = 128
 ```

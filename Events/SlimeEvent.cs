@@ -12,9 +12,10 @@ public class SlimeEvent : HullEvent
     public override string GetDescription() => "Increased chance of slime spawn";
     public override string GetMessage() => "<color=white>Inhabited with slime</color>";
     public override string GetShortMessage() => "<color=white>SO SLIMY</color>";
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
+    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+        Dictionary<Type, int> outsideComponentRarity)
     {
-        componentRarity.Add(typeof(BlobAI), 128);
+        enemyComponentRarity.Add(typeof(BlobAI), 128);
         HullManager.SendChatEventMessage(this);
     }
 }

@@ -26,13 +26,13 @@ namespace HullBreakerCompany.hull
             Plugin.ChangeQuotaValue = GetConfigValue("ChangeQuota", true, "Change quota");
             Plugin.QuotaIncrease = GetConfigValue("IncreasedQuota", 256, "Increased quota");
             
-            Plugin.MaxEnemyPowerCount = GetConfigValue("maxEnemyPowerCount", 2000, "Max enemy power count");
-            Plugin.MaxOutsideEnemyPowerCount = GetConfigValue("maxOutsideEnemyPowerCount", 20, "Max outside enemy power count");
-            Plugin.MaxDaytimeEnemyPowerCount = GetConfigValue("maxDaytimeEnemyPowerCount", 200, "Max daytime enemy power count");
-            Plugin.MinScrap = GetConfigValue("minScrap", 0, "Min scrap");
-            Plugin.MaxScrap = GetConfigValue("maxScrap", 30, "Max scrap");
-            Plugin.MinTotalScrapValue = GetConfigValue("minTotalScrapValue", 200, "Min total scrap value");
-            Plugin.MaxTotalScrapValue = GetConfigValue("maxTotalScrapValue", 800, "Max total scrap value");
+            Plugin.MaxEnemyPowerCount = GetConfigValue("maxEnemyPowerCount", 10, "Max enemy power count");
+            Plugin.MaxOutsideEnemyPowerCount = GetConfigValue("maxOutsideEnemyPowerCount", 10, "Max outside enemy power count");
+            Plugin.MaxDaytimeEnemyPowerCount = GetConfigValue("maxDaytimeEnemyPowerCount", 20, "Max daytime enemy power count");
+            Plugin.MinScrap = GetConfigValue("minScrap", 10, "Min scrap");
+            Plugin.MaxScrap = GetConfigValue("maxScrap", 15, "Max scrap");
+            Plugin.MinTotalScrapValue = GetConfigValue("minTotalScrapValue", 300, "Min total scrap value");
+            Plugin.MaxTotalScrapValue = GetConfigValue("maxTotalScrapValue", 700, "Max total scrap value");
             
             Plugin.IncreaseEventCountPerDay = GetConfigValue("IncreaseEventCountPerDay", false, "The number of events will increase every day. Visit the company building to reset");
             Plugin.EventCount = GetConfigValue("EventCount", 3, "The number of events that will be active at the same time");

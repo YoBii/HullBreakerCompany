@@ -13,7 +13,8 @@ public class BabkinPogrebEvent : HullEvent
     public override string GetDescription() => "Only jars of pickles spawn on the moon";
     public override string GetMessage() => "<color=white>On the this moon, something strange happened with scrap...</color>";
     public override string GetShortMessage() => "<color=white>ITEM MYSTERY</color>";
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity)
+    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+        Dictionary<Type, int> outsideComponentRarity)
     {
         try
         {

@@ -24,19 +24,12 @@ internal class HullManager : MonoBehaviour
             }
         }
     }
-    public static HullManager Instance { get; private set; }
+
+    public static HullManager Instance;
 
     private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+    { 
+        Instance = this;
     }
     
     public void ExecuteAfterDelay(Action action, float delay)
