@@ -63,7 +63,7 @@ namespace HullBreakerCompany
             { "dressgirl", typeof(DressGirlAI) },
             { "pufferenemy", typeof(PufferAI) },
             { "eyelessdogs", typeof(MouthDogAI) },
-            { "foresgiant", typeof(ForestGiantAI) },
+            { "forestgiant", typeof(ForestGiantAI) },
             { "sandworm", typeof(SandWormAI) },
             { "baboonbird", typeof(BaboonBirdAI)}
         };
@@ -139,10 +139,10 @@ namespace HullBreakerCompany
                         customEvent.EnemySpawnList = hullEvent["SpawnableEnemies"].Split(',').ToList();
                     }
 
-                    if (hullEvent.ContainsKey("SpawnableOutsideEnemies"))
-                    {
-                        customEvent.OutsideSpawnList = hullEvent["SpawnableOutsideEnemies"].Split(',').ToList();
-                    }
+                    // if (hullEvent.ContainsKey("SpawnableOutsideEnemies"))
+                    // {
+                    //     customEvent.OutsideSpawnList = hullEvent["SpawnableOutsideEnemies"].Split(',').ToList();
+                    // }
                     customEvent.SetMessage(hullEvent["InGameMessage"]);
                     customEvent.SetShortMessage(hullEvent["InGameShortMessage"]);
 
@@ -212,25 +212,22 @@ namespace HullBreakerCompany
                     
                     //Enemies
                     if (enemyComponentRarity.Count <= 0) continue;
-                    for (int i = newLevel.Enemies.Count - 1; i >= 0; i--)
+                    // for (int i = newLevel.Enemies.Count - 1; i >= 0; i--)
+                    // {
+                    //     var unit = newLevel.Enemies[i];
+                    //     for (int j = enemyComponentRarity.Count - 1; j >= 0; j--)
+                    //     {
+                    //         var enemyComponentRarityPair = enemyComponentRarity.ElementAt(j);
+                    //         if (unit.enemyType.enemyPrefab.GetComponent(enemyComponentRarityPair.Key) == null) continue;
+                    //         unit.rarity = enemyComponentRarityPair.Value;
+                    //         enemyComponentRarity.Remove(enemyComponentRarityPair.Key);
+                    //         break;
+                    //     }
+                    // }
+                    foreach (var unit in newLevel.Enemies)
                     {
-                        var unit = newLevel.Enemies[i];
-                        for (int j = enemyComponentRarity.Count - 1; j >= 0; j--)
+                        foreach (var enemyComponentRarityPair in enemyComponentRarity)
                         {
-                            var enemyComponentRarityPair = enemyComponentRarity.ElementAt(j);
-                            if (unit.enemyType.enemyPrefab.GetComponent(enemyComponentRarityPair.Key) == null) continue;
-                            unit.rarity = enemyComponentRarityPair.Value;
-                            enemyComponentRarity.Remove(enemyComponentRarityPair.Key);
-                            break;
-                        }
-                    }
-                    //Outside Enemies, should work
-                    for (int i = newLevel.OutsideEnemies.Count - 1; i >= 0; i--)
-                    {
-                        var unit = newLevel.OutsideEnemies[i];
-                        for (int j = enemyComponentRarity.Count - 1; j >= 0; j--)
-                        {
-                            var enemyComponentRarityPair = enemyComponentRarity.ElementAt(j);
                             if (unit.enemyType.enemyPrefab.GetComponent(enemyComponentRarityPair.Key) == null) continue;
                             unit.rarity = enemyComponentRarityPair.Value;
                             enemyComponentRarity.Remove(enemyComponentRarityPair.Key);
@@ -244,22 +241,25 @@ namespace HullBreakerCompany
                 }
             }
             //debug logs
+            Mls.LogInfo("");
             Mls.LogInfo("\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1bENEMIES RARITY\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b");
             foreach (var unit in newLevel.Enemies)
             {
                 Mls.LogInfo($"{unit.enemyType.enemyPrefab.name} - {unit.rarity}");
             }
+            Mls.LogInfo("");
             Mls.LogInfo("\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1bDAYTIME ENEMIES RARITY\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b");
             foreach (var unit in newLevel.DaytimeEnemies)
             {
                 Mls.LogInfo($"{unit.enemyType.enemyPrefab.name} - {unit.rarity}");
             }
+            Mls.LogInfo("");
             Mls.LogInfo("\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1bOUTSIDE ENEMIES RARITY\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b");
             foreach (var unit in newLevel.OutsideEnemies)
             {
                 Mls.LogInfo($"{unit.enemyType.enemyPrefab.name} - {unit.rarity}");
             }
-            
+            Mls.LogInfo("");
             if (!randomEvents.Contains("Hell"))
             {
                 enemyComponentRarity.Add(typeof(JesterAI), Random.Range(1, 8));
@@ -408,7 +408,7 @@ namespace HullBreakerCompany
                 {
                     Mls.LogInfo($"Event ID: {customEvent.ID()}");
                     Mls.LogInfo($"Spawnable Enemies: {string.Join(", ", customEvent.EnemySpawnList)}");
-                    Mls.LogInfo($"Spawnable Outside Enemies: {string.Join(", ", customEvent.OutsideSpawnList)}");
+                    // Mls.LogInfo($"Spawnable Outside Enemies: {string.Join(", ", customEvent.OutsideSpawnList)}");
                     Mls.LogInfo($"Message: {customEvent.GetMessage()}");
                 }
             }

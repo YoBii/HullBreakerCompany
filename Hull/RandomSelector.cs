@@ -15,7 +15,6 @@ public abstract class RandomSelector
         var gameEvents = GetWeightedRandomGameEvents(ConfigManager.GetWeights(), eventCount);
         return gameEvents;
     }
-
     private static List<T> GetWeightedRandomGameEvents<T>(Dictionary<T, int> weights, int count)
     {
         var totalWeight = weights.Where(x => x.Value > 0).Sum(x => x.Value);

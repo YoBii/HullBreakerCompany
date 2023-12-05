@@ -1,87 +1,83 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace HullBreakerCompany.Hull;
 
-public class SelectableLevelState
-{
-    private int _minScrap;
-    private int _maxScrap;
-    private int _minTotalScrapValue;
-    private int _maxTotalScrapValue;
-    private int _maxEnemyPowerCount;
-    private int _maxOutsideEnemyPowerCount;
-    private int _maxDaytimeEnemyPowerCount;
-    private List<SpawnableItemWithRarity> _spawnableScrap;
-    private AnimationCurve _enemySpawnChanceThroughoutDay;
-    private AnimationCurve _outsideEnemySpawnChanceThroughDay;
-    private AnimationCurve _daytimeEnemySpawnChanceThroughDay;
+public class SelectableLevelState {
     
-    // private List<SpawnableEnemyWithRarity> _enemies;
-    // private List<SpawnableEnemyWithRarity> _outsideEnemies;
-    // private List<SpawnableEnemyWithRarity> _daytimeEnemies;
+    public int MinScrap;
+    public int MaxScrap;
+    public int MinTotalScrapValue;
+    public int MaxTotalScrapValue;
+    public int MaxEnemyPowerCount = 8;
+    public int MaxOutsideEnemyPowerCount = 15;
+    public int MaxDaytimeEnemyPowerCount = 20;
+    public AnimationCurve EnemySpawnChanceThroughoutDay;
+    public AnimationCurve OutsideEnemySpawnChanceThroughDay;
+    public AnimationCurve DaytimeEnemySpawnChanceThroughDay;
     
+    public List<SpawnableEnemyWithRarity> EnemyList= new List<SpawnableEnemyWithRarity>();
     public SelectableLevelState(SelectableLevel level) {
         
-        _minScrap = level.minScrap;
+        MinScrap = level.minScrap;
+        MaxScrap = level.maxScrap;
+        MinTotalScrapValue = level.minTotalScrapValue;
+        MaxTotalScrapValue = level.maxTotalScrapValue;
+        MaxEnemyPowerCount = level.maxEnemyPowerCount;
+        MaxOutsideEnemyPowerCount = level.maxOutsideEnemyPowerCount;
+        MaxDaytimeEnemyPowerCount = level.maxDaytimeEnemyPowerCount;
+        EnemySpawnChanceThroughoutDay = level.enemySpawnChanceThroughoutDay;
+        OutsideEnemySpawnChanceThroughDay = level.outsideEnemySpawnChanceThroughDay;
+        DaytimeEnemySpawnChanceThroughDay = level.daytimeEnemySpawnChanceThroughDay;
         
-        _maxScrap = level.maxScrap - 1;
+        foreach (var enemy in level.Enemies) {
+            var clone = new SpawnableEnemyWithRarity {
+                enemyType = enemy.enemyType,
+                rarity = enemy.rarity
+            };
+            EnemyList.Add(clone);
+        }
         
-        _minTotalScrapValue = level.minTotalScrapValue - 1;
-
-        _maxTotalScrapValue = level.maxTotalScrapValue - 1;
-
-        _maxEnemyPowerCount = level.maxEnemyPowerCount - 1;
-
-        _maxOutsideEnemyPowerCount = level.maxOutsideEnemyPowerCount - 1;
-
-        _maxDaytimeEnemyPowerCount = level.maxDaytimeEnemyPowerCount - 1;
-        
-        _spawnableScrap = level.spawnableScrap;
-        
-        _enemySpawnChanceThroughoutDay = level.enemySpawnChanceThroughoutDay;
-        
-        _outsideEnemySpawnChanceThroughDay = level.outsideEnemySpawnChanceThroughDay;
-        
-        _daytimeEnemySpawnChanceThroughDay = level.daytimeEnemySpawnChanceThroughDay;
-        
-        //Should debug this
-        // _enemies = level.Enemies;
-        //
-        // _outsideEnemies = level.OutsideEnemies;
-        //
-        // _daytimeEnemies = level.DaytimeEnemies;
+        // Debug
+        // foreach (var enemy in EnemyList)
+        // {
+        //     Plugin.Mls.LogInfo($"stored enemy: {enemy.enemyType} rarity: {enemy.rarity}");
+        // }
     }
 
     public void RestoreState(SelectableLevel level) {
         
-        level.minScrap = _minScrap;
-        
-        level.maxScrap = _maxScrap + 1;
-        
-        level.minTotalScrapValue = _minTotalScrapValue + 1;
+        level.minScrap = MinScrap;
+        level.maxScrap = MaxScrap;
+        level.minTotalScrapValue = MinTotalScrapValue;
+        level.maxTotalScrapValue = MaxTotalScrapValue;
+        level.maxEnemyPowerCount = MaxEnemyPowerCount;
+        level.maxOutsideEnemyPowerCount = MaxOutsideEnemyPowerCount;
+        level.maxDaytimeEnemyPowerCount = MaxDaytimeEnemyPowerCount;
+        level.enemySpawnChanceThroughoutDay = EnemySpawnChanceThroughoutDay;
+        level.outsideEnemySpawnChanceThroughDay = OutsideEnemySpawnChanceThroughDay;
+        level.daytimeEnemySpawnChanceThroughDay = DaytimeEnemySpawnChanceThroughDay;
+        Plugin.Mls.LogInfo("");
+        Plugin.Mls.LogInfo("clearing enemy list");
+        Plugin.Mls.LogInfo("");
 
-        level.maxTotalScrapValue = _maxTotalScrapValue + 1;
-
-        level.maxEnemyPowerCount = _maxEnemyPowerCount + 1;
-
-        level.maxOutsideEnemyPowerCount = _maxOutsideEnemyPowerCount + 1;
-
-        level.maxDaytimeEnemyPowerCount = _maxDaytimeEnemyPowerCount + 1;
+       
+        level.Enemies.Clear();
         
-        level.spawnableScrap = _spawnableScrap;
+        foreach (var enemy in EnemyList) {
+            var clone = new SpawnableEnemyWithRarity {
+                enemyType = enemy.enemyType,
+                rarity = enemy.rarity
+            };
+            level.Enemies.Add(clone);
+        }
         
-        level.enemySpawnChanceThroughoutDay = _enemySpawnChanceThroughoutDay;
+        // Debug
+        // foreach (var enemy in level.Enemies)
+        // {
+        //     Plugin.Mls.LogInfo($"restored enemy: {enemy.enemyType} rarity: {enemy.rarity}");
+        // }
         
-        level.outsideEnemySpawnChanceThroughDay = _outsideEnemySpawnChanceThroughDay;
-        
-        level.daytimeEnemySpawnChanceThroughDay = _daytimeEnemySpawnChanceThroughDay;
-
-        //Should debug this
-        // level.Enemies = _enemies;
-        //
-        // level.OutsideEnemies = _outsideEnemies;
-        //
-        // level.DaytimeEnemies = _daytimeEnemies;
     }
 }
