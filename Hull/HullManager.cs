@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HullBreakerCompany.hull;
-internal class HullManager : MonoBehaviour
+namespace HullBreakerCompany.Hull;
+
+public class HullManager : MonoBehaviour
 {
     public TimeOfDay timeOfDay;
 
@@ -51,6 +52,15 @@ internal class HullManager : MonoBehaviour
         action.Invoke();
     }
 
+    public static void SendChatEventMessage(HullEvent hullEvent)
+    {
+        if (HUDManager.Instance != null && hullEvent != null && Plugin.EnableEventMessages)
+        {
+            HUDManager.Instance.AddTextToChatOnServer(Plugin.UseShortChatMessages
+                ? hullEvent.GetShortMessage()
+                : hullEvent.GetMessage());
+        }
+    }
     public static void SendChatEventMessage(string message)
     {
         if (HUDManager.Instance != null && message != null && Plugin.EnableEventMessages)
@@ -58,7 +68,6 @@ internal class HullManager : MonoBehaviour
             HUDManager.Instance.AddTextToChatOnServer(message);
         }
     }
-    
     public static void LogEnemyRarity(List<SpawnableEnemyWithRarity> enemies, string title)
     {
         Plugin.Mls.LogInfo("");

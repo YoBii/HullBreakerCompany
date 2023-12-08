@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using HullBreakerCompany.Event;
-using HullBreakerCompany.hull;
+using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events;
 
@@ -16,6 +15,6 @@ public class TurretEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         Plugin.LevelUnits(level, true);
-        HullManager.SendChatEventMessage(GetMessage());
+        HullManager.SendChatEventMessage(this);
     }
 }

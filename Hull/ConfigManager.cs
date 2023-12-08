@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using BepInEx;
 
-namespace HullBreakerCompany.hull
+namespace HullBreakerCompany.Hull
 {
     public class ConfigManager
     {

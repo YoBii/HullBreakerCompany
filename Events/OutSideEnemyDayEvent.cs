@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using HullBreakerCompany.Event;
-using HullBreakerCompany.hull;
+using HullBreakerCompany.Hull;
 using UnityEngine;
 
 namespace HullBreakerCompany.Events;
@@ -18,6 +17,6 @@ public class OutSideEnemyDayEvent : HullEvent
     {
         level.outsideEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe(0f, 512f));
         
-        HullManager.SendChatEventMessage(GetMessage());
+        HullManager.SendChatEventMessage(this);
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HullBreakerCompany.Event;
-using HullBreakerCompany.hull;
+using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events;
 
@@ -17,6 +16,6 @@ public class OneForAllEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         Plugin.OneForAllIsActive = true;
-        HullManager.SendChatEventMessage(GetMessage());
+        HullManager.SendChatEventMessage(this);
     }
 }

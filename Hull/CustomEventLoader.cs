@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using BepInEx;
-using HullBreakerCompany.Event;
+using HullBreakerCompany.Hull;
 using HullBreakerCompany.Events;
 
 namespace HullBreakerCompany.Hull;

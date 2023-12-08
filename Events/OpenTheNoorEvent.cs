@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using HullBreakerCompany.Event;
-using HullBreakerCompany.hull;
+using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events;
 
@@ -28,7 +27,7 @@ public class OpenTheNoorEvent : HullEvent
         }
 
         HullManager.Instance.ExecuteAfterDelay(() => { CloseBigDoors(); }, 16f);
-        HullManager.SendChatEventMessage(GetMessage());
+        HullManager.SendChatEventMessage(this);
     }
     
     private void CloseBigDoors()

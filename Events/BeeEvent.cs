@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HullBreakerCompany.Event;
-using HullBreakerCompany.hull;
+using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events;
 
@@ -21,6 +20,6 @@ public class BeeEvent : HullEvent
             unit.rarity = 256;
             break;
         }
-        HullManager.SendChatEventMessage(GetMessage());
+        HullManager.SendChatEventMessage(this);
     }
 }

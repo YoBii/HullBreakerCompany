@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HullBreakerCompany.Event;
-using HullBreakerCompany.hull;
+using HullBreakerCompany.Hull;
 using UnityEngine;
 
 namespace HullBreakerCompany.Events;
@@ -68,7 +67,7 @@ public class CustomEvent : HullEvent
         {
             outsideComponentRarity.Add(Plugin.EnemyBase[enemy], Rarity);
         }
-        
-        HullManager.SendChatEventMessage("<color=white>"+ GetMessage() +"</color>");
+
+        HullManager.SendChatEventMessage(Plugin.UseShortChatMessages ? GetShortMessage() : GetMessage());
     }
 }

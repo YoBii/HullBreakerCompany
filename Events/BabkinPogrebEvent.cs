@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HullBreakerCompany.Event;
-using HullBreakerCompany.hull;
+using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events;
 
@@ -44,7 +43,7 @@ public class BabkinPogrebEvent : HullEvent
             }
             
             HullManager.Instance.ExecuteAfterDelay(() => { DelayedReturnList(level); }, 12f);
-            HullManager.SendChatEventMessage(GetMessage());
+            HullManager.SendChatEventMessage(this);
         }
         catch (ArgumentOutOfRangeException ex)
         {

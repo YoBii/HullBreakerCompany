@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BepInEx.Configuration;
 
-namespace HullBreakerCompany.Event;
+namespace HullBreakerCompany.Hull;
 
 public abstract class HullEvent
 { 

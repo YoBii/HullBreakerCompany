@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using HullBreakerCompany.Event;
-using HullBreakerCompany.hull;
+using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events;
 
@@ -16,6 +15,6 @@ public class HullBreakEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         HullManager.Instance.AddMoney(120);
-        HullManager.SendChatEventMessage(GetMessage());
+        HullManager.SendChatEventMessage(this);
     }
 }

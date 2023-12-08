@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using HullBreakerCompany.Event;
-using HullBreakerCompany.hull;
+using HullBreakerCompany.Hull;
 using Random = UnityEngine.Random;
 
 namespace HullBreakerCompany.Events;
@@ -18,7 +17,7 @@ public class HellEvent : HullEvent
     {
         enemyComponentRarity.Add(typeof(JesterAI), 64);
         
-        HullManager.SendChatEventMessage(GetMessage());
+        HullManager.SendChatEventMessage(this);
         RoundManager.Instance.hourTimeBetweenEnemySpawnBatches = 1;
 
         HullManager.Instance.ExecuteAfterDelay(() => { Hell(); }, 16f);

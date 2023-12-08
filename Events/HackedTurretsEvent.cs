@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using HullBreakerCompany.Event;
-using HullBreakerCompany.hull;
+using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events;
 
@@ -28,7 +27,7 @@ public class HackedTurretsEvent : HullEvent
         }
         
         HullManager.Instance.ExecuteAfterDelay(() => { HackTurrets(); }, 16f);
-        HullManager.SendChatEventMessage(GetMessage());
+        HullManager.SendChatEventMessage(this);
     }
     
     private void HackTurrets()

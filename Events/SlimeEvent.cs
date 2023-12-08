@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using HullBreakerCompany.Event;
-using HullBreakerCompany.hull;
+using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events;
 
@@ -16,6 +15,6 @@ public class SlimeEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         enemyComponentRarity.Add(typeof(BlobAI), 48);
-        HullManager.SendChatEventMessage(GetMessage());
+        HullManager.SendChatEventMessage(this);
     }
 }
