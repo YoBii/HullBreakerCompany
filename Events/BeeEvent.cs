@@ -21,6 +21,6 @@ public class BeeEvent : HullEvent
             unit.rarity = 256;
             break;
         }
-        HullManager.SendChatEventMessage(this);
+        HullManager.SendChatEventMessage(GetMessage());
     }
 }

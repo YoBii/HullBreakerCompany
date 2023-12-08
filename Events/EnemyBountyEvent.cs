@@ -18,6 +18,6 @@ public class EnemyBountyEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         Plugin.BountyIsActive = true;
-        HullManager.SendChatEventMessage(this);
+        HullManager.SendChatEventMessage(GetMessage());
     }
 }

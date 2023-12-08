@@ -15,7 +15,7 @@ public class SlimeEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
-        enemyComponentRarity.Add(typeof(BlobAI), 128);
-        HullManager.SendChatEventMessage(this);
+        enemyComponentRarity.Add(typeof(BlobAI), 48);
+        HullManager.SendChatEventMessage(GetMessage());
     }
 }

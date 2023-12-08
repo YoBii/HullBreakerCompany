@@ -16,6 +16,6 @@ public class TurretEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         Plugin.LevelUnits(level, true);
-        HullManager.SendChatEventMessage(this);
+        HullManager.SendChatEventMessage(GetMessage());
     }
 }

@@ -16,6 +16,6 @@ public class SpringManEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         enemyComponentRarity.Add(typeof(SpringManAI), 128);
-        HullManager.SendChatEventMessage(this);
+        HullManager.SendChatEventMessage(GetMessage());
     }
 }

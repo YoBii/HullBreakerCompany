@@ -18,7 +18,7 @@ public class HellEvent : HullEvent
     {
         enemyComponentRarity.Add(typeof(JesterAI), 64);
         
-        HullManager.SendChatEventMessage(this);
+        HullManager.SendChatEventMessage(GetMessage());
         RoundManager.Instance.hourTimeBetweenEnemySpawnBatches = 1;
 
         HullManager.Instance.ExecuteAfterDelay(() => { Hell(); }, 16f);

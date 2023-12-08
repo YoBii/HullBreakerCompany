@@ -16,6 +16,6 @@ public class LandMineEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         Plugin.LevelUnits(level, false, true);
-        HullManager.SendChatEventMessage(this);
+        HullManager.SendChatEventMessage(GetMessage());
     }
 }

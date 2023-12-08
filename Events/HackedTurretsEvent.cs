@@ -28,7 +28,7 @@ public class HackedTurretsEvent : HullEvent
         }
         
         HullManager.Instance.ExecuteAfterDelay(() => { HackTurrets(); }, 16f);
-        HullManager.SendChatEventMessage(this);
+        HullManager.SendChatEventMessage(GetMessage());
     }
     
     private void HackTurrets()

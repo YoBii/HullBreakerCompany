@@ -16,6 +16,6 @@ public class FlowerManEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         enemyComponentRarity.Add(typeof(FlowermanAI), 256);
-        HullManager.SendChatEventMessage(this);
+        HullManager.SendChatEventMessage(GetMessage());
     }
 }

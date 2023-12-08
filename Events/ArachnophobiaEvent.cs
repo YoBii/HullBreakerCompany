@@ -16,6 +16,6 @@ public class ArachnophobiaEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         enemyComponentRarity.Add(typeof(SandSpiderAI), 256);
-        HullManager.SendChatEventMessage(this);
+        HullManager.SendChatEventMessage(GetMessage());
     }
 }

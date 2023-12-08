@@ -44,7 +44,7 @@ public class BabkinPogrebEvent : HullEvent
             }
             
             HullManager.Instance.ExecuteAfterDelay(() => { DelayedReturnList(level); }, 12f);
-            HullManager.SendChatEventMessage(this);
+            HullManager.SendChatEventMessage(GetMessage());
         }
         catch (ArgumentOutOfRangeException ex)
         {

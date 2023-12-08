@@ -17,6 +17,6 @@ public class OneForAllEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         Plugin.OneForAllIsActive = true;
-        HullManager.SendChatEventMessage(this);
+        HullManager.SendChatEventMessage(GetMessage());
     }
 }

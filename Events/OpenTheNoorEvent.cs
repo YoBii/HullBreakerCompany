@@ -28,7 +28,7 @@ public class OpenTheNoorEvent : HullEvent
         }
 
         HullManager.Instance.ExecuteAfterDelay(() => { CloseBigDoors(); }, 16f);
-        HullManager.SendChatEventMessage(this);
+        HullManager.SendChatEventMessage(GetMessage());
     }
     
     private void CloseBigDoors()

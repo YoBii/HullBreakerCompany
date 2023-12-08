@@ -16,7 +16,7 @@ public class OnAPowderKegEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(); }, UnityEngine.Random.Range(30, 680));
-        HullManager.SendChatEventMessage(this);
+        HullManager.SendChatEventMessage(GetMessage());
     }
 
     private void DetonateLandMine()

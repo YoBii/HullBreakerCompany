@@ -79,7 +79,7 @@ SpawnableEnemies
 SpawnableOutsideEnemies 
 
 { "eyelessdogs"}, //https://lethal.miraheze.org/wiki/Eyeless_Dog
-{ "foresgiant"}, //https://lethal.miraheze.org/wiki/Forest_Keeper
+{ "forestgiant"}, //https://lethal.miraheze.org/wiki/Forest_Keeper
 { "sandworm",}, //https://lethal.miraheze.org/wiki/Earth_Leviathan
 { "baboonbird",} //https://lethal.miraheze.org/wiki/Baboon_Hawk
 ```
@@ -128,5 +128,42 @@ SpawnableOutsideEnemies = baboonbird
 EnemyRarity = 128
 ```
 
+OffEyeLessDogEvent.cfg
 
+```cfg
+[CustomEvent]
 
+EventID = OffEyeLessDog
+
+EventWeight = 10
+
+InGameMessage = No barking
+
+InGameShortMessage = No barking
+
+SpawnableEnemies = off
+
+SpawnableOutsideEnemies = eyelessdogs
+
+EnemyRarity = 0
+```
+
+EyeLessDogEvent.cfg
+
+```cfg
+[CustomEvent]
+
+EventID = EyeLessDogs
+
+EventWeight = 10
+
+InGameMessage = Barking
+
+InGameShortMessage = Barking
+
+SpawnableEnemies = off
+
+SpawnableOutsideEnemies = eyelessdogs
+
+EnemyRarity = 1285
+```
