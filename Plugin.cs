@@ -283,10 +283,10 @@ namespace HullBreakerCompany
 
             foreach (var unit in n.spawnableMapObjects)
             {
-                var turretComponent = unit.prefabToSpawn.GetComponentInChildren<Turret>();
+                //var turretComponent = unit.prefabToSpawn.GetComponentInChildren<Turret>();
                 var landmineComponent = unit.prefabToSpawn.GetComponentInChildren<Landmine>();
 
-                if (turretComponent != null || landmineComponent != null)
+                if (landmineComponent != null)
                 {
                     unit.numberToSpawn = curve;
                 }
