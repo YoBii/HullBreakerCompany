@@ -75,6 +75,7 @@ SpawnableEnemies
 { "blobai",}, // https://lethal.miraheze.org/wiki/Hygrodere
 { "dressgirl",}, // https://lethal.miraheze.org/wiki/Ghost_Girl
 { "pufferenemy",}, // https://lethal.miraheze.org/wiki/Spore_Lizard
+{ "nutcrackerenemy" }
     
 SpawnableOutsideEnemies 
 

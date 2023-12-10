@@ -14,7 +14,7 @@ public class DevochkaPizdecEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
-        enemyComponentRarity.Add(typeof(DressGirlAI), 1024);
+        enemyComponentRarity.Add(typeof(DressGirlAI), 32);
         HullManager.SendChatEventMessage(this);
     }
 }

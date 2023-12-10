@@ -63,7 +63,8 @@ namespace HullBreakerCompany
             { "eyelessdogs", typeof(MouthDogAI) },
             { "forestgiant", typeof(ForestGiantAI) },
             { "sandworm", typeof(SandWormAI) },
-            { "baboonbird", typeof(BaboonBirdAI) }
+            { "baboonbird", typeof(BaboonBirdAI) },
+            { "nutcrackerenemy", typeof(NutcrackerEnemyAI)}
         };
 
         public static List<HullEvent> EventDictionary = new()
@@ -87,7 +88,8 @@ namespace HullBreakerCompany
             { new NothingEvent() },
             { new HackedTurretsEvent() }, //v1.2.0
             { new BabkinPogrebEvent() }, //v1.2.0
-            { new HullBreakEvent()} //v1.3.5
+            { new HullBreakEvent()}, //v1.3.5
+            { new NutcrackerEvent()} //v1.3.8
         };
 
         Harmony _harmony = new("HULLBREAKER");
@@ -331,12 +333,14 @@ namespace HullBreakerCompany
             HullManager.SendChatEventMessage(
                 "<color=red>One of the workers died, the ship will go into orbit in an hour</color>");
         }
-
+        
         [HarmonyPostfix]
         [HarmonyPatch(typeof(GameNetworkManager), nameof(GameNetworkManager.StartHost))]
         static void ResetDayPassed()
         {
             DaysPassed = 0;
         }
+        
+
     }
 }

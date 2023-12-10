@@ -7,7 +7,7 @@ namespace HullBreakerCompany.Events;
 public class HullBreakEvent : HullEvent
 {
     public override string ID() => "HullBreak";
-    public override int GetWeight() => 7;
+    public override int GetWeight() => 5;
     public override string GetDescription() => "Getting money for visiting this moon";
     public override string GetMessage() => "<color=green>Take a break, the company is sending money for visiting the moon</color>";
     public override string GetShortMessage() => "<color=white>TAKE A BREAK</color>";
