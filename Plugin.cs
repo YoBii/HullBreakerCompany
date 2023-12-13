@@ -64,7 +64,8 @@ namespace HullBreakerCompany
             { "forestgiant", typeof(ForestGiantAI) },
             { "sandworm", typeof(SandWormAI) },
             { "baboonbird", typeof(BaboonBirdAI) },
-            { "nutcrackerenemy", typeof(NutcrackerEnemyAI)}
+            { "nutcrackerenemy", typeof(NutcrackerEnemyAI)},
+            { "maskedplayerenemy", typeof(MaskedPlayerEnemy)}
         };
 
         public static List<HullEvent> EventDictionary = new()
@@ -80,7 +81,7 @@ namespace HullBreakerCompany
             { new SlimeEvent() },
             { new DevochkaPizdecEvent() },
             { new EnemyBountyEvent() },
-            { new OneForAllEvent() },
+            //{ new OneForAllEvent() },
             { new OpenTheNoorEvent() },
             { new OnAPowderKegEvent() },
             { new OutSideEnemyDayEvent() },
@@ -92,7 +93,7 @@ namespace HullBreakerCompany
             { new NutcrackerEvent()} //v1.3.8
         };
 
-        Harmony _harmony = new("HULLBREAKER");
+        readonly Harmony _harmony = new("HULLBREAKER");
 
         private void Awake()
         {
@@ -205,12 +206,8 @@ namespace HullBreakerCompany
             HullManager.LogEnemyRarity(newLevel.Enemies, "\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1bENEMIES RARITY\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b");
             HullManager.LogEnemyRarity(newLevel.DaytimeEnemies, "\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1bDAYTIME ENEMIES RARITY\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b");
             HullManager.LogEnemyRarity(newLevel.OutsideEnemies, "\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1bOUTSIDE ENEMIES RARITY\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b");
-
-            if (!randomEvents.Contains("Hell"))
-            {
-                enemyComponentRarity.Add(typeof(JesterAI), Random.Range(1, 8));
-            }
-
+            
+            
             if (!randomEvents.Contains("Bee"))
             {
                 foreach (var unit in nl.DaytimeEnemies.Where(unit =>
@@ -220,12 +217,7 @@ namespace HullBreakerCompany
                     break;
                 }
             }
-
-            if (!randomEvents.Contains("SpringMan"))
-            {
-                enemyComponentRarity.Add(typeof(SpringManAI), Random.Range(10, 32));
-            }
-
+            
             if (UseHullBreakerLevelSettings)
             {
                 nl.maxEnemyPowerCount += 16;
@@ -268,8 +260,11 @@ namespace HullBreakerCompany
                 {
                     if (unit.enemyType.enemyPrefab.GetComponent(componentRarityPair.Key) == null)
                         continue;
-                    unit.rarity = componentRarityPair.Value;
-                    componentRarity.Remove(componentRarityPair.Key);
+                    if (enemies.Any(e => e.enemyType == unit.enemyType))
+                    {
+                        unit.rarity = componentRarityPair.Value;
+                        componentRarity.Remove(componentRarityPair.Key);
+                    }
                     break;
                 }
             }
@@ -320,6 +315,7 @@ namespace HullBreakerCompany
         }
 
         //OneForAll event
+        //TODO fix
         [HarmonyPostfix]
         [HarmonyPatch(typeof(PlayerControllerB), "KillPlayerServerRpc")]
         static void OneForAll()

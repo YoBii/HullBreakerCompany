@@ -78,6 +78,7 @@ public class CustomEventLoader
         Plugin.Mls.LogInfo("Adding new event" + newEvent.ID() + " to dictionary");
         Plugin.EventDictionary.Add(newEvent);
     }
+    
     public static void DebugLoadCustomEvents()
     {
         foreach (var hullEvent in Plugin.EventDictionary)

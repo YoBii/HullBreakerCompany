@@ -76,7 +76,8 @@ SpawnableEnemies
 { "dressgirl",}, // https://lethal.miraheze.org/wiki/Ghost_Girl
 { "pufferenemy",}, // https://lethal.miraheze.org/wiki/Spore_Lizard
 { "nutcrackerenemy" }
-    
+{ "maskedplayerenemy" } //Not tested
+
 SpawnableOutsideEnemies 
 
 { "eyelessdogs"}, //https://lethal.miraheze.org/wiki/Eyeless_Dog
