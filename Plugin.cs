@@ -47,6 +47,7 @@ namespace HullBreakerCompany
         public static int EventCount;
 
         public static List<SpawnableItemWithRarity> NotModifiedSpawnableItemsWithRarity = new();
+        public static string CurrentMessage = "";
 
         public static Dictionary<String, Type> EnemyBase = new()
         {
@@ -92,6 +93,8 @@ namespace HullBreakerCompany
             { new HullBreakEvent()}, //v1.3.5
             { new NutcrackerEvent()} //v1.3.8
         };
+        
+        public static List<HullEvent> CurrentEvents = new();
 
         readonly Harmony _harmony = new("HULLBREAKER");
 
@@ -133,6 +136,7 @@ namespace HullBreakerCompany
         [HarmonyPrefix]
         static bool ModifiedLoad(ref SelectableLevel newLevel)
         {
+            CurrentEvents.Clear();
             Mls.LogInfo("Client is host: " + RoundManager.Instance.IsHost);
 
             if (!RoundManager.Instance.IsHost) return true;
@@ -152,6 +156,7 @@ namespace HullBreakerCompany
             if (newLevel.levelID == 3)
             {
                 Mls.LogInfo("Level is company, skipping");
+                CurrentMessage = "Events not found";
                 DaysPassed = 0;
                 return true;
             }
@@ -194,6 +199,8 @@ namespace HullBreakerCompany
                     
                     UpdateRarity(newLevel.Enemies, enemyComponentRarity);
                     UpdateRarity(newLevel.OutsideEnemies, outsideComponentRarity);
+                    
+                    CurrentEvents.Add(hullEvent);
                 }
                 catch (NullReferenceException ex)
                 {
@@ -246,7 +253,13 @@ namespace HullBreakerCompany
             }
 
             newLevel = nl;
-
+            CurrentMessage = "Events not found";
+            CurrentMessage = "<color=green>Notes about the <color=white>" + newLevel.PlanetName + ":\n\n";
+            foreach (var hullEvent in CurrentEvents)
+            {
+                CurrentMessage += "<color=orange>" + hullEvent.ID() + ": <color=white> " + hullEvent.GetMessage() + "\n\n";
+            }
+            
             return true;
         }
 
@@ -334,6 +347,7 @@ namespace HullBreakerCompany
         [HarmonyPatch(typeof(GameNetworkManager), nameof(GameNetworkManager.StartHost))]
         static void ResetDayPassed()
         {
+            CurrentMessage = "Events not found";
             DaysPassed = 0;
         }
         
