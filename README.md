@@ -2,6 +2,18 @@
 
 #### Making it more challenging to work for the company 💀
 
+## Info about this fork
+
+All credits go to @Venterok.
+
+I've only created this fork to change some minor things to my personal preferences and keep everything nice and organized with git allowing me to merge changes from upstream repo.
+
+Changes from original repo
+* all default event long and short messages in game chat have been changed to make it less obvious what to expect e.g. all events that increase monster spawn rate will read: _NOTES ABOUT MOON: densely populated_ so you don't know whether it's spiders, lizards or bees you have to expect
+* HullBreakEvent (the one where you get credits for landing) now gives a random amount of credits (50-200) and prints the amount in game chat
+* NothingEvent message is omitted from chat (this makes it seem that events are more random especially when combined with the option that increments number of events every day)
+* Don't print _NOTES ABOUT.._ in game chat when all events that day 
+
 
 # INSTRUCTION 
 
