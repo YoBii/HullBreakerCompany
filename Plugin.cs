@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using BepInEx;
@@ -16,6 +16,8 @@ namespace HullBreakerCompany
     public class Plugin : BaseUnityPlugin
     {
         private static Dictionary<int, SelectableLevelState> _levelStates = new();
+
+        private static readonly System.Random rnd = new System.Random();
 
         private static bool _loaded;
         public static ManualLogSource Mls;
@@ -121,7 +123,7 @@ namespace HullBreakerCompany
         {
             ConfigManager.SetConfigValue();
 
-            GameObject hullManager = new GameObject("HullManager");
+            GameObject hullManager = new GameObject("HullManager");           
             DontDestroyOnLoad(hullManager);
             hullManager.hideFlags = (HideFlags)61;
             hullManager.AddComponent<HullManager>();
@@ -331,13 +333,14 @@ namespace HullBreakerCompany
         [HarmonyPatch(typeof(EnemyAI), nameof(EnemyAI.KillEnemyServerRpc))]
         static void EnemyBounty()
         {
+            int bountyReward = rnd.Next(); //I want to be a configurable setting when I grow up
             Mls.LogInfo($"Enemy killed, bounty is active: {BountyIsActive}");
             if (!BountyIsActive) return;
             Terminal tl = FindObjectOfType<Terminal>();
-            tl.groupCredits += 30;
+            tl.groupCredits += bountyReward;
             tl.SyncGroupCreditsServerRpc(tl.groupCredits, tl.numberOfItemsInDropship);
 
-            HullManager.SendChatEventMessage("<color=green>Workers get paid for killing enemy</color>");
+            HullManager.SendChatEventMessage("<color=green>Enemy killed. You receive " + bountyReward + "credits from the company</color>");
         }
 
         //OneForAll event
