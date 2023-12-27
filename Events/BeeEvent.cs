@@ -10,8 +10,8 @@ public class BeeEvent : HullEvent
     public override string ID() => "Bee";
     public override int GetWeight() => 30;
     public override string GetDescription() => "Increased chance of bee hives spawning";
-    public override string GetMessage() => "<color=white>Possibly a large amount of bee hives</color>";
-    public override string GetShortMessage() => "<color=white>ANNOYING BUZZING</color>";
+    public override string GetMessage() => "<color=white>Large number of life forms detected, likely hostile</color>";
+    public override string GetShortMessage() => "<color=white>HIGH POPULATION</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {

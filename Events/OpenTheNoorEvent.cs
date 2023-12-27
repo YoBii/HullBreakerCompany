@@ -9,8 +9,8 @@ public class OpenTheNoorEvent : HullEvent
     public override string ID() => "OpenTheNoor";
     public override int GetWeight() => 25;
     public override string GetDescription() => "All big doors are locked in the level";
-    public override string GetMessage() => "<color=white>All big doors are locked in the level</color>";
-    public override string GetShortMessage() => "<color=white>OPEN THE NOOR...</color>";
+    public override string GetMessage() => "<color=white>High security compound</color>";
+    public override string GetShortMessage() => "<color=white>HIGH SECURITY</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {

@@ -9,8 +9,8 @@ public class SlimeEvent : HullEvent
     public override string ID() => "Slime";
     public override int GetWeight() => 20;
     public override string GetDescription() => "Increased chance of slime spawn";
-    public override string GetMessage() => "<color=white>Inhabited with slime</color>";
-    public override string GetShortMessage() => "<color=white>SO SLIMY</color>";
+    public override string GetMessage() => "<color=white>Large number of life forms detected, likely hostile</color>";
+    public override string GetShortMessage() => "<color=white>HIGH POPULATION</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {

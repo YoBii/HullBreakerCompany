@@ -9,8 +9,8 @@ public class ArachnophobiaEvent : HullEvent
     public override string ID() => "Arachnophobia";
     public override int GetWeight() => 20;
     public override string GetDescription() => "Increased chance of spider spawning";
-    public override string GetMessage() => "<color=white>Possible habitat of spiders</color>";
-    public override string GetShortMessage() => "<color=white>ARACHNOPHOBIA</color>";
+    public override string GetMessage() => "<color=white>Large number of life forms detected, likely hostile</color>";
+    public override string GetShortMessage() => "<color=white>HIGH POPULATION</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {

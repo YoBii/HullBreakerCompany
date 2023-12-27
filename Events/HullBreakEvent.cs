@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using HullBreakerCompany.Hull;
 
@@ -9,6 +9,8 @@ public class HullBreakEvent : HullEvent
     public override string ID() => "HullBreak";
     public override int GetWeight() => 5;
     public override string GetDescription() => "Getting money for visiting this moon";
+    public override string GetMessage() => "<color=white>KPI report: underperforming</color>\n<color=green>" + bonus_credits + "</color><color=white> credits received. Prove your worth to the company!</color>";
+    public override string GetShortMessage() => "<color=white>BONUS CREDITS: </color><color=green>" + bonus_credits + "</color>";
     public override string GetMessage() => "<color=green>Take a break, the company is sending money for visiting the moon</color>";
     public override string GetShortMessage() => "<color=white>TAKE A BREAK</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
