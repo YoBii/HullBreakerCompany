@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using HullBreakerCompany.Hull;
 
@@ -14,6 +14,7 @@ public class NothingEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
-        HullManager.SendChatEventMessage(this);
+        // simply omit the message
+        // HullManager.SendChatEventMessage(this);
     }
 }
