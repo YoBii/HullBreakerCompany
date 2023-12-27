@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BepInEx;
@@ -181,9 +181,22 @@ namespace HullBreakerCompany
                 NotModifiedSpawnableItemsWithRarity.Add(item);
             }
 
-            if (EventCount != 0 && EnableEventMessages)
+            if (EventCount != 0 && EnableEventMessages) //EventCount is not what it suggests. It's never > 1. To get EventCount use randomEvents.Count instead
             {
-                HUDManager.Instance.AddTextToChatOnServer("<color=red>NOTES ABOUT MOON:</color>\"");
+                //count how many active events are NothingEvent
+                int nothingEvent_count = 0;
+                foreach (string eventItem in randomEvents) {
+                    if(eventItem.Contains("Nothing")) {
+                        nothingEvent_count++;
+                    }
+                }
+                Mls.LogInfo($"EventCount is " + randomEvents.Count);
+                Mls.LogInfo($"NothingCount is " + nothingEvent_count);
+                
+                //When all events on a given day are NothingEvent don't print anything to chat
+                if (nothingEvent_count != randomEvents.Count) {
+                    HUDManager.Instance.AddTextToChatOnServer("<color=red>NOTES ABOUT MOON:</color>");
+                } 
             }
 
             //Event Execution
