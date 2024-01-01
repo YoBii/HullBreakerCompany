@@ -183,7 +183,7 @@ namespace HullBreakerCompany
                 NotModifiedSpawnableItemsWithRarity.Add(item);
             }
 
-            if (EventCount != 0 && EnableEventMessages) //EventCount is not what it suggests. It's never > 1. To get EventCount use randomEvents.Count instead
+            if (EventCount != 0 && EnableEventMessages) //check if configs allows events
             {
                 //count how many active events are NothingEvent
                 int nothingEvent_count = 0;
@@ -192,11 +192,11 @@ namespace HullBreakerCompany
                         nothingEvent_count++;
                     }
                 }
-                Mls.LogInfo($"EventCount is " + randomEvents.Count);
-                Mls.LogInfo($"NothingCount is " + nothingEvent_count);
+                Mls.LogInfo($"Random events: " + randomEvents.Count);
+                Mls.LogInfo($"Nothing events: " + nothingEvent_count);
                 
                 //When all events on a given day are NothingEvent don't print anything to chat
-                if (nothingEvent_count != randomEvents.Count) {
+                if (randomEvents.Count > nothingEvent_count) {
                     HUDManager.Instance.AddTextToChatOnServer("<color=red>NOTES ABOUT MOON:</color>");
                 } 
             }
