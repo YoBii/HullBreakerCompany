@@ -1,19 +1,27 @@
+# About this fork
+
+All Credits go to Venterok! This is the original mod [**HullBreaker Company**](https://thunderstore.io/c/lethal-company/p/Venterok/HullBreaker_Company/) and [**HullBreaker Company onGitHub**](https://github.com/Venterok/HullBreakerCompany). Check it out!
+
+I forked this mod for personal use / tweaking to personal preference. I might or might not keep this up to date merging changes from upstream repo.
+
+## This fork changes
+
+### Ambigous event messages
+* All event long and short messages in game chat are more ambigous 
+* For example all events that increase monster spawn rate have the same message. Telling you something about a large number of likely hostile life forms. So even if you know all the events you don't know whether it's spiders, lizards or bees you have to expect on a given round. Basically I tried to fit the whole "Notes about this moon"-thing without giving away the exact event
+### EnemyBountyEvent
+* The amount of credits rewarded for each kill is now random. Ranging from 50-80 - similar to an above average scrap item
+* The amount rewarded will show in game chat
+### HullBreakEvent
+* The event where you receive bonus credits now gives a random amount of credits (50-200)
+* The amount will show in game chat
+### NothingEvent
+* When the mod randomly selects _NothingEvent_ (no event) the event message is omitted from chat. With low `EventCount` such as `1` this makes it so events seem to be more random especially when combined with the option that increments the number of events every day. With high `EventCount` it simply prevents flooding the chat with empty lines from NothingEvent to a point where things become unreadable. This depends on your configuration (event count and event weights) of course
+* When all events on a given day are NothingEvent the entire NOTES ABOUT MOON section is omitted from game chat
+
 # HULLBREAKER COMPANY
 
 #### Making it more challenging to work for the company 💀
-
-## Info about this fork
-
-All credits go to @Venterok.
-
-I've only created this fork to change some minor things to my personal preferences and keep everything nice and organized with git allowing me to merge changes from upstream repo.
-
-Changes from original repo
-* all default event long and short messages in game chat have been changed to make it less obvious what to expect e.g. all events that increase monster spawn rate will read: _NOTES ABOUT MOON: Large number of life forms detected, likely hostile_ so you don't know whether it's spiders, lizards or bees you have to expect
-* HullBreakEvent (the one where you get credits for landing) now gives a random amount of credits (50-200) and prints the amount in game chat
-* NothingEvent message is omitted from chat (this makes it seem that events are more random especially when combined with the option that increments number of events every day)
-* When all events on a given day are `NothingEvent` don't print _NOTES ABOUT MOON_ to chat
-
 
 # INSTRUCTION 
 
