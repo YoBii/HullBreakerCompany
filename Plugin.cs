@@ -184,16 +184,11 @@ namespace HullBreakerCompany
             if (EventCount != 0 && EnableEventMessages) //check if configs allows events
             {
                 //count how many active events are NothingEvent
-                int nothingEvent_count = 0;
-                foreach (string eventItem in randomEvents) {
-                    if(eventItem.Contains("Nothing")) {
-                        nothingEvent_count++;
-                    }
-                }
+                int nothingEvent_count = randomEvents.Where(randomEvent => randomEvent.Equals("Nothing")).Count();
                 Mls.LogInfo($"Random events: " + randomEvents.Count);
                 Mls.LogInfo($"Nothing events: " + nothingEvent_count);
                 
-                //When all events on a given day are NothingEvent don't print anything to chat
+                //Only print Notes to game chat when there's at least one Event that's not NothingEvent
                 if (randomEvents.Count > nothingEvent_count) {
                     HUDManager.Instance.AddTextToChatOnServer("<color=red>NOTES ABOUT MOON:</color>");
                 } 
