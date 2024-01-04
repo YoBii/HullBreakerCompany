@@ -17,8 +17,6 @@ namespace HullBreakerCompany
     {
         private static Dictionary<int, SelectableLevelState> _levelStates = new();
 
-        private static readonly System.Random rnd = new System.Random();
-
         private static bool _loaded;
         public static ManualLogSource Mls;
 
@@ -333,7 +331,7 @@ namespace HullBreakerCompany
         [HarmonyPatch(typeof(EnemyAI), nameof(EnemyAI.KillEnemyServerRpc))]
         static void EnemyBounty()
         {
-            int bountyReward = rnd.Next(50, 80); //I want to be a configurable setting when I grow up
+            int bountyReward = Random.Range(50, 80); //I want to be a configurable setting when I grow up
             Mls.LogInfo($"Enemy killed, bounty is active: {BountyIsActive}");
             if (!BountyIsActive) return;
             Terminal tl = FindObjectOfType<Terminal>();
