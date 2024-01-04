@@ -2,7 +2,7 @@
 
 All Credits go to Venterok! This is the original mod [**HullBreaker Company**](https://thunderstore.io/c/lethal-company/p/Venterok/HullBreaker_Company/) and [**HullBreaker Company on GitHub**](https://github.com/Venterok/HullBreakerCompany). Check it out!
 
-I forked this mod for personal use / tweaking to personal preference. I might or might not keep this up to date merging changes from upstream repo.
+I forked this mod for personal use / tweaking to personal preference. Basically I just changed some strings and minor logic. I might or might not keep this up to date merging changes from upstream repo.
 
 ## This fork changes
 
