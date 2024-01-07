@@ -11,11 +11,11 @@ I forked this mod for personal use / tweaking to personal preference. Basically 
    * Basically I tried to fit the whole "Notes about this moon"-thing without giving away the exact event. For example all events that increase monster spawn rates have the same message. Telling you something about a large number of likely hostile life forms. So even if you know all the events you don't know whether it's spiders, lizards, slimes or bees you have to expect. 
 * See this list for all messages shared by multiple events
    * `HIGH POPULATION` / `Large number of life forms detected, likely hostile`
-    * ArachnophobiaEvent (bunker spider), BeeEvent, LizardsEvent, SlimeEvent
+      * ArachnophobiaEvent (bunker spider), BeeEvent, LizardsEvent, SlimeEvent
    * `PARANORMAL` / `Detected signs of paranormal acitivy`
-	* DevochkaPizdecEvent (ghostgirl), FlowerManEvent (Bracken), NutcrackerEvent, SpringManEvent (coilhead)
+       * DevochkaPizdecEvent (ghostgirl), FlowerManEvent (Bracken), NutcrackerEvent, SpringManEvent (coilhead)
    * `FORTIFIED` / `High security compound`
-    * LandMineEvent, OpenTheNoorEvent (all big doors closed), TurretEvent
+       * LandMineEvent, OpenTheNoorEvent (all big doors closed), TurretEvent
 ### EnemyBountyEvent
 * The amount of credits rewarded for each kill is now random. Ranging from 50-80 - similar to an above average scrap item
 * The amount rewarded will show in game chat
