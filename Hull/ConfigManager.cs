@@ -29,10 +29,6 @@ namespace HullBreakerCompany.Hull
             Plugin.MaxEnemyPowerCount = GetConfigValue("MaxEnemyPowerCount", 10, "Max enemy power count");
             Plugin.MaxOutsideEnemyPowerCount = GetConfigValue("MaxOutsideEnemyPowerCount", 10, "Max outside enemy power count");
             Plugin.MaxDaytimeEnemyPowerCount = GetConfigValue("MaxDaytimeEnemyPowerCount", 20, "Max daytime enemy power count");
-            Plugin.MinScrap = GetConfigValue("MinScrap", 10, "Min scrap");
-            Plugin.MaxScrap = GetConfigValue("MaxScrap", 15, "Max scrap");
-            Plugin.MinTotalScrapValue = GetConfigValue("MinTotalScrapValue", 300, "Min total scrap value");
-            Plugin.MaxTotalScrapValue = GetConfigValue("MaxTotalScrapValue", 700, "Max total scrap value");
             Plugin.BunkerEnemyScale = GetConfigValue("BunkerEnemyScale", 256, "Should change global bunker enemy spawn rate, not sure if its work");
             
             Plugin.IncreaseEventCountPerDay = GetConfigValue("IncreaseEventCountPerDay", false, "The number of events will increase every day. Visit the company building to reset");

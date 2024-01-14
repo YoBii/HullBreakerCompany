@@ -6,7 +6,6 @@ namespace HullBreakerCompany.Hull
 {
     public class SelectableLevelState
     {
-        public int MinScrap, MaxScrap, MinTotalScrapValue, MaxTotalScrapValue;
         public int MaxEnemyPowerCount = 8, MaxOutsideEnemyPowerCount = 15, MaxDaytimeEnemyPowerCount = 20;
         public AnimationCurve EnemySpawnChanceThroughoutDay, OutsideEnemySpawnChanceThroughDay, DaytimeEnemySpawnChanceThroughDay;
 
@@ -16,10 +15,6 @@ namespace HullBreakerCompany.Hull
 
         public SelectableLevelState(SelectableLevel level)
         {
-            MinScrap = level.minScrap;
-            MaxScrap = level.maxScrap;
-            MinTotalScrapValue = level.minTotalScrapValue;
-            MaxTotalScrapValue = level.maxTotalScrapValue;
             MaxEnemyPowerCount = level.maxEnemyPowerCount;
             MaxOutsideEnemyPowerCount = level.maxOutsideEnemyPowerCount;
             MaxDaytimeEnemyPowerCount = level.maxDaytimeEnemyPowerCount;
@@ -34,10 +29,6 @@ namespace HullBreakerCompany.Hull
 
         public void RestoreState(SelectableLevel level)
         {
-            level.minScrap = MinScrap;
-            level.maxScrap = MaxScrap;
-            level.minTotalScrapValue = MinTotalScrapValue;
-            level.maxTotalScrapValue = MaxTotalScrapValue;
             level.maxEnemyPowerCount = MaxEnemyPowerCount;
             level.maxOutsideEnemyPowerCount = MaxOutsideEnemyPowerCount;
             level.maxDaytimeEnemyPowerCount = MaxDaytimeEnemyPowerCount;

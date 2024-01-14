@@ -36,11 +36,6 @@ namespace HullBreakerCompany
         public static int MaxEnemyPowerCount;
         public static int MaxOutsideEnemyPowerCount;
         public static int MaxDaytimeEnemyPowerCount;
-        public static int MinScrap;
-        public static int MaxScrap;
-        public static int MinTotalScrapValue;
-        public static int MaxTotalScrapValue;
-
         public static bool ChangeQuotaValue;
         public static int QuotaIncrease;
 
@@ -240,9 +235,6 @@ namespace HullBreakerCompany
                 nl.maxEnemyPowerCount += 16;
                 nl.maxOutsideEnemyPowerCount += 20;
 
-                nl.maxScrap += Random.Range(6, 24);
-                nl.maxTotalScrapValue += Random.Range(400, 800);
-
                 nl.daytimeEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe(0f, 5f), new Keyframe(0.5f, 5f));
                 nl.enemySpawnChanceThroughoutDay = new AnimationCurve(new Keyframe(0f, 256f));
             }
@@ -255,10 +247,6 @@ namespace HullBreakerCompany
                 nl.maxEnemyPowerCount = MaxEnemyPowerCount;
                 nl.maxOutsideEnemyPowerCount = MaxOutsideEnemyPowerCount;
                 nl.maxDaytimeEnemyPowerCount = MaxDaytimeEnemyPowerCount;
-                nl.minScrap = MinScrap;
-                nl.maxScrap = MaxScrap;
-                nl.minTotalScrapValue = MinTotalScrapValue;
-                nl.maxTotalScrapValue = MaxTotalScrapValue;
                 nl.enemySpawnChanceThroughoutDay = new AnimationCurve(new Keyframe(0f, BunkerEnemyScale));
             }
 
