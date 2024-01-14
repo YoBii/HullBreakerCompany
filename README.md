@@ -41,8 +41,6 @@ Unpack the `venterok-hullbreaker_company-X.X.X.zip` archive into your game folde
 # FEATURES
 Increased enemy spawn rate and difficulty.
 
-Increasing quota per completed profit.
-
 Upon landing on a moon, a few random events are selected and printed in the chat. This is referred to as `"Notes about the moon"📜`.
 
 The notes contain information about the challenge, inhabitants of the planet, and cautionary messages.

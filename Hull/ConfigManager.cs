@@ -24,9 +24,6 @@ namespace HullBreakerCompany.Hull
             Plugin.UseHullBreakerLevelSettings = GetConfigValue("UseHullBreakerLevelSettings", true, "Use HullBreaker level settings, if false, use default level settings");
             Plugin.UseDefaultGameSettings = GetConfigValue("UseDefaultLevelSettings", false, "Use default level settings, if false, you can change on one's own");
             
-            Plugin.ChangeQuotaValue = GetConfigValue("ChangeQuota", true, "Change quota");
-            Plugin.QuotaIncrease = GetConfigValue("IncreasedQuota", 256, "Increased quota");
-            
             Plugin.MaxEnemyPowerCount = GetConfigValue("MaxEnemyPowerCount", 10, "Max enemy power count");
             Plugin.MaxOutsideEnemyPowerCount = GetConfigValue("MaxOutsideEnemyPowerCount", 10, "Max outside enemy power count");
             Plugin.MaxDaytimeEnemyPowerCount = GetConfigValue("MaxDaytimeEnemyPowerCount", 20, "Max daytime enemy power count");

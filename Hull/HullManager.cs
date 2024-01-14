@@ -15,10 +15,6 @@ public class HullManager : MonoBehaviour
         {
             timeOfDay = FindFirstObjectByType<TimeOfDay>();
         }
-        else if (Plugin.ChangeQuotaValue)
-        {
-            timeOfDay.quotaVariables.baseIncrease = Plugin.QuotaIncrease;
-        }
     }
     public static HullManager Instance { get; private set; }
 

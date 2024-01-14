@@ -37,9 +37,6 @@ namespace HullBreakerCompany
         public static int MaxEnemyPowerCount;
         public static int MaxOutsideEnemyPowerCount;
         public static int MaxDaytimeEnemyPowerCount;
-        public static bool ChangeQuotaValue;
-        public static int QuotaIncrease;
-
         public static bool IncreaseEventCountPerDay;
         public static int EventCount;
 
