@@ -16,7 +16,7 @@ public class ArachnophobiaEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
-        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<DressGirlAI>() == null)) return;
+        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<SandSpiderAI>() == null)) return;
         
         enemyComponentRarity.Add(typeof(SandSpiderAI), 256);
         HullManager.SendChatEventMessage(this);
