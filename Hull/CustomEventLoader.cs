@@ -42,7 +42,8 @@ public class CustomEventLoader
 
         if (!Directory.Exists(directoryPath))
         {
-            Plugin.Mls.LogError($"Directory does not exist: {directoryPath}");
+            Plugin.Mls.LogWarning($"Directory does not exist: {directoryPath}");
+            Plugin.Mls.LogInfo("Custom event folder 'HullEvents' not found. Skipping custom event loading.");
             return new List<Dictionary<string, string>>();
         }
 
