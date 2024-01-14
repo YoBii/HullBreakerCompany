@@ -7,6 +7,7 @@ using GameNetcodeStuff;
 using HarmonyLib;
 using HullBreakerCompany.Events;
 using HullBreakerCompany.Hull;
+using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -103,7 +104,8 @@ namespace HullBreakerCompany
             Mls = BepInEx.Logging.Logger.CreateLogSource("HULLBREAKER " + PluginInfo.PLUGIN_VERSION);
             Mls.LogInfo("Ready to break hull; HullBreakerCompany");
             _harmony.PatchAll(typeof(Plugin));
-
+            _harmony.PatchAll(typeof(EventsHandler));
+            
             if (!_loaded) Initialize();
         }
 
@@ -125,7 +127,7 @@ namespace HullBreakerCompany
             DontDestroyOnLoad(hullManager);
             hullManager.hideFlags = (HideFlags)61;
             hullManager.AddComponent<HullManager>();
-
+            
             Mls.LogInfo("HullManager created");
 
             CustomEventLoader.LoadCustomEvents();
@@ -321,44 +323,7 @@ namespace HullBreakerCompany
             }
         }
 
-        //EnemyBounty
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(EnemyAI), nameof(EnemyAI.KillEnemyServerRpc))]
-        static void EnemyBounty()
-        {
-            int bountyReward = Random.Range(50, 80); //I want to be a configurable setting when I grow up
-            Mls.LogInfo($"Enemy killed, bounty is active: {BountyIsActive}");
-            if (!BountyIsActive) return;
-            Terminal tl = FindObjectOfType<Terminal>();
-            tl.groupCredits += bountyReward;
-            tl.SyncGroupCreditsServerRpc(tl.groupCredits, tl.numberOfItemsInDropship);
-
-            HullManager.SendChatEventMessage("<color=green>Enemy killed. You receive " + bountyReward + "credits from the company</color>");
-        }
-
-        //OneForAll event
-        //TODO fix
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(PlayerControllerB), "KillPlayerServerRpc")]
-        static void OneForAll()
-        {
-            Mls.LogInfo($"Player killed, one for all is active: {OneForAllIsActive}");
-            if (!OneForAllIsActive) return;
-            HullManager gc = FindObjectOfType<HullManager>();
-            gc.timeOfDay.votedShipToLeaveEarlyThisRound = true;
-            gc.timeOfDay.SetShipLeaveEarlyServerRpc();
-
-            HullManager.SendChatEventMessage(
-                "<color=red>One of the workers died, the ship will go into orbit in an hour</color>");
-        }
-        
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(GameNetworkManager), nameof(GameNetworkManager.StartHost))]
-        static void ResetDayPassed()
-        {
-            CurrentMessage = "Events not found";
-            DaysPassed = 0;
-        }
+ 
         
 
     }

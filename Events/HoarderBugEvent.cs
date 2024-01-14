@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events;
@@ -14,6 +15,8 @@ public class HoarderBugEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
+        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<HoarderBugAI>() == null)) return;
+        
         enemyComponentRarity.Add(typeof(HoarderBugAI), 512);
         HullManager.SendChatEventMessage(this);
     }

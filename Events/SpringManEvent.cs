@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events;
@@ -14,6 +15,8 @@ public class SpringManEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
+        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<SpringManAI>() == null)) return;
+        
         enemyComponentRarity.Add(typeof(SpringManAI), 128);
         HullManager.SendChatEventMessage(this);
     }
