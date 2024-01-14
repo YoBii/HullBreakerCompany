@@ -16,7 +16,8 @@ namespace HullBreakerCompany.Hull
         }
         
         public static void SetConfigValue() {
-            Plugin.LandMineTurretScale = GetConfigValue("LandMineTurretScale", 64, "Should change amount of Landmines & Turrets when these events are active: (Landmine & Turret)");
+            Plugin.LandmineScale = GetConfigValue("LandmineScale", 24, "Should change amount of landmines when the landmine event ist active");
+            Plugin.TurretScale = GetConfigValue("TurretScale", 8, "Should change amount of turrets when the turret event ist active");
             Plugin.UseShortChatMessages = GetConfigValue("UseShortChatMessages", false, "Use short event message (one/two words), can add surprise effect & difficulty");
             Plugin.EnableEventMessages = GetConfigValue("EnableEventMessages", true, "Enable chat event messages");
             

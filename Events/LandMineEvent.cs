@@ -14,7 +14,7 @@ public class LandMineEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
-        Plugin.LevelUnits(level, false, true);
+        Plugin.addLandminesToLevelUnits(level);
         HullManager.SendChatEventMessage(this);
     }
 }

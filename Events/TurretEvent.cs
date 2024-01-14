@@ -14,7 +14,7 @@ public class TurretEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
-        Plugin.LevelUnits(level, true);
+        Plugin.addTurretsToLevelUnits(level);
         HullManager.SendChatEventMessage(this);
     }
 }

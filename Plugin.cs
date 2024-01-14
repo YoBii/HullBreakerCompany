@@ -26,7 +26,8 @@ namespace HullBreakerCompany
 
         public static int DaysPassed;
         public static float BunkerEnemyScale;
-        public static float LandMineTurretScale;
+        public static float LandmineScale;
+        public static float TurretScale;
         public static bool UseShortChatMessages;
         public static bool EnableEventMessages;
 
@@ -68,7 +69,7 @@ namespace HullBreakerCompany
         public static List<HullEvent> EventDictionary = new()
         {
             { new FlowerManEvent() },
-            //{ new TurretEvent() },
+            { new TurretEvent() },
             { new LandMineEvent() },
             { new HoarderBugEvent() },
             { new SpringManEvent() },
@@ -281,38 +282,53 @@ namespace HullBreakerCompany
             }
         }
         
-        public static void LevelUnits(SelectableLevel n, bool turret = false, bool landmine = false)
+        public static void addLandminesToLevelUnits(SelectableLevel level, float overrideAmount = 0f)
         {
-            Mls.LogInfo($"Turret: {turret}, Landmine: {landmine}");
-            var curve = new AnimationCurve(new Keyframe(0f, LandMineTurretScale),
-                new Keyframe(1f, 25));
+            float amount = LandmineScale;
+            if (overrideAmount > 0f)
+                amount = overrideAmount;
+            Mls.LogInfo($"Adding Landmines: {amount}");
 
-            foreach (var unit in n.spawnableMapObjects)
+            foreach (var mapObject in level.spawnableMapObjects)
             {
-                //var turretComponent = unit.prefabToSpawn.GetComponentInChildren<Turret>();
-                var landmineComponent = unit.prefabToSpawn.GetComponentInChildren<Landmine>();
-
-                if (landmineComponent != null)
+                if ((UnityEngine.Object)(object)mapObject.prefabToSpawn.GetComponentInChildren<Landmine>() != null)
                 {
-                    unit.numberToSpawn = curve;
+                    mapObject.numberToSpawn = new AnimationCurve(new Keyframe(0f, amount));
                 }
             }
         }
+
+        public static void addTurretsToLevelUnits(SelectableLevel n, float overrideAmount = 0f)
+        {
+            float amount = TurretScale;
+            if (overrideAmount > 0f)
+                amount = overrideAmount;
+            Mls.LogInfo($"Adding Turrets: {amount}");
+            foreach (var mapObject in n.spawnableMapObjects)
+            {
+                if (mapObject.prefabToSpawn.GetComponentInChildren<Turret>() != null)
+                {
+                    mapObject.numberToSpawn = new AnimationCurve(new Keyframe(0f, amount));
+                }
+            }
+        }
+
 
         private static void ResetLevelUnits(SelectableLevel level)
         {
-            foreach (var unit in level.spawnableMapObjects)
+            foreach (var mapObject in level.spawnableMapObjects)
             {
-                var landmineComponent = unit.prefabToSpawn.GetComponentInChildren<Landmine>();
-                if (landmineComponent != null)
+                var landmineComponent = mapObject.prefabToSpawn.GetComponentInChildren<Landmine>();
+                if (mapObject.prefabToSpawn.GetComponentInChildren<Landmine>() != null)
                 {
-                    unit.numberToSpawn = new AnimationCurve(new Keyframe(0f, 2.5f));
+                    mapObject.numberToSpawn = new AnimationCurve(new Keyframe(0f, 2.5f));
+                }
+                if (mapObject.prefabToSpawn.GetComponentInChildren<Turret>() != null)
+                {
+                    mapObject.numberToSpawn = new AnimationCurve(new Keyframe(0f, 2.5f));
                 }
             }
         }
-
- 
-        
 
     }
 }
