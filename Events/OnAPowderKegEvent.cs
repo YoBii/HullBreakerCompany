@@ -14,7 +14,8 @@ public class OnAPowderKegEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
-        HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(); }, UnityEngine.Random.Range(30, 680));
+        Plugin.addLandminesToLevelUnits(level, Plugin.LandmineScale * 2f / 3f);
+        HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(); }, UnityEngine.Random.Range(60, 300));
         HullManager.SendChatEventMessage(this);
     }
 
