@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using BepInEx.Configuration;
 
 namespace HullBreakerCompany.Hull;
 
@@ -13,7 +12,7 @@ public abstract class HullEvent
     }
     public virtual string GetDescription() => "Default description";
     public virtual string GetMessage() => "Default message";
-    public virtual string GetShortMessage() => "SHORT";
+    public virtual string GetShortMessage() => "Short message";
     public virtual void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity) { }
 }

@@ -14,6 +14,9 @@ public class DevochkaPizdecEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
+        bool enemyExists = level.Enemies.Exists(enemy => enemy.GetType() == typeof(DressGirlAI));
+        if (!enemyExists) return;
+        
         enemyComponentRarity.Add(typeof(DressGirlAI), 32);
         HullManager.SendChatEventMessage(this);
     }

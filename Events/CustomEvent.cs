@@ -43,12 +43,12 @@ public class CustomEvent : HullEvent
     
     public override string GetMessage()
     {
-        return _message;
+        return "<color=white>" + _message + "</color>";
     }
     
     public override string GetShortMessage()
     {
-        return _shortMessage;
+        return "<color=white>" + _shortMessage + "</color>";
     }
     
     public List<string> EnemySpawnList = new ();
@@ -60,12 +60,18 @@ public class CustomEvent : HullEvent
     {
         foreach (var enemy in EnemySpawnList.TakeWhile(enemy => enemy != "off"))
         {
-            componentRarity.Add(Plugin.EnemyBase[enemy], Rarity);
+            if (Plugin.EnemyBase.TryGetValue(enemy, out var value))
+            {
+                componentRarity.Add(value, Rarity);
+            } else Plugin.Mls.LogError($"Enemy {enemy} not found in EnemyBase");
         }
-        
+
         foreach (var enemy in OutsideSpawnList.TakeWhile(enemy => enemy != "off"))
         {
-            outsideComponentRarity.Add(Plugin.EnemyBase[enemy], Rarity);
+            if (Plugin.EnemyBase.TryGetValue(enemy, out var value))
+            {
+                outsideComponentRarity.Add(value, Rarity);
+            } else Plugin.Mls.LogError($"Enemy {enemy} not found in EnemyBase");
         }
 
         HullManager.SendChatEventMessage(Plugin.UseShortChatMessages ? GetShortMessage() : GetMessage());

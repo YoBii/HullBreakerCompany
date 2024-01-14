@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events;
@@ -14,6 +16,8 @@ public class ArachnophobiaEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
+        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<DressGirlAI>() == null)) return;
+        
         enemyComponentRarity.Add(typeof(SandSpiderAI), 256);
         HullManager.SendChatEventMessage(this);
     }

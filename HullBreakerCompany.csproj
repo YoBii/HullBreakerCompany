@@ -4,7 +4,7 @@
         <TargetFramework>netstandard2.1</TargetFramework>
         <AssemblyName>HullBreakerCompany</AssemblyName>
         <Description>Making it more challenging to work for the company</Description>
-        <Version>1.3.9</Version>
+        <Version>1.3.11</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
@@ -22,13 +22,13 @@
 
     <ItemGroup>
         <Reference Include="Assembly-CSharp">
-            <HintPath>Z:\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath> 
+            <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath> 
         </Reference>
         <Reference Include="UnityEngine">
-            <HintPath>Z:\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.dll</HintPath> 
+            <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.dll</HintPath> 
         </Reference>
         <Reference Include="Unity.Netcode.Runtime">
-            <HintPath>Z:\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
+            <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
         </Reference>
     </ItemGroup>
 </Project>

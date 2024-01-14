@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HullBreakerCompany.Hull;
 using Random = UnityEngine.Random;
 
@@ -15,6 +16,8 @@ public class HellEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
+        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<JesterAI>() == null)) return;
+        
         enemyComponentRarity.Add(typeof(JesterAI), 64);
         
         HullManager.SendChatEventMessage(this);
