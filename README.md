@@ -17,7 +17,7 @@ I forked this mod for personal use / tweaking to personal preference. Basically 
    * `FORTIFIED` / `High security compound`
        * LandMineEvent, OpenTheNoorEvent (all big doors closed), TurretEvent
 ### EnemyBountyEvent
-* The amount of credits rewarded for each kill is now random. Ranging from 50-80 - similar to an above average scrap item
+* The amount of credits rewarded for each kill is now random. Ranging from 40-80 - similar to an above average scrap item
 * The amount rewarded will show in game chat
 ### HullBreakEvent
 * The event where you receive bonus credits now gives a random amount of credits (50-200)
