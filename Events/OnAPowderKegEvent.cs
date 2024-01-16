@@ -15,7 +15,7 @@ public class OnAPowderKegEvent : HullEvent
         Dictionary<Type, int> outsideComponentRarity)
     {
         Plugin.addLandminesToLevelUnits(level, Plugin.LandmineScale * 2f / 3f);
-        HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(); }, UnityEngine.Random.Range(60, 300));
+        HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(); }, UnityEngine.Random.Range(10, 300));
         HullManager.SendChatEventMessage(this);
     }
 
