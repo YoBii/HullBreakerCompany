@@ -16,21 +16,21 @@ namespace HullBreakerCompany.Hull
         }
         
         public static void SetConfigValue() {
-            Plugin.LandmineScale = GetConfigValue("LandmineScale", 24, "Should change amount of landmines when the landmine event ist active");
-            Plugin.TurretScale = GetConfigValue("TurretScale", 8, "Should change amount of turrets when the turret event ist active");
-            Plugin.UseShortChatMessages = GetConfigValue("UseShortChatMessages", false, "Use short event message (one/two words), can add surprise effect & difficulty");
+            Plugin.LandmineScale = GetConfigValue("LandmineScale", 24, "Should change the amount of additional landmines spawned by landmine event");
+            Plugin.TurretScale = GetConfigValue("TurretScale", 8, "Should change the amount of additional turrets spawned by turret event");
             Plugin.EnableEventMessages = GetConfigValue("EnableEventMessages", true, "Enable chat event messages");
+            Plugin.UseShortChatMessages = GetConfigValue("UseShortChatMessages", false, "Use short event message");
             
-            Plugin.UseHullBreakerLevelSettings = GetConfigValue("UseHullBreakerLevelSettings", true, "Use HullBreaker level settings, if false, use default level settings");
-            Plugin.UseDefaultGameSettings = GetConfigValue("UseDefaultLevelSettings", false, "Use default level settings, if false, you can change on one's own");
+            Plugin.UseHullBreakerLevelSettings = GetConfigValue("UseHullBreakerLevelSettings", true, "Use HullBreaker level settings. Increases maximum enemy count as well as spawn rate inside and outside. Set to false if you want to use default or custom settings. See below.");
+            Plugin.UseVanillaGameSettings = GetConfigValue("UseVanillaLevelSettings", false, "Use vanilla level settings. If false, you can set your own custom settings below");
             
             Plugin.MaxEnemyPowerCount = GetConfigValue("MaxEnemyPowerCount", 10, "Max enemy power count");
             Plugin.MaxOutsideEnemyPowerCount = GetConfigValue("MaxOutsideEnemyPowerCount", 10, "Max outside enemy power count");
             Plugin.MaxDaytimeEnemyPowerCount = GetConfigValue("MaxDaytimeEnemyPowerCount", 20, "Max daytime enemy power count");
             Plugin.BunkerEnemyScale = GetConfigValue("BunkerEnemyScale", 256, "Should change global bunker enemy spawn rate, not sure if its work");
             
-            Plugin.IncreaseEventCountPerDay = GetConfigValue("IncreaseEventCountPerDay", false, "The number of events will increase every day. Visit the company building to reset");
-            Plugin.EventCount = GetConfigValue("EventCount", 3, "The number of events that will be active at the same time");
+            Plugin.EventCount = GetConfigValue("EventCount", 3, "Total number of events that are randomly selected. Can roll NothingEvent resulting in less active events");
+            Plugin.IncreaseEventCountPerDay = GetConfigValue("IncreaseEventCountPerDay", false, "The number of events rolled will increase by one every day. Resets on visiting the company building or loading a save");
 
         }
         

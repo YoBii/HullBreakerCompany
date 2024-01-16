@@ -32,7 +32,7 @@ namespace HullBreakerCompany
         public static bool EnableEventMessages;
 
         public static bool UseHullBreakerLevelSettings;
-        public static bool UseDefaultGameSettings;
+        public static bool UseVanillaGameSettings;
 
         public static int MaxEnemyPowerCount;
         public static int MaxOutsideEnemyPowerCount;
@@ -236,9 +236,9 @@ namespace HullBreakerCompany
                 nl.daytimeEnemySpawnChanceThroughDay = new AnimationCurve(new Keyframe(0f, 5f), new Keyframe(0.5f, 5f));
                 nl.enemySpawnChanceThroughoutDay = new AnimationCurve(new Keyframe(0f, 256f));
             }
-            else if (UseDefaultGameSettings)
+            else if (UseVanillaGameSettings)
             {
-                Mls.LogInfo("Default settings");
+                Mls.LogInfo("Vanilla settings");
             }
             else
             {
