@@ -1,4 +1,4 @@
-using GameNetcodeStuff;
+﻿using GameNetcodeStuff;
 using HarmonyLib;
 using UnityEngine;
 
@@ -12,6 +12,7 @@ public abstract class EventsHandler
     [HarmonyPatch(typeof(EnemyAI), nameof(EnemyAI.KillEnemyServerRpc))]
     static void EnemyBounty()
     {
+        if (!RoundManager.Instance.IsHost) return;
         Plugin.Mls.LogInfo($"Enemy killed, bounty is active: {Plugin.BountyIsActive}");
         if (!Plugin.BountyIsActive) return;
         Terminal tl = UnityEngine.Object.FindObjectOfType<Terminal>();        
