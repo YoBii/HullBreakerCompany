@@ -1,4 +1,4 @@
-﻿using GameNetcodeStuff;
+using GameNetcodeStuff;
 using HarmonyLib;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ public abstract class EventsHandler
         tl.groupCredits += bountyReward;
         tl.SyncGroupCreditsServerRpc(tl.groupCredits, tl.numberOfItemsInDropship);
 
-        HullManager.SendChatEventMessage("<color=green>Enemy killed. Your work keeps the company happy. You receive" + bountyReward + " credits</color>");
+        HullManager.SendChatEventMessage("<color=white>Enemy killed. Your work keeps the company happy. You receive </color><color=green>" + bountyReward + "</color><color=white> credits.</color>");
     }
 
 
