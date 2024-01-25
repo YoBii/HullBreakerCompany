@@ -9,7 +9,13 @@ public class OpenTheNoorEvent : HullEvent
     public override string ID() => "OpenTheNoor";
     public override int GetWeight() => 15;
     public override string GetDescription() => "All big doors are locked in the level";
-    public override string GetMessage() => "<color=white>High security compound</color>";
+    public static List<String> MessagesList = new() {
+        { "High security compound" },
+        { "You shall not pass!" },
+        { "Hodor - Hold the door!" },
+        { "They locked this place down" }
+    };
+    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>HIGH SECURITY</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)

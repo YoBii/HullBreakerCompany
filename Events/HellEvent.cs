@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace HullBreakerCompany.Events;
@@ -11,7 +12,13 @@ public class HellEvent : HullEvent
     public override string ID() => "Hell";
     public override int GetWeight() => 1;
     public override string GetDescription() => "Increased chance of spawning Jester and more enemies";
-    public override string GetMessage() => "<color=red>CAUTION: </color><color=white>very dense population, hostile</color>";
+    public static List<String> MessagesList = new() {
+        { "Extreme activity levels!" },
+        { "No one has ever returned from here.." },
+        { "Caution! Activity level 9 9 9 9 9 9 9 9 9 9 9 9 9" },
+        { "The company wishes the best of luck!" }
+    };
+    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>HELL</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)

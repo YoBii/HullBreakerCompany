@@ -9,7 +9,12 @@ public class HackedTurretsEvent : HullEvent
     public override string ID() => "HackedTurrets";
     public override int GetWeight() => 10;
     public override string GetDescription() => "Turrets dont work on the moon";
-    public override string GetMessage() => "<color=white>Security systems offline</color>";
+    public static List<String> MessagesList = new() {
+        { "Security systems offline" },
+        { "Abandoned after their defense sytems were hacked" },
+        { "The company disabled all turrets on this moon" }
+    };
+    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>SECURITY OFFLINE</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)

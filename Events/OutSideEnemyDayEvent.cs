@@ -10,7 +10,12 @@ public class OutSideEnemyDayEvent : HullEvent
     public override string ID() => "OutSideEnemyDay";
     public override int GetWeight() => 3;
     public override string GetDescription() => "Increased amount of enemies on the surface during the daytime";
-    public override string GetMessage() => "<color=white>This place was shrouded in darkness for weeks</color>";
+    public static List<String> MessagesList = new() {
+        { "This place was shrouded in darkness for weeks" },
+        { "Hihghly populated surface area" },
+        { "Due to frequent weather events wildlife roams the surface during daytime" }
+    };
+    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=red>SILENCE SEASON</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)

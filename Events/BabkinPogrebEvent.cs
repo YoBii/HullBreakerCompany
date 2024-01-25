@@ -10,7 +10,13 @@ public class BabkinPogrebEvent : HullEvent
     public override string ID() => "BabkinPogreb";
     public override int GetWeight() => 10;
     public override string GetDescription() => "Only jars of pickles spawn on the moon";
-    public override string GetMessage() => "<color=white>Scans indiciate all scrap is.. organic? </color>";
+        public static List<String> MessagesList = new() {
+        { "Scans indicate all scrap is... organic?" },
+        { "There is something wrong with the scrap.." },
+        { "We lost Rick. Find him!" },
+        { "Quite a pickle indeed!" }
+    };
+    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>SCRAP ANOMALY</color>";
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)

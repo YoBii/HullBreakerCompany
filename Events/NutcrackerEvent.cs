@@ -10,7 +10,14 @@ public class NutcrackerEvent : HullEvent
     public override string ID() => "Nutcracker";
     public override int GetWeight() => 5;
     public override string GetDescription() => "Increased chance of NutCracker spawn";
-    public override string GetMessage() => "<color=white>Detected signs of paranormal acitivy</color>";
+    public static List<String> MessagesList = new() {
+        { "Detected signs of paranormal activity" },
+        { "Several anomalies detected" },
+        { "Something's moving but not alive.." },
+        { "Keep your head down" },
+        { "Protect your nuts!" }
+    };
+    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>PARANORMAL</color>";
 
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
