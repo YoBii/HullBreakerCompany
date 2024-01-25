@@ -10,19 +10,20 @@ public abstract class EventsHandler
     //EnemyBounty
     [HarmonyPostfix]
     [HarmonyPatch(typeof(EnemyAI), nameof(EnemyAI.KillEnemy))]
-    static void EnemyBounty()
+    static void EnemyBounty(bool destroy)
     {
+        Plugin.Mls.LogInfo($"Enemy killed, instance isHost: {RoundManager.Instance.IsHost}");
         if (!RoundManager.Instance.IsHost) return;
-        Plugin.Mls.LogInfo($"Enemy killed, bounty is active: {Plugin.BountyIsActive}");
-        if (!Plugin.BountyIsActive) return;
-        Terminal tl = UnityEngine.Object.FindObjectOfType<Terminal>();        
-        int bountyReward = Random.Range(40, 80); // Make bounty reward amount configurable
-        tl.groupCredits += bountyReward;
-        tl.SyncGroupCreditsServerRpc(tl.groupCredits, tl.numberOfItemsInDropship);
+        Plugin.Mls.LogInfo($"Enemy killed, bounty is active: {Plugin.BountyIsActive}; destroy is {destroy}");
+        if (Plugin.BountyIsActive && !destroy) {
+            // use System.Random as workaround for diversity breaking UnityEngine.Random
+            System.Random rnd = new();
+            int bountyReward = rnd.Next(Plugin.BountyRewardMin, Plugin.BountyRewardMax);
+            HullManager.Instance.AddMoney(bountyReward);
 
         HullManager.SendChatEventMessage("<color=white>Enemy killed. Your work keeps the company happy. You receive </color><color=green>" + bountyReward + "</color><color=white> credits.</color>");
     }
-
+        }
 
     //OneForAll event
     //TODO fix
