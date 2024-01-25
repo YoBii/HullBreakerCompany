@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BepInEx;
@@ -156,7 +156,9 @@ namespace HullBreakerCompany
                 return true;
             }
 
-            DaysPassed++;
+            // get DaysPassed dynamically
+            DaysPassed = HullManager.Instance.timeOfDay.quotaVariables.deadlineDaysAmount - HullManager.Instance.timeOfDay.daysUntilDeadline + 1;
+
             Mls.LogInfo($"Days passed: {DaysPassed}");
 
             BountyIsActive = false;
