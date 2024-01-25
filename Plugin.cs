@@ -23,6 +23,7 @@ namespace HullBreakerCompany
 
         public static bool OneForAllIsActive;
         public static bool BountyIsActive;
+        public static bool BountyFirstKill;
 
         public static int DaysPassed;
         public static float BunkerEnemyScale;
