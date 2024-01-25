@@ -1,4 +1,4 @@
-﻿using BepInEx.Configuration;
+using BepInEx.Configuration;
 using System.Collections.Generic;
 using System.IO;
 using BepInEx;
@@ -32,6 +32,9 @@ namespace HullBreakerCompany.Hull
             Plugin.EventCount = GetConfigValue("EventCount", 3, "Total number of events that are randomly selected. Can roll NothingEvent resulting in less active events");
             Plugin.IncreaseEventCountPerDay = GetConfigValue("IncreaseEventCountPerDay", false, "The number of events rolled will increase by one every day. Resets on visiting the company building or loading a save");
 
+            Plugin.BountyRewardMin = GetConfigValue("BountyRewardMin", 40, "Minimum amount of credits rewarded for killing an enemy during EnemyBountyEvent");
+            Plugin.BountyRewardMax = GetConfigValue("BountyRewardMax", 80, "Maximum amount of credits rewarded for killing an enemy during EnemyBountyEvent");
+            Plugin.HullBreakEventCreditsMin = GetConfigValue("HullBreakEventCreditsMin", 50, "Minimum amount of credits granted by HullBreakEvent");
         }
         
         public static Dictionary<string, int> GetWeights()

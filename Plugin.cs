@@ -40,6 +40,9 @@ namespace HullBreakerCompany
         public static int MaxDaytimeEnemyPowerCount;
         public static bool IncreaseEventCountPerDay;
         public static int EventCount;
+        public static int BountyRewardMin;
+        public static int BountyRewardMax;
+        public static int HullBreakEventCreditsMin;
 
         public static List<SpawnableItemWithRarity> NotModifiedSpawnableItemsWithRarity = new();
         public static string CurrentMessage = "";
