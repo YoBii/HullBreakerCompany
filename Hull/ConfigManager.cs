@@ -35,6 +35,7 @@ namespace HullBreakerCompany.Hull
             Plugin.BountyRewardMin = GetConfigValue("BountyRewardMin", 40, "Minimum amount of credits rewarded for killing an enemy during EnemyBountyEvent");
             Plugin.BountyRewardMax = GetConfigValue("BountyRewardMax", 80, "Maximum amount of credits rewarded for killing an enemy during EnemyBountyEvent");
             Plugin.HullBreakEventCreditsMin = GetConfigValue("HullBreakEventCreditsMin", 50, "Minimum amount of credits granted by HullBreakEvent");
+            Plugin.HullBreakEventCreditsMax = GetConfigValue("HullBreakEventCreditsMax", 200, "Maximum amount of credits granted by HullBreakEvent");
         }
         
         public static Dictionary<string, int> GetWeights()

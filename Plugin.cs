@@ -43,6 +43,7 @@ namespace HullBreakerCompany
         public static int BountyRewardMin;
         public static int BountyRewardMax;
         public static int HullBreakEventCreditsMin;
+        public static int HullBreakEventCreditsMax;
 
         public static List<SpawnableItemWithRarity> NotModifiedSpawnableItemsWithRarity = new();
         public static string CurrentMessage = "";

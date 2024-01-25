@@ -17,7 +17,7 @@ public class HullBreakEvent : HullEvent
     public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
-        bonus_credits = Random.Range(50, 200);
+        bonus_credits = Random.Range(Plugin.HullBreakEventCreditsMin, Plugin.HullBreakEventCreditsMax);
 
         HullManager.Instance.AddMoney(bonus_credits);
         HullManager.SendChatEventMessage(this);
