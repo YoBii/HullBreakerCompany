@@ -1,4 +1,4 @@
-﻿using GameNetcodeStuff;
+using GameNetcodeStuff;
 using HarmonyLib;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public abstract class EventsHandler
 {
     //EnemyBounty
     [HarmonyPostfix]
-    [HarmonyPatch(typeof(EnemyAI), nameof(EnemyAI.KillEnemyServerRpc))]
+    [HarmonyPatch(typeof(EnemyAI), nameof(EnemyAI.KillEnemy))]
     static void EnemyBounty()
     {
         if (!RoundManager.Instance.IsHost) return;
