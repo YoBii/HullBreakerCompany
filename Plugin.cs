@@ -83,7 +83,7 @@ namespace HullBreakerCompany
             { new SlimeEvent() },
             { new DevochkaPizdecEvent() },
             { new EnemyBountyEvent() },
-            //{ new OneForAllEvent() },
+            { new OneForAllEvent() }, // EXPERIMENTAL
             { new OpenTheNoorEvent() },
             { new OnAPowderKegEvent() },
             { new OutSideEnemyDayEvent() },
