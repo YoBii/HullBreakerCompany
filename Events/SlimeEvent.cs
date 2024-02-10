@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
@@ -18,12 +18,16 @@ public class SlimeEvent : HullEvent
     };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>HIGH POPULATION</color>";
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+    public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
-        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<BlobAI>() == null)) return;
+        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<BlobAI>() == null)) {
+            Plugin.Mls.LogWarning($"Can't spawn BlobAI on this moon.");
+            return false;
+        }
         
-        enemyComponentRarity.Add(typeof(BlobAI), 48);
-        HullManager.SendChatEventMessage(this);
+        enemyComponentRarity.Add(typeof(BlobAI), 256);
+        HullManager.AddChatEventMessage(this);
+        return true;
     }
 }

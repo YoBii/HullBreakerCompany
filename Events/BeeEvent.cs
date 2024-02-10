@@ -19,7 +19,7 @@ public class BeeEvent : HullEvent
     };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>HIGH POPULATION</color>";
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+    public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
         foreach (var unit in level.DaytimeEnemies.Where(unit => unit.enemyType.enemyPrefab.GetComponent<RedLocustBees>() != null))
@@ -27,6 +27,6 @@ public class BeeEvent : HullEvent
             unit.rarity = 256;
             break;
         }
-        HullManager.SendChatEventMessage(this);
+        return true;
     }
 }

@@ -20,17 +20,21 @@ public class HellEvent : HullEvent
     };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>HELL</color>";
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+    public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
-        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<JesterAI>() == null)) return;
+        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<JesterAI>() == null)) {
+            Plugin.Mls.LogWarning($"Can't spawn JesterAI on this moon.");
+            return false;
+        }
         
         enemyComponentRarity.Add(typeof(JesterAI), 64);
-        
-        HullManager.SendChatEventMessage(this);
+
+        HullManager.AddChatEventMessage(this);
         RoundManager.Instance.hourTimeBetweenEnemySpawnBatches = 1;
 
         HullManager.Instance.ExecuteAfterDelay(() => { Hell(); }, 16f);
+        return true;
     }
     private void Hell()
     {

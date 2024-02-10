@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
@@ -55,7 +55,7 @@ public class CustomEvent : HullEvent
     public List<string> OutsideSpawnList = new ();
     
     public int Rarity = 1;
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> componentRarity,
+    public override bool Execute(SelectableLevel level, Dictionary<Type, int> componentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
         foreach (var enemy in EnemySpawnList.TakeWhile(enemy => enemy != "off"))
@@ -75,5 +75,6 @@ public class CustomEvent : HullEvent
         }
 
         HullManager.SendChatEventMessage(Plugin.UseShortChatMessages ? GetShortMessage() : GetMessage());
+        return true;
     }
 }

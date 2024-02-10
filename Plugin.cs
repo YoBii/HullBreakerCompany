@@ -46,6 +46,8 @@ namespace HullBreakerCompany
         public static int HullBreakEventCreditsMax;
 
         public static List<SpawnableItemWithRarity> NotModifiedSpawnableItemsWithRarity = new();
+        public static List<string> failedEvents = new();
+        public static List<string> roundEvents = new();
         public static string CurrentMessage = "";
 
         public static Dictionary<String, Type> EnemyBase = new()
@@ -197,6 +199,8 @@ namespace HullBreakerCompany
             }
 
             //Event Execution
+            roundEvents.Clear();
+            failedEvents.Clear();
             foreach (string gameEvent in randomEvents)
             {
                 try
@@ -204,8 +208,21 @@ namespace HullBreakerCompany
                     HullEvent hullEvent = EventDictionary.FirstOrDefault(e => e.ID() == gameEvent);
                     if (hullEvent == null) continue;
 
-                    hullEvent.Execute(newLevel, enemyComponentRarity, outsideComponentRarity);
-                    Mls.LogInfo($"Event: {gameEvent}");
+                    while(!hullEvent.Execute(newLevel, enemyComponentRarity, outsideComponentRarity)) {
+                        failedEvents.Add(hullEvent.ID());
+                        Mls.LogInfo($"Skipping Event: {hullEvent.ID()}");
+                        if(failedEvents.Count() == EventDictionary.Count()) {
+                            Plugin.Mls.LogError("Event selection failed!");
+                            break;
+                        }
+                        string newEvent;
+                        do {
+                            newEvent = RandomSelector.GetAnotherRandomGameEvent();
+                        } while(randomEvents.Contains(newEvent) || failedEvents.Contains(newEvent));
+                        hullEvent = EventDictionary.FirstOrDefault(e => e.ID() == newEvent);
+                    }
+                    roundEvents.Add(hullEvent.ID());
+                    Mls.LogInfo($"Event: {hullEvent.ID()}");
                     
                     UpdateRarity(newLevel.Enemies, enemyComponentRarity);
                     UpdateRarity(newLevel.OutsideEnemies, outsideComponentRarity);

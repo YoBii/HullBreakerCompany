@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using HullBreakerCompany.Hull;
 
@@ -16,23 +16,24 @@ public class HackedTurretsEvent : HullEvent
     };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>SECURITY OFFLINE</color>";
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+    public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
         if (HullManager.Instance == null)
         {
             Plugin.Mls.LogError("HullManager.Instance is null");
-            return;
+            return false;
         }
 
         if (level == null)
         {
             Plugin.Mls.LogError("level is null");
-            return;
+            return false;
         }
         
         HullManager.Instance.ExecuteAfterDelay(() => { HackTurrets(); }, 16f);
-        HullManager.SendChatEventMessage(this);
+        HullManager.AddChatEventMessage(this);
+        return true;
     }
     
     private void HackTurrets()

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +13,9 @@ public abstract class RandomSelector
         
         var gameEvents = GetWeightedRandomGameEvents(ConfigManager.GetWeights(), eventCount);
         return gameEvents;
+    }
+    public static string GetAnotherRandomGameEvent() {
+        return GetWeightedRandomGameEvents(ConfigManager.GetWeights(), 1)[0];
     }
     private static List<T> GetWeightedRandomGameEvents<T>(Dictionary<T, int> weights, int count)
     {

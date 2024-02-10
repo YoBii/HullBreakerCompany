@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -21,12 +21,16 @@ public class ArachnophobiaEvent : HullEvent
     };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>HIGH POPULATION</color>";
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+    public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
-        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<SandSpiderAI>() == null)) return;
+        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<SandSpiderAI>() == null)) {
+            Plugin.Mls.LogWarning($"Can't spawn SandSpiderAI on this moon.");
+            return false;
+        }
         
         enemyComponentRarity.Add(typeof(SandSpiderAI), 256);
-        HullManager.SendChatEventMessage(this);
+        HullManager.AddChatEventMessage(this);
+        return true;
     }
 }

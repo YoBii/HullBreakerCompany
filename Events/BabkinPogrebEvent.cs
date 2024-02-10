@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
@@ -17,8 +17,7 @@ public class BabkinPogrebEvent : HullEvent
         { "Quite a pickle indeed!" }
     };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>SCRAP ANOMALY</color>";
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+    public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
         try
@@ -40,7 +39,7 @@ public class BabkinPogrebEvent : HullEvent
             {
                 Plugin.Mls.LogError("No jars of pickles found in spawnableScrap list!");
                 DelayedReturnList(level);
-                return;
+                return false;
             }
             
             foreach (var item in level.spawnableScrap.Where(item => item.spawnableItem.itemName == "Jar of pickles"))
@@ -49,11 +48,12 @@ public class BabkinPogrebEvent : HullEvent
             }
             
             HullManager.Instance.ExecuteAfterDelay(() => { DelayedReturnList(level); }, 12f);
-            HullManager.SendChatEventMessage(this);
+            return true;
         }
         catch (ArgumentOutOfRangeException ex)
         {
             Plugin.Mls.LogError($"ArgumentOutOfRangeException caught in BabkinPogrebEvent.Execute: {ex.Message}");
+            return false;
         }
     }
 

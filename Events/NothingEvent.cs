@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using HullBreakerCompany.Hull;
 
@@ -19,10 +19,11 @@ public class NothingEvent : HullEvent
     };
     public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
     public override string GetShortMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+    public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
         // simply omit the message
         // HullManager.SendChatEventMessage(this);
+        return true;
     }
 }

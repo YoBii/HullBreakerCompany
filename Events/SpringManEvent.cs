@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
@@ -20,12 +20,16 @@ public class SpringManEvent : HullEvent
     };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>PARANORMAL</color>";
-    public override void Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+    public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
-        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<SpringManAI>() == null)) return;
+        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<SpringManAI>() == null)) {
+            Plugin.Mls.LogWarning($"Can't spawn SpringManAI on this moon.");
+            return false;
+        }
         
-        enemyComponentRarity.Add(typeof(SpringManAI), 128);
-        HullManager.SendChatEventMessage(this);
+        enemyComponentRarity.Add(typeof(SpringManAI), 256);
+        HullManager.AddChatEventMessage(this);
+        return true;
     }
 }
