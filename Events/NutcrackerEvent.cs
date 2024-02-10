@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
@@ -17,7 +17,13 @@ public class NutcrackerEvent : HullEvent
         { "Keep your head down" },
         { "Protect your nuts!" }
     };
+    public static List<String> shortMessagesList = new() {
+        { "PARANORMAL" },
+        { "HAUNTED" },
+        { "THIS IS NUTS" }
+    };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
+    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {

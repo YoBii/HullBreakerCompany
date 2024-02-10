@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events;
@@ -10,13 +12,18 @@ public class OnAPowderKegEvent : HullEvent
     public override int GetWeight() => 10;
     public override string GetDescription() => "Landmines can detonate at any time";
     public static List<String> MessagesList = new() {
-        { "Reoccuring explosions" },
+        { "Reccuring explosions" },
         { "Explosions detected" },
         { "They installed faulty mines" },
-        { "Mines explode at the slightest vibration" }
+        { "Mines explode at the slightest vibration" },
+        { "Tick, tick.. BOOM!" }
+    };
+    public static List<String> shortMessagesList = new() {
+        { "SURPRISE" },
+        { "EXPLOSIONS" }
     };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=red>ON A POWDER KEG</color>";
+    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {

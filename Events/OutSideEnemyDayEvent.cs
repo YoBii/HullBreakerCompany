@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using HullBreakerCompany.Hull;
 using UnityEngine;
@@ -14,6 +14,10 @@ public class OutSideEnemyDayEvent : HullEvent
         { "This place was shrouded in darkness for weeks" },
         { "Hihghly populated surface area" },
         { "Due to frequent weather events wildlife roams the surface during daytime" }
+    };
+    public static List<String> shortMessagesList = new() {
+        { "SILENCE SEASON" },
+        { "OUTSIDE PARTY" }
     };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=red>SILENCE SEASON</color>";

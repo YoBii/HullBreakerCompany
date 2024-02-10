@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
@@ -18,8 +18,13 @@ public class HellEvent : HullEvent
         { "Caution! Activity level 9 9 9 9 9 9 9 9 9 9 9 9 9" },
         { "The company wishes the best of luck!" }
     };
+    public static List<String> shortMessagesList = new() {
+        { "HELL" },
+        { "DANGER ZONE" },
+        { "LEAVE" }
+    };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>HELL</color>";
+    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {

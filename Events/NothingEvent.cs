@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using HullBreakerCompany.Hull;
 
@@ -14,8 +14,7 @@ public class NothingEvent : HullEvent
     {
         { "<color=white>...</color>" },
         { "<color=white>---</color>" },
-        { "<color=white>DAMAGED...</color>" },
-        { "<color=white>???</color>" },
+        { "<color=white>   </color>" }
     };
     public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
     public override string GetShortMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];

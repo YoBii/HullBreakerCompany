@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
@@ -19,8 +19,13 @@ public class FlowerManEvent : HullEvent
         { "When you're scared to take a look.." },
         { "Whatever you do, do not stare!" }
     };
+    public static List<String> shortMessagesList = new() {
+        { "PARANORMAL" },
+        { "HAUNTED" },
+        { "FEAR OF THE DARK" }
+    };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>PARANORMAL</color>";
+    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {

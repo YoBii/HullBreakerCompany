@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -19,8 +19,13 @@ public class ArachnophobiaEvent : HullEvent
         { "Natural spider habitat" },
         { "Don't get spun up!" }
     };
+    public static List<String> shortMessagesList = new() {
+        { "HIGH POPULATION" },
+        { "DOMINANT SPECIES" },
+        { "EIGHT LEGS" }
+    };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>HIGH POPULATION</color>";
+    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
