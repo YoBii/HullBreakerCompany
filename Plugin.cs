@@ -92,7 +92,8 @@ namespace HullBreakerCompany
             { new HackedTurretsEvent() }, //v1.2.0
             { new BabkinPogrebEvent() }, //v1.2.0
             { new HullBreakEvent()}, //v1.3.5
-            { new NutcrackerEvent()} //v1.3.8
+            { new NutcrackerEvent()}, //v1.3.8
+            { new MaskedEvent() }
         };
         
         public static List<HullEvent> CurrentEvents = new();
