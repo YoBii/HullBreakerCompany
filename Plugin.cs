@@ -149,9 +149,15 @@ namespace HullBreakerCompany
             if (!_levelStates.ContainsKey(levelID))
             {
                 _levelStates[levelID] = new SelectableLevelState(newLevel);
+                // Plugin.Mls.LogInfo($"Storing level state for levelID: {levelID}");
+                // Plugin.Mls.LogInfo($"Storing this loot table in levelState: ");
+                // _levelStates[levelID].SpawnableScrapList.ForEach(s => Plugin.Mls.LogInfo(s.spawnableItem.itemName + ", " + s.rarity));
             }
             else
             {
+                // Plugin.Mls.LogInfo($"Restoring level state for levelID: {levelID}");
+                // Plugin.Mls.LogInfo($"Restored this loot table from levelState: ");
+                // newLevel.spawnableScrap.ForEach(s => Plugin.Mls.LogInfo(s.spawnableItem.itemName + ", " + s.rarity));
                 _levelStates[levelID].RestoreState(newLevel);
             }
 

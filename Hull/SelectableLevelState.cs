@@ -12,6 +12,7 @@ namespace HullBreakerCompany.Hull
         public List<SpawnableEnemyWithRarity> EnemyList = new ();
         public List<SpawnableEnemyWithRarity> OutsideEnemyList = new ();
         public List<SpawnableEnemyWithRarity> DaytimeEnemyList = new ();
+        public List<SpawnableItemWithRarity> SpawnableScrapList = new ();
 
         public SelectableLevelState(SelectableLevel level)
         {
@@ -22,6 +23,7 @@ namespace HullBreakerCompany.Hull
             OutsideEnemySpawnChanceThroughDay = level.outsideEnemySpawnChanceThroughDay;
             DaytimeEnemySpawnChanceThroughDay = level.daytimeEnemySpawnChanceThroughDay;
 
+            CloneItems(level.spawnableScrap, SpawnableScrapList);
             CloneEnemies(level.Enemies, EnemyList);
             CloneEnemies(level.OutsideEnemies, OutsideEnemyList);
             CloneEnemies(level.DaytimeEnemies, DaytimeEnemyList);
@@ -36,6 +38,9 @@ namespace HullBreakerCompany.Hull
             level.outsideEnemySpawnChanceThroughDay = OutsideEnemySpawnChanceThroughDay;
             level.daytimeEnemySpawnChanceThroughDay = DaytimeEnemySpawnChanceThroughDay;
 
+            level.spawnableScrap.Clear();
+            CloneItems(SpawnableScrapList, level.spawnableScrap);
+            
             level.Enemies.Clear();
             CloneEnemies(EnemyList, level.Enemies);
 
@@ -58,6 +63,16 @@ namespace HullBreakerCompany.Hull
                     rarity = enemy.rarity
                 };
                 destination.Add(clone);
+            }
+        }
+
+        private void CloneItems(List<SpawnableItemWithRarity> source, List<SpawnableItemWithRarity> destination) {
+            foreach (var item in source) {
+                var copy = new SpawnableItemWithRarity {
+                    spawnableItem = item.spawnableItem,
+                    rarity = item.rarity
+                };
+                destination.Add(copy);
             }
         }
     }
