@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +8,7 @@ namespace HullBreakerCompany.Events;
 
 public class OnAPowderKegEvent : HullEvent
 {
+    public static int dayInSeconds;
     public override string ID() => "OnAPowderKeg";
     public override int GetWeight() => 10;
     public override string GetDescription() => "Landmines can detonate at any time";
@@ -27,17 +28,26 @@ public class OnAPowderKegEvent : HullEvent
     public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
         Dictionary<Type, int> outsideComponentRarity)
     {
+        dayInSeconds = (int)HullManager.Instance.timeOfDay.lengthOfHours * HullManager.Instance.timeOfDay.numberOfHours;
+        HullManager.AddChatEventMessage(this);
         Plugin.addLandminesToLevelUnits(level, Plugin.LandmineScale * 2f / 3f);
-        HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(); }, UnityEngine.Random.Range(10, 300));
+        HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(level); }, UnityEngine.Random.Range(dayInSeconds / 6, dayInSeconds / 2));
         return true;
     }
 
-    private void DetonateLandMine()
+    private async void DetonateLandMine(SelectableLevel level)
     {
+        if (level == null) {
+            Plugin.Mls.LogError("level is null");
+            return;
+        }
         Landmine[] landmines = UnityEngine.Object.FindObjectsOfType<Landmine>();
-        foreach (Landmine landmine in landmines)
+        Plugin.Mls.LogInfo(ID() + $" Event: PowderKeg has been ignited. Will explode a landmine every {dayInSeconds / landmines.Count() / 30}-{dayInSeconds / landmines.Count() / 4} seconds.");
+        foreach (var (landmine, i) in landmines.Select((landmine, i) => ( landmine, i )))
         {
+            Plugin.Mls.LogMessage(ID() + $" Event: Random landmine explosion #{i + 1}");
             landmine.ExplodeMineServerRpc();
+            await Task.Delay(TimeSpan.FromSeconds(UnityEngine.Random.Range(dayInSeconds / landmines.Count() / 30, dayInSeconds / landmines.Count() / 4)));
         }
     }
 }
