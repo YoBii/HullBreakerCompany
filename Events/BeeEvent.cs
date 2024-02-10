@@ -1,7 +1,9 @@
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
+using UnityEngine.UIElements.Collections;
 
 namespace HullBreakerCompany.Events;
 
@@ -33,6 +35,11 @@ public class BeeEvent : HullEvent
             unit.rarity = 256;
             break;
         }
+        foreach (var unit in level.DaytimeEnemies.Where(unit => (unit.enemyType.enemyPrefab.GetComponent<DocileLocustBeesAI>() != null) || (unit.enemyType.enemyPrefab.GetComponent<DoublewingAI>() != null)))
+        {
+            unit.rarity = 0;
+        }
+        HullManager.AddChatEventMessage(this);
         return true;
     }
 }

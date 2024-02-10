@@ -262,16 +262,6 @@ namespace HullBreakerCompany
             HullManager.LogEnemyRarity(newLevel.OutsideEnemies, "\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1bOUTSIDE ENEMIES RARITY\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b");
             
             
-            if (!randomEvents.Contains("Bee"))
-            {
-                foreach (var unit in nl.DaytimeEnemies.Where(unit =>
-                             unit.enemyType.enemyPrefab.GetComponent<RedLocustBees>() != null))
-                {
-                    unit.rarity = 22;
-                    break;
-                }
-            }
-            
             if (UseHullBreakerLevelSettings)
             {
                 nl.maxEnemyPowerCount += 16;
