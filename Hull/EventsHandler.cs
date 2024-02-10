@@ -45,19 +45,21 @@ public abstract class EventsHandler
     //OneForAll event
     //TODO fix
     [HarmonyPostfix]
-    [HarmonyPatch(typeof(PlayerControllerB), "KillPlayerClientRpc")]
+    [HarmonyPatch(typeof(PlayerControllerB), "KillPlayerServerRpc")]
     static void OneForAll()
     {
         if (!RoundManager.Instance.IsHost) return;
         Plugin.Mls.LogInfo($"Player killed, one for all is active: {Plugin.OneForAllIsActive}");
         if (!Plugin.OneForAllIsActive) return;
         Plugin.OneForAllIsActive = false;
-        HullManager gc = UnityEngine.Object.FindObjectOfType<HullManager>();
-        gc.timeOfDay.votedShipToLeaveEarlyThisRound = true;
-        gc.timeOfDay.SetShipLeaveEarlyServerRpc();
+        // HullManager gc = UnityEngine.Object.FindObjectOfType<HullManager>();
+        // gc.timeOfDay.votedShipToLeaveEarlyThisRound = true;
+        // gc.timeOfDay.SetShipLeaveEarlyServerRpc();
+        HullManager.Instance.timeOfDay.votedShipToLeaveEarlyThisRound = true;
+        HullManager.Instance.timeOfDay.SetShipLeaveEarlyServerRpc();
 
         HullManager.SendChatEventMessage(
-            "<color=red>One of the workers died, the ship will go into orbit in an hour</color>");
+            "<color=red>One of the workers died, the ship will go into orbit in an hour!</color>");
     }
         
     [HarmonyPostfix]
