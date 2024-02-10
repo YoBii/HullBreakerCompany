@@ -8,6 +8,7 @@ namespace HullBreakerCompany.Hull;
 public class HullManager : MonoBehaviour
 {
     public TimeOfDay timeOfDay;
+    public static List<string> chatMessages = new();
 
     public void Update()
     {
@@ -48,13 +49,24 @@ public class HullManager : MonoBehaviour
         action.Invoke();
     }
 
-    public static void SendChatEventMessage(HullEvent hullEvent)
+    public static void AddChatEventMessage(HullEvent hullEvent)
     {
         if (HUDManager.Instance != null && hullEvent != null && Plugin.EnableEventMessages)
         {
-            HUDManager.Instance.AddTextToChatOnServer(Plugin.UseShortChatMessages
+            chatMessages.Add(Plugin.UseShortChatMessages
                 ? hullEvent.GetShortMessage()
                 : hullEvent.GetMessage());
+        }
+    }
+    public static void AddChatEventMessage(string message, bool addAsFirst = false)
+    {
+        if (HUDManager.Instance != null && message != null && Plugin.EnableEventMessages)
+        {
+            if(!addAsFirst) {
+                chatMessages.Add(message);
+            } else {
+                chatMessages.Insert(0, message);
+            }
         }
     }
     public static void SendChatEventMessage(string message)
@@ -62,6 +74,14 @@ public class HullManager : MonoBehaviour
         if (HUDManager.Instance != null && message != null && Plugin.EnableEventMessages)
         {
             HUDManager.Instance.AddTextToChatOnServer(message);
+        }
+    }
+    public static void SendChatEventMessages() {
+        if (HUDManager.Instance != null && Plugin.EnableEventMessages) {
+            foreach(string message in chatMessages) {
+                HUDManager.Instance.AddTextToChatOnServer(message);
+            }
+            chatMessages.Clear();
         }
     }
     public static void LogEnemyRarity(List<SpawnableEnemyWithRarity> enemies, string title)

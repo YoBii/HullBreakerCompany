@@ -235,6 +235,20 @@ namespace HullBreakerCompany
                         $"NullReferenceException caught while processing event: {gameEvent}. Exception message: {ex.Message}. Caused : {ex.InnerException}");
                 }
             }
+
+            if (EventCount != 0 && EnableEventMessages) //check if configs allows events
+            {
+                //count how many active events are NothingEvent
+                int nothingEvent_count = roundEvents.Where(e => e.Equals("Nothing")).Count();
+                Mls.LogInfo($"Round events: " + roundEvents.Count);
+                Mls.LogInfo($"Nothing events: " + nothingEvent_count);
+                
+                //Only print Notes to game chat when there's at least one Event that's not NothingEvent
+                if (roundEvents.Count > nothingEvent_count) {
+                    HullManager.AddChatEventMessage("<color=red>NOTES ABOUT MOON:</color>", true);
+                    HullManager.SendChatEventMessages();
+                } 
+            }
             
             //debug logs
             HullManager.LogEnemyRarity(newLevel.Enemies, "\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1bENEMIES RARITY\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b\u2b1b");
@@ -339,7 +353,6 @@ namespace HullBreakerCompany
         {
             foreach (var mapObject in level.spawnableMapObjects)
             {
-                var landmineComponent = mapObject.prefabToSpawn.GetComponentInChildren<Landmine>();
                 if (mapObject.prefabToSpawn.GetComponentInChildren<Landmine>() != null)
                 {
                     mapObject.numberToSpawn = new AnimationCurve(new Keyframe(0f, 2.5f));
