@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using BepInEx;
@@ -184,26 +184,6 @@ namespace HullBreakerCompany
             var enemyComponentRarity = new Dictionary<Type, int>();
             var outsideComponentRarity = new Dictionary<Type, int>();
             enemyComponentRarity.Clear();
-
-            NotModifiedSpawnableItemsWithRarity.Clear();
-            
-            foreach (var item in nl.spawnableScrap)
-            {
-                NotModifiedSpawnableItemsWithRarity.Add(item);
-            }
-
-            if (EventCount != 0 && EnableEventMessages) //check if configs allows events
-            {
-                //count how many active events are NothingEvent
-                int nothingEvent_count = randomEvents.Where(randomEvent => randomEvent.Equals("Nothing")).Count();
-                Mls.LogInfo($"Random events: " + randomEvents.Count);
-                Mls.LogInfo($"Nothing events: " + nothingEvent_count);
-                
-                //Only print Notes to game chat when there's at least one Event that's not NothingEvent
-                if (randomEvents.Count > nothingEvent_count) {
-                    HUDManager.Instance.AddTextToChatOnServer("<color=red>NOTES ABOUT MOON:</color>");
-                } 
-            }
 
             //Event Execution
             roundEvents.Clear();
