@@ -17,17 +17,23 @@ Events fail to execute on certain moons where mobs or scrap can't naturally spaw
 Depending on whether you have other mods installed certain events are enabled automatically. No user interaction or configuration required.
 Introducing events for Shy guy, Herobrine, FacilityMeltdown and more. Check the changelog.
 
-### More impactful events
-You will definitely notice events more.
-No longer do events just bump up the rarity of let's say bunker spiders. They also increase their max count and decrease their power accordingly.
+### More impactful enemy events
+You will definitely notice enemy events more.
+No longer do events just bump up the rarity of let's say bunker spiders. They also increase their max count and decrease their power level accordingly.
+
+### More events
+Events, events, events. Can one have enough events?
+* More scrap events like 'Jar of pickles'-event. Some make your working shift harder, some make it easier.
+* HordeModeEvent increases spawn rate of inside enemies.
+* **(PLANNED)** Time dilation events. Make your day shorter or longer.
 
 ### Compatibility
-Fully compatible with LethalQuantities and AdvancedCompany.
+Fully compatible with LethalQuantities and AdvancedCompany overrides.
 Using these mods you can allow events that would usually fail on certain moons by setting their rarity.
 For example with vanilla moon configuration you can't get Jester event on Experimentation because Jesters don't spawn there.
 Set Jester rarity to `1` or any larger number to allow the Jester event to occur.
 
-### Ambigous event messages
+### Ambiguous event messages
 All event long and short messages in game chat are more ambigous i.e. less obvious.
 Basically I tried to fit the whole "Notes about this moon"-thing without giving away the exact event.
 For example all events that increase monster spawn rates have the same message. Telling you something about a large number of likely hostile life forms. So even if you know all the events you don't know whether it's spiders, lizards, slimes or bees you have to expect.
