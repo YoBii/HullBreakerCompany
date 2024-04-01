@@ -140,7 +140,7 @@ public abstract class EventsManager {
     }
 
     private static int RefreshDaysPassed() {
-        DaysPassed = HullManager.Instance.timeOfDay.quotaVariables.deadlineDaysAmount - HullManager.Instance.timeOfDay.daysUntilDeadline + 1;
+        DaysPassed = HullManager.Instance.timeOfDay.quotaVariables.deadlineDaysAmount - HullManager.Instance.timeOfDay.daysUntilDeadline;
         Plugin.Mls.LogInfo($"Days passed: {DaysPassed}");
         return DaysPassed;
     }

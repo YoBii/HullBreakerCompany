@@ -9,7 +9,7 @@ public abstract class RandomSelector
     private static Random _random = new();
     public static List<string> GetRandomGameEvents()
     {
-        var eventCount = Plugin.IncreaseEventCountPerDay ? Plugin.EventCount + EventsManager.DaysPassed - 1 : Plugin.EventCount;
+        var eventCount = Plugin.IncreaseEventCountPerDay ? Plugin.EventCount + EventsManager.DaysPassed : Plugin.EventCount;
         
         var gameEvents = GetWeightedRandomGameEvents(ConfigManager.GetWeights(), eventCount);
         return gameEvents;
