@@ -15,14 +15,12 @@ public abstract class EventsHandler
     {
         Plugin.Mls.LogInfo($"Enemy killed, instance isHost: {RoundManager.Instance.IsHost}");
         if (!RoundManager.Instance.IsHost) return;
-        Plugin.Mls.LogInfo($"Enemy killed, bounty is active: {Plugin.BountyIsActive}; destroy is {destroy}");
-        if (Plugin.BountyIsActive && !destroy) {
-            // use System.Random as workaround for diversity breaking UnityEngine.Random
-            System.Random rnd = new();
-            int bountyReward = rnd.Next(Plugin.BountyRewardMin, Plugin.BountyRewardMax);
-            HullManager.Instance.AddMoney(bountyReward);
+        Plugin.Mls.LogInfo($"Enemy killed, bounty is active: {BountyIsActive}; destroy is {destroy}");
+        if (BountyIsActive && !destroy) {
+            int bountyReward = UnityEngine.Random.Range(Plugin.BountyRewardMin, Plugin.BountyRewardMax);
+            BountyRewards++;
             // chat print reward. Detailed on 1st kill, abbreviated after
-            if (Plugin.BountyFirstKill) {
+            if (BountyFirstKill) {
                 // string building
                 List<String> rewardMessages = new() {
                     { "Threat neutralized! Keep up the good work. The company sends [AMOUNT] credits." },
@@ -34,10 +32,15 @@ public abstract class EventsHandler
                 rewardString.Replace("[AMOUNT]", "</color><color=green>" + bountyReward.ToString() + "</color><color=white>");
 
                 HullManager.SendChatEventMessage(rewardString.ToString());
-                Plugin.BountyFirstKill = false;
+                BountyFirstKill = false;
+            } else if (Plugin.BountyRewardLimit > 0 && BountyRewards >= Plugin.BountyRewardLimit){
+                BountyIsActive = false;
+                bountyReward = (int) Math.Floor(Plugin.BountyRewardMax * 1.5f);
+                Plugin.Mls.LogInfo("<color=white>Bounty completed! You receive </color><color=green>" + bountyReward + "</color><color=white> credits. Your handwork is invaluable to the company.");
             } else {
                 HullManager.SendChatEventMessage("<color=white>Bounty reward: </color><color=green>" + bountyReward + "</color><color=white> credits</color>");
             }
+            HullManager.Instance.AddMoney(bountyReward);
             Plugin.Mls.LogInfo($"Bounty credits rewarded: {bountyReward}");
         }
     }

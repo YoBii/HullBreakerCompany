@@ -21,7 +21,6 @@ namespace HullBreakerCompany
 
         public static bool compatibilityLQ = false;
 
-        public static int DaysPassed;
         public static float BunkerEnemyScale;
         public static float LandmineScale;
         public static float TurretScale;
@@ -30,6 +29,7 @@ namespace HullBreakerCompany
 
         public static bool UseHullBreakerLevelSettings;
         public static bool UseVanillaGameSettings;
+        public static string LevelSettings;
 
         public static int MaxEnemyPowerCount;
         public static int MaxOutsideEnemyPowerCount;
@@ -38,6 +38,7 @@ namespace HullBreakerCompany
         public static int EventCount;
         public static int BountyRewardMin;
         public static int BountyRewardMax;
+        public static int BountyRewardLimit;
         public static int HullBreakEventCreditsMin;
         public static int HullBreakEventCreditsMax;
         readonly Harmony _harmony = new("HULLBREAKER");
@@ -48,7 +49,7 @@ namespace HullBreakerCompany
             Mls.LogInfo("Ready to break hull; HullBreakerCompany");
             _harmony.PatchAll(typeof(Plugin));
             _harmony.PatchAll(typeof(EventsHandler));
-            
+
             if (!_loaded) Initialize();
         }
 
@@ -64,7 +65,7 @@ namespace HullBreakerCompany
 
         public void Initialize()
         {
-            ConfigManager.SetConfigValue();
+            ConfigManager.RefreshConfig();
 
             GameObject hullManager = new GameObject("HullManager");           
             DontDestroyOnLoad(hullManager);
@@ -96,7 +97,7 @@ namespace HullBreakerCompany
             ConfigManager.RefreshConfig();
             
             CustomEventLoader.DebugLoadCustomEvents();
-            
+
             //Begin modified Load
             Plugin.Mls.LogInfo($"Attempting to load and modify new level. ID: {newLevel.levelID}, Scene: {newLevel.sceneName}, Planet: {newLevel.PlanetName}");
 
@@ -105,10 +106,10 @@ namespace HullBreakerCompany
                 Plugin.Mls.LogInfo("Skipping modifications..");
                 return true;
             }
-
+            
             //Event Execution
             EventsManager.ExecuteEvents(newLevel);
-                    
+            
             return true;
         }
         private static void LQCompaitiblityPatch() {
