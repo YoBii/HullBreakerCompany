@@ -87,7 +87,7 @@ public class CustomEventLoader
             {
                 Plugin.Mls.LogInfo($"Event ID: {customEvent.ID()}");
                 Plugin.Mls.LogInfo($"Spawnable Enemies: {string.Join(", ", customEvent.EnemySpawnList)}");
-                // Mls.LogInfo($"Spawnable Outside Enemies: {string.Join(", ", customEvent.OutsideSpawnList)}");
+                Plugin.Mls.LogInfo($"Spawnable Outside Enemies: {string.Join(", ", customEvent.OutsideSpawnList)}");
                 Plugin.Mls.LogInfo($"Message: {customEvent.GetMessage()}");
             }
         }

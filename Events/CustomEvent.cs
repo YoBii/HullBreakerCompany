@@ -55,25 +55,25 @@ public class CustomEvent : HullEvent
     public List<string> OutsideSpawnList = new ();
     
     public int Rarity = 1;
-    // Pretty sure this is broken rn due to AddEnemyComponentRarity taking string but might work idk idc
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
+        if(EnemySpawnList.Any(enemy => !levelModifier.IsEnemySpawnable(enemy))) {
+            return false;
+        }
+        if (OutsideSpawnList.Any(enemy => !levelModifier.IsOutsideEnemySpawnable(enemy))) {
+            return false;
+        }
+
         foreach (var enemy in EnemySpawnList.TakeWhile(enemy => enemy != "off"))
         {
-            if (EnemyUtil.getEnemyByString(enemy) != null)
-            {
-                levelModifier.AddEnemyComponentRarity(enemy, Rarity);
-            } else Plugin.Mls.LogError($"Enemy {enemy} not found in EnemyBase");
+            levelModifier.AddEnemyComponentRarity(enemy, Rarity);
         }
 
         foreach (var enemy in OutsideSpawnList.TakeWhile(enemy => enemy != "off"))
         {
-            if (EnemyUtil.getEnemyByString(enemy) != null)
-            {
-                levelModifier.AddOutsideEnemyRarity(enemy, Rarity);
-            } else Plugin.Mls.LogError($"Enemy {enemy} not found in EnemyBase");
+            levelModifier.AddOutsideEnemyRarity(enemy, Rarity);
         }
 
-        HullManager.SendChatEventMessage(Plugin.UseShortChatMessages ? GetShortMessage() : GetMessage());
+        HullManager.AddChatEventMessage(this);
         return true;
     }
 }

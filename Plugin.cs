@@ -75,6 +75,8 @@ namespace HullBreakerCompany
             Mls.LogInfo("HullManager created");
 
             CustomEventLoader.LoadCustomEvents();
+            CustomEventLoader.DebugLoadCustomEvents();
+
             _loaded = true;
         }
 
@@ -96,7 +98,6 @@ namespace HullBreakerCompany
             Mls.LogInfo("Refreshing config..");
             ConfigManager.RefreshConfig();
             
-            CustomEventLoader.DebugLoadCustomEvents();
 
             //Begin modified Load
             Plugin.Mls.LogInfo($"Attempting to load and modify new level. ID: {newLevel.levelID}, Scene: {newLevel.sceneName}, Planet: {newLevel.PlanetName}");
