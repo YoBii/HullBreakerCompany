@@ -9,6 +9,14 @@ Since then more significant changes have been made.
 
 ## Major changes
 
+### Ambiguous event messages
+All event long and short messages in game chat are more ambigous i.e. less obvious.
+Basically I tried to fit the whole "Notes about this moon"-thing without giving away the exact event.
+For example all events that increase monster spawn rates can print the same message in game chat: telling you something about a dominant species.
+So even if you know all the events by heart you don't necessarily know whether it's spiders, lizards, slimes or bees you have to expect.
+
+Basically the event messages in chat will mostly be more mysterious. This was intended to reduce spoiling specific monster types and such for newcomers.
+
 ### Reworked event execution
 Rewritten event execution logic allows to dynamically replace events that fail to execute by another random event.
 Events fail to execute on certain moons where mobs or scrap can't naturally spawn.
@@ -33,11 +41,6 @@ Using these mods you can allow events that would usually fail on certain moons b
 For example with vanilla moon configuration you can't get Jester event on Experimentation because Jesters don't spawn there.
 Set Jester rarity to `1` or any larger number to allow the Jester event to occur.
 
-### Ambiguous event messages
-All event long and short messages in game chat are more ambigous i.e. less obvious.
-Basically I tried to fit the whole "Notes about this moon"-thing without giving away the exact event.
-For example all events that increase monster spawn rates have the same message. Telling you something about a large number of likely hostile life forms. So even if you know all the events you don't know whether it's spiders, lizards, slimes or bees you have to expect.
-
 ### Config file
 Reorganized and restructured - allowing for more customization. Hopefully you'll find some settings more intuitive.
 Mainly putting this here so you remember to check your config :)
@@ -48,19 +51,21 @@ Mainly putting this here so you remember to check your config :)
 
 #### EnemyBountyEvent
 * The amount of credits rewarded for each kill is now random. Similar to an above average scrap item
+	* Min/Max is configurable
 * The amount rewarded will show in game chat
-* There's a configurable limit to the amount of rewards
+* New config: Limit the amount of rewards. The final reward will pay 150% of Max
  
 #### HullBreakEvent
-* The event where you receive bonus credits now gives a random amount of credits (50-200)
+* The amount of bonus credits you receive is now random
+	* Min/Max is configurable
 * The amount will show in game chat
 
 #### NothingEvent
-* When the mod randomly selects _NothingEvent_ (no event) the event message is omitted from chat. With low `EventCount` such as `1` this makes it so events seem to be more random especially when combined with the option that increments the number of events every day. With high `EventCount` it simply prevents flooding the chat with empty lines from NothingEvent to a point where things become unreadable. This depends on your configuration (event count and event weights) of course
+* When the mod randomly selects _NothingEvent_ (no event) the event message is omitted from chat. With event counts this makes it so events seem more random especially when combined with the option that increments the number of events every day. With high `EventCount` it simply prevents flooding the chat with empty lines from NothingEvent to a point where things become unreadable. This depends on your configuration (event count and event weights) of course
 * When all events on a given day are NothingEvent the entire NOTES ABOUT MOON section is omitted from game chat
 
 #### OnAPowderKegEvent
-* Now explodes mines periodically. Respects custom day lengths.
+* Now explodes mines periodically. Respects custom day lengths
 
 #### Readded events
 * TurretsEvent, OneForAllEvent, MaskedEvent
