@@ -18,7 +18,7 @@ public class MeltdownEvent : HullEvent
         { "Unstable reactor core. Extract and leave immediately!" },
         { "Elevated radiation levels. Reactor meltdown imminent!" },
         { "Prevent a nuclear disaster by gracefully removing the apparatus core" },
-        { "Be prepared to leave at any given time" }
+        { "Be prepared to leave ASAP" }
     };
     public static List<string> shortMessagesList = new() {
         { "SURPRISE" },
