@@ -21,7 +21,7 @@
 ## Integrated mod events
 Reworked event execution also allows for dynamic modded enemy events and other integrated events:
 
-* **(NEW)** MeltdownEvent (only available with [FacilityMetldown](https://thunderstore.io/c/lethal-company/p/loaforc/FacilityMeltdown/) installed)
+* **(NEW)** MeltdownEvent (only available with [FacilityMeltdown](https://thunderstore.io/c/lethal-company/p/loaforc/FacilityMeltdown/) installed)
 * **(NEW)** BoombaEvent (only available with [LethalThings](https://thunderstore.io/c/lethal-company/p/Evaisa/LethalThings/) installed)
 * **(NEW)** HerobrineEvent (only available with [Herobrine](https://thunderstore.io/c/lethal-company/p/Kittenji/Herobrine/) installed)
 * **(NEW)** ShyGuyEvent (only available with [Scopophobia](https://thunderstore.io/c/lethal-company/p/jaspercreations/Scopophobia/) installed)
@@ -40,7 +40,7 @@ I probably forgot some..
 * **(NEW)** SelfDefenseEvent: spawns a lot of scrap wepons (stop, yield, toy hammer, )
 
 ## Enemy events
-* made enemy events more impactiful by not only increasing rarity but also (where applicable) increasing the enemy's max count, decreasing its power level and increasing the level's overall max power to compensate
+* made enemy events more impactful by not only increasing rarity but also (where applicable) increasing the enemy's max count, decreasing its power level and increasing the level's overall max power to compensate
 	* e.g. during a bunker spider event you might encounter up to 4 spiders on the map
 
 ## Config
