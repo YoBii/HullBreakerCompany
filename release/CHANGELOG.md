@@ -21,7 +21,7 @@
 ## Integrated mod events
 Reworked event execution also allows for dynamic modded enemy events and other integrated events:
 
-* **(NEW)** MeltdownEvent (only available with [FacilityMetldown](https://thunderstore.io/c/lethal-company/p/loaforc/FacilityMeltdown/) installed)
+* **(NEW)** MeltdownEvent (only available with [FacilityMeltdown](https://thunderstore.io/c/lethal-company/p/loaforc/FacilityMeltdown/) installed)
 * **(NEW)** BoombaEvent (only available with [LethalThings](https://thunderstore.io/c/lethal-company/p/Evaisa/LethalThings/) installed)
 * **(NEW)** HerobrineEvent (only available with [Herobrine](https://thunderstore.io/c/lethal-company/p/Kittenji/Herobrine/) installed)
 * **(NEW)** ShyGuyEvent (only available with [Scopophobia](https://thunderstore.io/c/lethal-company/p/jaspercreations/Scopophobia/) installed)
@@ -40,14 +40,14 @@ I probably forgot some..
 * **(NEW)** SelfDefenseEvent: spawns a lot of scrap wepons (stop, yield, toy hammer, )
 
 ## Enemy events
-* made enemy events more impactiful by not only increasing rarity but also (where applicable) increasing the enemy's max count, decreasing its power level and increasing the level's overall max power to compensate
+* made enemy events more impactful by not only increasing rarity but also (where applicable) increasing the enemy's max count, decreasing its power level and increasing the level's overall max power to compensate
 	* e.g. during a bunker spider event you might encounter up to 4 spiders on the map
 
 ## Config
 * restructured config file. Changed defaults. **I RECOMMEND YOU CHECK YOUR CONFIG AFTER 1ST START OR DELETE IT ENTIRELY BEFORE**
-	* made the range of credits rewarded for BountyEvent configurable
-		* added a configurable limit to the amount of rewards until the bounty is considered *complete*
-	* made the range of credits rewarded by HullBreakEvent configurable
+* made the range of credits rewarded for BountyEvent configurable
+	* added a configurable limit to the amount of rewards until the bounty is considered *complete*
+* made the range of credits rewarded by HullBreakEvent configurable
 * new level settings selection: `vanilla`, `hullbreaker` or `custom`
 	* level settings no longer change scrap amount and value or quota settings
 * changed behvior of having `IncreaseEventCountPerDay` enabled to increase number of events on top of the amount set in `EventCount`
