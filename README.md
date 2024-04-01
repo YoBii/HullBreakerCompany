@@ -10,7 +10,7 @@ Since then more significant changes have been made.
 ## Major changes
 
 ### Ambiguous event messages
-All event long and short messages in game chat are more ambigous i.e. less obvious.
+All event long and short messages in game chat are more ambiguous i.e. less obvious.
 Basically I tried to fit the whole "Notes about this moon"-thing without giving away the exact event.
 For example all events that increase monster spawn rates can print the same message in game chat: telling you something about a dominant species.
 So even if you know all the events by heart you don't necessarily know whether it's spiders, lizards, slimes or bees you have to expect.
@@ -45,9 +45,14 @@ Set Jester rarity to `1` or any larger number to allow the Jester event to occur
 Reorganized and restructured - allowing for more customization. Hopefully you'll find some settings more intuitive.
 Mainly putting this here so you remember to check your config :)
 
-## Smaller changes
+## Other changes
 
 ### Events
+
+#### Custom Events
+* added support for modded enemies
+	* make sure you use the enemy names exactly as they're printed in logs (case sensitive)
+	* only works for mods that don't use custom spawn logic
 
 #### EnemyBountyEvent
 * The amount of credits rewarded for each kill is now random. Similar to an above average scrap item
