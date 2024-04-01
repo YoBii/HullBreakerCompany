@@ -3,35 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
 
-namespace HullBreakerCompany.Events;
+namespace HullBreakerCompany.Events.Enemy;
 
 public class SlimeEvent : HullEvent
 {
     public override string ID() => "Slime";
-    public override int GetWeight() => 20;
+    public override int GetWeight() => 10;
     public override string GetDescription() => "Increased chance of slime spawn";
-    public static List<String> MessagesList = new() {
-        { "Hostile life form detected"},
-        { "A few species dominate this moon"},
+    public static List<string> MessagesList = new() {
+        { "Dominated by hostile life form"},
+        { "Dominant species detected"},
         { "Don't get lost in the sauce" },
         { "Shapeless creature detected. Water content 99.9%" }
     };
-    public static List<String> shortMessagesList = new() {
-        { "HIGH POPULATION" },
-        { "DOMINANT SPECIES" },
+    public static List<string> shortMessagesList = new() {
         { "SLIPPERY FLOOR" }
     };
     public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
-    public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
-        Dictionary<Type, int> outsideComponentRarity)
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<BlobAI>() == null)) {
-            Plugin.Mls.LogWarning($"Can't spawn BlobAI on this moon.");
+        if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(BlobAI)))) {
             return false;
         }
-        
-        enemyComponentRarity.Add(typeof(BlobAI), 256);
+
+        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(BlobAI)), 500);
+        levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(BlobAI)), 5);
+        levelModifier.AddMaxEnemyPower(5);
+
         HullManager.AddChatEventMessage(this);
         return true;
     }

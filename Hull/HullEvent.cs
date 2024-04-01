@@ -13,6 +13,7 @@ public abstract class HullEvent
     public virtual string GetDescription() => "Default description";
     public virtual string GetMessage() => "Default message";
     public virtual string GetShortMessage() => "Short message";
-    public virtual bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
-        Dictionary<Type, int> outsideComponentRarity) { return true; }
+    //public virtual bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
+    //    Dictionary<Type, int> outsideComponentRarity, Dictionary<Type, int> daytimeEnemyComponentRarity) { return true; }
+    public virtual bool Execute(SelectableLevel level, LevelModifier levelModifier) { return true; }
 }

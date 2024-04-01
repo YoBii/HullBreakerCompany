@@ -5,40 +5,38 @@ using HullBreakerCompany.Hull;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace HullBreakerCompany.Events;
+namespace HullBreakerCompany.Events.Enemy;
 
 public class HellEvent : HullEvent
 {
     public override string ID() => "Hell";
     public override int GetWeight() => 1;
     public override string GetDescription() => "Increased chance of spawning Jester and more enemies";
-    public static List<String> MessagesList = new() {
-        { "Extreme activity levels!" },
-        { "No one has ever returned from here.." },
-        { "Caution! Activity level 9 9 9 9 9 9 9 9 9 9 9 9 9" },
+    public static List<string> MessagesList = new() {
+        { "What's in the box?!" },
+        { "Upon encounter evacuate immediately!" },
+        { "Sir, I'm going to have to ask you to leave." },
         { "The company wishes the best of luck!" }
     };
-    public static List<String> shortMessagesList = new() {
+    public static List<string> shortMessagesList = new() {
         { "HELL" },
-        { "DANGER ZONE" },
         { "LEAVE" }
     };
-    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
+    public override string GetMessage() => "<color=white>" + MessagesList[Random.Range(0, MessagesList.Count)] + "</color>";
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
-    public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
-        Dictionary<Type, int> outsideComponentRarity)
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (level.Enemies.All(unit => unit.enemyType.enemyPrefab.GetComponent<JesterAI>() == null)) {
-            Plugin.Mls.LogWarning($"Can't spawn JesterAI on this moon.");
+        if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(JesterAI)))) {
             return false;
         }
-        
-        enemyComponentRarity.Add(typeof(JesterAI), 64);
+        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(JesterAI)), 500);
+        levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(JesterAI)), 4);
+        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(JesterAI)), 1);
 
         HullManager.AddChatEventMessage(this);
-        RoundManager.Instance.hourTimeBetweenEnemySpawnBatches = 1;
+        //RoundManager.Instance.hourTimeBetweenEnemySpawnBatches = 1;
 
-        HullManager.Instance.ExecuteAfterDelay(() => { Hell(); }, 16f);
+        //HullManager.Instance.ExecuteAfterDelay(() => { Hell(); }, 16f);
         return true;
     }
     private void Hell()

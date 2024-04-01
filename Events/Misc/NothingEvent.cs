@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using HullBreakerCompany.Hull;
 
-namespace HullBreakerCompany.Events;
+namespace HullBreakerCompany.Events.Misc;
 
 public class NothingEvent : HullEvent
 {
     public override string ID() => "Nothing";
-    public override int GetWeight() => 20;
+    public override int GetWeight() => 100;
     public override string GetDescription() => "Nothing happens";
 
-    public static List<String> MessagesList = new()
+    public static List<string> MessagesList = new()
     {
         { "<color=white>...</color>" },
         { "<color=white>---</color>" },
@@ -18,8 +18,7 @@ public class NothingEvent : HullEvent
     };
     public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
     public override string GetShortMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override bool Execute(SelectableLevel level, Dictionary<Type, int> enemyComponentRarity,
-        Dictionary<Type, int> outsideComponentRarity)
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         // simply omit the message
         // HullManager.SendChatEventMessage(this);

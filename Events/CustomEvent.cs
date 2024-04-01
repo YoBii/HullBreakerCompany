@@ -55,22 +55,21 @@ public class CustomEvent : HullEvent
     public List<string> OutsideSpawnList = new ();
     
     public int Rarity = 1;
-    public override bool Execute(SelectableLevel level, Dictionary<Type, int> componentRarity,
-        Dictionary<Type, int> outsideComponentRarity)
-    {
+    // Pretty sure this is broken rn due to AddEnemyComponentRarity taking string but might work idk idc
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         foreach (var enemy in EnemySpawnList.TakeWhile(enemy => enemy != "off"))
         {
-            if (Plugin.EnemyBase.TryGetValue(enemy, out var value))
+            if (EnemyUtil.getEnemyByString(enemy) != null)
             {
-                componentRarity.Add(value, Rarity);
+                levelModifier.AddEnemyComponentRarity(enemy, Rarity);
             } else Plugin.Mls.LogError($"Enemy {enemy} not found in EnemyBase");
         }
 
         foreach (var enemy in OutsideSpawnList.TakeWhile(enemy => enemy != "off"))
         {
-            if (Plugin.EnemyBase.TryGetValue(enemy, out var value))
+            if (EnemyUtil.getEnemyByString(enemy) != null)
             {
-                outsideComponentRarity.Add(value, Rarity);
+                levelModifier.AddOutsideEnemyRarity(enemy, Rarity);
             } else Plugin.Mls.LogError($"Enemy {enemy} not found in EnemyBase");
         }
 
