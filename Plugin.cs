@@ -44,60 +44,6 @@ namespace HullBreakerCompany
         public static int BountyRewardMax;
         public static int HullBreakEventCreditsMin;
         public static int HullBreakEventCreditsMax;
-
-        public static List<SpawnableItemWithRarity> NotModifiedSpawnableItemsWithRarity = new();
-        public static List<string> failedEvents = new();
-        public static List<string> roundEvents = new();
-        public static string CurrentMessage = "";
-
-        public static Dictionary<String, Type> EnemyBase = new()
-        {
-            { "flowerman", typeof(FlowermanAI) },
-            { "hoarderbug", typeof(HoarderBugAI) },
-            { "springman", typeof(SpringManAI) },
-            { "crawler", typeof(CrawlerAI) },
-            { "sandspider", typeof(SandSpiderAI) },
-            { "jester", typeof(JesterAI) },
-            { "centipede", typeof(CentipedeAI) },
-            { "blobai", typeof(BlobAI) },
-            { "dressgirl", typeof(DressGirlAI) },
-            { "pufferenemy", typeof(PufferAI) },
-            { "eyelessdogs", typeof(MouthDogAI) },
-            { "forestgiant", typeof(ForestGiantAI) },
-            { "sandworm", typeof(SandWormAI) },
-            { "baboonbird", typeof(BaboonBirdAI) },
-            { "nutcrackerenemy", typeof(NutcrackerEnemyAI)},
-            { "maskedplayerenemy", typeof(MaskedPlayerEnemy)}
-        };
-
-        public static List<HullEvent> EventDictionary = new()
-        {
-            { new FlowerManEvent() },
-            { new TurretEvent() },
-            { new LandMineEvent() },
-            { new HoarderBugEvent() },
-            { new SpringManEvent() },
-            { new LizardsEvent() },
-            { new ArachnophobiaEvent() },
-            { new BeeEvent() },
-            { new SlimeEvent() },
-            { new DevochkaPizdecEvent() },
-            { new EnemyBountyEvent() },
-            { new OneForAllEvent() }, // EXPERIMENTAL
-            { new OpenTheNoorEvent() },
-            { new OnAPowderKegEvent() },
-            { new OutSideEnemyDayEvent() },
-            { new HellEvent() },
-            { new NothingEvent() },
-            { new HackedTurretsEvent() }, //v1.2.0
-            { new BabkinPogrebEvent() }, //v1.2.0
-            { new HullBreakEvent()}, //v1.3.5
-            { new NutcrackerEvent()}, //v1.3.8
-            { new MaskedEvent() }
-        };
-        
-        public static List<HullEvent> CurrentEvents = new();
-
         readonly Harmony _harmony = new("HULLBREAKER");
 
         private void Awake()
