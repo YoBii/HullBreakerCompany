@@ -9,13 +9,26 @@ public abstract class RandomSelector
     private static Random _random = new();
     public static List<string> GetRandomGameEvents()
     {
-        var eventCount = Plugin.IncreaseEventCountPerDay ? Plugin.DaysPassed : Plugin.EventCount;
+        var eventCount = Plugin.IncreaseEventCountPerDay ? Plugin.EventCount + EventsManager.DaysPassed - 1 : Plugin.EventCount;
         
         var gameEvents = GetWeightedRandomGameEvents(ConfigManager.GetWeights(), eventCount);
         return gameEvents;
     }
-    public static string GetAnotherRandomGameEvent() {
-        return GetWeightedRandomGameEvents(ConfigManager.GetWeights(), 1)[0];
+    /// <summary>
+    /// Returns a single randomly selected event 
+    /// </summary>
+    /// <param name="excludedEvents">List of events to exclude</param>
+    public static string GetAnotherRandomGameEvent(List<string> excludedEvents) {
+        string newEvent;
+        Dictionary<string, int> weights = ConfigManager.GetWeights();
+
+        //remove excluded events from weights
+        foreach (var e in excludedEvents) {
+            weights.Remove(e);
+        }
+
+        newEvent = GetWeightedRandomGameEvents(weights, 1)[0];
+        return newEvent; 
     }
     private static List<T> GetWeightedRandomGameEvents<T>(Dictionary<T, int> weights, int count)
     {

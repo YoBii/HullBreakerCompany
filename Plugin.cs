@@ -146,73 +146,17 @@ namespace HullBreakerCompany
 
             CustomEventLoader.DebugLoadCustomEvents();
             
-            int levelID = newLevel.levelID;
-            if (!_levelStates.ContainsKey(levelID))
-            {
-                _levelStates[levelID] = new SelectableLevelState(newLevel);
-                // Plugin.Mls.LogInfo($"Storing level state for levelID: {levelID}");
-                // Plugin.Mls.LogInfo($"Storing this loot table in levelState: ");
-                // _levelStates[levelID].SpawnableScrapList.ForEach(s => Plugin.Mls.LogInfo(s.spawnableItem.itemName + ", " + s.rarity));
-            }
-            else
-            {
-                // Plugin.Mls.LogInfo($"Restoring level state for levelID: {levelID}");
-                // Plugin.Mls.LogInfo($"Restored this loot table from levelState: ");
-                // newLevel.spawnableScrap.ForEach(s => Plugin.Mls.LogInfo(s.spawnableItem.itemName + ", " + s.rarity));
-                _levelStates[levelID].RestoreState(newLevel);
-            }
+            //Begin modified Load
+            Plugin.Mls.LogInfo($"Attempting to load and modify new level. ID: {newLevel.levelID}, Scene: {newLevel.sceneName}, Planet: {newLevel.PlanetName}");
 
-            if (newLevel.levelID == 3)
-            {
-                Mls.LogInfo("Level is company, skipping");
-                CurrentMessage = "Events not found";
-                DaysPassed = 0;
+            if (newLevel.levelID == 3) {
+                Plugin.Mls.LogInfo("Level is company.");
+                Plugin.Mls.LogInfo("Skipping modifications..");
                 return true;
             }
 
-            // get DaysPassed dynamically
-            DaysPassed = HullManager.Instance.timeOfDay.quotaVariables.deadlineDaysAmount - HullManager.Instance.timeOfDay.daysUntilDeadline + 1;
-
-            Mls.LogInfo($"Days passed: {DaysPassed}");
-
-            BountyIsActive = false;
-            OneForAllIsActive = false;
-            ResetLevelUnits(newLevel);
-
-            var nl = newLevel;
-            var randomEvents = RandomSelector.GetRandomGameEvents();
-            var enemyComponentRarity = new Dictionary<Type, int>();
-            var outsideComponentRarity = new Dictionary<Type, int>();
-            enemyComponentRarity.Clear();
-
             //Event Execution
-            roundEvents.Clear();
-            failedEvents.Clear();
-            foreach (string gameEvent in randomEvents)
-            {
-                try
-                {
-                    HullEvent hullEvent = EventDictionary.FirstOrDefault(e => e.ID() == gameEvent);
-                    if (hullEvent == null) continue;
-
-                    while(!hullEvent.Execute(newLevel, enemyComponentRarity, outsideComponentRarity)) {
-                        failedEvents.Add(hullEvent.ID());
-                        Mls.LogInfo($"Skipping Event: {hullEvent.ID()}");
-                        if(failedEvents.Count() == EventDictionary.Count()) {
-                            Plugin.Mls.LogError("Event selection failed!");
-                            break;
-                        }
-                        string newEvent;
-                        do {
-                            newEvent = RandomSelector.GetAnotherRandomGameEvent();
-                        } while(randomEvents.Contains(newEvent) || failedEvents.Contains(newEvent));
-                        hullEvent = EventDictionary.FirstOrDefault(e => e.ID() == newEvent);
-                    }
-                    roundEvents.Add(hullEvent.ID());
-                    Mls.LogInfo($"Event: {hullEvent.ID()}");
-                    
-                    UpdateRarity(newLevel.Enemies, enemyComponentRarity);
-                    UpdateRarity(newLevel.OutsideEnemies, outsideComponentRarity);
+            EventsManager.ExecuteEvents(newLevel);
                     
                     CurrentEvents.Add(hullEvent);
                 }

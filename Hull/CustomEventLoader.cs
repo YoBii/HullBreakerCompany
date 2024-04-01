@@ -31,7 +31,7 @@ public class CustomEventLoader
             customEvent.SetMessage(hullEvent["InGameMessage"]);
             customEvent.SetShortMessage(hullEvent["InGameShortMessage"]);
 
-            Plugin.EventDictionary.Add(customEvent);
+            EventsManager.EventDictionary.Add(customEvent);
         }
     }
     
@@ -76,12 +76,12 @@ public class CustomEventLoader
     public static void AddEvent(HullEvent newEvent)
     {
         Plugin.Mls.LogInfo("Adding new event" + newEvent.ID() + " to dictionary");
-        Plugin.EventDictionary.Add(newEvent);
+        EventsManager.EventDictionary.Add(newEvent);
     }
     
     public static void DebugLoadCustomEvents()
     {
-        foreach (var hullEvent in Plugin.EventDictionary)
+        foreach (var hullEvent in EventsManager.EventDictionary)
         {
             if (hullEvent is CustomEvent customEvent)
             {
