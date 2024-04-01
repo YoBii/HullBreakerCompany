@@ -42,7 +42,6 @@ public abstract class EventsHandler
                 List<String> rewardMessages = new() {
                     { "Threat neutralized! Keep up the good work. The company sends [AMOUNT] credits." },
                     { "Enemy killed! Your work keeps the company happy. You receive [AMOUNT] credits." },
-                    { "Bounty success! Your handwork is invaluable to the company. [AMOUNT] credits rewarded." },
                     { "Monster killed! The company values your commitment. [AMOUNT] credits received." },
                 };
                 StringBuilder rewardString = new("<color=white>" + rewardMessages[UnityEngine.Random.Range(0, rewardMessages.Count)] + "</color>");
@@ -52,7 +51,7 @@ public abstract class EventsHandler
             } else if (Plugin.BountyRewardLimit > 0 && BountyRewards >= Plugin.BountyRewardLimit){
                 BountyIsActive = false;
                 bountyReward = (int) Math.Floor(Plugin.BountyRewardMax * 1.5f);
-                Plugin.Mls.LogInfo("<color=white>Bounty completed! You receive </color><color=green>" + bountyReward + "</color><color=white> credits. Your handwork is invaluable to the company.");
+                Plugin.Mls.LogInfo("<color=white>Bounty complete! You receive </color><color=green>" + bountyReward + "</color><color=white> credits. Your handwork is invaluable to the company.");
             } else {
                 HullManager.SendChatEventMessage("<color=white>Bounty reward: </color><color=green>" + bountyReward + "</color><color=white> credits</color>");
             }
