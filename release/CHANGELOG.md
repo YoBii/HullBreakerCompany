@@ -1,6 +1,14 @@
+# v2.0.2 (based on HullBreaker_Company_v1.3.11)
+* added support for modded enemies to custom events
+	* make sure you use the enemy names exactly as they're printed in logs (case sensitive)
+	* only works for mods that don't use custom spawn logic
+* changed `DaysPassed` to actually store the number of days that have passed in the current quota
+	* avoids potentially confusing logs when `IncreaseEventCountPerDay = true`
+	* doesn't affect anything other than logs
+
 # v2.0.0 (based on HullBreaker_Company_v1.3.11)
 
-## Core
+### Core
 * reworked the event execution logic
 	* when an event can't be executed on the given moon another event will be randomly selected and executed
 	* events can't execute when a moon doesn't naturally allow the enemy or scrap to spawn
@@ -11,14 +19,14 @@
 * fancy enemy and loot logging (Host only)
 	* this can be especially helpful when you're balancing custom moons or changing things with LQ or AC
 
-### Compatibility
+#### Compatibility
 * fully compatible with LethalQuantities and AdvancedCompany
 	* if you set custom enemy or scrap rarities for a moon using these mods it will allow relevant events
 		* i.e. when you set Jester rarity to 1 on Experimentation you *can* get the Jester event where otherwise you could not
 * Implicit compatibility with ImmersiveScrap, wesley's moons and other mods that add scrap
 	* If you have those mods their scrap will be utilized for some events
 
-## Integrated mod events
+### Integrated mod events
 Reworked event execution also allows for dynamic modded enemy events and other integrated events:
 
 * **(NEW)** MeltdownEvent (only available with [FacilityMeltdown](https://thunderstore.io/c/lethal-company/p/loaforc/FacilityMeltdown/) installed)
@@ -29,7 +37,7 @@ Reworked event execution also allows for dynamic modded enemy events and other i
 
 It's easy to add more modded enemy events **unless** they use custom spawning logic like Scopophobia. Feel free to request more.
 
-## More events
+### More events
 I probably forgot some..
 * **(NEW)** HordeModeEvent: spawns more inside enemies, earlier.
 * **(NEW)** ArmdayEvent: spawns a lot of heavy loot
@@ -39,11 +47,11 @@ I probably forgot some..
 * **(NEW)** LuckyDayEvent: increases chance for high value loot (cash register, gold bar, ..)
 * **(NEW)** SelfDefenseEvent: spawns a lot of scrap wepons (stop, yield, toy hammer, )
 
-## Enemy events
+### Enemy events
 * made enemy events more impactful by not only increasing rarity but also (where applicable) increasing the enemy's max count, decreasing its power level and increasing the level's overall max power to compensate
 	* e.g. during a bunker spider event you might encounter up to 4 spiders on the map
 
-## Config
+### Config
 * restructured config file. Changed defaults. **I RECOMMEND YOU CHECK YOUR CONFIG AFTER 1ST START OR DELETE IT ENTIRELY BEFORE**
 * made the range of credits rewarded for BountyEvent configurable
 	* added a configurable limit to the amount of rewards until the bounty is considered *complete*
@@ -52,7 +60,7 @@ I probably forgot some..
 	* level settings no longer change scrap amount and value or quota settings
 * changed behvior of having `IncreaseEventCountPerDay` enabled to increase number of events on top of the amount set in `EventCount`
 
-## Other event changes
+### Other event changes
 * readded and fixed OneForAllEvent (auto vote ship leave after 1st death)
 * readded MaskedEvent
 * reworked OnAPowderKegEvent
@@ -64,7 +72,7 @@ I probably forgot some..
 	* Bounty rewards now print more diverse and better chat messages
 * fixed a bug with BabkinPogreb event where pickles would keep spawning the next rounds until the ship was routed and landed on a different moon
 
-## Other changes
+### Other changes
 * fixed `IncreaseEventCountPerDay` (config where nr. of events increases each day) being incorrect when loading a save or getting fired resulting in more or less events than expected on a given day
 
 # v1.1.1 (based on HullBreaker_Company_v1.3.11)
