@@ -63,7 +63,7 @@ namespace HullBreakerCompany.Hull
 
             foreach (var hullEvent in EventsManager.EventDictionary)
             {
-                weights[hullEvent.ID()] = _configFile.Bind("3 - Event Weights", hullEvent.ID(), hullEvent.GetWeight(), hullEvent.GetDescription()).Value;
+                weights[hullEvent.ID()] = _configFile.Bind("3 - Event Weights", hullEvent.ID(), hullEvent.GetWeight(), string.Format($"{hullEvent.ID()} event: {hullEvent.GetDescription()}")).Value;
             }
 
             return weights;
