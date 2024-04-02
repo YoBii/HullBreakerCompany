@@ -10,7 +10,7 @@ public class ArmdayEvent : HullEvent
 {
     public override string ID() => "Armday";
     public override int GetWeight() => 20;
-    public override string GetDescription() => "Increased chance for heavy scrap to spawn";
+    public override string GetDescription() => "Spawns a lot of heavy loot.";
     public static List<string> MessagesList = new() {
         { "Roll up your sleeves and collect the scrap!" },
         { "Slipped disks are not covered by company insurance!" },

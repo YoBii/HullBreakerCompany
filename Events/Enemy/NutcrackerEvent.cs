@@ -9,7 +9,7 @@ public class NutcrackerEvent : HullEvent
 {
     public override string ID() => "Nutcracker";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Increased chance of NutCracker spawn";
+    public override string GetDescription() => "Increases spawn chance of Nutcracker.";
     public static List<string> MessagesList = new() {
         { "Reports of paranormal activity" },
         { "Paranormal signature detected" },

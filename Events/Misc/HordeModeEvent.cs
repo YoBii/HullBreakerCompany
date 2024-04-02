@@ -9,7 +9,7 @@ public class HordeModeEvent : HullEvent
 {
     public override string ID() => "HordeMode";
     public override int GetWeight() => 5;
-    public override string GetDescription() => "Increased inside enemy spawns";
+    public override string GetDescription() => "Increases inside enemy spawn rate. Spawns enemies earlier and more frequently.";
     public static List<string> MessagesList = new() {
         { "Extreme activity levels!" },
         { "No one has ever returned from here.." },

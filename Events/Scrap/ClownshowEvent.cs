@@ -9,7 +9,7 @@ public class ClownshowEvent : HullEvent
 {
     public override string ID() => "Clownshow";
     public override int GetWeight() => 20;
-    public override string GetDescription() => "Increased chance for noisy scrap to spawn";
+    public override string GetDescription() => "Spawns a lot of noisy scrap.";
     public static List<string> MessagesList = new() {
         { "This is a clown show!" },
         { "Your clown nose fell off.." }

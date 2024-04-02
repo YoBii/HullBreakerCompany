@@ -9,7 +9,7 @@ public class DevochkaPizdecEvent : HullEvent
 {
     public override string ID() => "DevochkaPizdec";
     public override int GetWeight() => 5;
-    public override string GetDescription() => "Increased chance of phantom girl spawn";
+    public override string GetDescription() => "Increases Ghostgirl (Dressgirl) spawn chance. Allows more than one to spawn.";
     public static List<string> MessagesList = new() {
         { "Reports of paranormal activity" },
         { "Paranormal signature detected" },

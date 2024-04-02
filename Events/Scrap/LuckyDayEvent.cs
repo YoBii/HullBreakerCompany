@@ -9,7 +9,7 @@ public class LuckyDayEvent : HullEvent
 {
     public override string ID() => "LuckyDay";
     public override int GetWeight() => 5;
-    public override string GetDescription() => "Increased chance for high value scrap to spawn";
+    public override string GetDescription() => "Increases spawn chance of high value loot.";
     public static List<string> MessagesList = new() {
         { "High value scrap detected!" },
         { "Supposed to hold some very valuable scrap" },

@@ -9,7 +9,7 @@ public class SelfDefenseEvent : HullEvent
 {
     public override string ID() => "SelfDefense";
     public override int GetWeight() => 20;
-    public override string GetDescription() => "Increased chance for weaopn scrap to spawn";
+    public override string GetDescription() => "Increases spawn chance of scrap that can be utilized as weapon.";
     public static List<string> MessagesList = new() {
         { "Weapons scattered all around!" },
         { "DIY self defense training today!" }

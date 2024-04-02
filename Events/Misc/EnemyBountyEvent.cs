@@ -10,7 +10,7 @@ public class EnemyBountyEvent : HullEvent
     public override string ID() => "EnemyBounty";
 
     public override int GetWeight() => 30;
-    public override string GetDescription() => "Company pays money for killing the enemies";
+    public override string GetDescription() => "Company rewards enemy kills with bonus credits.";
     public static List<string> MessagesList = new() {
         { "Company bounty: neutralize threats" },
         { "The company pays you for killing monsters" },

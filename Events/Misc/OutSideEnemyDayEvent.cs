@@ -9,7 +9,7 @@ public class OutSideEnemyDayEvent : HullEvent
 {
     public override string ID() => "OutSideEnemyDay";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Increased amount of enemies on the surface during the daytime";
+    public override string GetDescription() => "Increased amount of outside enemies during daytime. Eclipsed without eclipse.";
     public static List<string> MessagesList = new() {
         { "This place was shrouded in darkness for weeks" },
         { "A prolonged eclipse has disrupted wild life's circadian rhythm" },

@@ -10,7 +10,7 @@ public class ArachnophobiaEvent : HullEvent
 {
     public override string ID() => "Arachnophobia";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Increased chance of spider spawning";
+    public override string GetDescription() => "Increases bunker spider (SandSpider) spawn chance. Allows more than one to spawn.";
     public static List<string> MessagesList = new() {
         { "Dominated by hostile life form"},
         { "Dominant species detected"},

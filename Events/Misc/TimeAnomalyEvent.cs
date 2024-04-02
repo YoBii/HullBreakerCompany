@@ -8,7 +8,7 @@ public class TimeAnomaly : HullEvent
 {
     public override string ID() => "TimeAnomaly";
     public override int GetWeight() => 5;
-    public override string GetDescription() => "Makes day longer / time pass slower";
+    public override string GetDescription() => "Makes day longer i.e. time passes slower";
     public static List<string> MessagesList = new() {
         { "Gravity distorts space time. Take your time!" },
         { "You have all the time you need." },

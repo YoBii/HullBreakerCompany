@@ -9,7 +9,7 @@ public class BabkinPogrebEvent : HullEvent
 {
     public override string ID() => "BabkinPogreb";
     public override int GetWeight() => 20;
-    public override string GetDescription() => "Increases chance for jars of pickes scrap to spawn";
+    public override string GetDescription() => "Spawns a lot of pickle jars.";
     public static List<string> MessagesList = new() {
         { "Scans indicate all scrap is.. organic?" },
         { "There is something wrong with the scrap.." },

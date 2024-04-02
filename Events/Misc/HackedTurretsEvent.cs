@@ -8,7 +8,7 @@ public class HackedTurretsEvent : HullEvent
 {
     public override string ID() => "HackedTurrets";
     public override int GetWeight() => 20;
-    public override string GetDescription() => "Turrets dont work on the moon";
+    public override string GetDescription() => "All turrets are permanently disabled.";
     public static List<string> MessagesList = new() {
         { "Security systems offline" },
         { "Abandoned after their defense sytems were hacked" },

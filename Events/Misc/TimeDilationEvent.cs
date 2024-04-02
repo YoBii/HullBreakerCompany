@@ -9,7 +9,7 @@ public class TimeDilationEvent : HullEvent
 {
     public override string ID() => "TimeDilation";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Makes time pass faster";
+    public override string GetDescription() => "Makes day shorter i.e. time passes faster";
     public static List<string> MessagesList = new() {
         { "Gravity distorts space time. You better hurry!" },
         { "Let's go! In and out. Twenty minute adventure." },

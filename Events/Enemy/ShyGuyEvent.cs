@@ -9,7 +9,7 @@ public class ShyGuyEvent : HullEvent
 {
     public override string ID() => "ShyGuy";
     public override int GetWeight() => 5;
-    public override string GetDescription() => "Increased chance of Shy Guy spawn";
+    public override string GetDescription() => "Increases spawn chance of Shy Guy. Allows more than one to spawn.";
     public static List<string> MessagesList = new() {
         { "Do NOT look at him!" },
         { "When you're scared to take a look.." },

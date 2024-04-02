@@ -9,7 +9,7 @@ public class SpringManEvent : HullEvent
 {
     public override string ID() => "SpringMan";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Increased chance of spring man spawning (coil-head)";
+    public override string GetDescription() => "Increases spawn chance of Coil-Head (SpringMan)";
     public static List<string> MessagesList = new() {
         { "Reports of paranormal activity" },
         { "Paranormal signature detected" },

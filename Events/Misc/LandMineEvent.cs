@@ -8,7 +8,7 @@ public class LandMineEvent : HullEvent
 {
     public override string ID() => "LandMine";
     public override int GetWeight() => 30;
-    public override string GetDescription() => "Increased chance of landmines spawning";
+    public override string GetDescription() => "Spawns additional landmines inside.";
     public static List<string> MessagesList = new() {
         { "High security compound" },
         { "They rigged this place up"},

@@ -13,12 +13,12 @@ public class MeltdownEvent : HullEvent
     public int currentDaysLeft;
     public override string ID() => "Meltdown";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Starts reactor meltdown sequence";
+    public override string GetDescription() => "Starts reactor meltdown sequence sometime during the day.";
     public static List<string> MessagesList = new() {
         { "Unstable reactor core. Extract and leave immediately!" },
         { "Elevated radiation levels. Reactor meltdown imminent!" },
         { "Prevent a nuclear disaster by gracefully removing the apparatus core" },
-        { "Be prepared to leave ASAP" }
+        { "Increased radiation levels. Don't wander too far off the ship." }
     };
     public static List<string> shortMessagesList = new() {
         { "SURPRISE" },

@@ -9,7 +9,7 @@ public class LizardsEvent : HullEvent
 {
     public override string ID() => "Lizards";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Increased chance of puffers spawn";
+    public override string GetDescription() => "Increases Puffer spawn chance and there's more of them.";
     public static List<string> MessagesList = new() {
         { "Dominated by hostile life form" },
         { "Dominant species detected" },

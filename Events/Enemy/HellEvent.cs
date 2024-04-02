@@ -11,7 +11,7 @@ public class HellEvent : HullEvent
 {
     public override string ID() => "Hell";
     public override int GetWeight() => 1;
-    public override string GetDescription() => "Increased chance of spawning Jester and more enemies";
+    public override string GetDescription() => "Increases Jester spawn chance. Allows more than one to spawn.";
     public static List<string> MessagesList = new() {
         { "What's in the box?!" },
         { "Upon encounter evacuate immediately!" },

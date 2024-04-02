@@ -9,7 +9,7 @@ public class BoombaEvent : HullEvent
 {
     public override string ID() => "Boomba";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Increased chance of Boomba spawn";
+    public override string GetDescription() => "Increases spawn chance of Boomba and there's more of them. Also spawns more landmines.";
     public static List<string> MessagesList = new() {
         { "Cleaning crew's still around" },
         { "Mines left right and center" },

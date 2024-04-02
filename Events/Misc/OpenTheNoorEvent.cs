@@ -8,7 +8,7 @@ public class OpenTheNoorEvent : HullEvent
 {
     public override string ID() => "OpenTheNoor";
     public override int GetWeight() => 15;
-    public override string GetDescription() => "All big doors are locked in the level";
+    public override string GetDescription() => "All security doors spawn in closed state.";
     public static List<string> MessagesList = new() {
         { "High security compound" },
         { "You shall not pass!" },

@@ -9,7 +9,7 @@ public class ChristmasEveEvent : HullEvent
 {
     public override string ID() => "ChristmasEve";
     public override int GetWeight() => 20;
-    public override string GetDescription() => "Increased chance for gift scrap to spawn";
+    public override string GetDescription() => "Spawns a lot of gifts.";
     public static List<string> MessagesList = new() {
         { "Is it Christmas already?" },
         { "Help Santa collect the presents!" },

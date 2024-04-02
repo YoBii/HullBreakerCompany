@@ -9,7 +9,7 @@ public class ButlerEvent : HullEvent
 {
     public override string ID() => "Butler";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Increased chance of butler spawn";
+    public override string GetDescription() => "Increases spawn chance of butler and there's more of them";
     public static List<string> MessagesList = new() {
         { "Reports of paranormal activity" },
         { "Paranormal signature detected" },

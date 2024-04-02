@@ -9,7 +9,7 @@ public class SlimeEvent : HullEvent
 {
     public override string ID() => "Slime";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Increased chance of slime spawn";
+    public override string GetDescription() => "Increases spawn chance of Hygrodere (Blob/Slime) and there's more of them.";
     public static List<string> MessagesList = new() {
         { "Dominated by hostile life form"},
         { "Dominant species detected"},

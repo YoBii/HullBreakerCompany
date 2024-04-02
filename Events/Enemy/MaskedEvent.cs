@@ -9,7 +9,7 @@ public class MaskedEvent : HullEvent
 {
     public override string ID() => "Masked";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Increased chance of masked enemy spawn";
+    public override string GetDescription() => "Increases spawn chance of Masked.";
     public static List<string> MessagesList = new() {
         { "Reports of paranormal activity" },
         { "Paranormal signature detected" },

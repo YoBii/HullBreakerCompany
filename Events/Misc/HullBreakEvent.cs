@@ -11,7 +11,7 @@ public class HullBreakEvent : HullEvent
 {
     public override string ID() => "HullBreak";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Getting money for visiting this moon";
+    public override string GetDescription() => "The company sends a bonus payment. Take a break from stressfull events.";
     public static List<string> MessagesList = new() {
         { "KPI report: underperforming\nUse </color><color=green>[AMOUNT]</color><color=white> credits to prove your worth to the company!" },
         { "The company appreciates your loyalty. You receive </color><color=green>[AMOUNT]</color><color=white> credits" },

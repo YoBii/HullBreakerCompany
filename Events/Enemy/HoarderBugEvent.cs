@@ -9,7 +9,7 @@ public class HoarderBugEvent : HullEvent
 {
     public override string ID() => "HoarderBug";
     public override int GetWeight() => 30;
-    public override string GetDescription() => "Increased chance of hoarder bug spawn";
+    public override string GetDescription() => "Spawns a lot of Hoarderbugs while still allowing other enemies to spawn.";
     public static List<string> MessagesList = new() {
         { "Residues of pestice detected in the atmosphere" },
         { "Scrap is.. moving?"},

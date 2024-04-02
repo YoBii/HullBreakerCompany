@@ -10,7 +10,7 @@ public class DayDrinkingEvent : HullEvent
 {
     public override string ID() => "DayDrinking";
     public override int GetWeight() => 20;
-    public override string GetDescription() => "Increased chance for bottles scrap to spawn";
+    public override string GetDescription() => "Spawns a lot of alcoholic beverages.";
     public static List<string> MessagesList = new() {
         { "Let's crack a beer or two!" },
         { "Alcohol use prohibited during work hours!" },

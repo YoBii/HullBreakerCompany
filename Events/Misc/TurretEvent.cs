@@ -8,7 +8,7 @@ public class TurretEvent : HullEvent
 {
     public override string ID() => "Turret";
     public override int GetWeight() => 20;
-    public override string GetDescription() => "Increased chance of turrets spawning";
+    public override string GetDescription() => "Spawns additional turrets inside.";
     public static List<string> MessagesList = new() {
         { "High security compound" },
         { "It's right around the corner!" },

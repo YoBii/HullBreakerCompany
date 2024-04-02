@@ -11,7 +11,7 @@ public class BeeEvent : HullEvent
 {
     public override string ID() => "Bee";
     public override int GetWeight() => 20;
-    public override string GetDescription() => "Increased chance of bee hives spawning";
+    public override string GetDescription() => "Increases bee hive spawns outside";
     public static List<string> MessagesList = new() {
         { "Dominated by hostile life form"},
         { "Dominant species detected"},

@@ -9,7 +9,7 @@ public class HerobrineEvent : HullEvent
 {
     public override string ID() => "Herobrine";
     public override int GetWeight() => 5;
-    public override string GetDescription() => "Increased chance of Herobrine spawn";
+    public override string GetDescription() => "Guarantees Herobrine spawn. Herobrine doesn't reduce the amount of other enemies (doesn't add to global power)";
     public static List<string> MessagesList = new() {
         { "Removed." },
         { "Don't turn around.." }
@@ -25,8 +25,9 @@ public class HerobrineEvent : HullEvent
         if (!levelModifier.IsEnemySpawnable("Herobrine")) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity("Herobrine", 500);
+        levelModifier.AddEnemyComponentRarity("Herobrine", 1000);
         levelModifier.AddEnemyComponentPower("Herobrine", 1);
+        levelModifier.AddMaxEnemyPower(1);
 
         HullManager.AddChatEventMessage(this);
         return true;

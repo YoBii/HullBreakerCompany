@@ -11,7 +11,7 @@ public class OnAPowderKegEvent : HullEvent
     public int dayInSeconds;
     public override string ID() => "OnAPowderKeg";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Landmines can detonate at any time";
+    public override string GetDescription() => "Landmines will detonate randomly. Spawns additional landmines.";
     public static List<string> MessagesList = new() {
         { "Reccuring explosions" },
         { "Explosions detected" },

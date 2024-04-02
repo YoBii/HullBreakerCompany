@@ -9,7 +9,7 @@ public class FlowerManEvent : HullEvent
 {
     public override string ID() => "FlowerMan";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Increased chance of flowerman spawn";
+    public override string GetDescription() => "Increases Bracken (Flowerman) spawn chance. Allows more than one to spawn.";
     public static List<string> MessagesList = new() {
         { "Reports of paranormal activity" },
         { "Paranormal signature detected" },
