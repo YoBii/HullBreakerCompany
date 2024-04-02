@@ -68,7 +68,7 @@ public class CustomEventLoader
             }
 
             allEventData.Add(eventData);
-            Plugin.Mls.LogInfo($"Loaded event: {eventData["EventID"]}");
+            Plugin.Mls.LogInfo($"Loaded custom event: {eventData["EventID"]}");
         }
 
         return allEventData;

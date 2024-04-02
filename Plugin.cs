@@ -74,9 +74,6 @@ namespace HullBreakerCompany
             
             Mls.LogInfo("HullManager created");
 
-            CustomEventLoader.LoadCustomEvents();
-            CustomEventLoader.DebugLoadCustomEvents();
-
             _loaded = true;
         }
 
@@ -87,6 +84,7 @@ namespace HullBreakerCompany
             LQCompaitiblityPatch();
 
             EventsManager.AddModEvents();
+            EventsManager.AddCustomEvents();
 
             HullManager.LogBox("MODIFIED LEVEL LOAD");
 
@@ -96,6 +94,7 @@ namespace HullBreakerCompany
 
             // Refresh weights and settings
             Mls.LogInfo("Refreshing config..");
+            Mls.LogInfo("Refreshing weights..");
             ConfigManager.RefreshConfig();
             
 

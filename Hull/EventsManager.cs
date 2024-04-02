@@ -15,6 +15,7 @@ public abstract class EventsManager {
     //public static string CurrentMessage = "";
     public static int DaysPassed;
     public static bool modEventsLoaded = false;
+    public static bool customEventsLoaded = false;
         
     private static LevelModifier levelModifier;
 
@@ -79,6 +80,15 @@ public abstract class EventsManager {
             }
         }
         modEventsLoaded = true;
+    }
+    public static void AddCustomEvents() {
+        if (customEventsLoaded) return;
+        Plugin.Mls.LogInfo("First level load. Checking for custom events..");
+        
+        CustomEventLoader.LoadCustomEvents();
+        CustomEventLoader.DebugLoadCustomEvents();
+        
+        customEventsLoaded = true;
     }
     public static void ExecuteEvents(SelectableLevel newLevel) {
         HullManager.LogBox("EVENT EXECUTION");
