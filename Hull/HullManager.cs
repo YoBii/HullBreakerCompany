@@ -119,7 +119,7 @@ public class HullManager : MonoBehaviour
         LogBoxHeader(title);
 
         Plugin.Mls.LogInfo(String.Format("╠{0, -30}╤{1, 12}╗", new string('\u2550', 29).Insert(title.Length + 2, "╩"), new string('\u2550', 12)));
-        Plugin.Mls.LogInfo(String.Format("║ {0, -28} │ {1, 10} ║", " Scrap item ", " Rarity "));
+        Plugin.Mls.LogInfo(String.Format("║ {0, -28} │ {1, 10} ║", "Scrap item", "Rarity"));
         Plugin.Mls.LogInfo(String.Format("╠{0, -30}╪{1, 12}╣", new string('\u2550', 30), new string('\u2550', 12)));
 
         var raritySum = 0;
