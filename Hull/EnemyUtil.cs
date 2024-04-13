@@ -29,7 +29,7 @@ namespace HullBreakerCompany.Hull {
             { typeof(HoarderBugAI), "HoarderBug" },
             { typeof(SpringManAI), "SpringMan" },
             { typeof(CrawlerAI), "Crawler" },
-            { typeof(SandSpiderAI), "Sandspider" },
+            { typeof(SandSpiderAI), "SandSpider" },
             { typeof(JesterAI), "Jester" },
             { typeof(CentipedeAI), "Centipede" },
             { typeof(BlobAI), "Blob" },
@@ -38,7 +38,7 @@ namespace HullBreakerCompany.Hull {
             { typeof(MouthDogAI), "MouthDog" },
             { typeof(ForestGiantAI), "ForestGiant" },
             { typeof(SandWormAI), "SandWorm" },
-            { typeof(BaboonBirdAI), "baboonBird" },
+            { typeof(BaboonBirdAI), "BaboonBird" },
             { typeof(NutcrackerEnemyAI), "NutcrackerEnemy"},
             { typeof(MaskedPlayerEnemy), "MaskedPlayerEnemy"},
             { typeof(RedLocustBees), "RedLocustBees" }
