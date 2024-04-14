@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <AssemblyName>HullBreakerCompany</AssemblyName>
         <Description>Making it more challenging to work for the company</Description>
-        <Version>2.0.0</Version>
+        <Version>2.1.0</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
@@ -19,7 +19,7 @@
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
     </ItemGroup>
-
+	
     <ItemGroup>
         <Reference Include="Assembly-CSharp">
             <HintPath>D:\Games\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath> 
@@ -31,10 +31,10 @@
             <HintPath>D:\Games\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
         </Reference>
 		<Reference Include="FacilityMeltdown">
-            <HintPath>C:\Users\xscho\AppData\Roaming\r2modmanPlus-local\LethalCompany\profiles\xCore\BepInEx\plugins\loaforc-FacilityMeltdown\FacilityMeltdown\FacilityMeltdown.dll</HintPath>
-        </Reference>
+			<HintPath>$(APPDATA)\r2modmanPlus-local\LethalCompany\profiles\xCore\BepInEx\plugins\loaforc-FacilityMeltdown\FacilityMeltdown\FacilityMeltdown.dll</HintPath>
+		</Reference>
 		<Reference Include="LethalQuantities">
-            <HintPath>C:\Users\xscho\AppData\Roaming\r2modmanPlus-local\LethalCompany\profiles\xCore\BepInEx\plugins\BananaPuncher714-LethalQuantities\LethalQuantities.dll</HintPath>
+            <HintPath>$(APPDATA)\r2modmanPlus-local\LethalCompany\profiles\xCore\BepInEx\plugins\BananaPuncher714-LethalQuantities\LethalQuantities.dll</HintPath>
         </Reference>
     </ItemGroup>
 </Project>
