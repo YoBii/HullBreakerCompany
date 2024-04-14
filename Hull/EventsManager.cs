@@ -19,13 +19,12 @@ public abstract class EventsManager {
         
     private static LevelModifier levelModifier;
 
-    public static List<HullEvent> currentEvents = new();
-
     public static List<HullEvent> EventDictionary = new()
     {
         // Enemy events
         { new ArachnophobiaEvent() },
         { new BeeEvent() },
+        { new ButlerEvent() },
         { new DevochkaPizdecEvent() },
         { new FlowerManEvent() },
         { new HellEvent() },
@@ -46,8 +45,8 @@ public abstract class EventsManager {
         { new OneForAllEvent() }, // EXPERIMENTAL v2.0.0
         { new OpenTheNoorEvent() },
         { new OutSideEnemyDayEvent() },
-        //{ new TimeAnomaly() }, // needs client sync
-        //{ new TimeDilationEvent() }, // needs client sync
+        { new TimeAnomalyEvent() },
+        { new TimeDilationEvent() },
         { new TurretEvent() },
         // Scrap events
         { new ArmdayEvent() }, //v2.0.0
@@ -95,12 +94,12 @@ public abstract class EventsManager {
 
         LevelModifier levelMod = new(newLevel);
         levelModifier = levelMod;
-        
+
         UpdateLevelSettings();
         RefreshDaysPassed();
 
         List<HullEvent> randomEvents = new();
-        
+
         int eventCount = Plugin.IncreaseEventCountPerDay ? Plugin.EventCount + DaysPassed : Plugin.EventCount;
         Plugin.Mls.LogInfo($"Round events: {eventCount}");
 
@@ -119,9 +118,9 @@ public abstract class EventsManager {
                 if (hullEvent.Execute(newLevel, levelModifier)) {
                     //Plugin.Mls.LogInfo($"Adding event: {hullEvent.ID()}");
                     randomEvents.Add(hullEvent);
-                    } else {
+                } else {
                     Plugin.Mls.LogInfo($"Skipping event: {hullEvent.ID()}");
-                    }
+                }
             } catch (NullReferenceException ex) {
                 Plugin.Mls.LogError(
                     $"NullReferenceException caught while processing event: {gameEvent}. Exception message: {ex.Message}. Caused : {ex.InnerException}");

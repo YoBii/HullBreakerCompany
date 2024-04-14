@@ -217,11 +217,11 @@ public class LevelModifier(SelectableLevel level) {
         if (!revert) {
             //HullManager.Instance.timeOfDay.globalTimeSpeedMultiplier *= value;
             TimeOfDay.Instance.globalTimeSpeedMultiplier *= value;
-            Plugin.Mls.LogInfo($"Increasing TimeSpeedMultiplier: * {value}");
+            Plugin.Mls.LogInfo($"Increasing TimeSpeedMultiplier: Timescale {(int) Math.Round(value * 100)}%");
         } else {
             //HullManager.Instance.timeOfDay.globalTimeSpeedMultiplier /= value;
             TimeOfDay.Instance.globalTimeSpeedMultiplier /= value;
-            Plugin.Mls.LogInfo($"Decreasing TimeSpeedMultiplier: / {value}");
+            Plugin.Mls.LogInfo($"Decreasing TimeSpeedMultiplier: Timescale {(int)Math.Round(value * 100)}%");
         }
     }
     public void ApplyUnitModifications(SelectableLevel level, float landmineAmount, float turretAmount) {
