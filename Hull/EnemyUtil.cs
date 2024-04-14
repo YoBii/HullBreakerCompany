@@ -41,6 +41,7 @@ namespace HullBreakerCompany.Hull {
             { typeof(BaboonBirdAI), "BaboonBird" },
             { typeof(NutcrackerEnemyAI), "NutcrackerEnemy"},
             { typeof(MaskedPlayerEnemy), "MaskedPlayerEnemy"},
+            { typeof(ButlerEnemyAI), "ButlerEnemy" },
             { typeof(RedLocustBees), "RedLocustBees" }
         };
 

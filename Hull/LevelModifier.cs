@@ -48,10 +48,6 @@ public class LevelModifier(SelectableLevel level) {
 
     private float timeScale = 0;
 
-    public LevelModifier(SelectableLevel level) {
-        targetLevel = level;
-    }
-
     private void OnSceneUnloaded(Scene scene) {
         Plugin.Mls.LogInfo($"Unloading scene: {scene.name}");
         SelectableLevel currentLevel = RoundManager.Instance.currentLevel;
@@ -114,7 +110,7 @@ public class LevelModifier(SelectableLevel level) {
 
         foreach (var powerPair in powerPairs) {
             foreach (var enemy in level.Enemies.Where(enemy => enemy.enemyType.enemyPrefab.name == powerPair.Key)) {
-                if (!restore) powerBackups.TryAdd(powerPair.Key, enemy.enemyType.PowerLevel);
+                if (!restore) powerBackups.TryAdd(powerPair.Key, (int) Math.Round((double) enemy.enemyType.PowerLevel));
                 enemy.enemyType.PowerLevel = restore ? powerBackups[powerPair.Key] : powerPair.Value;
                 Plugin.Mls.LogInfo($"Setting power of {enemy.enemyType.enemyPrefab.name} to {enemy.enemyType.PowerLevel}");
                 break;

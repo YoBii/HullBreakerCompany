@@ -8,7 +8,7 @@ namespace HullBreakerCompany.Events.Enemy;
 public class ButlerEvent : HullEvent
 {
     public override string ID() => "Butler";
-    public override int GetWeight() => 10;
+    public override int GetWeight() => 5;
     public override string GetDescription() => "Increases spawn chance of butler and there's more of them";
     public static List<string> MessagesList = new() {
         { "Reports of paranormal activity" },
@@ -23,13 +23,12 @@ public class ButlerEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        return false; // until v50 releases in stable
-        //if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(ButlerEnemyAI)))) {
-        //    return false;
-        //}
-        //levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(ButlerEnemyAI)), 500);
-        //levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(ButlerEnemyAI)), 4);
-        //levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(ButlerEnemyAI)), 1);
+        if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(ButlerEnemyAI)))) {
+            return false;
+        }
+        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(ButlerEnemyAI)), 100);
+        levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(ButlerEnemyAI)), 4);
+        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(ButlerEnemyAI)), 0);
         HullManager.AddChatEventMessage(this);
         return true;
     }
