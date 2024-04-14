@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using BepInEx;
 using BepInEx.Logging;
@@ -9,6 +10,8 @@ using HullBreakerCompany.Events;
 using HullBreakerCompany.Hull;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace HullBreakerCompany
@@ -65,47 +68,66 @@ namespace HullBreakerCompany
 
         public void Initialize()
         {
-            ConfigManager.RefreshConfig();
+            //ConfigManager.RefreshConfig();
 
             GameObject hullManager = new GameObject("HullManager");           
             DontDestroyOnLoad(hullManager);
             hullManager.hideFlags = (HideFlags)61;
             hullManager.AddComponent<HullManager>();
+
+            SceneManager.sceneUnloaded += AfterGameInit;
             
             Mls.LogInfo("HullManager created");
 
             _loaded = true;
         }
 
+        private void AfterGameInit(Scene scene) {
+            if (scene.name != "InitScene") {
+                return;
+            }
+
+            // Check for LQ. If present apply patch so we undo our changes just before LQ does
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(LethalQuantities.PluginInfo.PLUGIN_GUID)) {
+                Mls.LogInfo("Lethal Quantities found! Applying compatibility patch!");
+                Harmony.CreateAndPatchAll(typeof(EventsManager));
+            }
+
+            // Check mod and custom events
+            EventsManager.AddModEvents();
+            EventsManager.AddCustomEvents();
+
+            // Refresh config and weights
+            ConfigManager.RefreshConfig();
+            ConfigManager.GetWeights();
+
+            // Unload this
+            SceneManager.sceneUnloaded -= AfterGameInit;
+        }
+
         [HarmonyPatch(typeof(RoundManager), nameof(RoundManager.LoadNewLevel))]
         [HarmonyPrefix]
         [HarmonyPriority(50)] // make sure we come last
         static bool ModifiedLoad(ref SelectableLevel newLevel) {
-            LQCompaitiblityPatch();
-
-            EventsManager.AddModEvents();
-            EventsManager.AddCustomEvents();
+            Mls.LogInfo("Client is host: " + RoundManager.Instance.IsHost);
+            
+            if (!RoundManager.Instance.IsHost) {
+                Mls.LogInfo("LoadNewLevel called as client. Stopping..");
+                return true;
+            }
 
             HullManager.LogBox("MODIFIED LEVEL LOAD");
 
-            //Quit if client
-            Mls.LogInfo("Client is host: " + RoundManager.Instance.IsHost);
-            if (!RoundManager.Instance.IsHost) return true;
-
-            // Refresh weights and settings
-            Mls.LogInfo("Refreshing config..");
-            Mls.LogInfo("Refreshing weights..");
-            ConfigManager.RefreshConfig();
-            
-
-            //Begin modified Load
             Plugin.Mls.LogInfo($"Attempting to load and modify new level. ID: {newLevel.levelID}, Scene: {newLevel.sceneName}, Planet: {newLevel.PlanetName}");
 
+            // Skip if level is company (Gordion)
             if (newLevel.levelID == 3) {
                 Plugin.Mls.LogInfo("Level is company.");
                 Plugin.Mls.LogInfo("Skipping modifications..");
                 return true;
             }
+            
+            ConfigManager.RefreshConfig();
             
             //Event Execution
             EventsManager.ExecuteEvents(newLevel);
