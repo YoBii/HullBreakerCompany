@@ -23,7 +23,7 @@ public class ChristmasEveEvent : HullEvent
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         string scrapToSpawn = "Gift";
         if (levelModifier.IsScrapSpawnable(scrapToSpawn)) {
-            levelModifier.AddSpawnableScrapRarity(scrapToSpawn, 1500);
+            levelModifier.AddSpawnableScrapRarity(scrapToSpawn, 300);
             HullManager.AddChatEventMessage(this);
             return true;
         } else {

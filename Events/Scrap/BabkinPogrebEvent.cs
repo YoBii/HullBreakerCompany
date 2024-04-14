@@ -26,7 +26,7 @@ public class BabkinPogrebEvent : HullEvent
     {
         string scrapToSpawn = "Jar of pickles";
         if (levelModifier.IsScrapSpawnable(scrapToSpawn)) {
-            levelModifier.AddSpawnableScrapRarity(scrapToSpawn, 1500);
+            levelModifier.AddSpawnableScrapRarity(scrapToSpawn, 100);
             HullManager.AddChatEventMessage(this);
             return true;
         } else {

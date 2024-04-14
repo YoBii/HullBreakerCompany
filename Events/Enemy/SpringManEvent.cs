@@ -28,7 +28,7 @@ public class SpringManEvent : HullEvent
         if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(SpringManAI)))) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(SpringManAI)), 500);
+        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(SpringManAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(SpringManAI)), 5);
         levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(SpringManAI)), 1);
         levelModifier.AddMaxEnemyPower(5);

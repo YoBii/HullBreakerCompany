@@ -23,17 +23,15 @@ public class DayDrinkingEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         Dictionary<String, int> scrapToSpawn = new() {
-            { "Bottles", 2000 },
-            { "Wine bottle", 500 },
-            { "Alcohol Flask", 1000 },
-            { "Canteen", 1000 }
+            { "Bottles", 30 },
+            { "Alcohol Flask", 25 },
+            { "Wine bottle", 10 },
+            { "Canteen", 25 }
         };
-        if (scrapToSpawn.Any(scrap => levelModifier.IsScrapSpawnable(scrap.Key))) {
-            levelModifier.AddSpawnableScrapRarityDict(scrapToSpawn);
-            HullManager.AddChatEventMessage(this);
-            return true;
-        } else {
-            return false;
-        }
+        scrapToSpawn = CalculateScrapRarities(scrapToSpawn, levelModifier);
+        if (scrapToSpawn.Count == 0) return false;
+        levelModifier.AddSpawnableScrapRarityDict(scrapToSpawn);
+        HullManager.AddChatEventMessage(this);
+        return true;
     }
 }

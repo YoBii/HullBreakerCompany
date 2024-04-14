@@ -12,6 +12,7 @@ public class ArmdayEvent : HullEvent
     public override int GetWeight() => 20;
     public override string GetDescription() => "Spawns a lot of heavy loot.";
     public static List<string> MessagesList = new() {
+        { "Expect to find some big heavy scrap" },
         { "Roll up your sleeves and collect the scrap!" },
         { "Slipped disks are not covered by company insurance!" },
         { "Lift heavy objects with a jerking twisting motion!" },
@@ -24,21 +25,19 @@ public class ArmdayEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         Dictionary<string, int> scrapToSpawn = new() {
-            { "Large axle", 2000 },
-            { "V-type Engine", 2000 },
-            { "Metal sheet", 2000 },
-            { "Stop sign", 2000 },
-            { "Yield sign", 2000 },
-            { "Fire hydrant", 1000 },
-            { "Broken engine", 1000 },
-            { "Anvil", 250 }
+            { "Metal sheet", 20 },
+            { "Large axle", 10 },
+            { "V-type Engine", 10 },
+            { "Stop sign", 10 },
+            { "Yield sign", 10 },
+            { "Fire hydrant", 15 },
+            { "Broken engine", 10 },
+            { "Anvil", 5 }
         };
-        if (scrapToSpawn.Any(scrap => levelModifier.IsScrapSpawnable(scrap.Key))) {
-            levelModifier.AddSpawnableScrapRarityDict(scrapToSpawn);
-            HullManager.AddChatEventMessage(this);
-            return true;
-        } else {
-            return false;
-        }
+        scrapToSpawn = CalculateScrapRarities(scrapToSpawn, levelModifier);
+        if (scrapToSpawn.Count == 0) return false;
+        levelModifier.AddSpawnableScrapRarityDict(scrapToSpawn);
+        HullManager.AddChatEventMessage(this);
+        return true;
     }
 }

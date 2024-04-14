@@ -10,8 +10,8 @@ using UnityEngine.Rendering;
 
 namespace HullBreakerCompany;
 
-public class LevelModifier {
-    private SelectableLevel targetLevel;
+public class LevelModifier(SelectableLevel level) {
+    private SelectableLevel targetLevel = level;
 
     private readonly Dictionary<string, int> enemyComponentRarityModifications = [];
     private readonly Dictionary<string, int> enemyComponentRarityBackups = [];
@@ -19,6 +19,7 @@ public class LevelModifier {
     private readonly Dictionary<string, int> enemyComponentMaxCountBackups = [];
     private readonly Dictionary<string, int> enemyComponentPowerModifications = [];
     private readonly Dictionary<string, int> enemyComponentPowerBackups = [];
+    private int targetLevelEnemyRarityTotal = 0;
 
     private readonly Dictionary<string, int> outsideEnemyComponentRarityModifications = [];
     private readonly Dictionary<string, int> outsideEnemyComponentRarityBackups = [];
@@ -27,6 +28,7 @@ public class LevelModifier {
 
     private readonly Dictionary<string, int> spawnableScrapRarityModifications = [];
     private readonly Dictionary<string, int> spawnableScrapRarityBackups = [];
+    private int targetLevelScrapRarityTotal = 0;
 
     private int maxEnemyPower;
     private int maxOutsideEnemyPower;
@@ -78,10 +80,18 @@ public class LevelModifier {
     private void ApplyEnemyComponentRarity(SelectableLevel level, Dictionary<string, int> rarityPairs, Dictionary<string, int> rarityBackups, bool restore = false) {
         if (rarityPairs.Count <= 0) return;
 
+        if (targetLevelEnemyRarityTotal == 0) {
+            targetLevelEnemyRarityTotal = level.Enemies.Sum(enemy => enemy.rarity);
+        }
+
         foreach (var rarityPair in rarityPairs) {
             foreach (var enemy in level.Enemies.Where(enemy => enemy.enemyType.enemyPrefab.name == rarityPair.Key)) {
-                if (!restore) rarityBackups.TryAdd(rarityPair.Key, enemy.rarity);
-                enemy.rarity = restore ? rarityBackups[rarityPair.Key] : rarityPair.Value;
+                if (restore) {
+                    enemy.rarity = rarityBackups[rarityPair.Key];
+                } else {
+                    rarityBackups.TryAdd(rarityPair.Key, enemy.rarity);
+                    enemy.rarity = (int) Math.Floor((float) rarityPair.Value / 100 * (targetLevelEnemyRarityTotal - enemy.rarity));
+                }
                 Plugin.Mls.LogInfo($"Setting rarity of {enemy.enemyType.enemyPrefab.name} to {enemy.rarity}");
                 break;
             }
@@ -138,10 +148,18 @@ public class LevelModifier {
     private void ApplyLootRarity(SelectableLevel level, Dictionary<string, int> rarityPairs, Dictionary<string, int> rarityBackups, bool restore = false) {
         if (rarityPairs.Count <= 0) return;
 
+        if (targetLevelScrapRarityTotal == 0) {
+            targetLevelScrapRarityTotal = level.spawnableScrap.Sum(scrap => scrap.rarity);
+        }
+
         foreach (var rarityPair in rarityPairs) {
             foreach (var item in level.spawnableScrap.Where(item => item.spawnableItem.itemName == rarityPair.Key)) {
-                if (!restore) rarityBackups.TryAdd(rarityPair.Key, item.rarity);
-                item.rarity = restore ? rarityBackups[rarityPair.Key] : rarityPair.Value;
+                if (restore) {
+                    item.rarity = rarityBackups[rarityPair.Key];
+                } else {
+                    rarityBackups.TryAdd(rarityPair.Key, item.rarity);
+                    item.rarity = (int) Math.Floor((float) rarityPair.Value / 100 * (targetLevelScrapRarityTotal - item.rarity));
+                }
                 Plugin.Mls.LogInfo($"Setting rarity of {item.spawnableItem.itemName} to {item.rarity}");
                 break;
             }
@@ -257,8 +275,13 @@ public class LevelModifier {
         return true;
     }
 
-    public void AddEnemyComponentRarity(string enemy, int rarity) {
-        enemyComponentRarityModifications.TryAdd(enemy, rarity);
+    /// <summary>
+    /// Adds an enemy to the levelModifier to modify its rarity.
+    /// </summary>
+    /// <param name="enemy">The enemyPrefab name</param>
+    /// <param name="percentOfTotalRarity">specified as percentage of the levels total enemy rarity</param>
+    public void AddEnemyComponentRarity(string enemy, int percentOfTotalRarity) {
+    enemyComponentRarityModifications.TryAdd(enemy, percentOfTotalRarity);
     }
     public void AddEnemyComponentMaxCount(string enemy, int maxCount) {
         enemyComponentMaxCountModifications.TryAdd(enemy, maxCount);
@@ -272,9 +295,20 @@ public class LevelModifier {
     public void AddOutsideEnemyRarity(string enemy, int rarity) {
         outsideEnemyComponentRarityModifications.TryAdd(enemy, rarity);
     }
-    public void AddSpawnableScrapRarity(string item, int rarity) {
-        spawnableScrapRarityModifications.TryAdd(item, rarity);
+
+    /// <summary>
+    /// Adds scrap to the levelModifier to modify its rarity.
+    /// </summary>
+    /// <param name="item">The scrap item name</param>
+    /// <param name="percentOfTotalRarity">specified as percentage of the levels total scrap rarity</param>
+    public void AddSpawnableScrapRarity(string item, int percentOfTotalRarity) {
+        spawnableScrapRarityModifications.TryAdd(item, percentOfTotalRarity);
     }
+
+    /// <summary>
+    /// Adds a dictionary of scrap to the levelModifier to modify their rarity.
+    /// </summary>
+    /// <param name="scrapToSpawn">scrap item to add by name and respective rarity as percentage of the levels total scrap rarity</param>
     public void AddSpawnableScrapRarityDict(Dictionary<string, int> scrapToSpawn) {
         foreach (var scrap in scrapToSpawn) {
             AddSpawnableScrapRarity(scrap.Key, scrap.Value);

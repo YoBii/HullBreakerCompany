@@ -25,7 +25,7 @@ public class ShyGuyEvent : HullEvent
         if (!levelModifier.IsEnemySpawnable("ShyGuy")) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity("ShyGuy", 500);
+        levelModifier.AddEnemyComponentRarity("ShyGuy", 100);
         levelModifier.AddEnemyComponentMaxCount("ShyGuy", 5);
         levelModifier.AddEnemyComponentPower("ShyGuy", 1);
         levelModifier.AddMaxEnemyPower(4);

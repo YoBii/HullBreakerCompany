@@ -21,17 +21,15 @@ public class ClownshowEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         Dictionary<String, int> scrapToSpawn = new() {
-            { "Airhorn", 2000 },
-            { "Clown horn", 2000 },
-            { "Candy", 2000 },
-            { "Whoopie cushion", 2000 }
+            { "Airhorn", 30 },
+            { "Clown horn", 30 },
+            { "Candy", 30 },
+            { "Whoopie cushion", 10 }
         };
-        if (scrapToSpawn.Any(scrap => levelModifier.IsScrapSpawnable(scrap.Key))) {
-            levelModifier.AddSpawnableScrapRarityDict(scrapToSpawn);
-            HullManager.AddChatEventMessage(this);
-            return true;
-        } else {
-            return false;
-        }
+        scrapToSpawn = CalculateScrapRarities(scrapToSpawn, levelModifier);
+        if (scrapToSpawn.Count == 0) return false;
+        levelModifier.AddSpawnableScrapRarityDict(scrapToSpawn);
+        HullManager.AddChatEventMessage(this);
+        return true;
     }
 }

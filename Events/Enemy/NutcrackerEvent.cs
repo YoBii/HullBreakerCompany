@@ -28,7 +28,7 @@ public class NutcrackerEvent : HullEvent
             return false;
         }
 
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(NutcrackerEnemyAI)), 500);
+        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(NutcrackerEnemyAI)), 100);
         levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(NutcrackerEnemyAI)), 1);
 
         HullManager.AddChatEventMessage(this);

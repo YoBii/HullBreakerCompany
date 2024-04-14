@@ -32,7 +32,7 @@ public class HoarderBugEvent : HullEvent
         if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(HoarderBugAI)))) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(HoarderBugAI)), 500);
+        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(HoarderBugAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(HoarderBugAI)), 10);
         levelModifier.AddMaxEnemyPower(10);
         HullManager.AddChatEventMessage(this);

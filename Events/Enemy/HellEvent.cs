@@ -29,7 +29,7 @@ public class HellEvent : HullEvent
         if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(JesterAI)))) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(JesterAI)), 500);
+        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(JesterAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(JesterAI)), 4);
         levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(JesterAI)), 1);
 

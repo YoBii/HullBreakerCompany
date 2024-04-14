@@ -27,7 +27,7 @@ public class MaskedEvent : HullEvent
         if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(MaskedPlayerEnemy)))) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(MaskedPlayerEnemy)), 500);
+        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(MaskedPlayerEnemy)), 100);
         levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(MaskedPlayerEnemy)), 1);
 
         HullManager.AddChatEventMessage(this);

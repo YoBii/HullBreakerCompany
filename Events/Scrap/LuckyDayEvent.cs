@@ -22,15 +22,13 @@ public class LuckyDayEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         Dictionary<String, int> scrapToSpawn = new() {
-            { "Cash register", 200 },
-            { "Gold bar", 100 }
+            { "Cash register", 20 },
+            { "Gold bar", 20 }
         };
-        if (scrapToSpawn.Any(scrap => levelModifier.IsScrapSpawnable(scrap.Key))) {
-            levelModifier.AddSpawnableScrapRarityDict(scrapToSpawn);
-            HullManager.AddChatEventMessage(this);
-            return true;
-        } else {
-            return false;
-        }
+        scrapToSpawn = CalculateScrapRarities(scrapToSpawn, levelModifier);
+        if (scrapToSpawn.Count == 0) return false;
+        levelModifier.AddSpawnableScrapRarityDict(scrapToSpawn);
+        HullManager.AddChatEventMessage(this);
+        return true;
     }
 }

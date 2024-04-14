@@ -9,7 +9,7 @@ public class SelfDefenseEvent : HullEvent
 {
     public override string ID() => "SelfDefense";
     public override int GetWeight() => 20;
-    public override string GetDescription() => "Increases spawn chance of scrap that can be utilized as weapon.";
+    public override string GetDescription() => "Spawns a lot of scrap that can be utilized as weapon.";
     public static List<string> MessagesList = new() {
         { "Weapons scattered all around!" },
         { "DIY self defense training today!" }
@@ -21,19 +21,17 @@ public class SelfDefenseEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         Dictionary<String, int> scrapToSpawn = new() {
-            { "Plunger", 2000 },
-            { "Fireaxe", 500 },
-            { "Toy Hammer", 1000 },
-            { "Stop sign", 2000 },
-            { "Yield sign", 2000 },
-            { "Baseball bat", 500 }
+            { "Plunger", 20 },
+            { "Stop sign", 15 },
+            { "Yield sign", 15 },
+            { "Baseball bat", 15 },
+            { "Toy Hammer", 10 },
+            { "Fireaxe", 5 },
         };
-        if (scrapToSpawn.Any(scrap => levelModifier.IsScrapSpawnable(scrap.Key))) {
-            levelModifier.AddSpawnableScrapRarityDict(scrapToSpawn);
-            HullManager.AddChatEventMessage(this);
-            return true;
-        } else {
-            return false;
-        }
+        scrapToSpawn = CalculateScrapRarities(scrapToSpawn, levelModifier);
+        if (scrapToSpawn.Count == 0) return false;
+        levelModifier.AddSpawnableScrapRarityDict(scrapToSpawn);
+        HullManager.AddChatEventMessage(this);
+        return true;
     }
 }

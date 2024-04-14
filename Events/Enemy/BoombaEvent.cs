@@ -25,7 +25,7 @@ public class BoombaEvent : HullEvent
         if (!levelModifier.IsEnemySpawnable("Boomba")) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity("Boomba", 500);
+        levelModifier.AddEnemyComponentRarity("Boomba", 100);
         levelModifier.AddEnemyComponentMaxCount("Boomba", 10);
         levelModifier.AddMaxEnemyPower(10);
 

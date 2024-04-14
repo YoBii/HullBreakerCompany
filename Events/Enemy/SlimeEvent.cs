@@ -27,7 +27,7 @@ public class SlimeEvent : HullEvent
             return false;
         }
 
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(BlobAI)), 500);
+        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(BlobAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(BlobAI)), 5);
         levelModifier.AddMaxEnemyPower(5);
 
