@@ -85,12 +85,13 @@ public class HullManager : MonoBehaviour
         }
     }
     public static void SendChatEventMessages() {
-        if (HUDManager.Instance != null && Plugin.EnableEventMessages) {
-            foreach(string message in chatMessages) {
+        if (HUDManager.Instance != null && Plugin.EnableEventMessages && chatMessages.Count > 0) {
+            AddChatEventMessage("<color=red>NOTES ABOUT MOON:</color>", true);
+            foreach (string message in chatMessages) {
                 HUDManager.Instance.AddTextToChatOnServer(message);
             }
-            chatMessages.Clear();
         }
+        chatMessages.Clear();
     }
     public static void LogEnemies(List<SpawnableEnemyWithRarity> enemies, string title) {
         //Plugin.Mls.LogInfo("\u2581\u2582\u2583\u2584\u2585\u2586\u2587\u2588" + title + "\u2588\u2587\u2586\u2585\u2584\u2583\u2582\u2581");

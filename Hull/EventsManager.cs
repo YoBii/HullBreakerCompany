@@ -99,52 +99,66 @@ public abstract class EventsManager {
         UpdateLevelSettings();
         RefreshDaysPassed();
 
-        currentEvents.Clear();
+        List<HullEvent> randomEvents = new();
         
-        var randomEvents = RandomSelector.GetRandomGameEvents();
+        int eventCount = Plugin.IncreaseEventCountPerDay ? Plugin.EventCount + DaysPassed : Plugin.EventCount;
+        Plugin.Mls.LogInfo($"Round events: {eventCount}");
 
-        var blacklistedEvents = new List<String>();
-        blacklistedEvents.AddRange(randomEvents);
+        Plugin.Mls.LogInfo($"Start event selection..");
 
-        foreach (string gameEvent in randomEvents)
-        {
-            try
-            {
+        foreach (string gameEvent in RandomSelector.GetRandomGameEvents(eventCount)) {
+            try {
                 HullEvent hullEvent = EventDictionary.FirstOrDefault(e => e.ID() == gameEvent);
-                if (hullEvent == null) continue;
+                if (hullEvent == null) {
+                    Plugin.Mls.LogWarning($"Couldn't find event {gameEvent} in event dictionary!");
+                    continue;
+                }
 
-                bool success;
+                Plugin.Mls.LogInfo($"Got event: {hullEvent.ID()}");
 
-                do {
-                    Plugin.Mls.LogInfo($"Selected Event: {hullEvent.ID()}");
-                    success = hullEvent.Execute(newLevel, levelModifier);
-                    if (!success) {
-                        blacklistedEvents.Add(hullEvent.ID());
-                        Plugin.Mls.LogInfo($"Skipping Event: {hullEvent.ID()}");
-                        if (blacklistedEvents.Count() == EventDictionary.Count()) {
-                            Plugin.Mls.LogError("Event selection failed!");
-                            break;
-                        }
-                    var newEvent = RandomSelector.GetAnotherRandomGameEvent(blacklistedEvents);
-                    hullEvent = EventDictionary.FirstOrDefault(e => e.ID() == newEvent);
+                if (hullEvent.Execute(newLevel, levelModifier)) {
+                    //Plugin.Mls.LogInfo($"Adding event: {hullEvent.ID()}");
+                    randomEvents.Add(hullEvent);
                     } else {
-                        Plugin.Mls.LogInfo($"Executing Event: {hullEvent.ID()}");
+                    Plugin.Mls.LogInfo($"Skipping event: {hullEvent.ID()}");
                     }
-                } while (!success);
-                currentEvents.Add(hullEvent);
-            }
-            catch (NullReferenceException ex)
-            {
+            } catch (NullReferenceException ex) {
                 Plugin.Mls.LogError(
                     $"NullReferenceException caught while processing event: {gameEvent}. Exception message: {ex.Message}. Caused : {ex.InnerException}");
             }
         }
-        Plugin.Mls.LogInfo($"Round events: " + currentEvents.Count);
-        Plugin.Mls.LogInfo($"Nothing events: " + currentEvents.Where(e => e.ID().Equals("Nothing")).Count());
+
+        // If events failed, select more until count is reached
+        while (randomEvents.Count() < eventCount) {
+            var newEvent = RandomSelector.GetAnotherRandomGameEvent();
+            if (newEvent == null) {
+                Plugin.Mls.LogInfo($"Event selection failed. No events left to execute..");
+                break;
+            }
+            var hullEvent = EventDictionary.FirstOrDefault(e => e.ID() == newEvent);
+            if (hullEvent == null) {
+                Plugin.Mls.LogWarning($"Couldn't find event {newEvent} in event dictionary!");
+                continue;
+            }
+
+            Plugin.Mls.LogInfo($"Got event: {hullEvent.ID()}");
+
+            if (hullEvent.Execute(newLevel, levelModifier)) {
+                //Plugin.Mls.LogInfo($"Adding event: {hullEvent.ID()}");
+                randomEvents.Add(hullEvent);
+            } else {
+                Plugin.Mls.LogInfo($"Skipping event: {hullEvent.ID()}");
+            }
+        }
+
+        Plugin.Mls.LogInfo($"Selected events: {randomEvents.Count()}");
+        Plugin.Mls.LogInfo($"Nothing events: {randomEvents.Where(e => e.ID().Equals("Nothing")).Count()}");
+        randomEvents.RemoveAll(e => e.ID().Equals("Nothing"));
+        Plugin.Mls.LogInfo($"Active events: {randomEvents.Count()} ({string.Join(", ", randomEvents.Select(e => e.ID()))})");
 
         levelModifier.ApplyModificationsToLevel();
 
-        PrintEventMessagesToGameChat();
+        HullManager.SendChatEventMessages();
 
         PrintDebugLogs(newLevel);
     }
@@ -177,16 +191,7 @@ public abstract class EventsManager {
 
         }
     }
-    private static void PrintEventMessagesToGameChat() {
-        if (Plugin.EventCount != 0 && Plugin.EnableEventMessages) //check if configs allows events
-        {            
-            //Only print Notes to game chat when there's at least one Event that's not NothingEvent
-            if (currentEvents.Count > currentEvents.Where(e => e.ID().Equals("Nothing")).Count()) {
-                HullManager.AddChatEventMessage("<color=red>NOTES ABOUT MOON:</color>", true);
-                HullManager.SendChatEventMessages();
-            } 
-        }
-    }
+
     private static void PrintDebugLogs(SelectableLevel level) {
         HullManager.LogEnemies(level.Enemies, "INSIDE ENEMIES");
         HullManager.LogEnemies(level.OutsideEnemies, "OUTSIDE ENEMIES");
