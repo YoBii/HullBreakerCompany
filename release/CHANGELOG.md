@@ -1,3 +1,21 @@
+# v2.1.0 (based on HullBreaker_Company_v1.3.11)
+* v50 compatibility
+* **(NEW)** ButlerEvent
+* **(NEW)** TimeAnomalyEvent: Time passes quicker (150-200% of default rate)
+* **(NEW)** TimeDilationEvent: Makes time pass slower (50-75% of default rate)
+* changed the way rarities are applied. Enemy and scrap rarities will now scale proportionally to the total rarities of the current level
+	* This applies to **custom events**!
+	* e.g. event A adds HoarderBug at 100 rarity. This will add HoarderBug at a rarity equal to the sum of all other monsters rarities resulting in every other enemy being a HoarderBug (on average)
+	* Scrap events will automatically compensate for scrap that can't be spawned (missing from level's loot table)
+		* The rarity of scrap that *can* spawn will increase proportionally to match the same overall event:normal scrap ratio
+		* For example Event A spawns gold bar and cash register as 50% of total rarity each. If gold bar can't spawn, cash register will be added as 100% of total rarity.
+* refactored event execution code
+	* NothingEvent is no longer removed from pool of events after being rolled
+* improved logging
+* changed order of event weights in config so custom events show at the very bottom
+* improved event descriptions in config section '3 - Event weights'
+* fixed bunker spider event failing even if SandSpider is spawnable on the moon
+
 # v2.0.2 (based on HullBreaker_Company_v1.3.11)
 * added support for modded enemies to custom events
 	* make sure you use the enemy names exactly as they're printed in logs (case sensitive)

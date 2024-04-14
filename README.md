@@ -33,7 +33,7 @@ No longer do events just bump up the rarity of let's say bunker spiders. They al
 Events, events, events. Can one have enough events?
 * More scrap events like 'Jar of pickles'-event. Some make your working shift harder, some make it easier.
 * HordeModeEvent increases spawn rate of inside enemies.
-* **(PLANNED)** Time dilation events. Make your day shorter or longer.
+* Time dilation events. Make your day shorter or longer.
 
 ### Compatibility
 Fully compatible with LethalQuantities and AdvancedCompany overrides.

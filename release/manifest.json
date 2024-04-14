@@ -1,9 +1,10 @@
 {
   "name": "HullBreaker_Company_Ambigous_Fork",
-  "version_number": "2.0.2",
+  "version_number": "2.1.0",
   "website_url": "https://discord.com/channels/1168655651455639582/1224398449227858100/1224398449227858100",
   "description": "Making it more challenging to work for the company - a more ambiguous fork",
   "dependencies": [
-    "BepInEx-BepInExPack-5.4.2100"
+    "BepInEx-BepInExPack-5.4.2100",
+    "ButteryStancakes-FloodedLevelsFixed-1.1.0"
   ]
 }
