@@ -412,7 +412,7 @@ public class LevelModifier {
         if (targetLevel.spawnableScrap.Any(item => item.spawnableItem.itemName.Equals(itemName))) {
             return true;
         } else {
-            Plugin.Mls.LogWarning($"Can't spawn scrap item {itemName} on this moon.");
+            Plugin.Mls.LogWarning($"Can't spawn scrap {itemName} on this moon.");
             return false;
         }
     }

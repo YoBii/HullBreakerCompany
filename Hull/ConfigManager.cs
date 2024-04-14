@@ -50,13 +50,15 @@ namespace HullBreakerCompany.Hull
         }
         
         public static void RefreshConfig() {
+            Plugin.Mls.LogInfo("Refreshing config..");
             _configFile = null;
             SetConfigValue();
-            GetWeights();
+            //GetWeights();
         }
 
         public static Dictionary<string, int> GetWeights()
         {
+            Plugin.Mls.LogInfo("Refreshing weights..");
             EnsureConfigExists();
 
             var weights = new Dictionary<string, int>();

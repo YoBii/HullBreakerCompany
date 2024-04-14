@@ -61,7 +61,7 @@ public abstract class EventsManager {
 
     public static void AddModEvents() {
         if (modEventsLoaded) return;
-        Plugin.Mls.LogInfo("First level load. Checking for compatible mods..");
+        Plugin.Mls.LogInfo("Checking for compatible mods..");
         
         Dictionary<HullEvent, string> modEvents = new() {
             { new BoombaEvent(), "evaisa.lethalthings" },
@@ -83,7 +83,7 @@ public abstract class EventsManager {
     }
     public static void AddCustomEvents() {
         if (customEventsLoaded) return;
-        Plugin.Mls.LogInfo("First level load. Checking for custom events..");
+        Plugin.Mls.LogInfo("Checking for custom events..");
         
         CustomEventLoader.LoadCustomEvents();
         CustomEventLoader.DebugLoadCustomEvents();
@@ -204,6 +204,10 @@ public abstract class EventsManager {
     [HarmonyPatch(typeof(RoundState), nameof(RoundState.OnDestroy))]
     [HarmonyPrefix]
     public static void RoundStateOnDestroyPrefix() {
+        if (levelModifier == null) {
+            Plugin.Mls.LogInfo("No levelModifier found. No modifications to revert.");
+            return;
+        }
         levelModifier.undoModificationsEarly();
     }
 }
