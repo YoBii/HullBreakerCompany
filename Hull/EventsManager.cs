@@ -62,40 +62,24 @@ public abstract class EventsManager {
     public static void AddModEvents() {
         if (modEventsLoaded) return;
         Plugin.Mls.LogInfo("Checking for compatible mods..");
-        
-        Dictionary<HullEvent, string> modEvents = new() {
-            { new BoombaEvent(), "evaisa.lethalthings" },
-            { new HerobrineEvent(), "Kittenji.HerobrineMod" },
-            { new MeltdownEvent(), "me.loaforc.facilitymeltdown" },
-            { new ShyGuyEvent(), "DBJ.ShyGuyPatcherPatcher" },
-            { new AC_BunnyEvent(), "com.potatoepet.AdvancedCompany" },
-            { new AC_ControllerEvent(), "com.potatoepet.AdvancedCompany" },
-            { new AC_RGBShoesEvent(), "com.potatoepet.AdvancedCompany" }
+        //Print all plugins
+        //Plugin.Mls.LogInfo($"{String.Join(", ", BepInEx.Bootstrap.Chainloader.PluginInfos.Keys.ToList().ToArray())}");
+
+        Dictionary<string, List<HullEvent>> modEvents = new() {
+            { "evaisa.lethalthings", [new BoombaEvent()] },
+            { "Kittenji.HerobrineMod", [new HerobrineEvent()] },
+            { "me.loaforc.facilitymeltdown", [new MeltdownEvent()] },
+            { "DBJ.ShyGuyPatcherPatcher", [new ShyGuyEvent()] },
+            { "com.potatoepet.AdvancedCompany", new List<HullEvent> { new AC_BunnyEvent(), new AC_ControllerEvent(), new AC_RGBShoesEvent() }  }
         };
-/*        var event1 = new AC_BunnyEvent();
-        Dictionary<string, List<HullEvent>> modEvents2 = new() {
-            {
-                "potatoepet.advancedcompany", new List<HullEvent> {
-                    new AC_BunnyEvent(), new AC_ControllerEvent(), new AC_RGBShoesEvent()
-                }
-            }
-        };
-        foreach (var modEventPair in modEvents2) {
+        foreach (var modEventPair in modEvents) {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(modEventPair.Key)) {
+                Plugin.Mls.LogInfo($"{BepInEx.Bootstrap.Chainloader.PluginInfos[modEventPair.Key].Metadata.Name} found! Enabling event(s): {string.Join(", ", modEventPair.Value.Select(e => e.ID()))}");
                 foreach (var e in modEventPair.Value) {
-                    Plugin.Mls.LogInfo($"{BepInEx.Bootstrap.Chainloader.PluginInfos[modEventPair.Key].Metadata.Name} found! Enabling event: {e.ID()}");
                     EventDictionary.Add(e);
                 }
-            }
-        }*/
-
-        //Plugin.Mls.LogInfo($"{String.Join(", ", BepInEx.Bootstrap.Chainloader.PluginInfos.Keys.ToList().ToArray())}");    
-        foreach(var modEventPair in modEvents) {
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(modEventPair.Value)) {
-                Plugin.Mls.LogInfo($"{BepInEx.Bootstrap.Chainloader.PluginInfos[modEventPair.Value].Metadata.Name} found! Enabling event: {modEventPair.Key.ID()}");
-                EventDictionary.Add(modEventPair.Key);
             } else {
-                Plugin.Mls.LogInfo($"{modEventPair.Value} not present! Disabling event: {modEventPair.Key.ID()}");
+                Plugin.Mls.LogDebug($"{modEventPair.Key} not present! Not loading associated events..");
             }
         }
         modEventsLoaded = true;
