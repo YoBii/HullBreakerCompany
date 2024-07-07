@@ -14,6 +14,7 @@ public abstract class EventsHandler
     public static bool OneForAllIsActive;
     public static bool BountyFirstKill;
     public static bool MeltdownActive;
+    public static bool OnAPowderKegActive;
     
     public static void Reset() {
         Plugin.Mls.LogInfo($"Resetting EventsHandler variables.");
@@ -21,6 +22,7 @@ public abstract class EventsHandler
         BountyRewards = 0;
         OneForAllIsActive = false;
         MeltdownActive = false;
+        OnAPowderKegActive = false;
     }
 
     // PATCHES
