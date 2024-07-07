@@ -46,10 +46,16 @@ public class CustomEvent : HullEvent
     {
         return "<color=white>" + _message + "</color>";
     }
+    public string GetReadableMessage() {
+        return _message;
+    }
     
     public override string GetShortMessage()
     {
         return "<color=white>" + _shortMessage + "</color>";
+    }
+    public string GetReadableShortMessage() {
+        return _shortMessage;
     }
     
     //public List<string> EnemySpawnList = new ();
