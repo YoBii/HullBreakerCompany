@@ -75,10 +75,14 @@ public class CustomEventLoader
     
     private static List<Dictionary<string, string>> LoadEventDataFromCfgFiles()
     {
-        string directoryPath = GetCustomEventDirectoryPath();
-        if (directoryPath == null) return [];
+        List<string> directoryPaths = GetCustomEventDirectoryPaths();
+        List<string> cfgFiles = new List<string>();
+        foreach (string directoryPath in directoryPaths) {
+            cfgFiles.AddRange(Directory.GetFiles(directoryPath, "*.cfg"));
+        }
 
-        string[] cfgFiles = Directory.GetFiles(directoryPath, "*.cfg");
+        if (cfgFiles.Count == 0) return [];
+
         List<Dictionary<string, string>> allEventData = new List<Dictionary<string, string>>();
 
         foreach (string cfgFile in cfgFiles) {
@@ -90,13 +94,24 @@ public class CustomEventLoader
 
         return allEventData;
     }
-    private static string GetCustomEventDirectoryPath() {
-        string directoryPath = Paths.BepInExRootPath + @"\HullEvents";
+    //private static string GetCustomEventDirectoryPath() {
+    //    string directoryPath = Paths.BepInExRootPath + @"\HullEvents";
 
-        if (!Directory.Exists(directoryPath)) {
-            Plugin.Mls.LogWarning($"Directory does not exist: {directoryPath}");
+    //    if (!Directory.Exists(directoryPath)) {
+    //        Plugin.Mls.LogWarning($"Directory does not exist: {directoryPath}");
+    //        Plugin.Mls.LogInfo("Custom event folder 'HullEvents' not found. Skipping custom event loading.");
+    //        return null;
+    //    }
+    //    return directoryPath;
+    //}
+    private static List<string> GetCustomEventDirectoryPaths() {
+        try {
+            return (from dir in Directory.GetDirectories(Paths.BepInExRootPath, "*", SearchOption.AllDirectories)
+                    where Path.GetFileName(dir).Equals("HullEvents", StringComparison.OrdinalIgnoreCase)
+                    select dir).ToList();
+        } catch (Exception ex) {
             Plugin.Mls.LogInfo("Custom event folder 'HullEvents' not found. Skipping custom event loading.");
-            return null;
+            return new List<string>();
         }
         return directoryPath;
     }
@@ -160,8 +175,12 @@ public class CustomEventLoader
 
     private static void AddEvent(HullEvent newEvent)
     {
-        Plugin.Mls.LogInfo("Adding new event " + newEvent.ID() + " to dictionary");
+        if (EventsManager.EventDictionary.Any(e => e.ID() == newEvent.ID())) {
+            Plugin.Mls.LogWarning("Custom event " + newEvent.ID() + " can't be added because an event with the same ID already exists! Check for duplicate config files.");
+        } else {
+            Plugin.Mls.LogInfo("Adding " + newEvent.ID() + " to event dictionary");
         EventsManager.EventDictionary.Add(newEvent);
+    }
     }
     
     public static void DebugLoadCustomEvents()
