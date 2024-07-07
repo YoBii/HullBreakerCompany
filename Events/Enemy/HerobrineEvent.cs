@@ -25,7 +25,7 @@ public class HerobrineEvent : HullEvent
         if (!levelModifier.IsEnemySpawnable("Herobrine")) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity("Herobrine", 1000);
+        levelModifier.AddEnemyComponentRarity("Herobrine", 33);
         levelModifier.AddEnemyComponentPower("Herobrine", 0);
         levelModifier.AddEnemyComponentMaxCount("Herobrine", 2);
 

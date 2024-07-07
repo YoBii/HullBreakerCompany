@@ -1,3 +1,24 @@
+# v2.2.0
+* updated for v56 
+	* last version was probably already compatible
+	* this version is also still compatible to v50
+* **(NEW)** SpikeTrapEvent: Spawn more spike traps. Amount configurable. 
+* **(NEW)** Added integrated events for AdvancedCompany
+	* Every unique AC item now has its own event (Light shoes, Bunny ears, Controller)
+* **(NEW)** Updated custom event system. You can do almost anything with custom events now. Please see the README and custom event template for more information
+	* Added support for multiple custom event folders. It will search for custom event cfg files in any folder called `HullEvents` inside your profile's BepInEx folder (including subfolders)
+* Added a % chance column to enemy and scrap log tables
+* Slightly modified how Hullbreaker events modify enemies and the level's power level
+* added a few checks for events that spawn or modify traps
+	* should fix OnAPowderKeg spamming errors when a round ends early
+* updated event messages
+* added logging when scrap rarities are recalculated due to unspawnable items
+* other logging changes / typos fixed
+* Fixed an issue where modifications to a level's max power levels weren't correctly applied
+* Fixed an issue where the event weights section was duplicated in BepInEx config when the config file was newly generated / deleted
+* removed FloodedLevelsFixed dependency. If you encounter any issues with flooded levels during time events please let me know.
+* updated README
+
 # v2.1.0 (based on HullBreaker_Company_v1.3.11)
 * v50 compatibility
 * **(NEW)** ButlerEvent

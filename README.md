@@ -10,24 +10,11 @@ Since then more significant changes have been made.
 ## Major changes
 
 ### Ambiguous event messages
-All event long and short messages in game chat are more ambiguous i.e. less obvious.
+All event long and short messages in game chat are more ambiguous i.e. less obvious or rather 'more mysterious'. This is intended to reduce spoiling specific monster types and such for newcomers.
+
 Basically I tried to fit the whole "Notes about this moon"-thing without giving away the exact event.
 For example all events that increase monster spawn rates can print the same message in game chat: telling you something about a dominant species.
 So even if you know all the events by heart you don't necessarily know whether it's spiders, lizards, slimes or bees you have to expect.
-
-Basically the event messages in chat will mostly be more mysterious. This was intended to reduce spoiling specific monster types and such for newcomers.
-
-### Reworked event execution
-Rewritten event execution logic allows to dynamically replace events that fail to execute by another random event.
-Events fail to execute on certain moons where mobs or scrap can't naturally spawn.
-
-#### Integrated mod events
-Depending on whether you have other mods installed certain events are enabled automatically. No user interaction or configuration required.
-Introducing events for Shy guy, Herobrine, FacilityMeltdown and more. Check the changelog.
-
-### More impactful enemy events
-You will definitely notice enemy events more.
-No longer do events just bump up the rarity of let's say bunker spiders. They also increase their max count and decrease their power level accordingly.
 
 ### More events
 Events, events, events. Can one have enough events?
@@ -35,24 +22,139 @@ Events, events, events. Can one have enough events?
 * HordeModeEvent increases spawn rate of inside enemies.
 * Time dilation events. Make your day shorter or longer.
 
+You can find a full list of all events below.
+
+### Reworked event execution
+Rewritten event execution logic allows to dynamically replace events that fail by exectuting another random event instead.
+Events fail on certain moons where the enemies or scrap they are trying to modify can't naturally spawn.
+
+### More impactful enemy events
+The goal for all events is to make them feel unique but still balanced and manageable.
+So instad of increasing only the rarity of a certain enemy, additionally their max count can be increased and their power level decreased.
+For example where before the spider event would only guarantee a spider to spawn, it now makes spiders more likely to spawn (early), allows encountering multiple spiders in the same round and doesn't displace other enemy spawns.
+That means other enemies *can* still spawn additionally but they will spawn in later. Not all at once because we still spawn naturally.
+
+### Integrated mod events
+Depending on whether you have other mods installed certain events are enabled automatically. No user interaction or configuration required.
+Introducing events for Shy guy, Herobrine, FacilityMeltdown and more. Check the changelog.
+
+### Custom Events
+* added support for modded enemies
+	* make sure you use the enemy names exactly as they're printed in logs (case sensitive)
+	* only works for mods that don't use custom spawn logic
+* added support for daytime enemies
+* added support for setting max count and power levels for all enemy types
+* added support for changing the level's power levels (inside, outside, daytime)
+* added support for overriding the level's spawn curve to a constant value  (inside, outside, daytime)
+
 ### Compatibility
 Fully compatible with LethalQuantities and AdvancedCompany overrides.
-Using these mods you can allow events that would usually fail on certain moons by setting their rarity.
+<details>
+Using these mods you can allow events that are otherwise not available on certain moons by setting the respective monster or scrap rarity to at least `1`.
 For example with vanilla moon configuration you can't get Jester event on Experimentation because Jesters don't spawn there.
-Set Jester rarity to `1` or any larger number to allow the Jester event to occur.
+Using the tool of your choice set the Jester's rarity to `1` or any larger number. This will enable the Jester event on that moon.
+</details>
 
 ### Config file
 Reorganized and restructured - allowing for more customization. Hopefully you'll find some settings more intuitive.
 Mainly putting this here so you remember to check your config :)
 
+
+## Events
+
+### Enemy events
+<details>
+	<summary>Click to expand</summary>
+
+All enemy events increase the repective enemy's spawn chance. Some additionally increase their max count and decrease their power level to varying degrees.
+
+They are designed to be impactful and create unique situations but still be manageable overall. Check your logs for what is changed exactly. 
+
+Event | Details
+------ | ------
+Arachnophobia   | Bunker spiders are more likely to spawn. There can be two or even more. Recommended mod: Arachnophilia
+Bee   | Circuit Bees are more likely to spawn and you can find a lot of them. This also increases daytime enemy spawns overall (take not LQ users).
+Butler   | Butler spawns more likely and there's potentially more of them. They don't count to overall enemy cap.
+DevochkaPizdec  | Ghost girls spawn more frequently and there can be more than one. Don't loose your head out there.
+FlowerMan   | Brackens spawn more frequently and in larger quantities. They often move together but can separate and give you a really bad time.
+Hell   | Jesters. Yes, multiple. Good luck.
+HoarderBug   | Hoarding Bugs spawn a lot more frequently and in much larger quantities. It's a race for scrap - who will capture the most?
+Lizards   | Puffers / Spore Lizards are more likely to spawn and there's more of them. They don't count to overall enemy cap.
+Masked   | Masked enemy are more likely to spawn and there's more of them. They don't count to overall enemy cap.
+Nutcracker   | Nutcrackers are more likely to spawn and there's more of them. They don't count to overall enemy cap.
+Slime   | Hygrodere / Blobs spawn more frequently and in much larger quantities. Recommended mod: RandomSlimeColor, RandomEnemiesSize.
+SpringMan   | Coil-heads are more likely to spawn and there can be a lot of them. Keep you eyes peeled.
+</details>
+
+### Scrap events
+<details>
+	<summary>Click to expand</summary>
+
+Scrap events generally change the weights of certain scrap in the loot table to make them more common.
+
+Most of these have been made with ImmersiveScrap in mind. They work perfectly fine without but balance might be off.
+
+Event | Details
+------ | ------
+Armday   | Incerases spawn chance of heavy loot
+BabkinPogreb   | Spawns a lot of pickle jars
+ChristmasEve   | Spawns a lot of presents
+Clownshow (Girl)   | Spawns a lot of scrap that can make noise like horns
+DayDrinking   | Spawns a lot of alcoholic beverages
+LuckyDay   | Increases chance for very valuable loot to spawn
+SelfDefense   | Spawns a lot of weapon-like scrap items
+</details>
+
+
+### Miscellaneous events
+<details>
+	<summary>Click to expand</summary>
+
+Traps events, time events and even some gameplay changing events.
+
+You might need to change your strategy so keep your eyes open for these!
+
+Event | Details
+------ | ------
+EnemyBounty   | The company pays money for killing monsters. Per enemy reward + final reward (configurable, read below)
+HackedTurrets   | All turrets are permanently disabled
+HordeMode   | Spawns enemies early and in large amounts
+HullBreak   | Take a break. The company sends a bonus payment
+LandMine   | Spawns a lot of landmines
+NothingEvent | This is used to balance the chance of any event occuring. This event = no event
+OnAPowderKeg  | Spawns more landmines. Landmines will randomly explode throughout the day.
+OneForAll  | When the first crew member dies, the ship's autopilot is immediately instructed to leave (like voting, you have two hours)
+OpenTheNoor  | All big security doors start in closed state
+OutSideEnemyDay  | Frontloads outside enemy spawns to occur early in the day. Like eclipsed but only outside.
+SpikeTrap  | Spawns a lot of spike traps (might have no effect in some custom interiors)
+TimeAnomaly  | Time passes faster
+TimeDilation  | Time passes more slower
+TurretEvent  | Spawns a lot of turrets
+
+</details>
+
+### Integrated events
+<details>
+	<summary>Click to expand</summary>
+
+List of events integrated with others mods (from all event categories). 
+
+Boomba   | Increases bee spawn chance, increases max count, decreases power Level
+Herobrine   | Increases bee spawn chance, increases max count, decreases power Level
+ShyGuyEvent   | Increases bee spawn chance, increases max count, decreases power Level
+Meltdown   | Will trigger the meltdown event sometime during the day (random between early noon and midnight)
+AC_Bunny  | Increases spawn chance of AdvancedCompany unique item: Bunny ears
+AC_Controller  | Increases spawn chance of AdvancedCompany unique item: Controller (Green, Pietsmiet)
+AC_RGBShoes  | Increases spawn chance of AdvancedCompany unique item: Light Shoes
+</details>
+
 ## Other changes
 
 ### Events
 
-#### Custom Events
-* added support for modded enemies
-	* make sure you use the enemy names exactly as they're printed in logs (case sensitive)
-	* only works for mods that don't use custom spawn logic
+Changes to existing events from the original Hullbreaker mod.
+<details>
+	<summary>Click to expand</summary>
 
 #### EnemyBountyEvent
 * The amount of credits rewarded for each kill is now random. Similar to an above average scrap item
@@ -74,10 +176,9 @@ Mainly putting this here so you remember to check your config :)
 
 #### Readded events
 * TurretsEvent, OneForAllEvent, MaskedEvent
+</details>
 
 ### Other
 #### HullBreakerLevelSettings
-* only change enemy count and spawn rate
-* no more changes to scrap amount and value or quota
-
-Check changelog for more
+* only changes enemy count and spawn rate
+* no longer touches scrap amount, scrap value or quota

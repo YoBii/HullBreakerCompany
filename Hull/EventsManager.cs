@@ -74,7 +74,7 @@ public abstract class EventsManager {
         };
         foreach (var modEventPair in modEvents) {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(modEventPair.Key)) {
-                Plugin.Mls.LogInfo($"{BepInEx.Bootstrap.Chainloader.PluginInfos[modEventPair.Key].Metadata.Name} found! Enabling event(s): {string.Join(", ", modEventPair.Value.Select(e => e.ID()))}");
+                Plugin.Mls.LogInfo($"{BepInEx.Bootstrap.Chainloader.PluginInfos[modEventPair.Key].Metadata.Name} found! Enabling events: {string.Join(", ", modEventPair.Value.Select(e => e.ID()))}");
                 foreach (var e in modEventPair.Value) {
                     EventDictionary.Add(e);
                 }
