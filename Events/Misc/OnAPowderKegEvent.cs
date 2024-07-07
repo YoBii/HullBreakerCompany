@@ -31,6 +31,7 @@ public class OnAPowderKegEvent : HullEvent
         HullManager.AddChatEventMessage(this);
         levelModifier.AddLandmines(Plugin.LandmineScale * 2f / 3f);
         HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(level); }, UnityEngine.Random.Range(dayInSeconds / 6, dayInSeconds / 2));
+        EventsHandler.OnAPowderKegActive = true;
         return true;
     }
 
@@ -47,6 +48,13 @@ public class OnAPowderKegEvent : HullEvent
         Plugin.Mls.LogInfo(ID() + $" Event: PowderKeg has been ignited. Will explode a landmine every {dayInSeconds / landmines.Count() / 30}-{dayInSeconds / landmines.Count() / 4} seconds.");
         foreach (var (landmine, i) in landmines.Select((landmine, i) => (landmine, i)))
         {
+            if (landmine == null) continue;
+            if (!landmine.IsSpawned) continue;
+            if (!EventsHandler.OnAPowderKegActive || TimeOfDay.Instance.playersManager.inShipPhase) {
+                Plugin.Mls.LogInfo($"OnAPowderKeg Event abort. Reason: OnAPowderKegActive: {EventsHandler.OnAPowderKegActive}; " +
+                    $"inShipPhase: {TimeOfDay.Instance.playersManager.inShipPhase};");
+                break;
+            }
             Plugin.Mls.LogMessage(ID() + $" Event: Random landmine explosion #{i + 1}");
             landmine.ExplodeMineServerRpc();
             await Task.Delay(TimeSpan.FromSeconds(UnityEngine.Random.Range(dayInSeconds / landmines.Count() / 30, dayInSeconds / landmines.Count() / 4)));
