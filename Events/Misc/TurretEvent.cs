@@ -23,6 +23,8 @@ public class TurretEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
+        if (!levelModifier.IsUnitSpawnable<Turret>()) return false;
+
         levelModifier.AddTurrets(Plugin.TurretScale);
         HullManager.AddChatEventMessage(this);
         return true;

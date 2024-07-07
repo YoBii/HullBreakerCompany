@@ -23,6 +23,8 @@ public class LandMineEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
+        if (!levelModifier.IsUnitSpawnable<Landmine>()) return false;
+
         levelModifier.AddLandmines(Plugin.LandmineScale);
         HullManager.AddChatEventMessage(this);
         return true;
