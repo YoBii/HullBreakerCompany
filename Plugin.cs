@@ -26,6 +26,7 @@ namespace HullBreakerCompany
 
         public static float BunkerEnemyScale;
         public static float LandmineScale;
+        public static float SpikeTrapScale;
         public static float TurretScale;
         public static bool UseShortChatMessages;
         public static bool EnableEventMessages;
