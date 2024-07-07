@@ -45,6 +45,7 @@ public abstract class EventsManager {
         { new OneForAllEvent() }, // EXPERIMENTAL v2.0.0
         { new OpenTheNoorEvent() },
         { new OutSideEnemyDayEvent() },
+        { new SpikeTrapEvent() }, //v50
         { new TimeAnomalyEvent() },
         { new TimeDilationEvent() },
         { new TurretEvent() },
@@ -66,8 +67,27 @@ public abstract class EventsManager {
             { new BoombaEvent(), "evaisa.lethalthings" },
             { new HerobrineEvent(), "Kittenji.HerobrineMod" },
             { new MeltdownEvent(), "me.loaforc.facilitymeltdown" },
-            { new ShyGuyEvent(), "DBJ.ShyGuyPatcherPatcher" }
+            { new ShyGuyEvent(), "DBJ.ShyGuyPatcherPatcher" },
+            { new AC_BunnyEvent(), "com.potatoepet.AdvancedCompany" },
+            { new AC_ControllerEvent(), "com.potatoepet.AdvancedCompany" },
+            { new AC_RGBShoesEvent(), "com.potatoepet.AdvancedCompany" }
         };
+/*        var event1 = new AC_BunnyEvent();
+        Dictionary<string, List<HullEvent>> modEvents2 = new() {
+            {
+                "potatoepet.advancedcompany", new List<HullEvent> {
+                    new AC_BunnyEvent(), new AC_ControllerEvent(), new AC_RGBShoesEvent()
+                }
+            }
+        };
+        foreach (var modEventPair in modEvents2) {
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(modEventPair.Key)) {
+                foreach (var e in modEventPair.Value) {
+                    Plugin.Mls.LogInfo($"{BepInEx.Bootstrap.Chainloader.PluginInfos[modEventPair.Key].Metadata.Name} found! Enabling event: {e.ID()}");
+                    EventDictionary.Add(e);
+                }
+            }
+        }*/
 
         //Plugin.Mls.LogInfo($"{String.Join(", ", BepInEx.Bootstrap.Chainloader.PluginInfos.Keys.ToList().ToArray())}");    
         foreach(var modEventPair in modEvents) {
@@ -92,8 +112,9 @@ public abstract class EventsManager {
     public static void ExecuteEvents(SelectableLevel newLevel) {
         HullManager.LogBox("EVENT EXECUTION");
 
-        LevelModifier levelMod = new(newLevel);
-        levelModifier = levelMod;
+        //LevelModifier levelMod = new(newLevel);
+        //levelModifier = levelMod;
+        levelModifier = new LevelModifier(newLevel);
 
         UpdateLevelSettings();
         RefreshDaysPassed();
@@ -153,7 +174,7 @@ public abstract class EventsManager {
         Plugin.Mls.LogInfo($"Selected events: {randomEvents.Count()}");
         Plugin.Mls.LogInfo($"Nothing events: {randomEvents.Where(e => e.ID().Equals("Nothing")).Count()}");
         randomEvents.RemoveAll(e => e.ID().Equals("Nothing"));
-        Plugin.Mls.LogInfo($"Active events: {randomEvents.Count()} ({string.Join(", ", randomEvents.Select(e => e.ID()))})");
+        Plugin.Mls.LogInfo($"Active events: {randomEvents.Count()} [{string.Join(", ", randomEvents.Select(e => e.ID()))}]");
 
         levelModifier.ApplyModificationsToLevel();
 
@@ -207,6 +228,7 @@ public abstract class EventsManager {
             Plugin.Mls.LogInfo("No levelModifier found. No modifications to revert.");
             return;
         }
-        levelModifier.undoModificationsEarly();
+        levelModifier.UndoModificationsEarly();
+        levelModifier = null;
     }
 }
