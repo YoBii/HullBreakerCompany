@@ -31,7 +31,7 @@ public class HellEvent : HullEvent
         }
         levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(JesterAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(JesterAI)), 4);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(JesterAI)), 1);
+        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(JesterAI)), 0);
 
         HullManager.AddChatEventMessage(this);
         //RoundManager.Instance.hourTimeBetweenEnemySpawnBatches = 1;

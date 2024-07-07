@@ -32,7 +32,7 @@ public class FlowerManEvent : HullEvent
         }
         levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(FlowermanAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(FlowermanAI)), 4);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(FlowermanAI)), 1);
+        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(FlowermanAI)), 0);
         HullManager.AddChatEventMessage(this);
         return true;
     }

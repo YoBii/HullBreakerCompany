@@ -27,8 +27,7 @@ public class ShyGuyEvent : HullEvent
         }
         levelModifier.AddEnemyComponentRarity("ShyGuy", 100);
         levelModifier.AddEnemyComponentMaxCount("ShyGuy", 5);
-        levelModifier.AddEnemyComponentPower("ShyGuy", 1);
-        levelModifier.AddMaxEnemyPower(4);
+        levelModifier.AddEnemyComponentPower("ShyGuy", 0);
 
         HullManager.AddChatEventMessage(this);
         return true;

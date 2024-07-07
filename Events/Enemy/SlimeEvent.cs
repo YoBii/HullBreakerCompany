@@ -29,7 +29,7 @@ public class SlimeEvent : HullEvent
 
         levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(BlobAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(BlobAI)), 5);
-        levelModifier.AddMaxEnemyPower(5);
+        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(BlobAI)), 0);
 
         HullManager.AddChatEventMessage(this);
         return true;

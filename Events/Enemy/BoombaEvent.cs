@@ -27,7 +27,7 @@ public class BoombaEvent : HullEvent
         }
         levelModifier.AddEnemyComponentRarity("Boomba", 100);
         levelModifier.AddEnemyComponentMaxCount("Boomba", 10);
-        levelModifier.AddMaxEnemyPower(10);
+        levelModifier.AddEnemyComponentPower("Boomba", 0);
 
         levelModifier.AddLandmines(Plugin.LandmineScale * 2 / 3);
 

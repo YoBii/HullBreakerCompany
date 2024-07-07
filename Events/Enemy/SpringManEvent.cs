@@ -30,8 +30,7 @@ public class SpringManEvent : HullEvent
         }
         levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(SpringManAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(SpringManAI)), 5);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(SpringManAI)), 1);
-        levelModifier.AddMaxEnemyPower(5);
+        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(SpringManAI)), 0);
 
         HullManager.AddChatEventMessage(this);
         return true;

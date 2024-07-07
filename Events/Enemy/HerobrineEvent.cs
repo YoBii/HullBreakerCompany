@@ -26,8 +26,8 @@ public class HerobrineEvent : HullEvent
             return false;
         }
         levelModifier.AddEnemyComponentRarity("Herobrine", 1000);
-        levelModifier.AddEnemyComponentPower("Herobrine", 1);
-        levelModifier.AddMaxEnemyPower(1);
+        levelModifier.AddEnemyComponentPower("Herobrine", 0);
+        levelModifier.AddEnemyComponentMaxCount("Herobrine", 2);
 
         HullManager.AddChatEventMessage(this);
         return true;

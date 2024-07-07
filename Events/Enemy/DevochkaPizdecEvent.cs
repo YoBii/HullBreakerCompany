@@ -30,7 +30,7 @@ public class DevochkaPizdecEvent : HullEvent
         }
         levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(DressGirlAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(DressGirlAI)), 4);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(DressGirlAI)), 1);
+        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(DressGirlAI)), 0);
         HullManager.AddChatEventMessage(this);
         return true;
     }

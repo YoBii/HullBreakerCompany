@@ -31,8 +31,7 @@ public class ArachnophobiaEvent : HullEvent
         }
         levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(SandSpiderAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(SandSpiderAI)), 5);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(SandSpiderAI)), 1);
-        levelModifier.AddMaxEnemyPower(4);
+        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(SandSpiderAI)), 0);
         HullManager.AddChatEventMessage(this);
         return true;
     }

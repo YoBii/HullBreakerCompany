@@ -29,7 +29,7 @@ public class LizardsEvent : HullEvent
         }
         levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(PufferAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(PufferAI)), 5);
-        levelModifier.AddMaxEnemyPower(5);
+        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(PufferAI)), 0);
         HullManager.AddChatEventMessage(this);
         return true;
     }
