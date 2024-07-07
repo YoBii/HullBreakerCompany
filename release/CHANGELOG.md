@@ -1,11 +1,19 @@
+# v2.2.1
+readme changes only
+* Added warning about breaking custom event changes
+	* Once more: You have to update your custom event configs. The notation for enemies has changed.
+* included custom event template
+* fixed table formatting
+
 # v2.2.0
 * updated for v56 
 	* last version was probably already compatible
-	* this version is also still compatible to v50
+	* this version is also still compatible with v50
 * **(NEW)** SpikeTrapEvent: Spawn more spike traps. Amount configurable. 
 * **(NEW)** Added integrated events for AdvancedCompany
 	* Every unique AC item now has its own event (Light shoes, Bunny ears, Controller)
 * **(NEW)** Updated custom event system. You can do almost anything with custom events now. Please see the README and custom event template for more information
+	* **IMPORTANT** You have to update your custom event configs. The notation for enemies has changed.
 	* Added support for multiple custom event folders. It will search for custom event cfg files in any folder called `HullEvents` inside your profile's BepInEx folder (including subfolders)
 * Added a % chance column to enemy and scrap log tables
 * Slightly modified how Hullbreaker events modify enemies and the level's power level

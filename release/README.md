@@ -47,9 +47,96 @@ Introducing events for Shy guy, Herobrine, FacilityMeltdown and more. Check the 
 * added support for changing the level's power levels (inside, outside, daytime)
 * added support for overriding the level's spawn curve to a constant value  (inside, outside, daytime)
 
+#### IMPORTANT
+With v2.2.0 the format of custom event config files has changed. Please update your configs. Refer to the template below.
+
+#### Custom Event Template
+
+The template file is located in your Hullbreaker plugins folder `profilename\BepInEx\plugins\explodingMods-HullBreaker_Company_Ambigous_Fork\HullEvents`
+<details>
+	<summary>Show Custom Event Template</summary>
+
+```
+# CustomEvent Template
+# I recommend you create a copy of this template and edit that.
+# The filename doesn't matter. You can name it whatever you like.
+
+# Change the line below to [ENABLED] or delete it to enable this custom event. 
+[DISABLED]
+
+# The internal event name
+# REQUIRED
+EventID = CustomEventName
+
+# Default weighted rarity of the event
+# REQUIRED
+EventWeight = 0
+
+# The long form message printed to in-game chat when the event is active
+# REQUIRED
+InGameMessage = My custom event chat message
+
+# The short form message printed to in-game chat when the event is active
+# REQUIRED
+InGameShortMessage = EVENT MESSAGE
+
+# List of enemies and their modifiers, seperated by comma
+# Set modifier to -1 to not change
+# enemyName = the name of the enemy. Must be identical to what's printed in hullbreaker logs/console
+# rarity = the rarity to set (in % of the total inside enemy rarity) 
+# maxcount = maximum number of entities of that enemy that can spawn at the same time
+# power = the power level for that enemy
+# EXAMPLE: Centipede:100:10:-1, SandSpider:100:8:1
+SpawnableEnemies = enemyName:rarity:maxcount:power, enemyName:rarity:maxcount:power
+
+# List of outside enemies and their modifiers, seperated by comma
+# Set modifier to -1 to not change
+# enemyName = the name of the enemy. Must be identical to what's printed in hullbreaker logs/console
+# rarity = the rarity to set as an absolute number
+# maxcount = maximum number of entities of that enemy that can spawn at the same time
+# power = the power level for that enemy
+# EXAMPLE: MouthDog:100:20:1, SandWorm:100:5:0
+SpawnableOutsideEnemies = enemyName:rarity:maxcount:power, enemyName:rarity:maxcount:power
+
+# List of daytime enemies and their modifiers, seperated by comma
+# Set modifier to -1 to not change
+# enemyName = the name of the enemy. Must be identical to what's printed in hullbreaker logs/console
+# rarity = the rarity to set as an absolute number
+# maxcount = maximum number of entities of that enemy that can spawn at the same time
+# power = the power level for that enemy
+# EXAMPLE: RedLocustBees:-1:10:0
+SpawnableDaytimeEnemies = enemyName:rarity
+
+# List of scrap items and their rarity, seperated by comma
+# scrapName = the name of the scrap item. Must be identical to what's printed in hullbreaker logs/console
+# rarity = the rarity to set (in % of the scrap rarity) 
+# EXAMPLE SpawnableScrap = Big Bolt:10, Cookie mold pan:20, Teeth:50
+SpawnableScrap = scrapName:rarity
+
+# Increase the level's inside monster power cap by this number. Set to 0 to disable
+GlobalPowerIncrease = 0
+
+# Increase the level's outside monster power cap by this number. Set to 0 to disable
+GlobalOutsidePowerIncrease = 0
+
+# Increase the level's daytime monster power cap by this number. Set to 0 to disable
+GlobalDaytimePowerIncrease = 0
+
+# Override the global spawn rate to a constant value. Think number of enemies to spawn per wave. 256 will spawn everything instantly. Set to 0 to disable
+GlobalInsideSpawnRateOverride = 0 
+
+# Override the global outside spawn rate to a constant value. 256 will front load the outside enemy spawning. Set to 0 to disable
+GlobalOutsideSpawnRateOverride = 0
+
+# Override the global daytime spawn rate to a constant value. Think number of enemies to spawn per wave. 256 will spawn everything instantly. Set to 0 to disable
+GlobalDaytimeSpawnRateOverride = 0
+```
+</details>
+
 ### Compatibility
 Fully compatible with LethalQuantities and AdvancedCompany overrides.
 <details>
+
 Using these mods you can allow events that are otherwise not available on certain moons by setting the respective monster or scrap rarity to at least `1`.
 For example with vanilla moon configuration you can't get Jester event on Experimentation because Jesters don't spawn there.
 Using the tool of your choice set the Jester's rarity to `1` or any larger number. This will enable the Jester event on that moon.
@@ -139,13 +226,15 @@ TurretEvent  | Spawns a lot of turrets
 
 List of events integrated with others mods (from all event categories). 
 
-Boomba   | Increases bee spawn chance, increases max count, decreases power Level
-Herobrine   | Increases bee spawn chance, increases max count, decreases power Level
-ShyGuyEvent   | Increases bee spawn chance, increases max count, decreases power Level
-Meltdown   | Will trigger the meltdown event sometime during the day (random between early noon and midnight)
-AC_Bunny  | Increases spawn chance of AdvancedCompany unique item: Bunny ears
-AC_Controller  | Increases spawn chance of AdvancedCompany unique item: Controller (Green, Pietsmiet)
-AC_RGBShoes  | Increases spawn chance of AdvancedCompany unique item: Light Shoes
+Event | Required Mod | Details
+------ | ------ | ------
+Boomba   | LethalThings | Increases boomba spawn chance and max count significantly.
+Herobrine   | HerobrineMod | Increases Herobrine spawn chance. Can spawn  up to 2. Doesn't count towards power level.
+ShyGuyEvent  | Scopophobia | Increases ShyGuy spawn chance and allows more to spawn - drastically increasing chance of actually finding one.
+Meltdown   | FacilityMeltdown | Will trigger the meltdown event sometime during the day (random between early noon and midnight)
+AC_Bunny  | AdvancedCompany | Increases spawn chance of AdvancedCompany unique item: Bunny ears
+AC_Controller  | AdvancedCompany | Increases spawn chance of AdvancedCompany unique item: Controller (Green, Pietsmiet)
+AC_RGBShoes  | AdvancedCompany | Increases spawn chance of AdvancedCompany unique item: Light Shoes
 </details>
 
 ## Other changes
