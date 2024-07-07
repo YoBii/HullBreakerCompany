@@ -41,7 +41,7 @@ public class MeltdownEvent : HullEvent
         if (!EventsHandler.MeltdownActive || TimeOfDay.Instance.playersManager.inShipPhase || RoundManager.Instance.currentLevel.levelID == 3) {
             Plugin.Mls.LogInfo($"Meltdown Event abort. Reason: MeltdownActive: {EventsHandler.MeltdownActive}; " +
                 $"inShipPhase: {TimeOfDay.Instance.playersManager.inShipPhase}; " +
-                $"currentLevel: {RoundManager.Instance.currentLevel.PlanetName} (ID {RoundManager.Instance.currentLevel.levelID}");
+                $"currentLevel: {RoundManager.Instance.currentLevel.PlanetName} (ID {RoundManager.Instance.currentLevel.levelID})");
             return;
         }
         Plugin.Mls.LogInfo(ID() + $" Event: Meltdown initiated");
