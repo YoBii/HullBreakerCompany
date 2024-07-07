@@ -12,8 +12,9 @@ public class AC_ControllerEvent : HullEvent
     public override string GetDescription() => "Increases spawn chance of the green Pietsmiet controller item (AdvancedCompany)";
     public static List<string> MessagesList = new() {
         { "There will be gaming!" },
+        { "This moon is.. doom-ed?!" },
         { "The only thing they fear is you" },
-        { "\"Ich bin himmelblau, himmelblau\"" }
+        { "\"Ich bin himmelblau, himmelblau.. Scha-la-la!\"" }
     };
     public static List<string> shortMessagesList = new() {
         { "CONTROLLER" },

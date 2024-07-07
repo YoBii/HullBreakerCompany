@@ -12,8 +12,8 @@ public class ArmdayEvent : HullEvent
     public override int GetWeight() => 20;
     public override string GetDescription() => "Spawns a lot of heavy loot.";
     public static List<string> MessagesList = new() {
-        { "Expect to find some big heavy scrap" },
-        { "Roll up your sleeves and collect the scrap!" },
+        { "Expect a lot of of big heavy scrap!" },
+        { "Grip strength required! Heavy duty scrap." },
         { "Slipped disks are not covered by company insurance!" },
         { "Lift heavy objects with a jerking twisting motion!" },
         { "Lower back pain" }

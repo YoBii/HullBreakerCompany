@@ -12,7 +12,8 @@ public class AC_BunnyEvent : HullEvent
     public override string GetDescription() => "Increases spawn chance of the unique bunny ears item (AdvancedCompany)";
     public static List<string> MessagesList = new() {
         { "Jump little bunny, jump!" },
-        { "Hop, hop.." }
+        { "Hop, hop.." },
+        { "Reports of silly bunny ears" }
     };
     public static List<string> shortMessagesList = new() {
         { "BUNNY" },

@@ -11,8 +11,9 @@ public class AC_RGBShoesEvent : HullEvent
     public override int GetWeight() => 3;
     public override string GetDescription() => "Increases spawn chance of the unique light shoes item (AdvancedCompany)";
     public static List<string> MessagesList = new() {
-        { "Fancy sneakers. Gaming RGB!" },
-        { "Run at the speed of light" }
+        { "Fancy sneakers. Gaming RGB! +120fps" },
+        { "Run at the speed of light" },
+        { "Reports of RGB lights.. traveling at extreme speeds" }
     };
     public static List<string> shortMessagesList = new() {
         { "Shoes" },
@@ -22,7 +23,7 @@ public class AC_RGBShoesEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         Dictionary<String, int> scrapToSpawn = new() {
-            { "Light shoes", 3 }
+            { "Light shoes", 5 }
         };
         scrapToSpawn = CalculateScrapRarities(scrapToSpawn, levelModifier);
         if (scrapToSpawn.Count == 0) return false;
