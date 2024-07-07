@@ -25,6 +25,7 @@ namespace HullBreakerCompany.Hull
 
             Plugin.LandmineScale = GetConfigValue("1.2 - Event Configuration", "LandmineScale", 32, "The amount of additional landmines spawned by landmine event (there are more events that spawns mines and thus scale with the value set here)");
             Plugin.TurretScale = GetConfigValue("1.2 - Event Configuration", "TurretScale", 12, "The amount of additional turrets spawned by turret event");
+            Plugin.SpikeTrapScale = GetConfigValue("1.2 - Event Configuration", "SpikeTrapScale", 12, "The amount of additional spike traps spawned by SpikeTrap event");
             
             Plugin.BountyRewardMin = GetConfigValue("1.2 - Event Configuration", "BountyRewardMin", 20, "Minimum amount of credits rewarded for killing an enemy during EnemyBountyEvent");
             Plugin.BountyRewardMax = GetConfigValue("1.2 - Event Configuration", "BountyRewardMax", 70, "Maximum amount of credits rewarded for killing an enemy during EnemyBountyEvent");
