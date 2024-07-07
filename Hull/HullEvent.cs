@@ -19,9 +19,9 @@ public abstract class HullEvent
         var totalRarityWeight = 0;
         var totalEffectiveRarityWeight = 0;
         Dictionary<string, int> newScrapToSpawn = new Dictionary<string, int>();
+        Plugin.Mls.LogInfo($"{ID()}: Rarities (% of total) [{string.Join(", ", inputScrap.Select(scrap => scrap.Key + ":" + scrap.Value))}]");
         foreach (var scrap in inputScrap) {
             totalRarityWeight += scrap.Value;
-            Plugin.Mls.LogInfo($"{ID()}: want to change rarity of {scrap.Key} to {scrap.Value}% of total scrap rarity");
             if (levelModifier.IsScrapSpawnable(scrap.Key)) {
                 totalEffectiveRarityWeight += scrap.Value;
                 newScrapToSpawn.TryAdd(scrap.Key, scrap.Value);
@@ -31,10 +31,11 @@ public abstract class HullEvent
         foreach (var scrap in inputScrap) {
             if (newScrapToSpawn.ContainsKey(scrap.Key)) {
                 newScrapToSpawn[scrap.Key] = (int)Math.Round(scrap.Value / (double)totalEffectiveRarityWeight * totalRarityWeight);
-                if (newScrapToSpawn[scrap.Key] != scrap.Value) {
-                    Plugin.Mls.LogInfo($"{ID()}: to compensate for unspawnable scrap, {scrap.Key} will be added at {newScrapToSpawn[scrap.Key]}% of total scrap rarity ");
-                }
             }
+        }
+        if (newScrapToSpawn.Count() != inputScrap.Count()) {
+            Plugin.Mls.LogInfo($"Recalculating scrap rarities to compensate for items that are not in this moon's loot table..");
+            Plugin.Mls.LogInfo($"{ID()}: New rarities (% of total) [{string.Join(", ", newScrapToSpawn.Select(scrap => scrap.Key + ":" + scrap.Value))}]");
         }
         return newScrapToSpawn;
     }
