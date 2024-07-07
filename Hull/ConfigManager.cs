@@ -86,7 +86,7 @@ namespace HullBreakerCompany.Hull
         private static void CreateDefaultConfigFile()
         {
             using StreamWriter sw = File.CreateText(_configPath);
-            sw.WriteLine("[Weights]");
+            sw.WriteLine("[3 - Event Weights]");
             foreach (var hullEvent in EventsManager.EventDictionary)
             {
                 sw.WriteLine(hullEvent.ID() + "=" + hullEvent.GetWeight());
