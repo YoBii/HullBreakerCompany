@@ -12,6 +12,8 @@ public class ShyGuyEvent : HullEvent
     public override string GetDescription() => "Increases spawn chance of Shy Guy. Allows more than one to spawn.";
     public static List<string> MessagesList = new() {
         { "Do NOT look at him!" },
+        { "Scopophobia.." },
+        { "SCP-096" },
         { "When you're scared to take a look.." },
         { "No one who's seen their face has survived.." }
     };
