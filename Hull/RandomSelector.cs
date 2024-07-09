@@ -1,7 +1,9 @@
-﻿using System;
+﻿using HullBreakerCompany.Events.Misc;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
+using UnityEngine.UIElements;
 
 namespace HullBreakerCompany.Hull;
 
@@ -11,62 +13,35 @@ public abstract class RandomSelector
 
     private static Dictionary<string, int> weights = new();
 
-    public static List<string> GetRandomGameEvents(int count)
-    {
+    public static void InitializeWeights() {
         weights = ConfigManager.GetWeights();
-        
-        var gameEvents = GetWeightedRandomGameEvents(weights, count);
-
-        // remove selected events from pool - no duplicate events
-        foreach (var e in gameEvents ) {
-            if (e == "NothingEvent") continue;
-            weights.Remove(e);
-        }
-        return gameEvents;
-    }
-    
+    }  
     /// <summary>
-    /// Returns one randomly selected event 
+    /// Returns one random weighted event 
     /// </summary>
-    public static string GetAnotherRandomGameEvent() {
-        if (weights.Count == 0) {
+    public static string GetRandomGameEvent() {
+        var totalWeight = weights.Where(x => x.Value > 0).Sum(x => x.Value);
+        if (totalWeight < 1) {
             return null;
         }
-        string newEvent = GetWeightedRandomGameEvents(weights, 1)[0];
-        if (newEvent != "Nothing") weights.Remove(newEvent);
-        return newEvent; 
-    }
-    private static List<T> GetWeightedRandomGameEvents<T>(Dictionary<T, int> weights, int count)
-    {
-        var totalWeight = weights.Where(x => x.Value > 0).Sum(x => x.Value);
-        var selectedItems = new HashSet<T>();
-        
-        if (totalWeight < 1) {
-            return selectedItems.ToList();
-        }
+        string randomGameEvent = "";
 
-        while (selectedItems.Count < count)
-        {
-            var randomNumber = _random.Next(totalWeight);
-            foreach (var item in weights)
-            {
-                if (item.Value == 0)
-                {
-                    continue;
-                }
-
-                if (randomNumber < item.Value)
-                {
-                    selectedItems.Add(item.Key);
-                    break;
-                }
-                randomNumber -= item.Value;
+        var rnd = _random.Next(totalWeight);
+        foreach (var ev in weights) {
+            if (ev.Value == 0) {
+                continue;
             }
+            if (rnd < ev.Value) {
+                randomGameEvent = ev.Key;
+                break;
+            }
+            rnd -= ev.Value;
         }
-
-        return selectedItems.ToList();
+        if (string.IsNullOrEmpty(randomGameEvent)) return null;
+        // remove from pool unless NothingEvent - no duplicate events
+        if (randomGameEvent != "Nothing") weights.Remove(randomGameEvent);
+        return randomGameEvent; 
     }
-
     private static void Shuffle<T>(IList<T> list)
     {
         var n = list.Count;

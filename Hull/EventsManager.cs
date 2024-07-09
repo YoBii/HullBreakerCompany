@@ -96,45 +96,22 @@ public abstract class EventsManager {
     public static void ExecuteEvents(SelectableLevel newLevel) {
         HullManager.LogBox("EVENT EXECUTION");
 
-        //LevelModifier levelMod = new(newLevel);
-        //levelModifier = levelMod;
         levelModifier = new LevelModifier(newLevel);
 
         UpdateLevelSettings();
         RefreshDaysPassed();
 
-        List<HullEvent> randomEvents = new();
+        List<HullEvent> chosenEvents = new();
 
         int eventCount = Plugin.IncreaseEventCountPerDay ? Plugin.EventCount + DaysPassed : Plugin.EventCount;
         Plugin.Mls.LogInfo($"Round events: {eventCount}");
 
         Plugin.Mls.LogInfo($"Start event selection..");
+        
+        RandomSelector.InitializeWeights();
 
-        foreach (string gameEvent in RandomSelector.GetRandomGameEvents(eventCount)) {
-            try {
-                HullEvent hullEvent = EventDictionary.FirstOrDefault(e => e.ID() == gameEvent);
-                if (hullEvent == null) {
-                    Plugin.Mls.LogWarning($"Couldn't find event {gameEvent} in event dictionary!");
-                    continue;
-                }
-
-                Plugin.Mls.LogInfo($"Got event: {hullEvent.ID()}");
-
-                if (hullEvent.Execute(newLevel, levelModifier)) {
-                    //Plugin.Mls.LogInfo($"Adding event: {hullEvent.ID()}");
-                    randomEvents.Add(hullEvent);
-                } else {
-                    Plugin.Mls.LogInfo($"Skipping event: {hullEvent.ID()}");
-                }
-            } catch (NullReferenceException ex) {
-                Plugin.Mls.LogError(
-                    $"NullReferenceException caught while processing event: {gameEvent}. Exception message: {ex.Message}. Caused : {ex.InnerException}");
-            }
-        }
-
-        // If events failed, select more until count is reached
-        while (randomEvents.Count() < eventCount) {
-            var newEvent = RandomSelector.GetAnotherRandomGameEvent();
+        while (chosenEvents.Count() < eventCount) {
+            var newEvent = RandomSelector.GetRandomGameEvent();
             if (newEvent == null) {
                 Plugin.Mls.LogInfo($"Event selection failed. No events left to execute..");
                 break;
@@ -144,21 +121,19 @@ public abstract class EventsManager {
                 Plugin.Mls.LogWarning($"Couldn't find event {newEvent} in event dictionary!");
                 continue;
             }
-
             Plugin.Mls.LogInfo($"Got event: {hullEvent.ID()}");
-
-            if (hullEvent.Execute(newLevel, levelModifier)) {
-                //Plugin.Mls.LogInfo($"Adding event: {hullEvent.ID()}");
-                randomEvents.Add(hullEvent);
+            bool success = hullEvent.Execute(newLevel, levelModifier);
+            if (success) {
+                chosenEvents.Add(hullEvent);
             } else {
                 Plugin.Mls.LogInfo($"Skipping event: {hullEvent.ID()}");
             }
         }
 
-        Plugin.Mls.LogInfo($"Selected events: {randomEvents.Count()}");
-        Plugin.Mls.LogInfo($"Nothing events: {randomEvents.Where(e => e.ID().Equals("Nothing")).Count()}");
-        randomEvents.RemoveAll(e => e.ID().Equals("Nothing"));
-        Plugin.Mls.LogInfo($"Active events: {randomEvents.Count()} [{string.Join(", ", randomEvents.Select(e => e.ID()))}]");
+        Plugin.Mls.LogInfo($"Selected events: {chosenEvents.Count()}");
+        Plugin.Mls.LogInfo($"Nothing events: {chosenEvents.Where(e => e.ID().Equals("Nothing")).Count()}");
+        chosenEvents.RemoveAll(e => e.ID().Equals("Nothing"));
+        Plugin.Mls.LogInfo($"Active events: {chosenEvents.Count()} [{string.Join(", ", chosenEvents.Select(e => e.ID()))}]");
 
         levelModifier.ApplyModificationsToLevel();
 
