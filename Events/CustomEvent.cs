@@ -109,9 +109,12 @@ public class CustomEvent : HullEvent
             if (enemy.Value[2] > -1) levelModifier.AddDaytimeEnemyComponentPower(enemy.Key, enemy.Value[2]);
         }
 
+        if (ScrapSpawnList.Count > 0) {
         ScrapSpawnList = CalculateScrapRarities(ScrapSpawnList, levelModifier);
-        if (ScrapSpawnList.Count == 0) return false;
+            if (ScrapSpawnList != null && ScrapSpawnList.Count > 0) {
         levelModifier.AddSpawnableScrapRarityDict(ScrapSpawnList);
+            }
+        }
 
         if (addPower > 0) levelModifier.AddMaxEnemyPower(addPower);
         if (addOutsidePower > 0) levelModifier.AddMaxOutsideEnemyPower(addOutsidePower);
