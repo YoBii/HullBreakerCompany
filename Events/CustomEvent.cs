@@ -10,8 +10,8 @@ public class CustomEvent : HullEvent
 {
     private string _id;
     private int _weight;
-    private string _message;
-    private string _shortMessage;
+    private List<string> MessageList = new List<string>();
+    private List<string> ShortMessageList = new List<string>();
     
     public override string ID() 
     { 
@@ -32,30 +32,30 @@ public class CustomEvent : HullEvent
         return _weight;
     }
     
-    public void SetMessage(string value)
+    public void AddMessage(string msg)
     {
-        _message = value;
+        MessageList.Add(msg);
     }
     
-    public void SetShortMessage(string value)
+    public void AddShortMessage(string msg)
     {
-        _shortMessage = value;
+        ShortMessageList.Add(msg);
     }
     
     public override string GetMessage()
     {
-        return "<color=white>" + _message + "</color>";
+        return "<color=white>" + MessageList[UnityEngine.Random.Range(0, MessageList.Count)] + "</color>";
     }
-    public string GetReadableMessage() {
-        return _message;
+    public string GetReadableMessages() {
+        return string.Join("; ", MessageList);
     }
     
     public override string GetShortMessage()
     {
-        return "<color=white>" + _shortMessage + "</color>";
+        return "<color=white>" + ShortMessageList[UnityEngine.Random.Range(0, ShortMessageList.Count)] + "</color>";
     }
     public string GetReadableShortMessage() {
-        return _shortMessage;
+        return string.Join("; ", ShortMessageList);
     }
     
     //public List<string> EnemySpawnList = new ();

@@ -13,7 +13,7 @@ public abstract class HullEvent
     }
     public virtual string GetDescription() => "Default description";
     public virtual string GetMessage() => "Default message";
-    public virtual string GetShortMessage() => "Short message";
+    public virtual string GetShortMessage() => "MESSAGE";
     public virtual bool Execute(SelectableLevel level, LevelModifier levelModifier) { return true; }
     public virtual bool SimulateExecution(SelectableLevel level, LevelModifier levelModifier, Dictionary<string, List<int>> enemies, Dictionary<string, List<int>> OutsideEnemies, Dictionary<string, List<int>> DaytimeEnemies, Dictionary<string, int> scrap) { 
         if (enemies != null && enemies.Count > 0 && enemies.Any(enemy => !levelModifier.IsEnemySpawnable(enemy.Key))) {
@@ -38,7 +38,7 @@ public abstract class HullEvent
         var totalRarityWeight = 0;
         var totalEffectiveRarityWeight = 0;
         Dictionary<string, int> newScrapToSpawn = new Dictionary<string, int>();
-        Plugin.Mls.LogInfo($"{ID()}: Rarities (% of total) [{string.Join(", ", inputScrap.Select(scrap => scrap.Key + ":" + scrap.Value))}]");
+        Plugin.Mls.LogInfo($"{ID()}: Scrap rarities (% of total) [{string.Join(", ", inputScrap.Select(scrap => scrap.Key + ":" + scrap.Value))}]");
         foreach (var scrap in inputScrap) {
             totalRarityWeight += scrap.Value;
             if (levelModifier.IsScrapSpawnable(scrap.Key, false)) {
