@@ -74,22 +74,7 @@ public class CustomEvent : HullEvent
     public int overrideDaytimeSpawnRate;
 
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
-        if(EnemySpawnList.Count > 0 && !EnemySpawnList.Any(enemy => levelModifier.IsEnemySpawnable(enemy.Key))) {
-            Plugin.Mls.LogWarning($"Event {ID()} has SpawnableEnemies defined but none of them are spawnable in this level.");
-            return false;
-        }
-        if (OutsideEnemySpawnList.Count > 0 && !OutsideEnemySpawnList.Any(enemy => levelModifier.IsOutsideEnemySpawnable(enemy.Key))) {
-            Plugin.Mls.LogWarning($"Event {ID()} has SpawnableOutsideEnemies defined but none of them are spawnable in this level.");
-            return false;
-        }        
-        if (DaytimeEnemySpawnList.Count > 0 && !DaytimeEnemySpawnList.Any(enemy => levelModifier.IsDaytimeEnemySpawnable(enemy.Key))) {
-            Plugin.Mls.LogWarning($"Event {ID()} has SpawnableDaytimeEnemies defined but none of them are spawnable in this level.");
-            return false;
-        }
-        if (ScrapSpawnList.Count > 0 && !ScrapSpawnList.Any(scrap => levelModifier.IsScrapSpawnable(scrap.Key))) {
-            Plugin.Mls.LogWarning($"Event {ID()} has SpawnableScrap defined but none of them are spawnable in this level.");
-            return false;
-        }
+        if (!SimulateExecution(level, levelModifier, EnemySpawnList, OutsideEnemySpawnList, DaytimeEnemySpawnList, ScrapSpawnList)) return false;
 
         foreach (var enemy in EnemySpawnList) {
             levelModifier.AddEnemyComponentRarity(enemy.Key, enemy.Value[0]);
@@ -110,9 +95,9 @@ public class CustomEvent : HullEvent
         }
 
         if (ScrapSpawnList.Count > 0) {
-        ScrapSpawnList = CalculateScrapRarities(ScrapSpawnList, levelModifier);
+            ScrapSpawnList = CalculateScrapRarities(ScrapSpawnList, levelModifier);
             if (ScrapSpawnList != null && ScrapSpawnList.Count > 0) {
-        levelModifier.AddSpawnableScrapRarityDict(ScrapSpawnList);
+                levelModifier.AddSpawnableScrapRarityDict(ScrapSpawnList);
             }
         }
 
