@@ -546,14 +546,14 @@ public class LevelModifier(SelectableLevel level) {
             return false;
         }
     }
-    public bool IsScrapSpawnable(string itemName) {
+    public bool IsScrapSpawnable(string itemName, bool logging = true) {
         if (!IsTargetLevelSet()) return false;
         if (targetLevel.spawnableScrap.Any(item => item.spawnableItem.itemName.Equals(itemName))) {
             return true;
-        } else {
+        } else if (logging) {
             Plugin.Mls.LogWarning($"Can't spawn scrap {itemName} on this moon.");
-            return false;
         }
+        return false;
     }
 
     public void UndoModificationsEarly() {
