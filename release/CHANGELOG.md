@@ -1,3 +1,17 @@
+# v2.2.2
+* added support for multiple long and short messages for custom events
+	* messages are seprated by semicolon (;)
+	* updated `CustomEventTemplate.cfg`
+* improved custom event config parsing
+* improved event execution by adding a method to simulate all event modifications before queueing them up for application
+	* fixes a bug where custom events with no or undefined scrap definitions would apply changes to enemies without being considered an 'active event' i.e. no message printed to chat, etc.
+* improved random event selection code
+	* previously under normal circumstances you could only get one NothingEvent per day i.e. effectively you only had a chance to reduce the total number of events per day by one
+	* now NothingEvent can roll every time an event is selected
+	* if you previously increased the NothingEvent weight to increase randomness / decrease frequency of events you might want to consider tuning it back down
+* ignore case for enemy and scrap names (in custom events)
+* updated event messages
+* updated a few logs
 # v2.2.1
 readme changes only
 * Added warning about breaking custom event changes
@@ -15,15 +29,15 @@ readme changes only
 * **(NEW)** Updated custom event system. You can do almost anything with custom events now. Please see the README and custom event template for more information
 	* **IMPORTANT** You have to update your custom event configs. The notation for enemies has changed.
 	* Added support for multiple custom event folders. It will search for custom event cfg files in any folder called `HullEvents` inside your profile's BepInEx folder (including subfolders)
-* Added a % chance column to enemy and scrap log tables
-* Slightly modified how Hullbreaker events modify enemies and the level's power level
+* added a % chance column to enemy and scrap log tables
+* slightly modified how Hullbreaker events modify enemies and the level's power level
 * added a few checks for events that spawn or modify traps
 	* should fix OnAPowderKeg spamming errors when a round ends early
 * updated event messages
 * added logging when scrap rarities are recalculated due to unspawnable items
 * other logging changes / typos fixed
-* Fixed an issue where modifications to a level's max power levels weren't correctly applied
-* Fixed an issue where the event weights section was duplicated in BepInEx config when the config file was newly generated / deleted
+* fixed an issue where modifications to a level's max power levels weren't correctly applied
+* fixed an issue where the event weights section was duplicated in BepInEx config when the config file was newly generated / deleted
 * removed FloodedLevelsFixed dependency. If you encounter any issues with flooded levels during time events please let me know.
 * updated README
 

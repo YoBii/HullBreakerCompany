@@ -64,70 +64,74 @@ The template file is located in your Hullbreaker plugins folder `profilename\Bep
 # Change the line below to [ENABLED] or delete it to enable this custom event. 
 [DISABLED]
 
+# EVENT ID - REQUIRED
 # The internal event name
-# REQUIRED
 EventID = CustomEventName
 
+# EVENT WEIGHT - REQUIRED
 # Default weighted rarity of the event
-# REQUIRED
 EventWeight = 0
 
+# MESSAGES - REQUIRED
 # The long form message printed to in-game chat when the event is active
-# REQUIRED
-InGameMessage = My custom event chat message
+# You can add multiple messages separated by semicolon (first message; second message; ..)
+InGameMessage = My first custom event chat message; My second custom event chat message
 
+# SHORT MESSAGES - REQUIRED
 # The short form message printed to in-game chat when the event is active
-# REQUIRED
-InGameShortMessage = EVENT MESSAGE
+# You can add multiple messages separated by semicolon (FIRST; SECOND; ..)
+InGameShortMessage = FIRST; SECOND; THIRD
 
-# List of enemies and their modifiers, seperated by comma
-# Set modifier to -1 to not change
-# enemyName = the name of the enemy. Must be identical to what's printed in hullbreaker logs/console
-# rarity = the rarity to set (in % of the total inside enemy rarity) 
-# maxcount = maximum number of entities of that enemy that can spawn at the same time
-# power = the power level for that enemy
+# ENEMY LISTS
+# Enemies followed by their modifiers, seperated by comma
+# Event will be skipped when ONE or more of these are missing from the level's enemy list
+# Format: enemyName:rarity:maxcount:power, ..
+# enemyName: the name of the enemy. Must be identical to what's printed in hullbreaker logs/console
+# rarity: the rarity to set (in % of the total enemy rarity i.e. 100 makes it 50:50), -1 to not change
+# maxcount: spawn up to this amount, -1 to not change, can be omitted
+# power: override the enemy's power level, -1 to not change, can be omitted
+
+# INSIDE ENEMIES - OPTIONAL
 # EXAMPLE: Centipede:100:10:-1, SandSpider:100:8:1
 SpawnableEnemies = enemyName:rarity:maxcount:power, enemyName:rarity:maxcount:power
 
-# List of outside enemies and their modifiers, seperated by comma
-# Set modifier to -1 to not change
-# enemyName = the name of the enemy. Must be identical to what's printed in hullbreaker logs/console
-# rarity = the rarity to set as an absolute number
-# maxcount = maximum number of entities of that enemy that can spawn at the same time
-# power = the power level for that enemy
+# OUTSIDE ENEMIES - OPTIONAL
 # EXAMPLE: MouthDog:100:20:1, SandWorm:100:5:0
 SpawnableOutsideEnemies = enemyName:rarity:maxcount:power, enemyName:rarity:maxcount:power
 
-# List of daytime enemies and their modifiers, seperated by comma
-# Set modifier to -1 to not change
-# enemyName = the name of the enemy. Must be identical to what's printed in hullbreaker logs/console
-# rarity = the rarity to set as an absolute number
-# maxcount = maximum number of entities of that enemy that can spawn at the same time
-# power = the power level for that enemy
+# DAYTIME ENEMIES - OPTIONAL
 # EXAMPLE: RedLocustBees:-1:10:0
 SpawnableDaytimeEnemies = enemyName:rarity
 
+# SCRAP LIST - OPTIONAL
 # List of scrap items and their rarity, seperated by comma
+# Event will be skipped when ALL of these are missing from the level's loot table
 # scrapName = the name of the scrap item. Must be identical to what's printed in hullbreaker logs/console
-# rarity = the rarity to set (in % of the scrap rarity) 
+# rarity = the rarity to set (in % of the total scrap rarity i.e. 100 makes it 50:50) 
 # EXAMPLE SpawnableScrap = Big Bolt:10, Cookie mold pan:20, Teeth:50
 SpawnableScrap = scrapName:rarity
 
+# MAX ENEMY POWER - OPTIONAL
 # Increase the level's inside monster power cap by this number. Set to 0 to disable
 GlobalPowerIncrease = 0
 
+# MAX OUTSIDE ENEMY POWER - OPTIONAL
 # Increase the level's outside monster power cap by this number. Set to 0 to disable
 GlobalOutsidePowerIncrease = 0
 
+# MAX DAYTIME ENEMY POWER - OPTIONAL
 # Increase the level's daytime monster power cap by this number. Set to 0 to disable
 GlobalDaytimePowerIncrease = 0
 
+# ENEMY SPAWN RATE OVERRIDE - OPTIONAL
 # Override the global spawn rate to a constant value. Think number of enemies to spawn per wave. 256 will spawn everything instantly. Set to 0 to disable
 GlobalInsideSpawnRateOverride = 0 
 
+# OUTSIDE ENEMY SPAWN RATE OVERRIDE - OPTIONAL
 # Override the global outside spawn rate to a constant value. 256 will front load the outside enemy spawning. Set to 0 to disable
 GlobalOutsideSpawnRateOverride = 0
 
+# DAYTIME ENEMY SPAWN RATE OVERRIDE - OPTIONAL
 # Override the global daytime spawn rate to a constant value. Think number of enemies to spawn per wave. 256 will spawn everything instantly. Set to 0 to disable
 GlobalDaytimeSpawnRateOverride = 0
 ```
@@ -160,7 +164,7 @@ They are designed to be impactful and create unique situations but still be mana
 Event | Details
 ------ | ------
 Arachnophobia   | Bunker spiders are more likely to spawn. There can be two or even more. Recommended mod: Arachnophilia
-Bee   | Circuit Bees are more likely to spawn and you can find a lot of them. This also increases daytime enemy spawns overall (take not LQ users).
+Bee   | Bee hives are more likely to spawn and you can find a lot of them. This also increases daytime enemy spawns overall (take note LQ users).
 Butler   | Butler spawns more likely and there's potentially more of them. They don't count to overall enemy cap.
 DevochkaPizdec  | Ghost girls spawn more frequently and there can be more than one. Don't loose your head out there.
 FlowerMan   | Brackens spawn more frequently and in larger quantities. They often move together but can separate and give you a really bad time.
@@ -215,7 +219,7 @@ OpenTheNoor  | All big security doors start in closed state
 OutSideEnemyDay  | Frontloads outside enemy spawns to occur early in the day. Like eclipsed but only outside.
 SpikeTrap  | Spawns a lot of spike traps (might have no effect in some custom interiors)
 TimeAnomaly  | Time passes faster
-TimeDilation  | Time passes more slower
+TimeDilation  | Time passes slower
 TurretEvent  | Spawns a lot of turrets
 
 </details>
@@ -233,7 +237,7 @@ Herobrine   | HerobrineMod | Increases Herobrine spawn chance. Can spawn  up to 
 ShyGuyEvent  | Scopophobia | Increases ShyGuy spawn chance and allows more to spawn - drastically increasing chance of actually finding one.
 Meltdown   | FacilityMeltdown | Will trigger the meltdown event sometime during the day (random between early noon and midnight)
 AC_Bunny  | AdvancedCompany | Increases spawn chance of AdvancedCompany unique item: Bunny ears
-AC_Controller  | AdvancedCompany | Increases spawn chance of AdvancedCompany unique item: Controller (Green, Pietsmiet)
+AC_Controller  | AdvancedCompany | Increases spawn chance of AdvancedCompany unique item: Controller (Pietsmiet)
 AC_RGBShoes  | AdvancedCompany | Increases spawn chance of AdvancedCompany unique item: Light Shoes
 </details>
 
