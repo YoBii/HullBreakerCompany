@@ -93,7 +93,7 @@ public class LevelModifier(SelectableLevel level) {
         }
 
         foreach (var rarityPair in enemyComponentRarityModifications) {
-            foreach (var enemy in targetLevel.Enemies.Where(enemy => enemy.enemyType.enemyPrefab.name == rarityPair.Key)) {
+            foreach (var enemy in targetLevel.Enemies.Where(enemy => enemy.enemyType.enemyPrefab.name.Equals(rarityPair.Key, StringComparison.OrdinalIgnoreCase))) {
                 if (undo) {
                     enemy.rarity = enemyComponentRarityBackups[rarityPair.Key];
                 } else {
@@ -109,7 +109,7 @@ public class LevelModifier(SelectableLevel level) {
         if (enemyComponentMaxCountModifications.Count <= 0) return;
 
         foreach (var maxCountPair in enemyComponentMaxCountModifications) {
-            foreach (var enemy in targetLevel.Enemies.Where(enemy => enemy.enemyType.enemyPrefab.name == maxCountPair.Key)) {
+            foreach (var enemy in targetLevel.Enemies.Where(enemy => enemy.enemyType.enemyPrefab.name.Equals(maxCountPair.Key, StringComparison.OrdinalIgnoreCase))) {
                 if (!undo) enemyComponentMaxCountBackups.TryAdd(maxCountPair.Key, enemy.enemyType.MaxCount);
                 enemy.enemyType.MaxCount = undo ? enemyComponentMaxCountBackups[maxCountPair.Key] : maxCountPair.Value;
                 Plugin.Mls.LogInfo($"Setting maxCount of {enemy.enemyType.enemyPrefab.name} to {enemy.enemyType.MaxCount}");
@@ -121,7 +121,7 @@ public class LevelModifier(SelectableLevel level) {
         if (enemyComponentPowerModifications.Count <= 0) return;
 
         foreach (var powerPair in enemyComponentPowerModifications) {
-            foreach (var enemy in targetLevel.Enemies.Where(enemy => enemy.enemyType.enemyPrefab.name == powerPair.Key)) {
+            foreach (var enemy in targetLevel.Enemies.Where(enemy => enemy.enemyType.enemyPrefab.name.Equals(powerPair.Key, StringComparison.OrdinalIgnoreCase))) {
                 if (!undo) enemyComponentPowerBackups.TryAdd(powerPair.Key, (float) Math.Round(enemy.enemyType.PowerLevel));
                 enemy.enemyType.PowerLevel = undo ? enemyComponentPowerBackups[powerPair.Key] : powerPair.Value;
                 Plugin.Mls.LogInfo($"Setting power of {enemy.enemyType.enemyPrefab.name} to {enemy.enemyType.PowerLevel}");
@@ -137,7 +137,7 @@ public class LevelModifier(SelectableLevel level) {
         }
 
         foreach (var rarityPair in outsideEnemyComponentRarityModifications) {
-            foreach (var enemy in targetLevel.OutsideEnemies.Where(enemy => enemy.enemyType.enemyPrefab.name == rarityPair.Key)) {
+            foreach (var enemy in targetLevel.OutsideEnemies.Where(enemy => enemy.enemyType.enemyPrefab.name.Equals(rarityPair.Key, StringComparison.OrdinalIgnoreCase))) {
                 if (undo) {
                     enemy.rarity = outsideEnemyComponentRarityBackups[rarityPair.Key];
                 } else {
@@ -152,7 +152,7 @@ public class LevelModifier(SelectableLevel level) {
     private void ApplyOutsideEnemyComponentMaxCount(bool undo = false) {
         if (outsideEnemyComponentMaxCountModifications.Count <= 0) return;
         foreach (var maxCountPair in outsideEnemyComponentMaxCountModifications) {
-            foreach (var enemy in targetLevel.OutsideEnemies.Where(enemy => enemy.enemyType.enemyPrefab.name == maxCountPair.Key)) {
+            foreach (var enemy in targetLevel.OutsideEnemies.Where(enemy => enemy.enemyType.enemyPrefab.name.Equals(maxCountPair.Key, StringComparison.OrdinalIgnoreCase))) {
                 if (!undo) outsideEnemyComponentMaxCountBackups.TryAdd(maxCountPair.Key, enemy.enemyType.MaxCount);
                 enemy.enemyType.MaxCount = undo ? outsideEnemyComponentMaxCountBackups[maxCountPair.Key] : maxCountPair.Value;
                 Plugin.Mls.LogInfo($"Setting maxCount of {enemy.enemyType.enemyPrefab.name} to {enemy.enemyType.MaxCount}");
@@ -164,7 +164,7 @@ public class LevelModifier(SelectableLevel level) {
         if (outsideEnemyComponentPowerModifications.Count <= 0) return;
 
         foreach (var powerPair in outsideEnemyComponentPowerModifications) {
-            foreach (var enemy in targetLevel.OutsideEnemies.Where(enemy => enemy.enemyType.enemyPrefab.name == powerPair.Key)) {
+            foreach (var enemy in targetLevel.OutsideEnemies.Where(enemy => enemy.enemyType.enemyPrefab.name.Equals(powerPair.Key, StringComparison.OrdinalIgnoreCase))) {
                 if (!undo) outsideEnemyComponentPowerBackups.TryAdd(powerPair.Key, (float) Math.Round(enemy.enemyType.PowerLevel));
                 enemy.enemyType.PowerLevel = undo ? outsideEnemyComponentPowerBackups[powerPair.Key] : powerPair.Value;
                 Plugin.Mls.LogInfo($"Setting power of {enemy.enemyType.enemyPrefab.name} to {enemy.enemyType.PowerLevel}");
@@ -178,7 +178,7 @@ public class LevelModifier(SelectableLevel level) {
             targetLevelDaytimeEnemyRarityTotal = targetLevel.DaytimeEnemies.Sum(enemy => enemy.rarity);
         }
         foreach (var rarityPair in daytimeEnemyComponentRarityModifications) {
-            foreach (var enemy in targetLevel.DaytimeEnemies.Where(enemy => enemy.enemyType.enemyPrefab.name == rarityPair.Key)) {
+            foreach (var enemy in targetLevel.DaytimeEnemies.Where(enemy => enemy.enemyType.enemyPrefab.name.Equals(rarityPair.Key, StringComparison.OrdinalIgnoreCase))) {
                 if (undo) {
                     enemy.rarity = daytimeEnemyComponentRarityBackups[rarityPair.Key];
                 } else {
@@ -194,7 +194,7 @@ public class LevelModifier(SelectableLevel level) {
         if (daytimeEnemyComponentMaxCountModifications.Count <= 0) return;
 
         foreach (var maxCountPair in daytimeEnemyComponentMaxCountModifications) {
-            foreach (var enemy in targetLevel.DaytimeEnemies.Where(enemy => enemy.enemyType.enemyPrefab.name == maxCountPair.Key)) {
+            foreach (var enemy in targetLevel.DaytimeEnemies.Where(enemy => enemy.enemyType.enemyPrefab.name.Equals(maxCountPair.Key, StringComparison.OrdinalIgnoreCase))) {
                 if (!undo) daytimeEnemyComponentMaxCountBackups.TryAdd(maxCountPair.Key, enemy.enemyType.MaxCount);
                 enemy.enemyType.MaxCount = undo ? daytimeEnemyComponentMaxCountBackups[maxCountPair.Key] : maxCountPair.Value;
                 Plugin.Mls.LogInfo($"Setting maxCount of {enemy.enemyType.enemyPrefab.name} to {enemy.enemyType.MaxCount}");
@@ -206,7 +206,7 @@ public class LevelModifier(SelectableLevel level) {
         if (daytimeEnemyComponentPowerModifications.Count <= 0) return;
 
         foreach (var powerPair in daytimeEnemyComponentPowerModifications) {
-            foreach (var enemy in targetLevel.DaytimeEnemies.Where(enemy => enemy.enemyType.enemyPrefab.name == powerPair.Key)) {
+            foreach (var enemy in targetLevel.DaytimeEnemies.Where(enemy => enemy.enemyType.enemyPrefab.name.Equals(powerPair.Key, StringComparison.OrdinalIgnoreCase))) {
                 if (!undo) daytimeEnemyComponentPowerBackups.TryAdd(powerPair.Key, (float) Math.Round(enemy.enemyType.PowerLevel));
                 enemy.enemyType.PowerLevel = undo ? daytimeEnemyComponentPowerBackups[powerPair.Key] : powerPair.Value;
                 Plugin.Mls.LogInfo($"Setting power of {enemy.enemyType.enemyPrefab.name} to {enemy.enemyType.PowerLevel}");
@@ -222,7 +222,7 @@ public class LevelModifier(SelectableLevel level) {
         }
 
         foreach (var rarityPair in spawnableScrapRarityModifications) {
-            foreach (var item in targetLevel.spawnableScrap.Where(item => item.spawnableItem.itemName == rarityPair.Key)) {
+            foreach (var item in targetLevel.spawnableScrap.Where(item => item.spawnableItem.itemName.Equals(rarityPair.Key, StringComparison.OrdinalIgnoreCase))) {
                 if (undo) {
                     item.rarity = spawnableScrapRarityBackups[rarityPair.Key];
                 } else {
@@ -430,6 +430,51 @@ public class LevelModifier(SelectableLevel level) {
         timeScale = value;
         return true;
     }
+    public bool IsEnemySpawnable(string enemyName) {
+        if (!IsTargetLevelSet()) return false;
+        if (targetLevel.Enemies.Any(unit => unit.enemyType.enemyPrefab.name.Equals(enemyName, StringComparison.OrdinalIgnoreCase))) {
+            return true;
+        } else {
+            Plugin.Mls.LogWarning($"Can't spawn enemy {enemyName} on this moon.");
+            return false;
+        }
+    }
+    public bool IsOutsideEnemySpawnable(string enemyName) {
+        if (!IsTargetLevelSet()) return false;
+        if (targetLevel.OutsideEnemies.Any(unit => unit.enemyType.enemyPrefab.name.Equals(enemyName, StringComparison.OrdinalIgnoreCase))) {
+            return true;
+        } else {
+            Plugin.Mls.LogWarning($"Can't spawn outside {enemyName} on this moon.");
+            return false;
+        }
+    }
+    public bool IsDaytimeEnemySpawnable(string enemyName) {
+        if (!IsTargetLevelSet()) return false;
+        if (targetLevel.DaytimeEnemies.Any(unit => unit.enemyType.enemyPrefab.name.Equals(enemyName, StringComparison.OrdinalIgnoreCase))) {
+            return true;
+        } else {
+            Plugin.Mls.LogWarning($"Can't spawn daytime enemy {enemyName} on this moon.");
+            return false;
+        }
+    }
+    public bool IsUnitSpawnable<T>() {
+        if (!IsTargetLevelSet()) return false;
+        if (targetLevel.spawnableMapObjects.Any(mapObject => mapObject.prefabToSpawn.GetComponentInChildren<T>() != null)) {
+            return true;
+        } else {
+            Plugin.Mls.LogWarning($"Can't spawn {nameof(T)} on this moon.");
+            return false;
+        }
+    }
+    public bool IsScrapSpawnable(string itemName, bool logging = true) {
+        if (!IsTargetLevelSet()) return false;
+        if (targetLevel.spawnableScrap.Any(item => item.spawnableItem.itemName.Equals(itemName, StringComparison.OrdinalIgnoreCase))) {
+            return true;
+        } else if (logging) {
+            Plugin.Mls.LogWarning($"Can't spawn scrap {itemName} on this moon.");
+        }
+        return false;
+    }
     public void ApplyModificationsToLevel() {
         if (!IsTargetLevelSet()) return;
         HullManager.LogBox("APPLYING LEVEL MODIFICATIONS");
@@ -510,52 +555,6 @@ public class LevelModifier(SelectableLevel level) {
         // Remove SceneManager event listener
         SceneManager.sceneUnloaded -= OnSceneUnloaded;
     }
-    public bool IsEnemySpawnable(string enemyName) {
-        if (!IsTargetLevelSet()) return false;
-        if (targetLevel.Enemies.Any(unit => unit.enemyType.enemyPrefab.name.Equals(enemyName))) {
-            return true;
-        } else {
-            Plugin.Mls.LogWarning($"Can't spawn enemy {enemyName} on this moon.");
-            return false;
-        }
-    }
-    public bool IsOutsideEnemySpawnable(string enemyName) {
-        if (!IsTargetLevelSet()) return false;
-        if (targetLevel.OutsideEnemies.Any(unit => unit.enemyType.enemyPrefab.name.Equals(enemyName))) {
-            return true;
-        } else {
-            Plugin.Mls.LogWarning($"Can't spawn outside {enemyName} on this moon.");
-            return false;
-        }
-    }
-    public bool IsDaytimeEnemySpawnable(string enemyName) {
-        if (!IsTargetLevelSet()) return false;
-        if (targetLevel.DaytimeEnemies.Any(unit => unit.enemyType.enemyPrefab.name.Equals(enemyName))) {
-            return true;
-        } else {
-            Plugin.Mls.LogWarning($"Can't spawn daytime enemy {enemyName} on this moon.");
-            return false;
-        }
-    }
-    public bool IsUnitSpawnable<T>() {
-        if (!IsTargetLevelSet()) return false;
-        if (targetLevel.spawnableMapObjects.Any(mapObject => mapObject.prefabToSpawn.GetComponentInChildren<T>() != null)) {
-            return true;
-        } else {
-            Plugin.Mls.LogWarning($"Can't spawn {nameof(T)} on this moon.");
-            return false;
-        }
-    }
-    public bool IsScrapSpawnable(string itemName, bool logging = true) {
-        if (!IsTargetLevelSet()) return false;
-        if (targetLevel.spawnableScrap.Any(item => item.spawnableItem.itemName.Equals(itemName))) {
-            return true;
-        } else if (logging) {
-            Plugin.Mls.LogWarning($"Can't spawn scrap {itemName} on this moon.");
-        }
-        return false;
-    }
-
     public void UndoModificationsEarly() {
         SelectableLevel currentLevel = RoundManager.Instance.currentLevel;
         if (currentLevel == null) {
