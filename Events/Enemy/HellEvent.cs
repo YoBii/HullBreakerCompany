@@ -26,12 +26,12 @@ public class HellEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(JesterAI)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(JesterAI)))) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(JesterAI)), 100);
-        levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(JesterAI)), 4);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(JesterAI)), 0);
+        levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(JesterAI)), 100);
+        levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(JesterAI)), 4);
+        levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(JesterAI)), 0);
 
         HullManager.AddChatEventMessage(this);
         //RoundManager.Instance.hourTimeBetweenEnemySpawnBatches = 1;

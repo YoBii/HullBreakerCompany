@@ -23,12 +23,12 @@ public class ButlerEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(ButlerEnemyAI)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(ButlerEnemyAI)))) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(ButlerEnemyAI)), 100);
-        levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(ButlerEnemyAI)), 4);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(ButlerEnemyAI)), 0);
+        levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(ButlerEnemyAI)), 100);
+        levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(ButlerEnemyAI)), 4);
+        levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(ButlerEnemyAI)), 0);
         HullManager.AddChatEventMessage(this);
         return true;
     }

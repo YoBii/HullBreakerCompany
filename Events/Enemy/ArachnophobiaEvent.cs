@@ -26,12 +26,12 @@ public class ArachnophobiaEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if(!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(SandSpiderAI)))) {
+        if(!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(SandSpiderAI)))) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(SandSpiderAI)), 100);
-        levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(SandSpiderAI)), 5);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(SandSpiderAI)), 0);
+        levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(SandSpiderAI)), 100);
+        levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(SandSpiderAI)), 5);
+        levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(SandSpiderAI)), 0);
         HullManager.AddChatEventMessage(this);
         return true;
     }

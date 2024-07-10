@@ -24,12 +24,12 @@ public class NutcrackerEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(NutcrackerEnemyAI)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(NutcrackerEnemyAI)))) {
             return false;
         }
 
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(NutcrackerEnemyAI)), 100);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(NutcrackerEnemyAI)), 1);
+        levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(NutcrackerEnemyAI)), 100);
+        levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(NutcrackerEnemyAI)), 1);
 
         HullManager.AddChatEventMessage(this);
         return true;

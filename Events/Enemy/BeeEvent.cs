@@ -27,12 +27,12 @@ public class BeeEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsDaytimeEnemySpawnable(EnemyUtil.getEnemyByType(typeof(RedLocustBees)))) {
+        if (!levelModifier.IsDaytimeEnemySpawnable(Util.getEnemyByType(typeof(RedLocustBees)))) {
             return false;
         }
-        levelModifier.AddDaytimeEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(RedLocustBees)), 1000);
-        levelModifier.AddDaytimeEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(RedLocustBees)), 0);
-        levelModifier.AddDaytimeEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(RedLocustBees)), 10);
+        levelModifier.AddDaytimeEnemyComponentRarity(Util.getEnemyByType(typeof(RedLocustBees)), 1000);
+        levelModifier.AddDaytimeEnemyComponentPower(Util.getEnemyByType(typeof(RedLocustBees)), 0);
+        levelModifier.AddDaytimeEnemyComponentMaxCount(Util.getEnemyByType(typeof(RedLocustBees)), 10);
         levelModifier.AddDaytimeEnemySpawnChanceThroughoutDay(64);
         HullManager.AddChatEventMessage(this);
         return true;

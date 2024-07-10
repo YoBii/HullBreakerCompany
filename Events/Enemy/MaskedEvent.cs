@@ -24,11 +24,11 @@ public class MaskedEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(MaskedPlayerEnemy)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(MaskedPlayerEnemy)))) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(MaskedPlayerEnemy)), 100);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(MaskedPlayerEnemy)), 1);
+        levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(MaskedPlayerEnemy)), 100);
+        levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(MaskedPlayerEnemy)), 1);
 
         HullManager.AddChatEventMessage(this);
         return true;

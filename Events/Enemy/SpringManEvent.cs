@@ -25,12 +25,12 @@ public class SpringManEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(SpringManAI)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(SpringManAI)))) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(SpringManAI)), 100);
-        levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(SpringManAI)), 5);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(SpringManAI)), 0);
+        levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(SpringManAI)), 100);
+        levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(SpringManAI)), 5);
+        levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(SpringManAI)), 0);
 
         HullManager.AddChatEventMessage(this);
         return true;

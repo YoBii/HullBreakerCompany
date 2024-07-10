@@ -24,12 +24,12 @@ public class LizardsEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(PufferAI)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(PufferAI)))) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(PufferAI)), 100);
-        levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(PufferAI)), 5);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(PufferAI)), 0);
+        levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(PufferAI)), 100);
+        levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(PufferAI)), 5);
+        levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(PufferAI)), 0);
         HullManager.AddChatEventMessage(this);
         return true;
     }

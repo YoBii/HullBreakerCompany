@@ -27,12 +27,12 @@ public class FlowerManEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(FlowermanAI)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(FlowermanAI)))) {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(FlowermanAI)), 100);
-        levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(FlowermanAI)), 4);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(FlowermanAI)), 0);
+        levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(FlowermanAI)), 100);
+        levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(FlowermanAI)), 4);
+        levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(FlowermanAI)), 0);
         HullManager.AddChatEventMessage(this);
         return true;
     }

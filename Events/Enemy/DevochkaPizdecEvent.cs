@@ -24,13 +24,13 @@ public class DevochkaPizdecEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(EnemyUtil.getEnemyByType(typeof(DressGirlAI))))
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(DressGirlAI))))
         {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(EnemyUtil.getEnemyByType(typeof(DressGirlAI)), 100);
-        levelModifier.AddEnemyComponentMaxCount(EnemyUtil.getEnemyByType(typeof(DressGirlAI)), 4);
-        levelModifier.AddEnemyComponentPower(EnemyUtil.getEnemyByType(typeof(DressGirlAI)), 0);
+        levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(DressGirlAI)), 100);
+        levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(DressGirlAI)), 4);
+        levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(DressGirlAI)), 0);
         HullManager.AddChatEventMessage(this);
         return true;
     }

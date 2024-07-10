@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace HullBreakerCompany.Hull {
-    internal class EnemyUtil {
-        private  static Dictionary<String, Type> EnemyBase = new()
+    internal class Util {
+        private static Dictionary<string, Type> EnemyBase = new()
         {
             { "flowerman", typeof(FlowermanAI) },
             { "hoarderbug", typeof(HoarderBugAI) },
@@ -24,7 +24,7 @@ namespace HullBreakerCompany.Hull {
             { "maskedplayerenemy", typeof(MaskedPlayerEnemy)}
         };
 
-        private static Dictionary<Type, String> EnemiesByType = new() {
+        private static Dictionary<Type, string> EnemiesByType = new() {
             { typeof(FlowermanAI), "Flowerman" },
             { typeof(HoarderBugAI), "HoarderBug" },
             { typeof(SpringManAI), "SpringMan" },
@@ -45,7 +45,13 @@ namespace HullBreakerCompany.Hull {
             { typeof(RedLocustBees), "RedLocustBees" }
         };
 
-        public static string getEnemyByType (Type type) {
+        private static Dictionary<Type, string> TrapUnitsByType = new() {
+            { typeof(Landmine), "Landmine" },
+            { typeof(Turret), "TurretContainer" },
+            { typeof(SpikeRoofTrap), "SpikeRoofTrapHazard" }
+        };
+
+        public static string getEnemyByType(Type type) {
             try {
                 EnemiesByType.TryGetValue(type, out var enemy);
                 return enemy;
@@ -53,10 +59,18 @@ namespace HullBreakerCompany.Hull {
                 return null;
             }
         }
-        public static Type getEnemyByString(String str) {
+        public static Type getEnemyByString(string str) {
             try {
                 EnemyBase.TryGetValue(str, out var enemy);
                 return enemy;
+            } catch {
+                return null;
+            }
+        }
+        public static string getTrapUnitByType(Type type) {
+            try {
+                EnemiesByType.TryGetValue(type, out var unit);
+                return unit;
             } catch {
                 return null;
             }
