@@ -12,8 +12,8 @@ public class TurretEvent : HullEvent
     public static List<string> MessagesList = new() {
         { "High security compound" },
         { "It's right around the corner!" },
-        { "Keep moving and don't get stuck!" },
-        { "The company recommends bringing a bulletproof vest" }
+        { "Keep moving from cover to cover!" },
+        { "The company recommends bringing a bulletproof vest!" }
     };
     public static List<string> shortMessagesList = new() {
         { "TURRETS" },

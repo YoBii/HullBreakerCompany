@@ -46,6 +46,6 @@ public class MeltdownEvent : HullEvent
         }
         Plugin.Mls.LogInfo(ID() + $" Event: Meltdown initiated");
         MeltdownAPI.StartMeltdown(PluginInfo.PLUGIN_GUID);
-        HullManager.SendChatEventMessage("<color=red>NUCLEAR MELTDOWN IMMINENT! ABANDON MISSION!</color>");
+        HullManager.SendChatEventMessage("<color=red>NUCLEAR MELTDOWN! ABANDON MISSION!</color>");
     }
 }
