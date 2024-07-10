@@ -25,6 +25,7 @@ public abstract class EventsManager {
         { new ArachnophobiaEvent() },
         { new BeeEvent() },
         { new ButlerEvent() },
+        { new CrawlerEvent() }, //v2.2.3
         { new DevochkaPizdecEvent() },
         { new FlowerManEvent() },
         { new HellEvent() },
