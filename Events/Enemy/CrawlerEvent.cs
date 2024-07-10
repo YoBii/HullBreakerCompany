@@ -28,7 +28,7 @@ public class CrawlerEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if(!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(SandSpiderAI)))) {
+        if(!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(CrawlerAI)))) {
             return false;
         }
         levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(CrawlerAI)), 100);
