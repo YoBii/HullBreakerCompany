@@ -40,7 +40,7 @@ Introducing events for Shy guy, Herobrine, FacilityMeltdown and more. Check the 
 
 ### Custom Events
 * added support for modded enemies
-	* make sure you use the enemy names exactly as they're printed in logs (case sensitive)
+	* make sure you use the enemy names as they're printed in logs (case insensitive)
 	* only works for mods that don't use custom spawn logic
 * added support for daytime enemies
 * added support for setting max count and power levels for all enemy types
@@ -166,6 +166,7 @@ Event | Details
 Arachnophobia   | Bunker spiders are more likely to spawn. There can be two or even more. Recommended mod: Arachnophilia
 Bee   | Bee hives are more likely to spawn and you can find a lot of them. This also increases daytime enemy spawns overall (take note LQ users).
 Butler   | Butler spawns more likely and there's potentially more of them. They don't count to overall enemy cap.
+Crawler  | Crawler spawns more frequently and has redcued power level. Max count unchanged (vanilla is 4)
 DevochkaPizdec  | Ghost girls spawn more frequently and there can be more than one. Don't loose your head out there.
 FlowerMan   | Brackens spawn more frequently and in larger quantities. They often move together but can separate and give you a really bad time.
 Hell   | Jesters. Yes, multiple. Good luck.
