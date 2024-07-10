@@ -333,29 +333,28 @@ public class LevelModifier(SelectableLevel level) {
     }
     private void ApplyUnitModification(bool undo = false) {
         foreach (var trap in traps) {
+            string readable_name;
+            if (trap.Key == Util.getTrapUnitByType(typeof(Turret))) readable_name = "Turret";
+            else readable_name = trap.Key;
             foreach (var mapObject in targetLevel.spawnableMapObjects) {
                 if (mapObject.prefabToSpawn.name == trap.Key) {
                     if (!undo) {
                         if (trap.Value <= 0) return;
                         trapBackups.Add(trap.Key, mapObject.numberToSpawn);
                         mapObject.numberToSpawn = new AnimationCurve(new Keyframe(0f, (float)trap.Value));
-                        Plugin.Mls.LogInfo($"Overriding {mapObject.prefabToSpawn.name} amount: {(trap.Value)}");
+                        Plugin.Mls.LogInfo($"Overriding {readable_name} amount: {(trap.Value)}");
                     } else {
                         if (trapBackups[trap.Key] == null) {
-                            Plugin.Mls.LogWarning($"Backup for {trap.Key} not found!");
+                            Plugin.Mls.LogError($"Backup for {readable_name} ({trap.Key}) not found!");
                             return;
                         }
                         mapObject.numberToSpawn = trapBackups[trap.Key];
-                        Plugin.Mls.LogInfo($"Restoring original {mapObject.prefabToSpawn.name} spawn curve");
+                        Plugin.Mls.LogInfo($"Restoring original {readable_name} spawn curve");
                     }
                 }
             }
         }
     }
-    //  [Error  :HULLBREAKER 2.2.2] Landmine
-    //  [Info: HULLBREAKER 2.2.2] Overriding Landmine amount: 128
-    //  [Error: HULLBREAKER 2.2.2] TurretContainer
-    //  [Error  :HULLBREAKER 2.2.2] SpikeRoofTrapHazard
     private bool IsTargetLevelSet() {
         if (targetLevel == null) {
             Plugin.Mls.LogWarning("Target level not set!");
@@ -495,7 +494,6 @@ public class LevelModifier(SelectableLevel level) {
     public bool IsTrapUnitSpawnable(string unit) {
         if (!IsTargetLevelSet()) { return false; }
         if (targetLevel.spawnableMapObjects.Any(mapObject => mapObject.prefabToSpawn.name == unit)) {
-            Plugin.Mls.LogWarning($"Found {unit})!");
             return true;
         } else {
             Plugin.Mls.LogWarning($"Can't spawn {unit} on this moon.");
