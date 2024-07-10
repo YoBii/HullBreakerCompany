@@ -36,17 +36,16 @@ namespace HullBreakerCompany.Hull
             Plugin.LevelSettings = _configFile.Bind("2 - Level Settings", "LevelSettings", "vanilla",
                 new ConfigDescription("Specifies the settings to apply to every level by default\n" +
                 "These are baseline settings. Changes by events will always apply on top.\n" +
-                "SlimeEvent for example will increase a level's max power so it spawns *additional* slimes instead of just replacing enemies with slimes\n" +
                 "'vanilla': keep level settings as they are\n" +
-                "'hullbreaker': increases spawn rate inside and outside. Increases max power of inside and outside nemies by 16 and 20 respectively\n" +
-                "'custom': uses the values you specified below\n",
+                "'hullbreaker': hard difficulty. Significantly increases spawn rate inside and outside. Increases max power of inside and outside nemies by 16 and 20 respectively\n" +
+                "'custom': uses the values you specified below. Defaults for 'custom' are the values used in 'hullbreaker'\n",
                 new AcceptableValueList<string>(["vanilla", "hullbreaker", "custom"]),
                 Array.Empty<object>())).Value;
 
             Plugin.MaxEnemyPowerCount = GetConfigValue("2.1 - Level Settings", "MaxEnemyPowerCount", 16, "Increase max enemy power count by this value");
             Plugin.MaxOutsideEnemyPowerCount = GetConfigValue("2.1 - Level Settings", "MaxOutsideEnemyPowerCount", 20, "Increase max outside enemy power count by this value (e.g. moutdog or forestgiant)");
             Plugin.MaxDaytimeEnemyPowerCount = GetConfigValue("2.1 - Level Settings", "MaxDaytimeEnemyPowerCount", 0, "Increase max daytime enemy power count by this value (e.g. bees)");
-            Plugin.BunkerEnemyScale = GetConfigValue("2.1 - Level Settings", "BunkerEnemyScale", 256, "Change spawn rate for enemies inside. A value of '256' will instantly spawn enemies as you land (i.e. place or queue them in vents from which they will spawn after some time");
+            Plugin.BunkerEnemyScale = GetConfigValue("2.1 - Level Settings", "Spawn curve override", 256, "Change spawn rate for inside enemies. A value of '256' will max out the amount of monsters spawned in each spawn wave starting as soon as you land.");
             
         }
         
@@ -54,7 +53,6 @@ namespace HullBreakerCompany.Hull
             Plugin.Mls.LogInfo("Refreshing config..");
             _configFile = null;
             SetConfigValue();
-            //GetWeights();
         }
 
         public static Dictionary<string, int> GetWeights()
