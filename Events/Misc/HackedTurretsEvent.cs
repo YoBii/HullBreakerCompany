@@ -23,7 +23,6 @@ public class HackedTurretsEvent : HullEvent
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (HullManager.Instance == null) {
-        {
             Plugin.Mls.LogError("HullManager.Instance is null");
             return false;
         }
@@ -31,6 +30,9 @@ public class HackedTurretsEvent : HullEvent
             Plugin.Mls.LogError("level is null");
             return false;
         }
+
+        if (!levelModifier.IsTrapUnitSpawnable(Util.getTrapUnitByType(typeof(Turret)))) return false;
+        levelModifier.AddTrapUnit(Util.getTrapUnitByType(typeof(Turret)), Plugin.TurretScale / 3 * 2);
 
         HullManager.Instance.ExecuteAfterDelay(() => { HackTurrets(); }, 16f);
         HullManager.AddChatEventMessage(this);
