@@ -29,7 +29,9 @@ public class BoombaEvent : HullEvent
         levelModifier.AddEnemyComponentMaxCount("Boomba", 10);
         levelModifier.AddEnemyComponentPower("Boomba", 0);
 
-        levelModifier.AddLandmines(Plugin.LandmineScale * 2 / 3);
+        if (levelModifier.IsTrapUnitSpawnable(Util.getTrapUnitByType(typeof(Landmine)))) {
+            levelModifier.AddTrapUnit(Util.getTrapUnitByType(typeof(Landmine)), Plugin.LandmineScale / 2);
+        }
 
         HullManager.AddChatEventMessage(this);
         return true;
