@@ -16,9 +16,9 @@ public class CrawlerEvent : HullEvent
         { "Dominant species detected"},
         { "Something is stomping heavily. Probably hostile." },
         { "To bonk or be bonked, that is the question" },
-        { "Heavy thumping inside the facility" },
+        { "Intense thumping inside the facility" },
         { "Does putting two halves together MAKE US WHOLE AGAIN?" },
-        { "" }
+        { "Prepare to get stomped on" }
     };
     public static List<string> shortMessagesList = new() {
         { "THUMP" },
@@ -32,7 +32,6 @@ public class CrawlerEvent : HullEvent
             return false;
         }
         levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(CrawlerAI)), 100);
-        levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(CrawlerAI)), 4);
         levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(CrawlerAI)), 1);
         HullManager.AddChatEventMessage(this);
         return true;
