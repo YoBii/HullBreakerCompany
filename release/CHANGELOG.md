@@ -1,3 +1,14 @@
+# v2.2.3
+* **(NEW)** Crawler Event: Spawns thumpers more frequently and reduces their power level.
+* HackedTurrets Event now also spawns additional turrets according to your TurretScale setting
+	* makes more sense thematically to actually see turrets when the event reads all of them have been disabled
+	* you can also troll your friends. turrets during the event are indefinitely deactivated at round start but their state can still change. Use the terminal :)
+* improved code to modify and restore trap spawns
+	* fixed a bug where trap's spawn curves weren't correctly restored after finishing the day
+	* allowing for more possibilities in the future (more integrated mod events)
+* updated event messages
+* updated README
+
 # v2.2.2
 * added support for multiple long and short messages for custom events
 	* messages are seprated by semicolon (;)
