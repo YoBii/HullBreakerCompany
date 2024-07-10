@@ -69,7 +69,7 @@ namespace HullBreakerCompany.Hull {
         }
         public static string getTrapUnitByType(Type type) {
             try {
-                EnemiesByType.TryGetValue(type, out var unit);
+                TrapUnitsByType.TryGetValue(type, out var unit);
                 return unit;
             } catch {
                 return null;
