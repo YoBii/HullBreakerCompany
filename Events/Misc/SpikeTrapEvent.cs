@@ -24,9 +24,8 @@ public class SpikeTrapEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsUnitSpawnable<SpikeRoofTrap>()) return false;
-
-        levelModifier.AddSpikeTraps(Plugin.SpikeTrapScale);
+        if (!levelModifier.IsTrapUnitSpawnable(Util.getTrapUnitByType(typeof(SpikeRoofTrap)))) return false;
+        levelModifier.AddTrapUnit(Util.getTrapUnitByType(typeof(SpikeRoofTrap)), Plugin.SpikeTrapScale);
         HullManager.AddChatEventMessage(this);
         return true;
     }

@@ -27,11 +27,14 @@ public class OnAPowderKegEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
+        if (!levelModifier.IsTrapUnitSpawnable(Util.getTrapUnitByType(typeof(Landmine)))) return false;
+        levelModifier.AddTrapUnit(Util.getTrapUnitByType(typeof(Landmine)), (int)(Plugin.LandmineScale * 2 / 3));
+
         dayInSeconds = (int)HullManager.Instance.timeOfDay.lengthOfHours * HullManager.Instance.timeOfDay.numberOfHours;
-        HullManager.AddChatEventMessage(this);
-        levelModifier.AddLandmines(Plugin.LandmineScale * 2f / 3f);
         HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(level); }, UnityEngine.Random.Range(dayInSeconds / 6, dayInSeconds / 2));
+        
         EventsHandler.OnAPowderKegActive = true;
+        HullManager.AddChatEventMessage(this);
         return true;
     }
 

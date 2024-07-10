@@ -50,11 +50,14 @@ public class LevelModifier(SelectableLevel level) {
     private AnimationCurve daytimeEnemySpawnChanceThroghoutDayBackup;
 
     private float landmines;
-    private AnimationCurve landminesBackup;
+    private AnimationCurve landminesBackup = null;
     private float turrets;
-    private AnimationCurve turretsBackup;
+    private AnimationCurve turretsBackup = null;
     private float spiketraps;
-    private AnimationCurve spiketrapsBackup;
+    private AnimationCurve spiketrapsBackup = null;
+
+    private readonly Dictionary<string, int> traps = [];
+    private readonly Dictionary<string, AnimationCurve> trapBackups = [];
 
     private bool active { get; } = false;
 
@@ -321,13 +324,38 @@ public class LevelModifier(SelectableLevel level) {
                     mapObject.numberToSpawn = new AnimationCurve(new Keyframe(0f, amount));
                     Plugin.Mls.LogInfo($"Overriding {mapObject.prefabToSpawn.name} amount: {amount}");
                 } else {
-                    backup = mapObject.numberToSpawn;
-                    mapObject.numberToSpawn = new AnimationCurve(new Keyframe(0f, amount));
-                    Plugin.Mls.LogInfo($"Overriding {mapObject.prefabToSpawn.name} amount: {amount}");
+                    mapObject.numberToSpawn = backup;
+                    backup = null;
+                    Plugin.Mls.LogInfo($"Resetting {mapObject.prefabToSpawn.name} amount");
                 }
             }
         }
     }
+    private void ApplyUnitModification(bool undo = false) {
+        foreach (var trap in traps) {
+            foreach (var mapObject in targetLevel.spawnableMapObjects) {
+                if (mapObject.prefabToSpawn.name == trap.Key) {
+                    if (!undo) {
+                        if (trap.Value <= 0) return;
+                        trapBackups.Add(trap.Key, mapObject.numberToSpawn);
+                        mapObject.numberToSpawn = new AnimationCurve(new Keyframe(0f, (float)trap.Value));
+                        Plugin.Mls.LogInfo($"Overriding {mapObject.prefabToSpawn.name} amount: {(trap.Value)}");
+                    } else {
+                        if (trapBackups[trap.Key] == null) {
+                            Plugin.Mls.LogWarning($"Backup for {trap.Key} not found!");
+                            return;
+                        }
+                        mapObject.numberToSpawn = trapBackups[trap.Key];
+                        Plugin.Mls.LogInfo($"Restoring original {mapObject.prefabToSpawn.name} spawn curve");
+                    }
+                }
+            }
+        }
+    }
+    //  [Error  :HULLBREAKER 2.2.2] Landmine
+    //  [Info: HULLBREAKER 2.2.2] Overriding Landmine amount: 128
+    //  [Error: HULLBREAKER 2.2.2] TurretContainer
+    //  [Error  :HULLBREAKER 2.2.2] SpikeRoofTrapHazard
     private bool IsTargetLevelSet() {
         if (targetLevel == null) {
             Plugin.Mls.LogWarning("Target level not set!");
@@ -414,6 +442,13 @@ public class LevelModifier(SelectableLevel level) {
     public void AddDaytimeEnemySpawnChanceThroughoutDay(int value) {
         daytimeEnemySpawnChanceThroughoutDay += value;
     }
+    public void AddTrapUnit(string unit, int value) {
+        if (traps.ContainsKey(unit)) {
+            traps[unit] += value;
+            return;
+        }
+        traps.Add(unit, value);
+    }
     public void AddLandmines(float amount) {
         landmines += amount;
     }
@@ -454,6 +489,16 @@ public class LevelModifier(SelectableLevel level) {
             return true;
         } else {
             Plugin.Mls.LogWarning($"Can't spawn daytime enemy {enemyName} on this moon.");
+            return false;
+        }
+    }
+    public bool IsTrapUnitSpawnable(string unit) {
+        if (!IsTargetLevelSet()) { return false; }
+        if (targetLevel.spawnableMapObjects.Any(mapObject => mapObject.prefabToSpawn.name == unit)) {
+            Plugin.Mls.LogWarning($"Found {unit})!");
+            return true;
+        } else {
+            Plugin.Mls.LogWarning($"Can't spawn {unit} on this moon.");
             return false;
         }
     }
@@ -507,9 +552,10 @@ public class LevelModifier(SelectableLevel level) {
         ApplyTimeScale();
 
         // Unit mods
-        ApplyUnitModification<Landmine>(landmines, landminesBackup);
-        ApplyUnitModification<Turret>(turrets, turretsBackup);
-        ApplyUnitModification<SpikeRoofTrap>(spiketraps, spiketrapsBackup);
+        //ApplyUnitModification<Landmine>(landmines, landminesBackup);
+        //ApplyUnitModification<Turret>(turrets, turretsBackup);
+        //ApplyUnitModification<SpikeRoofTrap>(spiketraps, spiketrapsBackup);
+        ApplyUnitModification();
 
         // Add SceneManager event listener to undo our modifications later
         SceneManager.sceneUnloaded += OnSceneUnloaded;
@@ -548,9 +594,11 @@ public class LevelModifier(SelectableLevel level) {
         ApplyTimeScale(true);
 
         // Unit mods
-        ApplyUnitModification<Landmine>(landmines, landminesBackup);
-        ApplyUnitModification<Turret>(turrets, turretsBackup);
-        ApplyUnitModification<SpikeRoofTrap>(spiketraps, spiketrapsBackup);
+        //ApplyUnitModification<Landmine>(landmines, landminesBackup);
+        //ApplyUnitModification<Turret>(turrets, turretsBackup);
+        //ApplyUnitModification<SpikeRoofTrap>(spiketraps, spiketrapsBackup);
+        ApplyUnitModification(true);
+
 
         // Remove SceneManager event listener
         SceneManager.sceneUnloaded -= OnSceneUnloaded;

@@ -22,14 +22,12 @@ public class HackedTurretsEvent : HullEvent
     public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (HullManager.Instance == null)
+        if (HullManager.Instance == null) {
         {
             Plugin.Mls.LogError("HullManager.Instance is null");
             return false;
         }
-
-        if (level == null)
-        {
+        if (level == null) {
             Plugin.Mls.LogError("level is null");
             return false;
         }
