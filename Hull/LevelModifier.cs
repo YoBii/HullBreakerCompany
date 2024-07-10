@@ -49,17 +49,10 @@ public class LevelModifier(SelectableLevel level) {
     private int daytimeEnemySpawnChanceThroughoutDay;
     private AnimationCurve daytimeEnemySpawnChanceThroghoutDayBackup;
 
-    private float landmines;
-    private AnimationCurve landminesBackup = null;
-    private float turrets;
-    private AnimationCurve turretsBackup = null;
-    private float spiketraps;
-    private AnimationCurve spiketrapsBackup = null;
-
     private readonly Dictionary<string, int> traps = [];
     private readonly Dictionary<string, AnimationCurve> trapBackups = [];
 
-    private bool active { get; } = false;
+    private bool Active { get; set; } = false;
 
     private float timeScale = 0;
 
@@ -315,22 +308,6 @@ public class LevelModifier(SelectableLevel level) {
             Plugin.Mls.LogInfo($"Reset TimeSpeedMultiplier: {timeScale}");
         }
     }
-    private void ApplyUnitModification<T>(float amount, AnimationCurve backup) {  
-        foreach (var mapObject in targetLevel.spawnableMapObjects) {
-            if (mapObject.prefabToSpawn.GetComponentInChildren<T>() != null) {
-                if (backup == null) {
-                    if (amount <= 0) return;
-                    backup = mapObject.numberToSpawn;
-                    mapObject.numberToSpawn = new AnimationCurve(new Keyframe(0f, amount));
-                    Plugin.Mls.LogInfo($"Overriding {mapObject.prefabToSpawn.name} amount: {amount}");
-                } else {
-                    mapObject.numberToSpawn = backup;
-                    backup = null;
-                    Plugin.Mls.LogInfo($"Resetting {mapObject.prefabToSpawn.name} amount");
-                }
-            }
-        }
-    }
     private void ApplyUnitModification(bool undo = false) {
         foreach (var trap in traps) {
             string readable_name;
@@ -448,15 +425,6 @@ public class LevelModifier(SelectableLevel level) {
         }
         traps.Add(unit, value);
     }
-    public void AddLandmines(float amount) {
-        landmines += amount;
-    }
-    public void AddTurrets(float amount) {
-        turrets += amount;
-    }
-    public void AddSpikeTraps(float amount) {
-        spiketraps += amount;
-    }
     public bool SetTimeScale(float value) {
         if (timeScale != 0) {
             throw new Exception("Timescale already set!");
@@ -550,16 +518,19 @@ public class LevelModifier(SelectableLevel level) {
         ApplyTimeScale();
 
         // Unit mods
-        //ApplyUnitModification<Landmine>(landmines, landminesBackup);
-        //ApplyUnitModification<Turret>(turrets, turretsBackup);
-        //ApplyUnitModification<SpikeRoofTrap>(spiketraps, spiketrapsBackup);
         ApplyUnitModification();
 
         // Add SceneManager event listener to undo our modifications later
         SceneManager.sceneUnloaded += OnSceneUnloaded;
+
+        Active = true;
     }
     public void UndoModifications() {
         if (!IsTargetLevelSet()) return;
+        if (!Active) {
+            Plugin.Mls.LogError($"Tried to undo modifications for {targetLevel.PlanetName} but levelmodifier is not active!");
+            return;
+        }
         HullManager.LogBox("REVERTING LEVEL MODIFICATIONS");
         Plugin.Mls.LogInfo($"Reverting all modifications to {targetLevel.PlanetName}!");
 
@@ -592,14 +563,12 @@ public class LevelModifier(SelectableLevel level) {
         ApplyTimeScale(true);
 
         // Unit mods
-        //ApplyUnitModification<Landmine>(landmines, landminesBackup);
-        //ApplyUnitModification<Turret>(turrets, turretsBackup);
-        //ApplyUnitModification<SpikeRoofTrap>(spiketraps, spiketrapsBackup);
         ApplyUnitModification(true);
-
 
         // Remove SceneManager event listener
         SceneManager.sceneUnloaded -= OnSceneUnloaded;
+
+        Active = false;
     }
     public void UndoModificationsEarly() {
         SelectableLevel currentLevel = RoundManager.Instance.currentLevel;
