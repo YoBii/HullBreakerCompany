@@ -7,6 +7,7 @@
 	* fixed a bug where trap's spawn curves weren't correctly restored after finishing the day
 	* allowing for more possibilities in the future (more integrated mod events)
 * updated event messages
+* updated config descriptions
 * updated README
 
 # v2.2.2
