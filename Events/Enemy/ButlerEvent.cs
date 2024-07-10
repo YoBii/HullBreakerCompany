@@ -14,6 +14,8 @@ public class ButlerEvent : HullEvent
         { "Reports of paranormal activity" },
         { "Paranormal signature detected" },
         { "Someone is taking care of this place" },
+        { "Mirror finished floors require meticulous care.. and protection.."},
+        { "Avoid stained clothing by not staining the floors. Suits are company property!" }
     };
     public static List<string> shortMessagesList = new() {
         { "BUTLER" },
