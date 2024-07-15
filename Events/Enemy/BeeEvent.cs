@@ -33,7 +33,7 @@ public class BeeEvent : HullEvent
         levelModifier.AddDaytimeEnemyComponentRarity(Util.getEnemyByType(typeof(RedLocustBees)), 1000);
         levelModifier.AddDaytimeEnemyComponentPower(Util.getEnemyByType(typeof(RedLocustBees)), 0);
         levelModifier.AddDaytimeEnemyComponentMaxCount(Util.getEnemyByType(typeof(RedLocustBees)), 10);
-        levelModifier.AddDaytimeEnemySpawnChanceThroughoutDay(64);
+        levelModifier.AddDaytimeEnemySpawnChanceThroughoutDay(32);
         HullManager.AddChatEventMessage(this);
         return true;
     }
