@@ -5,7 +5,7 @@ using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Integrated.SCP;
 
-public class SlimyFriend : HullEvent
+public class SlimyFriendEvent : HullEvent
 {
     public override string ID() => "SlimyFriend";
     public override int GetWeight() => 10;

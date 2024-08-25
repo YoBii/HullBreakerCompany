@@ -7,7 +7,7 @@ using UnityEngine.UIElements.Collections;
 
 namespace HullBreakerCompany.Events.Integrated.Surfaced;
 
-public class Urchin : HullEvent
+public class UrchinEvent : HullEvent
 {
     public override string ID() => "Urchin";
     public override int GetWeight() => 20;
@@ -33,7 +33,6 @@ public class Urchin : HullEvent
         }
         levelModifier.AddDaytimeEnemyComponentRarity("Urchin", 10000);
         levelModifier.AddDaytimeEnemyComponentMaxCount("Urchin", 10);
-        //levelModifier.AddDaytimeEnemyComponentPower("Urchin", 0);
         levelModifier.AddDaytimeEnemySpawnChanceThroughoutDay(10);
         if (Plugin.ColoredEventMessages)
         {

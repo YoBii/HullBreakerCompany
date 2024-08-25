@@ -8,6 +8,9 @@ using System.Linq;
 using Mono.Cecil;
 using HarmonyLib;
 using LethalQuantities.Objects;
+using HullBreakerCompany.Events.Integrated.SCP;
+using HullBreakerCompany.Events.Integrated.Surfaced;
+using HullBreakerCompany.Events.Integrated.AdvancedCompany;
 
 namespace HullBreakerCompany.Hull;
 
@@ -64,14 +67,18 @@ public abstract class EventsManager {
         if (modEventsLoaded) return;
         Plugin.Mls.LogInfo("Checking for compatible mods..");
         //Print all plugins
-        //Plugin.Mls.LogInfo($"{String.Join(", ", BepInEx.Bootstrap.Chainloader.PluginInfos.Keys.ToList().ToArray())}");
+        Plugin.Mls.LogFatal($"{string.Join(", ", BepInEx.Bootstrap.Chainloader.PluginInfos.Keys.ToList())}");
 
         Dictionary<string, List<HullEvent>> modEvents = new() {
-            { "evaisa.lethalthings", [new BoombaEvent()] },
-            { "Kittenji.HerobrineMod", [new HerobrineEvent()] },
+            { "evaisa.lethalthings", [new Events.Integrated.BoombaEvent()] },
+            { "Kittenji.HerobrineMod", [new Events.Integrated.HerobrineEvent()] },
             { "me.loaforc.facilitymeltdown", [new MeltdownEvent()] },
             { "DBJ.ShyGuyPatcherPatcher", [new ShyGuyEvent()] },
-            { "com.potatoepet.AdvancedCompany", new List<HullEvent> { new AC_BunnyEvent(), new AC_ControllerEvent(), new AC_RGBShoesEvent() }  }
+            { "com.potatoepet.AdvancedCompany", [new BunnyEvent(), new ControllerEvent(), new RGBShoesEvent()]},
+            { "Dackie.SCP106" , [new RottingManEvent()]},
+            { "ProjectSCP.SCP3199", [new EggmanEvent()]},
+            { "ProjectSCP.SCP966", [new InvisibleGuestEvent()]},
+            { "Surfaced", [new BruceAlmightyEvent(), new SeaMineEvent(), new UrchinEvent()] }
         };
         foreach (var modEventPair in modEvents) {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(modEventPair.Key)) {

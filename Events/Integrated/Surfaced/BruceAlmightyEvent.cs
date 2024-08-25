@@ -7,7 +7,7 @@ using UnityEngine.UIElements.Collections;
 
 namespace HullBreakerCompany.Events.Integrated.Surfaced;
 
-public class BruceAlmighty : HullEvent
+public class BruceAlmightyEvent : HullEvent
 {
     public override string ID() => "BruceAlmighty";
     public override int GetWeight() => 20;

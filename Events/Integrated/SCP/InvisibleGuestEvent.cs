@@ -7,7 +7,7 @@ using UnityEngine.UIElements.Collections;
 
 namespace HullBreakerCompany.Events.Integrated.SCP;
 
-public class InvisibleGuest : HullEvent
+public class InvisibleGuestEvent : HullEvent
 {
     public override string ID() => "InvisibleGuest";
     public override int GetWeight() => 20;

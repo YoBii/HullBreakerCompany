@@ -7,31 +7,30 @@ using UnityEngine.UIElements.Collections;
 
 namespace HullBreakerCompany.Events.Integrated.SCP;
 
-public class SCP106Event: HullEvent
+public class EggmanEvent : HullEvent
 {
-    public override string ID() => "SCP106";
+    public override string ID() => "Eggman";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Increases SCP106 outside spawn frequency.";
+    public override string GetDescription() => "Increases SCP3199 outside spawn frequency.";
     public static List<string> MessagesList = new() {
-        { "Reports of paranormal activity" },
-        { "Paranormal signature detected" },
-        { "Stay away from any elderly 'rotting' humanoids.." },
-        { "No physical interaction with SCP-106 is allowed at any time." }
+        { "Dominated by hostile life form" },
+        { "Aggressive outside species" },
+        { "Eggs spotted outside the facility" }
     };
     public static List<string> shortMessagesList = new() {
-        { "ROTTINGMAN" }
+        { "EGGMAN" }
     };
     public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
     public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable("SCP106Obj2"))
+        if (!levelModifier.IsEnemySpawnable("SCP3199"))
         {
             return false;
         }
-        levelModifier.AddOutsideEnemyComponentRarity("SCP106Obj2", 100);
-        levelModifier.AddOutsideEnemyComponentMaxCount("SCP106Obj2", 3);
-        levelModifier.AddEnemyComponentPower("SCP106Obj2", 1);
+        levelModifier.AddOutsideEnemyComponentRarity("SCP3199", 100);
+        levelModifier.AddOutsideEnemyComponentMaxCount("SCP3199", 4);
+        levelModifier.AddEnemyComponentPower("SCP3199", 1);
         if (Plugin.ColoredEventMessages)
         {
             HullManager.AddChatEventMessageColored(this, "red");

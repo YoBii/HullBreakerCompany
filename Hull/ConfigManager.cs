@@ -22,7 +22,7 @@ namespace HullBreakerCompany.Hull
 
             Plugin.EnableEventMessages = GetConfigValue("1.1 - Event Messages", "EnableEventMessages", true, "Enable chat event messages");
             Plugin.UseShortChatMessages = GetConfigValue("1.1 - Event Messages", "UseShortChatMessages", false, "Use short event message");
-            Plugin.ColoredEventMessages = GetConfigValue("1.1 - Event Messages", "UseColoredChatMessages", false, "If true will use colors for event messages to indicate whether they are good or bad events.");
+            Plugin.ColoredEventMessages = GetConfigValue("1.1 - Event Messages", "UseColoredChatMessages", false, "If true will use colors for event messages to indicate whether they are 'good' or 'bad' events.");
 
             Plugin.LandmineScale = GetConfigValue("1.2 - Event Configuration", "LandmineScale", 32, "The amount of additional landmines spawned by landmine event (there are more events that spawns mines and thus scale with the value set here)");
             Plugin.TurretScale = GetConfigValue("1.2 - Event Configuration", "TurretScale", 12, "The amount of additional turrets spawned by turret event");
