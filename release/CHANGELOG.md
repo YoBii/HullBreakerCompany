@@ -1,3 +1,24 @@
+# v2.2.4
+#### Added 
+* EasterEvent: Spawns a lot of Easter Eggs (vanilla scrap).
+* Integrated Events (SCP)
+	* Eggman Event: Increases SCP3199 outside spawn chance, spawns up to four.
+	* InvisibleGuest Event: Increases SCP966 spawn chance, spawns up to three.
+	* RottingMan Event: Increases SCP106 spawn chance, spawns up to three.
+	* SlimyFriend Event: Increases SCP999 spawn chance, spawns up to three and less other monsters spawn.
+* Integrated Events (Surfaced)
+	* BruceAlmighty Event: Guarantees Bruce spawn outside. Spawns up to three. 
+	* Urchin Event: Spawns up to ten Urchin early in the round.
+	* SeaMine Event: Spawns a lot of old sea mines. Uses LandmineScale config.
+* New config option for coloured event messages in chat.
+
+#### Changed
+* Adjusted Bee event spawn curve
+* Updated README
+
+#### Fixed
+* Mod not loading correctly in LAN mode
+
 # v2.2.3
 * **(NEW)** Crawler Event: Spawns thumpers more frequently and reduces their power level.
 * HackedTurrets Event now also spawns additional turrets according to your TurretScale setting
@@ -12,7 +33,7 @@
 
 # v2.2.2
 * added support for multiple long and short messages for custom events
-	* messages are seprated by semicolon (;)
+	* messages are separated by semicolon (;)
 	* updated `CustomEventTemplate.cfg`
 * improved custom event config parsing
 * improved event execution by adding a method to simulate all event modifications before queueing them up for application

@@ -157,7 +157,7 @@ Mainly putting this here so you remember to check your config :)
 <details>
 	<summary>Click to expand</summary>
 
-All enemy events increase the repective enemy's spawn chance. Some additionally increase their max count and decrease their power level to varying degrees.
+All enemy events increase the respective enemy's spawn chance. Some additionally increase their max count and decrease their power level to varying degrees.
 
 They are designed to be impactful and create unique situations but still be manageable overall. Check your logs for what is changed exactly. 
 
@@ -166,7 +166,7 @@ Event | Details
 Arachnophobia   | Bunker spiders are more likely to spawn. There can be two or even more. Recommended mod: Arachnophilia
 Bee   | Bee hives are more likely to spawn and you can find a lot of them. This also increases daytime enemy spawns overall (take note LQ users).
 Butler   | Butler spawns more likely and there's potentially more of them. They don't count to overall enemy cap.
-Crawler  | Crawler spawns more frequently and has redcued power level. Max count unchanged (vanilla is 4)
+Crawler  | Crawler spawns more frequently and has reduced power level. Max count unchanged (vanilla is 4)
 DevochkaPizdec  | Ghost girls spawn more frequently and there can be more than one. Don't loose your head out there.
 FlowerMan   | Brackens spawn more frequently and in larger quantities. They often move together but can separate and give you a really bad time.
 Hell   | Jesters. Yes, multiple. Good luck.
@@ -193,6 +193,7 @@ BabkinPogreb   | Spawns a lot of pickle jars
 ChristmasEve   | Spawns a lot of presents
 Clownshow (Girl)   | Spawns a lot of scrap that can make noise like horns
 DayDrinking   | Spawns a lot of alcoholic beverages
+Easter   | Spawns a lot of Easter Eggs
 LuckyDay   | Increases chance for very valuable loot to spawn
 SelfDefense   | Spawns a lot of weapon-like scrap items
 </details>
@@ -213,7 +214,7 @@ HackedTurrets   | All turrets are permanently disabled
 HordeMode   | Spawns enemies early and in large amounts
 HullBreak   | Take a break. The company sends a bonus payment
 LandMine   | Spawns a lot of landmines
-NothingEvent | This is used to balance the chance of any event occuring. This event = no event
+NothingEvent | This is used to balance the chance of any event occurring. This event = no event
 OnAPowderKeg  | Spawns more landmines. Landmines will randomly explode throughout the day.
 OneForAll  | When the first crew member dies, the ship's autopilot is immediately instructed to leave (like voting, you have two hours)
 OpenTheNoor  | All big security doors start in closed state
@@ -240,6 +241,13 @@ Meltdown   | FacilityMeltdown | Will trigger the meltdown event sometime during 
 AC_Bunny  | AdvancedCompany | Increases spawn chance of AdvancedCompany unique item: Bunny ears
 AC_Controller  | AdvancedCompany | Increases spawn chance of AdvancedCompany unique item: Controller (Pietsmiet)
 AC_RGBShoes  | AdvancedCompany | Increases spawn chance of AdvancedCompany unique item: Light Shoes
+BruceAlmighty  | Surfaced | Guarantees Bruce spawn outside. Spawns up to three. 
+SeaMine  | Surfaced | Spawns a lot of old sea mines. Uses LandmineScale config.
+Urchin | Surfaced | Spawns up to ten Urchin early in the round. 
+InvisibleGuest  | SCP966 | Increases SCP966 spawn chance, spawns up to three.
+SCP106  | SCP106 | Increases SCP106 spawn chance, spawns up to three.
+Eggman  | SCP3199 | Increases SCP3199 outside spawn chance, spawns up to four.
+SlimyFriend  | SCP999 | Increases SCP999 spawn chance, spawns up to three and less other monsters spawn.
 </details>
 
 ## Other changes
