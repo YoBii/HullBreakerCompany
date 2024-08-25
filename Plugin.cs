@@ -30,6 +30,7 @@ namespace HullBreakerCompany
         public static int TurretScale;
         public static bool UseShortChatMessages;
         public static bool EnableEventMessages;
+        public static bool ColoredEventMessages;
 
         public static bool UseHullBreakerLevelSettings;
         public static bool UseVanillaGameSettings;
@@ -84,7 +85,8 @@ namespace HullBreakerCompany
         }
 
         private void AfterGameInit(Scene scene) {
-            if (scene.name != "InitScene") {
+            //Mls.LogInfo($"Scene name: {scene.name}");
+            if (scene.name != "InitScene" && scene.name != "InitSceneLANMode") {
                 return;
             }
 
