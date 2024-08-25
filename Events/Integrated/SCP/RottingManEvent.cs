@@ -10,7 +10,7 @@ namespace HullBreakerCompany.Events.Integrated.SCP;
 public class RottingManEvent: HullEvent
 {
     public override string ID() => "RottingMan";
-    public override int GetWeight() => 10;
+    public override int GetWeight() => 7;
     public override string GetDescription() => "Increases SCP106 spawn frequency and can spawn more of them.";
     public static List<string> MessagesList = new() {
         { "Reports of paranormal activity" },

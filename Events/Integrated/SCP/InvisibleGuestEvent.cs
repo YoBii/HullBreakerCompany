@@ -10,7 +10,7 @@ namespace HullBreakerCompany.Events.Integrated.SCP;
 public class InvisibleGuestEvent : HullEvent
 {
     public override string ID() => "InvisibleGuest";
-    public override int GetWeight() => 20;
+    public override int GetWeight() => 15;
     public override string GetDescription() => "Increases SCP966 spawn frequency. Spawns up to three. ";
     public static List<string> MessagesList = new() {
         { "Reports of paranormal activity" },

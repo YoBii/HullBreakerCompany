@@ -17,7 +17,7 @@ public class BruceAlmightyEvent : HullEvent
         { "Dominant species detected"},
         { "Tip: Avoid getting hurt" },
         { "Watch out for sharks!" },
-        { "The land animals shouldn't harm you.. unless you present yourself as food" }
+        { "The land animals won't harm you.. unless you present yourself as food" }
     };
     public static List<string> shortMessagesList = new() {
         { "BRUCE" },

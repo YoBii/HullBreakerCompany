@@ -10,7 +10,7 @@ namespace HullBreakerCompany.Events.Integrated.Surfaced;
 public class UrchinEvent : HullEvent
 {
     public override string ID() => "Urchin";
-    public override int GetWeight() => 20;
+    public override int GetWeight() => 10;
     public override string GetDescription() => "Increases Urching spawn frequency. Spawns up to ten early. ";
     public static List<string> MessagesList = new() {
         { "Dominated by hostile life form"},
