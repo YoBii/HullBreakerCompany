@@ -59,12 +59,23 @@ public class HullManager : MonoBehaviour
 
     public static void AddChatEventMessage(HullEvent hullEvent)
     {
-        if (HUDManager.Instance != null && hullEvent != null && Plugin.EnableEventMessages)
-        {
-            chatMessages.Add(Plugin.UseShortChatMessages
+        string msg = "";
+        if (HUDManager.Instance != null && hullEvent != null && Plugin.EnableEventMessages) {
+            msg = Plugin.UseShortChatMessages
                 ? hullEvent.GetShortMessage()
-                : hullEvent.GetMessage());
+                : hullEvent.GetMessage();
         }
+        chatMessages.Add("<color=white>" + msg + "</color>");
+    }
+    public static void AddChatEventMessageColored(HullEvent hullEvent, string color = "white") {
+        string msg = "";
+        if (HUDManager.Instance != null && hullEvent != null && Plugin.EnableEventMessages) {
+            msg = Plugin.UseShortChatMessages
+                ? hullEvent.GetShortMessage()
+                : hullEvent.GetMessage();
+        }
+        chatMessages.Add("<color=" + color + ">" + msg + "</color>");
+
     }
     public static void AddChatEventMessage(string message, bool addAsFirst = false)
     {
@@ -86,7 +97,11 @@ public class HullManager : MonoBehaviour
     }
     public static void SendChatEventMessages() {
         if (HUDManager.Instance != null && Plugin.EnableEventMessages && chatMessages.Count > 0) {
-            AddChatEventMessage("<color=red>NOTES ABOUT MOON:</color>", true);
+            if (Plugin.ColoredEventMessages) {
+                AddChatEventMessage("NOTES ABOUT MOON:", true);
+            } else {
+                AddChatEventMessage("<color=red>NOTES ABOUT MOON:</color>", true);
+            }
             foreach (string message in chatMessages) {
                 HUDManager.Instance.AddTextToChatOnServer(message);
             }
@@ -96,9 +111,9 @@ public class HullManager : MonoBehaviour
     public static void LogEnemies(List<SpawnableEnemyWithRarity> enemies, string title) {
         LogBoxHeader(title);
         
-        Plugin.Mls.LogInfo(String.Format("╠{0, -24}╦{1, 12}╤{2, 12}╤{3, 12}╤{4, 12}╗", new string('\u2550', 23).Insert(title.Length + 2, "╩"), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12)));
-        Plugin.Mls.LogInfo(string.Format("║ {0, -22} ║ {1, 10} │ {2, 10} │ {3, 10} │ {4, 10} ║", "Enemy", "Rarity", "Chance", "MaxCount", "Power"));
-        Plugin.Mls.LogInfo(String.Format("\u2560{0, -24}\u256c{1, 12}╪{2, 12}╪{3, 12}╪{4, 12}╣", new string ('\u2550', 24), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12)));
+        Plugin.Mls.LogInfo(String.Format("╠{0, -40}╦{1, 12}╤{2, 12}╤{3, 12}╤{4, 12}╗", new string('\u2550', 39).Insert(title.Length + 2, "╩"), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12)));
+        Plugin.Mls.LogInfo(string.Format("║ {0, -38} ║ {1, 10} │ {2, 10} │ {3, 10} │ {4, 10} ║", "Enemy", "Rarity", "Chance", "MaxCount", "Power"));
+        Plugin.Mls.LogInfo(String.Format("\u2560{0, -40}\u256c{1, 12}╪{2, 12}╪{3, 12}╪{4, 12}╣", new string ('\u2550', 40), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12)));
         
         var raritySum = 0;
         foreach (var unit in enemies) {
@@ -106,14 +121,14 @@ public class HullManager : MonoBehaviour
         }
         foreach (var unit in enemies) {
             try {
-                Plugin.Mls.LogInfo(String.Format("║ {0, -22} ║ {1, 10} │ {2, 10} │ {3, 10} │ {4, 10} ║", unit.enemyType.enemyPrefab.name, unit.rarity, $"{Math.Round((float)unit.rarity / raritySum * 100, 2)}%", unit.enemyType.MaxCount, unit.enemyType.PowerLevel));
+                Plugin.Mls.LogInfo(String.Format("║ {0, -38} ║ {1, 10} │ {2, 10} │ {3, 10} │ {4, 10} ║", unit.enemyType.enemyPrefab.name, unit.rarity, $"{Math.Round((float)unit.rarity / raritySum * 100, 2)}%", unit.enemyType.MaxCount, unit.enemyType.PowerLevel));
             } catch (Exception ex) {
                 Plugin.Mls.LogError(ex.Message);
             }
         }
-        Plugin.Mls.LogInfo(String.Format("\u2560{0, -24}\u256c{1, 12}╪{2, 12}╪{3, 12}╪{4, 12}╣", new string('\u2550', 24), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12)));
-        Plugin.Mls.LogInfo(String.Format("║ {0, -22} ║ {1, 10} │ {2, 10} │ {3, 10} │ {4, 10} ║", "Sum", raritySum, "", "", ""));
-        Plugin.Mls.LogInfo(String.Format("╚{0, -24}╩{1, 12}╧{2, 12}╧{3, 12}╧{4, 12}╝", new string('\u2550', 24), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12)));
+        Plugin.Mls.LogInfo(String.Format("\u2560{0, -40}\u256c{1, 12}╪{2, 12}╪{3, 12}╪{4, 12}╣", new string('\u2550', 40), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12)));
+        Plugin.Mls.LogInfo(String.Format("║ {0, -38} ║ {1, 10} │ {2, 10} │ {3, 10} │ {4, 10} ║", "Sum", raritySum, "", "", ""));
+        Plugin.Mls.LogInfo(String.Format("╚{0, -40}╩{1, 12}╧{2, 12}╧{3, 12}╧{4, 12}╝", new string('\u2550', 40), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12), new string('\u2550', 12)));
     }
 
     public static void LogScrapRarity(List<SpawnableItemWithRarity> loot, string title) {
