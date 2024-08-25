@@ -24,13 +24,17 @@ public class MeltdownEvent : HullEvent
         { "SURPRISE" },
         { "MELTDOWN" }
     };
-    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
+    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
+    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         currentDaysLeft = TimeOfDay.Instance.daysUntilDeadline;
         dayInSeconds = (int)HullManager.Instance.timeOfDay.lengthOfHours * HullManager.Instance.timeOfDay.numberOfHours;
-        HullManager.AddChatEventMessage(this);
+        if (Plugin.ColoredEventMessages) {
+            HullManager.AddChatEventMessageColored(this, "red");
+        } else {
+            HullManager.AddChatEventMessage(this);
+        }
         HullManager.Instance.ExecuteAfterDelay(() => { StartMeltdown(); }, UnityEngine.Random.Range(dayInSeconds * 0.3f, dayInSeconds * 0.8f));
         EventsHandler.MeltdownActive = true;
         return true;

@@ -1,38 +1,43 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
+using UnityEngine.UIElements.Collections;
 
-namespace HullBreakerCompany.Events.Enemy;
+namespace HullBreakerCompany.Events.Integrated.SCP;
 
-public class MaskedEvent : HullEvent
+public class SCP106Event: HullEvent
 {
-    public override string ID() => "Masked";
+    public override string ID() => "SCP106";
     public override int GetWeight() => 10;
-    public override string GetDescription() => "Increases spawn chance of Masked.";
+    public override string GetDescription() => "Increases SCP106 outside spawn frequency.";
     public static List<string> MessagesList = new() {
         { "Reports of paranormal activity" },
         { "Paranormal signature detected" },
-        { "Phantom of the Opera" },
-        { "Who's the new guy?"}
+        { "Stay away from any elderly 'rotting' humanoids.." },
+        { "No physical interaction with SCP-106 is allowed at any time." }
     };
     public static List<string> shortMessagesList = new() {
-        { "MASKED" },
-        { "TRUST ISSUES" }
+        { "ROTTINGMAN" }
     };
     public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
     public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(MaskedPlayerEnemy)))) {
+        if (!levelModifier.IsEnemySpawnable("SCP106Obj2"))
+        {
             return false;
         }
-        levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(MaskedPlayerEnemy)), 100);
-        levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(MaskedPlayerEnemy)), 1);
-
-        if (Plugin.ColoredEventMessages) {
+        levelModifier.AddOutsideEnemyComponentRarity("SCP106Obj2", 100);
+        levelModifier.AddOutsideEnemyComponentMaxCount("SCP106Obj2", 3);
+        levelModifier.AddEnemyComponentPower("SCP106Obj2", 1);
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

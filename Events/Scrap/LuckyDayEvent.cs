@@ -18,8 +18,8 @@ public class LuckyDayEvent : HullEvent
     public static List<string> shortMessagesList = new() {
         { "LUCKY" }
     };
-    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
+    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
+    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         Dictionary<String, int> scrapToSpawn = new() {
             { "Cash register", 20 },
@@ -28,7 +28,11 @@ public class LuckyDayEvent : HullEvent
         scrapToSpawn = CalculateScrapRarities(scrapToSpawn, levelModifier);
         if (scrapToSpawn.Count == 0) return false;
         levelModifier.AddSpawnableScrapRarityDict(scrapToSpawn);
-        HullManager.AddChatEventMessage(this);
+        if (Plugin.ColoredEventMessages) {
+            HullManager.AddChatEventMessageColored(this, "green");
+        } else {
+            HullManager.AddChatEventMessage(this);
+        }
         return true;
     }
 }

@@ -15,7 +15,11 @@ public class OneForAllEvent : HullEvent
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         EventsHandler.OneForAllIsActive = true;
-        HullManager.AddChatEventMessage(this);
+        if (Plugin.ColoredEventMessages) {
+            HullManager.AddChatEventMessageColored(this, "red");
+        } else {
+            HullManager.AddChatEventMessage(this);
+        }
         return true;
     }
 }

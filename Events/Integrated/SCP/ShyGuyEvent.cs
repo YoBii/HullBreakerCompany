@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
 
-namespace HullBreakerCompany.Events.Enemy;
+namespace HullBreakerCompany.Events.Integrated.SCP;
 
 public class ShyGuyEvent : HullEvent
 {
@@ -20,18 +20,26 @@ public class ShyGuyEvent : HullEvent
     public static List<string> shortMessagesList = new() {
         { "SHY" }
     };
-    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
+    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
+    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable("ShyGuy")) {
+        if (!levelModifier.IsEnemySpawnable("ShyGuy"))
+        {
             return false;
         }
         levelModifier.AddEnemyComponentRarity("ShyGuy", 100);
         levelModifier.AddEnemyComponentMaxCount("ShyGuy", 5);
         levelModifier.AddEnemyComponentPower("ShyGuy", 0);
 
-        HullManager.AddChatEventMessage(this);
+        if (Plugin.ColoredEventMessages)
+        {
+            HullManager.AddChatEventMessageColored(this, "red");
+        }
+        else
+        {
+            HullManager.AddChatEventMessage(this);
+        }
         return true;
     }
 }

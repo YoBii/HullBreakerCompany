@@ -5,7 +5,7 @@ using System.Linq;
 using HullBreakerCompany.Hull;
 using UnityEngine.UIElements.Collections;
 
-namespace HullBreakerCompany.Events.Enemy;
+namespace HullBreakerCompany.Events.Integrated.Surfaced;
 
 public class Urchin : HullEvent
 {
@@ -23,18 +23,26 @@ public class Urchin : HullEvent
         { "SPIKY" },
         { "BALLS" }
     };
-    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
+    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
+    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsDaytimeEnemySpawnable("Urchin")) {
+        if (!levelModifier.IsDaytimeEnemySpawnable("Urchin"))
+        {
             return false;
         }
         levelModifier.AddDaytimeEnemyComponentRarity("Urchin", 10000);
         levelModifier.AddDaytimeEnemyComponentMaxCount("Urchin", 10);
         //levelModifier.AddDaytimeEnemyComponentPower("Urchin", 0);
         levelModifier.AddDaytimeEnemySpawnChanceThroughoutDay(10);
-        HullManager.AddChatEventMessage(this);
+        if (Plugin.ColoredEventMessages)
+        {
+            HullManager.AddChatEventMessageColored(this, "red");
+        }
+        else
+        {
+            HullManager.AddChatEventMessage(this);
+        }
         return true;
     }
 }

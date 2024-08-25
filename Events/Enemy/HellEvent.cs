@@ -23,7 +23,7 @@ public class HellEvent : HullEvent
         { "LEAVE" }
     };
     public override string GetMessage() => "<color=white>" + MessagesList[Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
+    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(JesterAI)))) {
@@ -33,7 +33,11 @@ public class HellEvent : HullEvent
         levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(JesterAI)), 4);
         levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(JesterAI)), 0);
 
-        HullManager.AddChatEventMessage(this);
+        if (Plugin.ColoredEventMessages) {
+            HullManager.AddChatEventMessageColored(this, "red");
+        } else {
+            HullManager.AddChatEventMessage(this);
+        }
         //RoundManager.Instance.hourTimeBetweenEnemySpawnBatches = 1;
 
         //HullManager.Instance.ExecuteAfterDelay(() => { Hell(); }, 16f);

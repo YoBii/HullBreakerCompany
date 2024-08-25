@@ -24,8 +24,8 @@ public class CrawlerEvent : HullEvent
         { "THUMP" },
         { "STOMP" }
     };
-    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
+    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
+    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if(!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(CrawlerAI)))) {
@@ -33,7 +33,11 @@ public class CrawlerEvent : HullEvent
         }
         levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(CrawlerAI)), 100);
         levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(CrawlerAI)), 1);
-        HullManager.AddChatEventMessage(this);
+        if (Plugin.ColoredEventMessages) {
+            HullManager.AddChatEventMessageColored(this, "red");
+        } else {
+            HullManager.AddChatEventMessage(this);
+        }
         return true;
     }
 }

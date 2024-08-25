@@ -18,8 +18,8 @@ public class HackedTurretsEvent : HullEvent
         { "SECURITY OFFLINE" },
         { "TURRETS HACKED "}
     };
-    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
+    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
+    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (HullManager.Instance == null) {
@@ -34,8 +34,12 @@ public class HackedTurretsEvent : HullEvent
         if (!levelModifier.IsTrapUnitSpawnable(Util.getTrapUnitByType(typeof(Turret)))) return false;
         levelModifier.AddTrapUnit(Util.getTrapUnitByType(typeof(Turret)), Plugin.TurretScale / 3 * 2);
 
-        HullManager.Instance.ExecuteAfterDelay(() => { HackTurrets(); }, 16f);
-        HullManager.AddChatEventMessage(this);
+        HullManager.Instance.ExecuteAfterDelay(HackTurrets, 16f);
+        if (Plugin.ColoredEventMessages) {
+            HullManager.AddChatEventMessageColored(this, "green");
+        } else {
+            HullManager.AddChatEventMessage(this);
+        }
         return true;
     }
 

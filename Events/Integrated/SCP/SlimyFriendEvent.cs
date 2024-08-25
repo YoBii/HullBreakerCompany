@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HullBreakerCompany.Hull;
 
-namespace HullBreakerCompany.Events.Enemy;
+namespace HullBreakerCompany.Events.Integrated.SCP;
 
 public class SlimyFriend : HullEvent
 {
@@ -19,11 +19,12 @@ public class SlimyFriend : HullEvent
     public static List<string> shortMessagesList = new() {
         { "HYDRATE" }
     };
-    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
+    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
+    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable("SCP999Enemy")) {
+        if (!levelModifier.IsEnemySpawnable("SCP999Enemy"))
+        {
             return false;
         }
 
@@ -31,7 +32,14 @@ public class SlimyFriend : HullEvent
         levelModifier.AddEnemyComponentMaxCount("SCP999Enemy", 3);
         levelModifier.AddEnemyComponentPower("SCP999Enemy", 3);
 
-        HullManager.AddChatEventMessage(this);
+        if (Plugin.ColoredEventMessages)
+        {
+            HullManager.AddChatEventMessageColored(this, "red");
+        }
+        else
+        {
+            HullManager.AddChatEventMessage(this);
+        }
         return true;
     }
 }

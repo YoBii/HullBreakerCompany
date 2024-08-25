@@ -20,13 +20,17 @@ public class SpikeTrapEvent : HullEvent
         { "SPIKES" },
         { "TRAPS" }
     };
-    public override string GetMessage() => "<color=white>" + MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => "<color=white>" + shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)] + "</color>";
+    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
+    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsTrapUnitSpawnable(Util.getTrapUnitByType(typeof(SpikeRoofTrap)))) return false;
         levelModifier.AddTrapUnit(Util.getTrapUnitByType(typeof(SpikeRoofTrap)), Plugin.SpikeTrapScale);
-        HullManager.AddChatEventMessage(this);
+        if (Plugin.ColoredEventMessages) {
+            HullManager.AddChatEventMessageColored(this, "orange");
+        } else {
+            HullManager.AddChatEventMessage(this);
+        }
         return true;
     }
 }
