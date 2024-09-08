@@ -21,6 +21,14 @@
 		<PathMap>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))=G:\</PathMap>
 	</PropertyGroup>
 
+	<Target Name="CopyAssemblyToRelease" AfterTargets="Build">
+		<PropertyGroup>
+			<CopyToDir>.\release\BepInEx\plugins\</CopyToDir>
+		</PropertyGroup>
+		<Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFiles="$(CopyToDir)\$(ProjectName).dll" />
+		<Message Text="Copied assembly to $(CopyToDir)" Importance="High" />
+	</Target>
+
     <ItemGroup>
         <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
         <PackageReference Include="BepInEx.Core" Version="5.*" />
