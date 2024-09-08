@@ -73,7 +73,7 @@ public abstract class EventsManager {
             { "evaisa.lethalthings", [new Events.Integrated.BoombaEvent()] },
             { "Kittenji.HerobrineMod", [new Events.Integrated.HerobrineEvent()] },
             { "me.loaforc.facilitymeltdown", [new MeltdownEvent()] },
-            { "DBJ.ShyGuyPatcherPatcher", [new ShyGuyEvent()] },
+            { "Scopophobia", [new ShyGuyEvent()] },
             { "com.potatoepet.AdvancedCompany", [new BunnyEvent(), new ControllerEvent(), new RGBShoesEvent()]},
             { "Dackie.SCP106" , [new RottingManEvent()]},
             { "ProjectSCP.SCP3199", [new EggmanEvent()]},
