@@ -7,11 +7,17 @@ namespace HullBreakerCompany.Events.Misc;
 
 public class OneForAllEvent : HullEvent
 {
-    public override string ID() => "OneForAll";
-    public override int GetWeight() => 10;
-    public override string GetDescription() => "The ship will leave within two hours after one of the workers has died.";
-    public override string GetMessage() => "<color=white>You have been selected for team building measures!</color>";
-    public override string GetShortMessage() => "<color=red>ONE FOR ALL</color>";
+    public OneForAllEvent() {
+        ID = "OneForAll";
+        Weight = 10;
+        Description = "The ship will leave within two hours after one of the workers has died.";
+        MessagesList = new List<string>() {
+            { "<color=white>You have been selected for team building measures!</color>" }
+        };
+        shortMessagesList = new List<string>() {
+            { "<color=red>ONE FOR ALL</color>" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         EventsHandler.OneForAllIsActive = true;

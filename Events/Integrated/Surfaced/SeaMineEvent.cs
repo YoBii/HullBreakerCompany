@@ -6,21 +6,21 @@ namespace HullBreakerCompany.Events.Misc;
 
 public class SeaMineEvent : HullEvent
 {
-    public override string ID() => "SeaMine";
-    public override int GetWeight() => 15;
-    public override string GetDescription() => "Spawns additional seamines inside. Uses LandmineScale config.";
-    public static List<string> MessagesList = new() {
-        { "High security compound" },
-        { "They rigged this place up"},
-        { "Watch your head!"},
-        { "Expect mines" },
-        { "Lots of mines might block your path" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "SEAMINES" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public SeaMineEvent() {
+        ID = "SeaMine";
+        Weight = 15;
+        Description = "Spawns additional seamines inside. Uses LandmineScale config.";
+        MessagesList = new List<string>() {
+            { "High security compound" },
+            { "They rigged this place up" },
+            { "Watch your head!" },
+            { "Expect mines" },
+            { "Lots of mines might block your path" }
+        };
+        shortMessagesList = new List<string>() {
+            { "SEAMINES" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsTrapUnitSpawnable("Old Seamine")) return false;

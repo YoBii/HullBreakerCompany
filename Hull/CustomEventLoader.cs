@@ -174,10 +174,10 @@ public class CustomEventLoader
 
     private static void AddEvent(HullEvent newEvent)
     {
-        if (EventsManager.EventDictionary.Any(e => e.ID() == newEvent.ID())) {
-            Plugin.Mls.LogWarning("Custom event " + newEvent.ID() + " can't be added because an event with the same ID already exists! Check for duplicate config files.");
+        if (EventsManager.EventDictionary.Any(e => e.GetID() == newEvent.GetID())) {
+            Plugin.Mls.LogWarning("Custom event " + newEvent.GetID() + " can't be added because an event with the same ID already exists! Check for duplicate config files.");
         } else {
-            Plugin.Mls.LogInfo("Adding " + newEvent.ID() + " to event dictionary");
+            Plugin.Mls.LogInfo("Adding " + newEvent.GetID() + " to event dictionary");
             EventsManager.EventDictionary.Add(newEvent);
         }
     }
@@ -189,7 +189,7 @@ public class CustomEventLoader
         {
             if (hullEvent is CustomEvent customEvent)
             {
-                Plugin.Mls.LogInfo($"Event ID: {customEvent.ID()}");
+                Plugin.Mls.LogInfo($"Event ID: {customEvent.GetID()}");
                 Plugin.Mls.LogInfo($"Messages: {customEvent.GetReadableMessages()}");
                 Plugin.Mls.LogInfo($"Short messages: {customEvent.GetReadableShortMessage()}");
                 Plugin.Mls.LogInfo($"Enemies: {string.Join(";  ", customEvent.EnemySpawnList.Select(enemy => "[" + enemy.Key + ": Rarity percent = " + enemy.Value[0] + ", Max Count = " + enemy.Value[1] + ", Power Level = " + enemy.Value[2] + "]"))}");

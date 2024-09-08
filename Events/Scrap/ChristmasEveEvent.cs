@@ -7,19 +7,19 @@ namespace HullBreakerCompany.Events.Scrap;
 
 public class ChristmasEveEvent : HullEvent
 {
-    public override string ID() => "ChristmasEve";
-    public override int GetWeight() => 20;
-    public override string GetDescription() => "Spawns a lot of gifts.";
-    public static List<string> MessagesList = new() {
-        { "Is it Christmas already?" },
-        { "Help Santa collect the presents!" },
-        { "The Company wishes a Merry Christmas!" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "XMAS" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public ChristmasEveEvent() {
+        ID = "ChristmasEve";
+        Weight = 20;
+        Description = "Spawns a lot of gifts.";
+        MessagesList = new List<string>() {
+            { "Is it Christmas already?" },
+            { "Help Santa collect the presents!" },
+            { "The Company wishes a Merry Christmas!" }
+        };
+        shortMessagesList = new List<string>() {
+            { "XMAS" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         string scrapToSpawn = "Gift";
         if (levelModifier.IsScrapSpawnable(scrapToSpawn)) {

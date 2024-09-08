@@ -7,18 +7,18 @@ namespace HullBreakerCompany.Events.Scrap;
 
 public class SelfDefenseEvent : HullEvent
 {
-    public override string ID() => "SelfDefense";
-    public override int GetWeight() => 20;
-    public override string GetDescription() => "Spawns a lot of scrap that can be utilized as weapon.";
-    public static List<string> MessagesList = new() {
-        { "Weapons scattered all around!" },
-        { "DIY self defense training today!" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "WEAPONS" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public SelfDefenseEvent() {
+        ID = "SelfDefense";
+        Weight = 20;
+        Description = "Spawns a lot of scrap that can be utilized as weapon.";
+        MessagesList = new List<string>() {
+            { "Weapons scattered all around!" },
+            { "DIY self defense training today!" }
+        };
+        shortMessagesList = new List<string>() {
+            { "WEAPONS" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         Dictionary<String, int> scrapToSpawn = new() {
             { "Plunger", 20 },

@@ -82,7 +82,7 @@ public abstract class EventsManager {
         };
         foreach (var modEventPair in modEvents) {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(modEventPair.Key)) {
-                Plugin.Mls.LogInfo($"{BepInEx.Bootstrap.Chainloader.PluginInfos[modEventPair.Key].Metadata.Name} found! Enabling events: {string.Join(", ", modEventPair.Value.Select(e => e.ID()))}");
+                Plugin.Mls.LogInfo($"{BepInEx.Bootstrap.Chainloader.PluginInfos[modEventPair.Key].Metadata.Name} found! Enabling events: {string.Join(", ", modEventPair.Value.Select(e => e.GetID()))}");
                 foreach (var e in modEventPair.Value) {
                     EventDictionary.Add(e);
                 }
@@ -124,24 +124,24 @@ public abstract class EventsManager {
                 Plugin.Mls.LogInfo($"Event selection failed. No events left to execute..");
                 break;
             }
-            var hullEvent = EventDictionary.FirstOrDefault(e => e.ID() == newEvent);
+            var hullEvent = EventDictionary.FirstOrDefault(e => e.GetID() == newEvent);
             if (hullEvent == null) {
                 Plugin.Mls.LogWarning($"Couldn't find event {newEvent} in event dictionary!");
                 continue;
             }
-            Plugin.Mls.LogInfo($"Got event: {hullEvent.ID()}");
+            Plugin.Mls.LogInfo($"Got event: {hullEvent.GetID()}");
             bool success = hullEvent.Execute(newLevel, levelModifier);
             if (success) {
                 chosenEvents.Add(hullEvent);
             } else {
-                Plugin.Mls.LogInfo($"Skipping event: {hullEvent.ID()}");
+                Plugin.Mls.LogInfo($"Skipping event: {hullEvent.GetID()}");
             }
         }
 
         Plugin.Mls.LogInfo($"Selected events: {chosenEvents.Count()}");
-        Plugin.Mls.LogInfo($"Nothing events: {chosenEvents.Where(e => e.ID().Equals("Nothing")).Count()}");
-        chosenEvents.RemoveAll(e => e.ID().Equals("Nothing"));
-        Plugin.Mls.LogInfo($"Active events: {chosenEvents.Count()} [{string.Join(", ", chosenEvents.Select(e => e.ID()))}]");
+        Plugin.Mls.LogInfo($"Nothing events: {chosenEvents.Where(e => e.GetID().Equals("Nothing")).Count()}");
+        chosenEvents.RemoveAll(e => e.GetID().Equals("Nothing"));
+        Plugin.Mls.LogInfo($"Active events: {chosenEvents.Count()} [{string.Join(", ", chosenEvents.Select(e => e.GetID()))}]");
 
         levelModifier.ApplyModificationsToLevel();
 

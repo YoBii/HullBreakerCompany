@@ -22,6 +22,7 @@ namespace HullBreakerCompany.Hull
 
             Plugin.EnableEventMessages = GetConfigValue("1.1 - Event Messages", "EnableEventMessages", true, "Enable chat event messages");
             Plugin.UseShortChatMessages = GetConfigValue("1.1 - Event Messages", "UseShortChatMessages", false, "Use short event message");
+            Plugin.UniqueEventMessages = GetConfigValue("1.1 - Event Messages", "UseUniqueChatMessages", false, "If true will use non ambigous messages in chat. Every event has a unique message that doesn't change.");
             Plugin.ColoredEventMessages = GetConfigValue("1.1 - Event Messages", "UseColoredChatMessages", false, "If true will use colors for event messages to indicate whether they are 'good' or 'bad' events.");
 
             Plugin.LandmineScale = GetConfigValue("1.2 - Event Configuration", "LandmineScale", 32, "The amount of additional landmines spawned by landmine event (there are more events that spawns mines and thus scale with the value set here)");
@@ -65,7 +66,7 @@ namespace HullBreakerCompany.Hull
 
             foreach (var hullEvent in EventsManager.EventDictionary)
             {
-                weights[hullEvent.ID()] = _configFile.Bind("3 - Event Weights", hullEvent.ID(), hullEvent.GetWeight(), string.Format($"{hullEvent.ID()} event: {hullEvent.GetDescription()}")).Value;
+                weights[hullEvent.GetID()] = _configFile.Bind("3 - Event Weights", hullEvent.GetID(), hullEvent.GetWeight(), string.Format($"{hullEvent.GetID()} event: {hullEvent.GetDescription()}")).Value;
             }
 
             return weights;
@@ -88,7 +89,7 @@ namespace HullBreakerCompany.Hull
             sw.WriteLine("[3 - Event Weights]");
             foreach (var hullEvent in EventsManager.EventDictionary)
             {
-                sw.WriteLine(hullEvent.ID() + "=" + hullEvent.GetWeight());
+                sw.WriteLine(hullEvent.GetID() + "=" + hullEvent.GetWeight());
             }
         }
     }

@@ -7,21 +7,21 @@ namespace HullBreakerCompany.Events.Integrated.AdvancedCompany;
 
 public class ControllerEvent : HullEvent
 {
-    public override string ID() => "AC_Controller";
-    public override int GetWeight() => 3;
-    public override string GetDescription() => "Increases spawn chance of the green Pietsmiet controller item (AdvancedCompany)";
-    public static List<string> MessagesList = new() {
-        { "There will be gaming!" },
-        { "This moon is.. doom-ed?!" },
-        { "The only thing they fear is you" },
-        { "\"Ich bin himmelblau, himmelblau.. Scha-la-la!\"" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "CONTROLLER" },
-        { "PIETSMIET" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public ControllerEvent() {
+        ID = "AC_Controller";
+        Weight = 3;
+        Description = "Increases spawn chance of the green Pietsmiet controller item (AdvancedCompany)";
+        MessagesList = new List<string>() {
+            { "There will be gaming!" },
+            { "This moon is.. doom-ed?!" },
+            { "The only thing they fear is you" },
+            { "\"Ich bin himmelblau, himmelblau.. Scha-la-la!\"" }
+        };
+        shortMessagesList = new List<string>() {
+            { "CONTROLLER" },
+            { "PIETSMIET" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         Dictionary<string, int> scrapToSpawn = new() {

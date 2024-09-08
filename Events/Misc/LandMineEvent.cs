@@ -6,21 +6,21 @@ namespace HullBreakerCompany.Events.Misc;
 
 public class LandMineEvent : HullEvent
 {
-    public override string ID() => "LandMine";
-    public override int GetWeight() => 30;
-    public override string GetDescription() => "Spawns additional landmines inside.";
-    public static List<string> MessagesList = new() {
-        { "High security compound" },
-        { "They rigged this place up"},
-        { "Watch your step!"},
-        { "Expect mines" },
-        { "Lots of mines might block your path" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "LANDMINES" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public LandMineEvent() {
+        ID = "LandMine";
+        Weight = 30;
+        Description = "Spawns additional landmines inside.";
+        MessagesList = new List<string>() {
+            { "High security compound" },
+            { "They rigged this place up" },
+            { "Watch your step!" },
+            { "Expect mines" },
+            { "Lots of mines might block your path" }
+        };
+        shortMessagesList = new List<string>() {
+            { "LANDMINES" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsTrapUnitSpawnable(Util.getTrapUnitByType(typeof(Landmine)))) return false;

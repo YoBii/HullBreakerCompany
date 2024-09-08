@@ -6,19 +6,19 @@ namespace HullBreakerCompany.Events.Misc;
 
 public class TimeDilationEvent : HullEvent
 {
-    public override string ID() => "TimeDilation";
-    public override int GetWeight() => 5;
-    public override string GetDescription() => "Makes day longer i.e. time passes slower";
-    public static List<string> MessagesList = new() {
-        { "Gravity distorts space time. Take your time!" },
-        { "You have all the time you need." },
-        { "Gravitional anomaly distorts spacetime! Time passes at a slower rate." }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "TIME+" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public TimeDilationEvent() {
+        ID = "TimeDilation";
+        Weight = 5;
+        Description = "Makes day longer i.e. time passes slower";
+        MessagesList = new List<string>() {
+            { "Gravity distorts space time. Take your time!" },
+            { "You have all the time you need." },
+            { "Gravitational anomaly distorts spacetime! Time passes at a slower rate." }
+        };
+        shortMessagesList = new List<string>() {
+            { "TIME+" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         try {

@@ -7,27 +7,27 @@ using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Misc;
 
-public class MeltdownEvent : HullEvent
-{
-    public int dayInSeconds;
-    public int currentDaysLeft;
-    public override string ID() => "Meltdown";
-    public override int GetWeight() => 10;
-    public override string GetDescription() => "Starts reactor meltdown sequence sometime during the day.";
-    public static List<string> MessagesList = new() {
+public class MeltdownEvent : HullEvent {
+    public MeltdownEvent() {
+        ID = "Meltdown";
+        Weight = 10;
+        Description = "Starts reactor meltdown sequence sometime during the day.";
+        MessagesList = new List<string>() {
         { "Unstable reactor core. Extract and leave immediately!" },
         { "Elevated radiation levels. Reactor meltdown imminent!" },
         { "Prevent a nuclear disaster by gracefully removing the apparatus core" },
         { "Increased radiation levels. Don't wander too far off the ship." }
     };
-    public static List<string> shortMessagesList = new() {
+        shortMessagesList = new List<string>() {
         { "SURPRISE" },
         { "MELTDOWN" }
     };
+    }
+    public int dayInSeconds;
+    public int currentDaysLeft;
     public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
     public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
-    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
-    {
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         currentDaysLeft = TimeOfDay.Instance.daysUntilDeadline;
         dayInSeconds = (int)HullManager.Instance.timeOfDay.lengthOfHours * HullManager.Instance.timeOfDay.numberOfHours;
         if (Plugin.ColoredEventMessages) {
@@ -48,7 +48,7 @@ public class MeltdownEvent : HullEvent
                 $"currentLevel: {RoundManager.Instance.currentLevel.PlanetName} (ID {RoundManager.Instance.currentLevel.levelID})");
             return;
         }
-        Plugin.Mls.LogInfo(ID() + $" Event: Meltdown initiated");
+        Plugin.Mls.LogInfo(GetID() + $" Event: Meltdown initiated");
         MeltdownAPI.StartMeltdown(PluginInfo.PLUGIN_GUID);
         HullManager.SendChatEventMessage("<color=red>NUCLEAR MELTDOWN! ABANDON MISSION!</color>");
     }

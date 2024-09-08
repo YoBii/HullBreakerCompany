@@ -8,20 +8,22 @@ namespace HullBreakerCompany.Events.Enemy;
 
 public class ArachnophobiaEvent : HullEvent
 {
-    public override string ID() => "Arachnophobia";
-    public override int GetWeight() => 10;
-    public override string GetDescription() => "Increases bunker spider (SandSpider) spawn chance. Allows more than one to spawn.";
-    public static List<string> MessagesList = new() {
-        { "Dominated by hostile life form"},
-        { "Dominant species detected"},
-        { "This place is crawling.." },
-        { "They have 8 eyes.." },
-        { "Natural spider habitat" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "EIGHT EYES" },
-        { "EIGHT LEGS" }
-    };
+    public ArachnophobiaEvent() {
+        ID = "Arachnophobia";
+        Weight = 10;
+        Description = "Increases bunker spider (SandSpider) spawn chance. Allows more than one to spawn.";
+        MessagesList = new List<string>() {
+            { "Dominated by hostile life form"},
+            { "Dominant species detected"},
+            { "This place is crawling.." },
+            { "They have 8 eyes.." },
+            { "Natural spider habitat" }
+        };
+        shortMessagesList = new List<string>() {
+            { "EIGHT EYES" },
+            { "EIGHT LEGS" }
+        };  
+    }
     public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
     public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)

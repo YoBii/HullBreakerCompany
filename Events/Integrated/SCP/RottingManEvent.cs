@@ -9,20 +9,20 @@ namespace HullBreakerCompany.Events.Integrated.SCP;
 
 public class RottingManEvent: HullEvent
 {
-    public override string ID() => "RottingMan";
-    public override int GetWeight() => 7;
-    public override string GetDescription() => "Increases SCP106 spawn frequency and can spawn more of them.";
-    public static List<string> MessagesList = new() {
-        { "Reports of paranormal activity" },
-        { "Paranormal signature detected" },
-        { "Stay away from any elderly 'rotting' humanoids.." },
-        { "No physical interaction with SCP-106 is allowed at any time." }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "ROTTINGMAN" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public RottingManEvent() {
+        ID = "RottingMan";
+        Weight = 7;
+        Description = "Increases SCP106 spawn frequency and can spawn more of them.";
+        MessagesList = new List<string>() {
+            { "Reports of paranormal activity" },
+            { "Paranormal signature detected" },
+            { "Stay away from any elderly 'rotting' humanoids.." },
+            { "No physical interaction with SCP-106 is allowed at any time." }
+        };
+        shortMessagesList = new List<string>() {
+            { "ROTTINGMAN" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsEnemySpawnable("SCP106Obj2"))

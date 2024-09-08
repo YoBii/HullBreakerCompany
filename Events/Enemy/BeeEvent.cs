@@ -9,7 +9,24 @@ namespace HullBreakerCompany.Events.Enemy;
 
 public class BeeEvent : HullEvent
 {
-    public override string ID() => "Bee";
+    public BeeEvent() {
+        ID = "Bee";
+        Weight = 20;
+        Description = "Increases bee hive spawns outside";
+        MessagesList = new List<string>() {
+            { "Dominated by hostile life form"},
+            { "Dominant species detected"},
+            { "Sticky golden goodness" },
+            { "Extract the bee hives!" },
+            { "Don't get stung by bees!" }
+        };
+        shortMessagesList = new List<string>() {
+            { "BZZZZZ" },
+            { "STICKY GOLD" }
+        };
+    }
+
+    public override string GetID() => "Bee";
     public override int GetWeight() => 20;
     public override string GetDescription() => "Increases bee hive spawns outside";
     public static List<string> MessagesList = new() {

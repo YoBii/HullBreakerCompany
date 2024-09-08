@@ -9,22 +9,22 @@ namespace HullBreakerCompany.Events.Integrated.Surfaced;
 
 public class UrchinEvent : HullEvent
 {
-    public override string ID() => "Urchin";
-    public override int GetWeight() => 10;
-    public override string GetDescription() => "Increases Urching spawn frequency. Spawns up to ten early. ";
-    public static List<string> MessagesList = new() {
-        { "Dominated by hostile life form"},
-        { "Dominant species detected"},
-        { "Urchin Invasion" },
-        { "Exponential growth" },
-        { "They will not stop breeding" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "SPIKY" },
-        { "BALLS" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public UrchinEvent() {
+        ID = "Urchin";
+        Weight = 10;
+        Description = "Increases Urching spawn frequency. Spawns up to ten early.";
+        MessagesList = new List<string>() {
+            { "Dominated by hostile life form" },
+            { "Dominant species detected" },
+            { "Urchin Invasion" },
+            { "Exponential growth" },
+            { "They will not stop breeding" }
+        };
+        shortMessagesList = new List<string>() {
+            { "SPIKY" },
+            { "BALLS" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsDaytimeEnemySpawnable("Urchin"))

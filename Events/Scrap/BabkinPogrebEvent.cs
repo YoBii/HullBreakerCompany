@@ -7,18 +7,20 @@ namespace HullBreakerCompany.Events.Scrap;
 
 public class BabkinPogrebEvent : HullEvent
 {
-    public override string ID() => "BabkinPogreb";
-    public override int GetWeight() => 20;
-    public override string GetDescription() => "Spawns a lot of pickle jars.";
-    public static List<string> MessagesList = new() {
-        { "Scans indicate all scrap is.. organic?" },
-        { "There is something wrong with the scrap.." },
-        { "We lost Rick. Find him!" },
-        { "Quite a pickle indeed!" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "QUITE A PICKLE" }
-    };
+    public BabkinPogrebEvent() {
+        ID = "BabkinPogreb";
+        Weight = 20;
+        Description = "Spawns a lot of pickle jars.";
+        MessagesList = new List<string>() {
+            { "Scans indicate all scrap is.. organic?" },
+            { "There is something wrong with the scrap.." },
+            { "We lost Rick. Find him!" },
+            { "Quite a pickle indeed!" }
+        };
+        shortMessagesList = new List<string>() {
+            { "QUITE A PICKLE" }
+        };
+    }
     public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
     public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public static List<SpawnableItemWithRarity> scrapList = new();

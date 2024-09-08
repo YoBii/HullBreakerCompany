@@ -7,21 +7,21 @@ namespace HullBreakerCompany.Events.Integrated.SCP;
 
 public class ShyGuyEvent : HullEvent
 {
-    public override string ID() => "ShyGuy";
-    public override int GetWeight() => 5;
-    public override string GetDescription() => "Increases spawn chance of Shy Guy. Allows more than one to spawn.";
-    public static List<string> MessagesList = new() {
-        { "Do NOT look at him!" },
-        { "Scopophobia.." },
-        { "SCP-096" },
-        { "When you're scared to take a look.." },
-        { "No one who's seen their face has survived.." }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "SHY" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public ShyGuyEvent() {
+        ID = "ShyGuy";
+        Weight = 5;
+        Description = "Increases spawn chance of Shy Guy. Allows more than one to spawn.";
+        MessagesList = new List<string>() {
+            { "Do NOT look at him!" },
+            { "Scopophobia.." },
+            { "SCP-096" },
+            { "When you're scared to take a look.." },
+            { "No one who's seen their face has survived.." }
+        };
+        shortMessagesList = new List<string>() {
+            { "SHY" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsEnemySpawnable("ShyGuy"))

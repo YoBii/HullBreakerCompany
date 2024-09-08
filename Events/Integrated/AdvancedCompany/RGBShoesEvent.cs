@@ -7,20 +7,20 @@ namespace HullBreakerCompany.Events.Integrated.AdvancedCompany;
 
 public class RGBShoesEvent : HullEvent
 {
-    public override string ID() => "AC_RGBShoes";
-    public override int GetWeight() => 3;
-    public override string GetDescription() => "Increases spawn chance of the unique light shoes item (AdvancedCompany)";
-    public static List<string> MessagesList = new() {
-        { "Fancy sneakers. Gaming RGB! +120fps" },
-        { "Run at the speed of light" },
-        { "Reports of RGB lights.. traveling at extreme speeds" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "Shoes" },
-        { "RGB" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public RGBShoesEvent() {
+        ID = "AC_RGBShoes";
+        Weight = 3;
+        Description = "Increases spawn chance of the unique light shoes item (AdvancedCompany)";
+        MessagesList = new List<string>() {
+            { "Fancy sneakers. Gaming RGB! +120fps" },
+            { "Run at the speed of light" },
+            { "Reports of RGB lights.. traveling at extreme speeds" }
+        };
+        shortMessagesList = new List<string>() {
+            { "Shoes" },
+            { "RGB" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         Dictionary<string, int> scrapToSpawn = new() {

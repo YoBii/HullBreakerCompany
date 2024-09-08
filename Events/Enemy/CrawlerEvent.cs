@@ -8,24 +8,23 @@ namespace HullBreakerCompany.Events.Enemy;
 
 public class CrawlerEvent : HullEvent
 {
-    public override string ID() => "Crawler";
-    public override int GetWeight() => 5;
-    public override string GetDescription() => "Increases thumper (also Crawler or Halves) spawn chance. Allows multiple to spawn and lowers their power level.";
-    public static List<string> MessagesList = new() {
-        { "Dominated by hostile life form"},
-        { "Dominant species detected"},
-        { "Something is stomping heavily. Probably hostile." },
-        { "To bonk or be bonked, that is the question" },
-        { "Intense thumping inside the facility" },
-        { "Does putting two halves together MAKE US WHOLE AGAIN?" },
-        { "Prepare to get stomped on" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "THUMP" },
-        { "STOMP" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public CrawlerEvent () {
+        ID = "Crawler";
+        Weight = 5;
+        Description = "Increases thumper (also Crawler or Halves) spawn chance. Allows multiple to spawn and lowers their power level.";
+        MessagesList = new List<string>() { 
+            { "Dominated by hostile life form"},
+            { "Dominant species detected"},
+            { "Heavy stomping inside. Probably hostile." },
+            { "To bonk or be bonked, that is the question" },
+            { "Intense thumping inside the facility" },
+            { "Does putting two halves together MAKE US WHOLE AGAIN?" },
+        };
+        shortMessagesList = new List<string>() {
+            { "THUMP" },
+            { "STOMP" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if(!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(CrawlerAI)))) {

@@ -7,20 +7,20 @@ namespace HullBreakerCompany.Events.Misc;
 
 public class HordeModeEvent : HullEvent
 {
-    public override string ID() => "HordeMode";
-    public override int GetWeight() => 5;
-    public override string GetDescription() => "Increases inside enemy spawn rate. Spawns enemies earlier and more frequently.";
-    public static List<string> MessagesList = new() {
-        { "Extreme activity levels!" },
-        { "No one has ever returned from here.." },
-        { "Caution! Activity level 9 9 9 9 9 9 9 9 9 9 9 9" },
-        { "The company wishes the best of luck!" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "HORDEMODE" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public HordeModeEvent() {
+        ID = "HordeMode";
+        Weight = 5;
+        Description = "Increases inside enemy spawn rate. Spawns enemies earlier and more frequently.";
+        MessagesList = new List<string>() { 
+            { "Extreme activity levels!" },
+            { "No one has ever returned from here.." },
+            { "Caution! Activity level 9 9 9 9 9 9 9 9 9 9 9 9" },
+            { "The company wishes the best of luck!" }
+        };
+        shortMessagesList = new List<string>() {
+            { "HORDEMODE" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         // maybe check whether spawnchance field in levelModifier is set instead

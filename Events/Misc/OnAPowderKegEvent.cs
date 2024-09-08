@@ -8,23 +8,23 @@ namespace HullBreakerCompany.Events.Misc;
 
 public class OnAPowderKegEvent : HullEvent
 {
+    public OnAPowderKegEvent() {
+        ID = "OnAPowderKeg";
+        Weight = 10;
+        Description = "Landmines will detonate randomly. Spawns additional landmines.";
+        MessagesList = new List<string>() {
+            { "Reccuring explosions" },
+            { "Explosions detected" },
+            { "They installed faulty mines" },
+            { "Mines explode at the slightest vibration" },
+            { "Tick, tick.. BOOM!" }
+        };
+        shortMessagesList = new List<string>() {
+            { "SURPRISE" },
+            { "EXPLOSIONS" }
+        };
+    }
     public int dayInSeconds;
-    public override string ID() => "OnAPowderKeg";
-    public override int GetWeight() => 10;
-    public override string GetDescription() => "Landmines will detonate randomly. Spawns additional landmines.";
-    public static List<string> MessagesList = new() {
-        { "Reccuring explosions" },
-        { "Explosions detected" },
-        { "They installed faulty mines" },
-        { "Mines explode at the slightest vibration" },
-        { "Tick, tick.. BOOM!" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "SURPRISE" },
-        { "EXPLOSIONS" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsTrapUnitSpawnable(Util.getTrapUnitByType(typeof(Landmine)))) return false;
@@ -52,7 +52,7 @@ public class OnAPowderKegEvent : HullEvent
         Landmine[] landmines = UnityEngine.Object.FindObjectsOfType<Landmine>();
         if (landmines.Count() == 0) return;
 
-        Plugin.Mls.LogInfo(ID() + $" Event: PowderKeg has been ignited. Will explode a landmine every {dayInSeconds / landmines.Count() / 30}-{dayInSeconds / landmines.Count() / 4} seconds.");
+        Plugin.Mls.LogInfo(GetID() + $" Event: PowderKeg has been ignited. Will explode a landmine every {dayInSeconds / landmines.Count() / 30}-{dayInSeconds / landmines.Count() / 4} seconds.");
         foreach (var (landmine, i) in landmines.Select((landmine, i) => (landmine, i)))
         {
             if (landmine == null) continue;
@@ -62,7 +62,7 @@ public class OnAPowderKegEvent : HullEvent
                     $"inShipPhase: {TimeOfDay.Instance.playersManager.inShipPhase};");
                 break;
             }
-            Plugin.Mls.LogMessage(ID() + $" Event: Random landmine explosion #{i + 1}");
+            Plugin.Mls.LogMessage(GetID() + $" Event: Random landmine explosion #{i + 1}");
             landmine.ExplodeMineServerRpc();
             await Task.Delay(TimeSpan.FromSeconds(UnityEngine.Random.Range(dayInSeconds / landmines.Count() / 30, dayInSeconds / landmines.Count() / 4)));
         }

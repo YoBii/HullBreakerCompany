@@ -9,21 +9,21 @@ namespace HullBreakerCompany.Events.Enemy;
 
 public class HellEvent : HullEvent
 {
-    public override string ID() => "Hell";
-    public override int GetWeight() => 1;
-    public override string GetDescription() => "Increases Jester spawn chance. Allows more than one to spawn.";
-    public static List<string> MessagesList = new() {
-        { "What's in the box?!" },
-        { "Upon encounter evacuate immediately!" },
-        { "Sir, I'm going to have to ask you to leave." },
-        { "The company wishes the best of luck!" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "HELL" },
-        { "LEAVE" }
-    };
-    public override string GetMessage() => "<color=white>" + MessagesList[Random.Range(0, MessagesList.Count)] + "</color>";
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public HellEvent() {
+        ID = "Hell";
+        Weight = 1;
+        Description = "Increases Jester spawn chance. Allows more than one to spawn.";
+        MessagesList = new List<string>() {
+            { "What's in the box?!" },
+            { "Upon encounter evacuate immediately!" },
+            { "Sir, I'm going to have to ask you to leave." },
+            { "The company wishes the best of luck!" }
+        };
+        shortMessagesList = new List<string>() {
+            { "HELL" },
+            { "LEAVE" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(JesterAI)))) {

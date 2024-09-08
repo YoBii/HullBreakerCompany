@@ -7,21 +7,21 @@ namespace HullBreakerCompany.Events.Enemy;
 
 public class LizardsEvent : HullEvent
 {
-    public override string ID() => "Lizards";
-    public override int GetWeight() => 10;
-    public override string GetDescription() => "Increases Puffer spawn chance and there's more of them.";
-    public static List<string> MessagesList = new() {
-        { "Dominated by hostile life form" },
-        { "Dominant species detected" },
-        { "Don't get too close!" },
-        { "Be aware of toxic spore clouds" },
-        { "Don't inhale the spores!" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "SPORE DUST" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public LizardsEvent() {
+        ID = "Lizards";
+        Weight = 10;
+        Description = "Increases Puffer spawn chance and there's more of them.";
+        MessagesList = new List<string>() {
+            { "Dominated by hostile life form" },
+            { "Dominant species detected" },
+            { "Don't get too close!" },
+            { "Be aware of toxic spore clouds" },
+            { "Don't inhale the spores!" }
+        };
+        shortMessagesList = new List<string>() {
+            { "SPORE DUST" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(PufferAI)))) {

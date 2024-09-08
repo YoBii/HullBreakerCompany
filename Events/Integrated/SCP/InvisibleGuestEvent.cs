@@ -9,21 +9,21 @@ namespace HullBreakerCompany.Events.Integrated.SCP;
 
 public class InvisibleGuestEvent : HullEvent
 {
-    public override string ID() => "InvisibleGuest";
-    public override int GetWeight() => 15;
-    public override string GetDescription() => "Increases SCP966 spawn frequency. Spawns up to three. ";
-    public static List<string> MessagesList = new() {
-        { "Reports of paranormal activity" },
-        { "Paranormal signature detected" },
-        { "It's wearing you down.." },
-        { "Did you see that?!?!" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "SLUGGISH" },
-        { "GUEST" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public InvisibleGuestEvent() {
+        ID = "InvisibleGuest";
+        Weight = 15;
+        Description = "Increases SCP966 spawn frequency. Spawns up to three.";
+        MessagesList = new List<string>() {
+            { "Reports of paranormal activity" },
+            { "Paranormal signature detected" },
+            { "It's wearing you down.." },
+            { "Did you see that?!?!" }
+        };
+        shortMessagesList = new List<string>() {
+            { "SLUGGISH" },
+            { "GUEST" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsEnemySpawnable("scp966"))

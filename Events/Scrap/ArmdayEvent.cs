@@ -8,21 +8,21 @@ namespace HullBreakerCompany.Events.Scrap;
 
 public class ArmdayEvent : HullEvent
 {
-    public override string ID() => "Armday";
-    public override int GetWeight() => 20;
-    public override string GetDescription() => "Spawns a lot of heavy loot.";
-    public static List<string> MessagesList = new() {
-        { "Expect a lot of of big heavy scrap!" },
-        { "Grip strength required! Heavy duty scrap." },
-        { "Slipped disks are not covered by company insurance!" },
-        { "Lift heavy objects with a jerking twisting motion!" },
-        { "Lower back pain" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "HEAVY" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public ArmdayEvent() {
+        ID = "Armday";
+        Weight = 20;
+        Description = "Spawns a lot of heavy loot.";
+        MessagesList = new List<string>() {
+            { "Expect a lot of big heavy scrap!" },
+            { "Grip strength required! Heavy duty scrap." },
+            { "Slipped disks are not covered by company insurance!" },
+            { "Lift heavy objects with a jerking twisting motion!" },
+            { "Lower back pain" }
+        };
+        shortMessagesList = new List<string>() {
+            { "HEAVY" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         Dictionary<string, int> scrapToSpawn = new() {
             { "Metal sheet", 20 },

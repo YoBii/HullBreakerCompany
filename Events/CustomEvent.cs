@@ -13,7 +13,7 @@ public class CustomEvent : HullEvent
     private List<string> MessageList = new List<string>();
     private List<string> ShortMessageList = new List<string>();
     
-    public override string ID() 
+    public override string GetID() 
     { 
         return _id; 
     }

@@ -1,32 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Enemy;
 
-public class FlowerManEvent : HullEvent
-{
-    public override string ID() => "FlowerMan";
-    public override int GetWeight() => 10;
-    public override string GetDescription() => "Increases Bracken (Flowerman) spawn chance. Allows more than one to spawn.";
-    public static List<string> MessagesList = new() {
-        { "Reports of paranormal activity" },
-        { "Paranormal signature detected" },
-        { "Something is lurking in the shadows" },
-        { "Are you afraid of the dark?" },
-        { "Always behind you.." },
-        { "White eyes watching you.." },
-        { "Sometimes you don't want to win a staring contest!" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "STALKER" },
-        { "FEAR OF THE DARK" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
-    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
-    {
+public class FlowerManEvent : HullEvent {
+    public FlowerManEvent() {
+        ID = "FlowerMan";
+        Weight = 10;
+        Description = "Increases Bracken (Flowerman) spawn chance. Allows more than one to spawn.";
+        MessagesList = new List<string>() {
+            { "Reports of paranormal activity" },
+            { "Paranormal signature detected" },
+            { "Something is lurking in the shadows" },
+            { "Are you afraid of the dark?" },
+            { "Always behind you.." },
+            { "White eyes watching you.." },
+            { "Sometimes you don't want to win a staring contest!" }
+        };
+        shortMessagesList = new List<string>() {
+            { "STALKER" },
+            { "FEAR OF THE DARK" }
+        };
+    }
+
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(FlowermanAI)))) {
             return false;
         }

@@ -30,6 +30,7 @@ namespace HullBreakerCompany
         public static int TurretScale;
         public static bool UseShortChatMessages;
         public static bool EnableEventMessages;
+        public static bool UniqueEventMessages;
         public static bool ColoredEventMessages;
 
         public static bool UseHullBreakerLevelSettings;

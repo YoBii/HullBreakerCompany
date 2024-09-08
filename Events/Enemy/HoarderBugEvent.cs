@@ -7,26 +7,26 @@ namespace HullBreakerCompany.Events.Enemy;
 
 public class HoarderBugEvent : HullEvent
 {
-    public override string ID() => "HoarderBug";
-    public override int GetWeight() => 30;
-    public override string GetDescription() => "Spawns a lot of Hoarderbugs while still allowing other enemies to spawn.";
-    public static List<string> MessagesList = new() {
-        { "Residues of pestice detected in the atmosphere" },
-        { "Scrap is.. moving?"},
-        { "Dominant species detected"},
-        { "The competition is already here" },
-        { "The hoarding bug mafia is in charge of this place" },
-        { "They are stealing our scrap!" },
-        { "Friend..?" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "CAPTURE THE SCRAP" },
-        { "MOVING SCRAP" },
-        { "COMPETITION" },
-        { "MAFIA" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public HoarderBugEvent() {
+        ID = "HoarderBug";
+        Weight = 30;
+        Description = "Spawns a lot of Hoarderbugs while still allowing other enemies to spawn.";
+        MessagesList = new List<string>() {
+            { "Residues of pesticide detected in the atmosphere" },
+            { "Scrap is.. moving?" },
+            { "Dominant species detected" },
+            { "The competition is already here" },
+            { "The hoarding bug mafia is in charge of this place" },
+            { "They are stealing our scrap!" },
+            { "Friend..?" }
+        };
+        shortMessagesList = new List<string>() {
+            { "CAPTURE THE SCRAP" },
+            { "MOVING SCRAP" },
+            { "COMPETITION" },
+            { "MAFIA" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(HoarderBugAI)))) {

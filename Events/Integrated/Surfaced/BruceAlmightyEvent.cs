@@ -9,22 +9,22 @@ namespace HullBreakerCompany.Events.Integrated.Surfaced;
 
 public class BruceAlmightyEvent : HullEvent
 {
-    public override string ID() => "BruceAlmighty";
-    public override int GetWeight() => 20;
-    public override string GetDescription() => "Increases Bruce spawn frequency. Spawns up to three. ";
-    public static List<string> MessagesList = new() {
-        { "Dominated by hostile life form"},
-        { "Dominant species detected"},
-        { "Tip: Avoid getting hurt" },
-        { "Watch out for sharks!" },
-        { "The land animals won't harm you.. unless you present yourself as food" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "BRUCE" },
-        { "SNACKED" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public BruceAlmightyEvent() {
+        ID = "BruceAlmighty";
+        Weight = 20;
+        Description = "Increases Bruce spawn frequency. Spawns up to three.";
+        MessagesList = new List<string>() {
+            { "Dominated by hostile life form"},
+            { "Dominant species detected"},
+            { "Tip: Avoid getting hurt" },
+            { "Watch out for sharks!" },
+            { "The land animals won't harm you.. unless you present yourself as food" }
+        };
+        shortMessagesList = new List<string>() {
+            { "BRUCE" },
+            { "SNACKED" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsOutsideEnemySpawnable("Bruce"))

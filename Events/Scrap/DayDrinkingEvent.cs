@@ -8,19 +8,19 @@ namespace HullBreakerCompany.Events.Scrap;
 
 public class DayDrinkingEvent : HullEvent
 {
-    public override string ID() => "DayDrinking";
-    public override int GetWeight() => 20;
-    public override string GetDescription() => "Spawns a lot of alcoholic beverages.";
-    public static List<string> MessagesList = new() {
-        { "Let's crack a beer or two!" },
-        { "Alcohol use prohibited during work hours!" },
-        { "There is something wrong with the scrap.." }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "DAYDRINKING" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public DayDrinkingEvent() {
+        ID = "DayDrinking";
+        Weight = 20;
+        Description = "Spawns a lot of alcoholic beverages.";
+        MessagesList = new List<string>() {
+            { "Let's crack a beer or two!" },
+            { "Alcohol use prohibited during work hours!" },
+            { "There is something wrong with the scrap.." }
+        };
+        shortMessagesList = new List<string>() {
+            { "DAYDRINKING" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         Dictionary<String, int> scrapToSpawn = new() {
             { "Bottles", 30 },

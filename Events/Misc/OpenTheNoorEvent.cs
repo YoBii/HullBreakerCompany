@@ -6,22 +6,22 @@ namespace HullBreakerCompany.Events.Misc;
 
 public class OpenTheNoorEvent : HullEvent
 {
-    public override string ID() => "OpenTheNoor";
-    public override int GetWeight() => 15;
-    public override string GetDescription() => "All security doors spawn in closed state.";
-    public static List<string> MessagesList = new() {
-        { "High security compound" },
-        { "You shall not pass!" },
-        { "Hodor - Hold the door!" },
-        { "They locked this place down" },
-        { "Abandoned on lockdown. All security doors are closed." }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "HODOR" },
-        { "OPEN THE NOOR" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public OpenTheNoorEvent() {
+        ID = "OpenTheNoor";
+        Weight = 15;
+        Description = "All security doors spawn in closed state.";
+        MessagesList = new List<string>() {
+            { "High security compound" },
+            { "You shall not pass!" },
+            { "Hodor - Hold the door!" },
+            { "They locked this place down" },
+            { "Abandoned on lockdown. All security doors are closed." }
+        };
+        shortMessagesList = new List<string>() {
+            { "HODOR" },
+            { "OPEN THE NOOR" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (HullManager.Instance == null)

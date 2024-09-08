@@ -4,22 +4,21 @@ using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Enemy;
 
-public class ButlerEvent : HullEvent
+public class BarberEvent : HullEvent
 {
-    public ButlerEvent() {
-        ID = "Butler";
+    public BarberEvent() {
+        ID = "Barber";
         Weight = 5;
-        Description = "Increases spawn chance of butler and there's more of them";
+        Description = "Increases spawn chance of barber and there's more of them";
         MessagesList = new List<string>() {
             { "Reports of paranormal activity" },
             { "Paranormal signature detected" },
-            { "Someone is taking care of this place" },
-            { "Mirror finished floors require meticulous care.."},
-            { "Avoid stained clothing by not staining the floors. Suits are company property!" }
+            { "In dire need of a haircut..?"},
+            { "Snip-snap" }
         };
         shortMessagesList = new List<string>() {
-            { "BUTLER" },
-            { "JANITOR" }
+            { "BARBER" },
+            { "SCISSORS" }
         };
     }
 
@@ -29,7 +28,7 @@ public class ButlerEvent : HullEvent
             return false;
         }
         levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(ButlerEnemyAI)), 100);
-        levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(ButlerEnemyAI)), 4);
+        levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(ButlerEnemyAI)), 5);
         levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(ButlerEnemyAI)), 0);
         if (Plugin.ColoredEventMessages) {
             HullManager.AddChatEventMessageColored(this, "red");

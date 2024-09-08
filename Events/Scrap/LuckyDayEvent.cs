@@ -7,19 +7,19 @@ namespace HullBreakerCompany.Events.Scrap;
 
 public class LuckyDayEvent : HullEvent
 {
-    public override string ID() => "LuckyDay";
-    public override int GetWeight() => 5;
-    public override string GetDescription() => "Increases spawn chance of high value loot.";
-    public static List<string> MessagesList = new() {
-        { "High value scrap detected!" },
-        { "Supposed to hold some very valuable scrap" },
-        { "Today's your lucky day!" }
-    };
-    public static List<string> shortMessagesList = new() {
-        { "LUCKY" }
-    };
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
+    public LuckyDayEvent() {
+        ID = "LuckyDay";
+        Weight = 5;
+        Description = "Increases spawn chance of high value loot.";
+        MessagesList = new List<string>() {
+            { "High value scrap detected!" },
+            { "Supposed to hold some very valuable scrap" },
+            { "Today's your lucky day!" }
+        };
+        shortMessagesList = new List<string>() {
+            { "LUCKY" }
+        };
+    }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
         Dictionary<String, int> scrapToSpawn = new() {
             { "Cash register", 20 },
