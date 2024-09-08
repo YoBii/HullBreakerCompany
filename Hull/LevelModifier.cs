@@ -314,7 +314,7 @@ public class LevelModifier(SelectableLevel level) {
             if (trap.Key == Util.getTrapUnitByType(typeof(Turret))) readable_name = "Turret";
             else readable_name = trap.Key;
             foreach (var mapObject in targetLevel.spawnableMapObjects) {
-                if (mapObject.prefabToSpawn.name == trap.Key) {
+                if (mapObject.prefabToSpawn.name.Equals(trap.Key, StringComparison.OrdinalIgnoreCase)) {
                     if (!undo) {
                         if (trap.Value <= 0) return;
                         trapBackups.Add(trap.Key, mapObject.numberToSpawn);
