@@ -79,7 +79,8 @@ public abstract class EventsManager {
             { "Dackie.SCP106" , [new RottingManEvent()]},
             { "ProjectSCP.SCP3199", [new EggmanEvent()]},
             { "ProjectSCP.SCP966", [new InvisibleGuestEvent()]},
-            { "Surfaced", [new BruceAlmightyEvent(), new SeaMineEvent(), new UrchinEvent()] }
+            { "Surfaced", [new BruceAlmightyEvent(), new SeaMineEvent(), new UrchinEvent()] },
+            { "TestAccount666.TestAccountVariety", [new CageMineEvent(), new GiftMimicEvent(), new PropulsionMineEvent()] }
         };
         foreach (var modEventPair in modEvents) {
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(modEventPair.Key)) {
