@@ -36,7 +36,7 @@ That means other enemies *can* still spawn additionally but they will spawn in l
 
 ### Integrated mod events
 Depending on whether you have other mods installed certain events are enabled automatically. No user interaction or configuration required.
-Introducing events for Shy guy, Herobrine, FacilityMeltdown and more. Check the changelog.
+Introducing events for Shy guy, Herobrine, FacilityMeltdown, Surfaced, TestAccountVariety and more. Check changelog and the table below.
 
 ### Custom Events
 * added support for modded enemies
@@ -244,6 +244,9 @@ AC_RGBShoes  | AdvancedCompany | Increases spawn chance of AdvancedCompany uniqu
 BruceAlmighty  | Surfaced | Guarantees Bruce spawn outside. Spawns up to three. 
 SeaMine  | Surfaced | Spawns a lot of old sea mines. Uses LandmineScale config.
 Urchin | Surfaced | Spawns up to ten Urchin early in the round. 
+PrisonMine | TestAccountVariety | Spawns more prison/cage mines. Uses amount from TurretScale config.
+GiftMimic | TestAccountVariety | Spawns more gift mimics. Uses amount from LandmineScale config divided by 3.
+PropulsionMine | TestAccountVariety | Spawns more propulsion mines. Uses amount from LandmineScale config.
 InvisibleGuest  | SCP966 | Increases SCP966 spawn chance, spawns up to three.
 SCP106  | SCP106 | Increases SCP106 spawn chance, spawns up to three.
 Eggman  | SCP3199 | Increases SCP3199 outside spawn chance, spawns up to four.

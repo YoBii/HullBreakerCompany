@@ -1,3 +1,24 @@
+# v2.2.5
+#### Added
+- **Barber Event**: Spawns barber more frequently. They don't count towards max enemy power.
+- **TestAccountVariety Events**:
+	- **PrisonMine Event**: Spawns more prison/cage mines. Uses amount from TurretScale config.
+	- **GiftMimic Event**: Spawns more gift mimics. Uses amount from LandmineScale config divided by 3.
+	- **PropulsionMine Event**: Spawns more propulsion mines. Uses amount from LandmineScale config.
+
+- **Logging**: Added an additional table for map hazards / traps.
+- **Unique event messages**: new config setting to prefer unique event chat messages (non-ambiguous)
+	- Each event always prints the same message.
+	- Please report any duplicates I didn't manually cross-check every event.
+
+#### Changed
+- Updated the Scopophobia compatibility check since ShyGuyPatcherPatcher is no longer needed.
+	- Make sure to disable the spawn patch in Scopophobia config or the event won't work properly.
+
+#### Fixed
+- Removed pointless fatal log
+
+
 # v2.2.4
 #### Added 
 * EasterEvent: Spawns a lot of Easter Eggs (vanilla scrap).
