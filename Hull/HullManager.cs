@@ -150,7 +150,20 @@ public class HullManager : MonoBehaviour
         Plugin.Mls.LogInfo(String.Format("╠{0, -30}╪{1, 12}╪{2, 12}╣", new string('\u2550', 30), new string('\u2550', 12), new string('\u2550', 12)));
         Plugin.Mls.LogInfo(String.Format("║ {0, -28} │ {1, 10} │ {2, 10} ║", "Sum", raritySum, ""));
         Plugin.Mls.LogInfo(String.Format("╚{0, -30}╧{1, 12}╧{2, 12}╝", new string('\u2550', 30), new string('\u2550', 12), new string('\u2550', 12)));
+    }
+    public static void LogMapHazards(List<SpawnableMapObject> hazards, string title) {
+        LogBoxHeader(title);
 
+        Plugin.Mls.LogInfo(String.Format("╠{0, -30}╤{1, 12}╗", new string('\u2550', 29).Insert(title.Length + 2, "╩"), new string('\u2550', 12)));
+        Plugin.Mls.LogInfo(String.Format("║ {0, -28} │ {1, 10} ║", "Map Hazard", "AvgCount"));
+        Plugin.Mls.LogInfo(String.Format("╠{0, -30}╪{1, 12}╣", new string('\u2550', 30), new string('\u2550', 12)));
+
+        foreach  (var trap in hazards) {
+            if (trap == null) continue;
+            int avg_amount = (int)(trap.numberToSpawn.GetKeys().Sum(key => key.m_Value) / trap.numberToSpawn.GetKeys().Length);
+            Plugin.Mls.LogInfo(String.Format("║ {0, -28} │ {1, 10} ║", trap.prefabToSpawn.name, avg_amount));
+        }
+        Plugin.Mls.LogInfo(String.Format("╚{0, -30}╧{1, 12}╝", new string('\u2550', 30), new string('\u2550', 12)));
     }
     public static void LogBox(string title) {
         Plugin.Mls.LogInfo("╔" + new string('\u2550', title.Length + 2) + "╗");

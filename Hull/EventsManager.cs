@@ -186,6 +186,8 @@ public abstract class EventsManager {
         HullManager.LogEnemies(level.DaytimeEnemies, "DAYTIME ENEMIES");
 
         HullManager.LogScrapRarity(level.spawnableScrap, "LOOT TABLE");
+        
+        HullManager.LogMapHazards(level.spawnableMapObjects.ToList(), "MAP HAZARDS");
     }
 
     // LethalQuantities Compatability Patch
