@@ -68,7 +68,7 @@ public abstract class EventsManager {
         if (modEventsLoaded) return;
         Plugin.Mls.LogInfo("Checking for compatible mods..");
         //Print all plugins
-        Plugin.Mls.LogFatal($"{string.Join(", ", BepInEx.Bootstrap.Chainloader.PluginInfos.Keys.ToList())}");
+        //Plugin.Mls.LogDebug($"{string.Join(", ", BepInEx.Bootstrap.Chainloader.PluginInfos.Keys.ToList())}");
 
         Dictionary<string, List<HullEvent>> modEvents = new() {
             { "evaisa.lethalthings", [new Events.Integrated.BoombaEvent()] },
