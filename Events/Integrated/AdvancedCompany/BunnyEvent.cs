@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Integrated.AdvancedCompany;
 
 public class BunnyEvent : HullEvent
 {
-    public BunnyEvent() {
+    public BunnyEvent()
+    {
         ID = "AC_Bunny";
         Weight = 3;
         Description = "Increases spawn chance of the unique bunny ears item (AdvancedCompany)";

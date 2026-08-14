@@ -137,15 +137,6 @@ GlobalDaytimeSpawnRateOverride = 0
 ```
 </details>
 
-### Compatibility
-Fully compatible with LethalQuantities and AdvancedCompany overrides.
-<details>
-
-Using these mods you can allow events that are otherwise not available on certain moons by setting the respective monster or scrap rarity to at least `1`.
-For example with vanilla moon configuration you can't get Jester event on Experimentation because Jesters don't spawn there.
-Using the tool of your choice set the Jester's rarity to `1` or any larger number. This will enable the Jester event on that moon.
-</details>
-
 ### Config file
 Reorganized and restructured - allowing for more customization. Hopefully you'll find some settings more intuitive.
 Mainly putting this here so you remember to check your config :)

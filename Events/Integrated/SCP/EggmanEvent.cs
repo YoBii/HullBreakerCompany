@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
-using UnityEngine.UIElements.Collections;
 
 namespace HullBreakerCompany.Events.Integrated.SCP;
 
 public class EggmanEvent : HullEvent
 {
-    public EggmanEvent() {
+    public EggmanEvent()
+    {
         ID = "Eggman";
         Weight = 10;
         Description = "Increases SCP3199 outside spawn frequency.";

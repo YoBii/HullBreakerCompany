@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Scrap;
 
 public class BabkinPogrebEvent : HullEvent
 {
-    public BabkinPogrebEvent() {
+    public BabkinPogrebEvent()
+    {
         ID = "BabkinPogreb";
         Weight = 20;
         Description = "Spawns a lot of pickle jars.";
@@ -21,17 +20,18 @@ public class BabkinPogrebEvent : HullEvent
             { "QUITE A PICKLE" }
         };
     }
-    public override string GetMessage() => MessagesList[UnityEngine.Random.Range(0, MessagesList.Count)];
-    public override string GetShortMessage() => shortMessagesList[UnityEngine.Random.Range(0, shortMessagesList.Count)];
     public static List<SpawnableItemWithRarity> scrapList = new();
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         string scrapToSpawn = "Jar of pickles";
-        if (levelModifier.IsScrapSpawnable(scrapToSpawn)) {
+        if (levelModifier.IsScrapSpawnable(scrapToSpawn))
+        {
             levelModifier.AddSpawnableScrapRarity(scrapToSpawn, 100);
             HullManager.AddChatEventMessage(this);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }

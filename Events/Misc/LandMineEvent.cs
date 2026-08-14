@@ -1,12 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Misc;
 
 public class LandMineEvent : HullEvent
 {
-    public LandMineEvent() {
+    public LandMineEvent()
+    {
         ID = "LandMine";
         Weight = 30;
         Description = "Spawns additional landmines inside.";
@@ -25,9 +25,12 @@ public class LandMineEvent : HullEvent
     {
         if (!levelModifier.IsTrapUnitSpawnable(Util.getTrapUnitByType(typeof(Landmine)))) return false;
         levelModifier.AddTrapUnit(Util.getTrapUnitByType(typeof(Landmine)), Plugin.LandmineScale);
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

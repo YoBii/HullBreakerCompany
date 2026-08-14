@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Integrated.SCP;
 
 public class SlimyFriendEvent : HullEvent
 {
-    public SlimyFriendEvent() {
+    public SlimyFriendEvent()
+    {
         ID = "SlimyFriend";
         Weight = 10;
         Description = "Increases spawn chance of SCP-999 and there's more of them.";

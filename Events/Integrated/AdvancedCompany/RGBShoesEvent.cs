@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Integrated.AdvancedCompany;
 
 public class RGBShoesEvent : HullEvent
 {
-    public RGBShoesEvent() {
+    public RGBShoesEvent()
+    {
         ID = "AC_RGBShoes";
         Weight = 3;
         Description = "Increases spawn chance of the unique light shoes item (AdvancedCompany)";

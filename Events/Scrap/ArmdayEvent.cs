@@ -1,14 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Scrap;
 
 public class ArmdayEvent : HullEvent
 {
-    public ArmdayEvent() {
+    public ArmdayEvent()
+    {
         ID = "Armday";
         Weight = 20;
         Description = "Spawns a lot of heavy loot.";
@@ -23,7 +21,8 @@ public class ArmdayEvent : HullEvent
             { "HEAVY" }
         };
     }
-    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
+    {
         Dictionary<string, int> scrapToSpawn = new() {
             { "Metal sheet", 20 },
             { "Large axle", 10 },

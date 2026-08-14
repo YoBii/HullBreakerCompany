@@ -1,8 +1,5 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
-using UnityEngine;
 
 namespace HullBreakerCompany.Events;
 
@@ -12,10 +9,10 @@ public class CustomEvent : HullEvent
     private int _weight;
     private List<string> MessageList = new List<string>();
     private List<string> ShortMessageList = new List<string>();
-    
-    public override string GetID() 
-    { 
-        return _id; 
+
+    public override string GetID()
+    {
+        return _id;
     }
 
     public void SetID(string value)
@@ -31,39 +28,45 @@ public class CustomEvent : HullEvent
     {
         return _weight;
     }
-    
+
     public void AddMessage(string msg)
     {
         MessageList.Add(msg);
     }
-    
+
     public void AddShortMessage(string msg)
     {
         ShortMessageList.Add(msg);
     }
-    
+
     public override string GetMessage()
     {
-        return "<color=white>" + MessageList[UnityEngine.Random.Range(0, MessageList.Count)] + "</color>";
+        List<string> messages = LocaleManager.GetMessages(GetID()) ?? MessageList;
+        if (messages.Count == 0) return "";
+        return "<color=white>" + messages[UnityEngine.Random.Range(0, messages.Count)] + "</color>";
     }
-    public string GetReadableMessages() {
+    public string GetReadableMessages()
+    {
         return string.Join("; ", MessageList);
     }
-    
+
     public override string GetShortMessage()
     {
-        return "<color=white>" + ShortMessageList[UnityEngine.Random.Range(0, ShortMessageList.Count)] + "</color>";
+        List<string> shortMessages = LocaleManager.GetShortMessages(GetID()) ?? ShortMessageList;
+        if (shortMessages.Count == 0) return "";
+        return "<color=white>" + shortMessages[UnityEngine.Random.Range(0, shortMessages.Count)] + "</color>";
     }
-    public string GetReadableShortMessage() {
+    public string GetReadableShortMessage()
+    {
         return string.Join("; ", ShortMessageList);
     }
-    
+
     //public List<string> EnemySpawnList = new ();
     //public List<string> OutsideSpawnList = new ();
-    public Dictionary<string, List<int>> EnemySpawnList = new ();
-    public Dictionary<string, List<int>> OutsideEnemySpawnList = new ();
-    public Dictionary<string, List<int>> DaytimeEnemySpawnList = new ();
-    public Dictionary<string, int> ScrapSpawnList = new ();
+    public Dictionary<string, List<int>> EnemySpawnList = new();
+    public Dictionary<string, List<int>> OutsideEnemySpawnList = new();
+    public Dictionary<string, List<int>> DaytimeEnemySpawnList = new();
+    public Dictionary<string, int> ScrapSpawnList = new();
 
     public int addPower;
     public int addOutsidePower;
@@ -73,30 +76,36 @@ public class CustomEvent : HullEvent
     public int overrideOutsideSpawnRate;
     public int overrideDaytimeSpawnRate;
 
-    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
+    {
         if (!SimulateExecution(level, levelModifier, EnemySpawnList, OutsideEnemySpawnList, DaytimeEnemySpawnList, ScrapSpawnList)) return false;
 
-        foreach (var enemy in EnemySpawnList) {
+        foreach (var enemy in EnemySpawnList)
+        {
             levelModifier.AddEnemyComponentRarity(enemy.Key, enemy.Value[0]);
             if (enemy.Value[1] > -1) levelModifier.AddEnemyComponentMaxCount(enemy.Key, enemy.Value[1]);
             if (enemy.Value[2] > -1) levelModifier.AddEnemyComponentPower(enemy.Key, enemy.Value[2]);
         }
 
-        foreach (var enemy in OutsideEnemySpawnList) {
+        foreach (var enemy in OutsideEnemySpawnList)
+        {
             levelModifier.AddOutsideEnemyComponentRarity(enemy.Key, enemy.Value[0]);
             if (enemy.Value[1] > -1) levelModifier.AddOutsideEnemyComponentMaxCount(enemy.Key, enemy.Value[1]);
             if (enemy.Value[2] > -1) levelModifier.AddOutsideEnemyComponentPower(enemy.Key, enemy.Value[2]);
         }
 
-        foreach (var enemy in DaytimeEnemySpawnList) {
+        foreach (var enemy in DaytimeEnemySpawnList)
+        {
             levelModifier.AddDaytimeEnemyComponentRarity(enemy.Key, enemy.Value[0]);
             if (enemy.Value[1] > -1) levelModifier.AddDaytimeEnemyComponentMaxCount(enemy.Key, enemy.Value[1]);
             if (enemy.Value[2] > -1) levelModifier.AddDaytimeEnemyComponentPower(enemy.Key, enemy.Value[2]);
         }
 
-        if (ScrapSpawnList.Count > 0) {
+        if (ScrapSpawnList.Count > 0)
+        {
             ScrapSpawnList = CalculateScrapRarities(ScrapSpawnList, levelModifier);
-            if (ScrapSpawnList != null && ScrapSpawnList.Count > 0) {
+            if (ScrapSpawnList != null && ScrapSpawnList.Count > 0)
+            {
                 levelModifier.AddSpawnableScrapRarityDict(ScrapSpawnList);
             }
         }

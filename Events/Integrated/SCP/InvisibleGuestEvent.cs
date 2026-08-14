@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
-using UnityEngine.UIElements.Collections;
 
 namespace HullBreakerCompany.Events.Integrated.SCP;
 
 public class InvisibleGuestEvent : HullEvent
 {
-    public InvisibleGuestEvent() {
+    public InvisibleGuestEvent()
+    {
         ID = "InvisibleGuest";
         Weight = 15;
         Description = "Increases SCP966 spawn frequency. Spawns up to three.";

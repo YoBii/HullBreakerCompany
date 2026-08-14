@@ -1,0 +1,574 @@
+{
+  "common": {
+    "notesAboutMoon": "NOTES ABOUT MOON:",
+    "eventWeightDescription": "{id} event: {desc}"
+  },
+  "events": {
+    "Arachnophobia": {
+      "description": "Increases bunker spider (SandSpider) spawn chance. Allows more than one to spawn.",
+      "messages": [
+        "Dominated by hostile life form",
+        "Dominant species detected",
+        "This place is crawling..",
+        "They have 8 eyes..",
+        "Natural spider habitat"
+      ],
+      "shortMessages": ["EIGHT EYES", "EIGHT LEGS"]
+    },
+    "Barber": {
+      "description": "Increases spawn chance of barber and there's more of them",
+      "messages": [
+        "Reports of paranormal activity",
+        "Paranormal signature detected",
+        "In dire need of a haircut..?",
+        "Snip-snap"
+      ],
+      "shortMessages": ["BARBER", "SCISSORS"]
+    },
+    "Bee": {
+      "description": "Increases bee hive spawns outside",
+      "messages": [
+        "Dominated by hostile life form",
+        "Dominant species detected",
+        "Sticky golden goodness",
+        "Extract the bee hives!",
+        "Don't get stung by bees!"
+      ],
+      "shortMessages": ["BZZZZZ", "STICKY GOLD"]
+    },
+    "Butler": {
+      "description": "Increases spawn chance of butler and there's more of them",
+      "messages": [
+        "Reports of paranormal activity",
+        "Paranormal signature detected",
+        "Someone is taking care of this place",
+        "Mirror finished floors require meticulous care..",
+        "Avoid stained clothing by not staining the floors. Suits are company property!"
+      ],
+      "shortMessages": ["BUTLER", "JANITOR"]
+    },
+    "Crawler": {
+      "description": "Increases thumper (also Crawler or Halves) spawn chance. Allows multiple to spawn and lowers their power level.",
+      "messages": [
+        "Dominated by hostile life form",
+        "Dominant species detected",
+        "Heavy stomping inside. Probably hostile.",
+        "To bonk or be bonked, that is the question",
+        "Intense thumping inside the facility",
+        "Does putting two halves together MAKE US WHOLE AGAIN?"
+      ],
+      "shortMessages": ["THUMP", "STOMP"]
+    },
+    "DevochkaPizdec": {
+      "description": "Increases Ghostgirl (Dressgirl) spawn chance. Allows more than one to spawn.",
+      "messages": [
+        "Reports of paranormal activity",
+        "Paranormal signature detected",
+        "Workers were losing their mind before they shut this place down. Extract what was left behind.",
+        "Don't lose your head now!"
+      ],
+      "shortMessages": ["PARANOID", "PLAYTIME"]
+    },
+    "FlowerMan": {
+      "description": "Increases Bracken (Flowerman) spawn chance. Allows more than one to spawn.",
+      "messages": [
+        "Reports of paranormal activity",
+        "Paranormal signature detected",
+        "Something is lurking in the shadows",
+        "Are you afraid of the dark?",
+        "Always behind you..",
+        "White eyes watching you..",
+        "Sometimes you don't want to win a staring contest!"
+      ],
+      "shortMessages": ["STALKER", "FEAR OF THE DARK"]
+    },
+    "Hell": {
+      "description": "Increases Jester spawn chance. Allows more than one to spawn.",
+      "messages": [
+        "What's in the box?!",
+        "Upon encounter evacuate immediately!",
+        "Sir, I'm going to have to ask you to leave.",
+        "The company wishes the best of luck!"
+      ],
+      "shortMessages": ["HELL", "LEAVE"]
+    },
+    "HoarderBug": {
+      "description": "Spawns a lot of Hoarderbugs while still allowing other enemies to spawn.",
+      "messages": [
+        "Residues of pesticide detected in the atmosphere",
+        "Scrap is.. moving?",
+        "Dominant species detected",
+        "The competition is already here",
+        "The hoarding bug mafia is in charge of this place",
+        "They are stealing our scrap!",
+        "Friend..?"
+      ],
+      "shortMessages": ["CAPTURE THE SCRAP", "MOVING SCRAP", "COMPETITION", "MAFIA"]
+    },
+    "Lizards": {
+      "description": "Increases Puffer spawn chance and there's more of them.",
+      "messages": [
+        "Dominated by hostile life form",
+        "Dominant species detected",
+        "Don't get too close!",
+        "Be aware of toxic spore clouds",
+        "Don't inhale the spores!"
+      ],
+      "shortMessages": ["SPORE DUST"]
+    },
+    "Masked": {
+      "description": "Increases spawn chance of Masked.",
+      "messages": [
+        "Reports of paranormal activity",
+        "Paranormal signature detected",
+        "Phantom of the Opera",
+        "Who's the new guy?"
+      ],
+      "shortMessages": ["MASKED", "TRUST ISSUES"]
+    },
+    "Nutcracker": {
+      "description": "Increases spawn chance of Nutcracker.",
+      "messages": [
+        "Reports of paranormal activity",
+        "Paranormal signature detected",
+        "Don't you move..",
+        "Keep your head down",
+        "Protect your nuts!"
+      ],
+      "shortMessages": ["THIS IS NUTS"]
+    },
+    "Slime": {
+      "description": "Increases spawn chance of Hygrodere (Blob/Slime) and there's more of them.",
+      "messages": [
+        "Dominated by hostile life form",
+        "Dominant species detected",
+        "Don't get lost in the sauce",
+        "Shapeless creature detected. Water content 99.9%"
+      ],
+      "shortMessages": ["SLIPPERY FLOOR"]
+    },
+    "SpringMan": {
+      "description": "Increases spawn chance of Coil-Head (SpringMan)",
+      "messages": [
+        "Reports of paranormal activity",
+        "Paranormal signature detected",
+        "They'll only kill you when you're not looking",
+        "Don't lose your head now!",
+        "Now this is a staring contest you do not want to lose!"
+      ],
+      "shortMessages": ["SPRING", "BOING!"]
+    },
+    "EnemyBounty": {
+      "description": "Company rewards enemy kills with bonus credits.",
+      "messages": [
+        "Company bounty: neutralize threats",
+        "The company pays you for killing monsters",
+        "Bounty assigned: kill enemies",
+        "Company bounty: RIP AND TEAR"
+      ],
+      "shortMessages": ["KILL BOUNTY", "COMPANY BOUNTY"],
+      "killMessages": [
+        "Threat neutralized! Keep up the good work. The company sends {amount} credits.",
+        "Enemy killed! Your work keeps the company happy. You receive {amount} credits.",
+        "Monster killed! The company values your commitment. {amount} credits received."
+      ],
+      "rewardMessage": "Bounty reward: {amount} credits"
+    },
+    "HackedTurrets": {
+      "description": "All turrets are permanently disabled.",
+      "messages": [
+        "Security systems offline",
+        "Abandoned after their defense systems were hacked",
+        "The company disabled all turrets on this moon"
+      ],
+      "shortMessages": ["SECURITY OFFLINE", "TURRETS HACKED"]
+    },
+    "HordeMode": {
+      "description": "Increases inside enemy spawn rate. Spawns enemies earlier and more frequently.",
+      "messages": [
+        "Extreme activity levels!",
+        "No one has ever returned from here..",
+        "Caution! Activity level 9 9 9 9 9 9 9 9 9 9 9 9",
+        "The company wishes the best of luck!"
+      ],
+      "shortMessages": ["HORDEMODE"]
+    },
+    "HullBreak": {
+      "description": "The company sends a bonus payment. Take a break from stressfull events.",
+      "messages": [
+        "KPI report: underperforming\nYou are granted </color><color=green>{amount}</color><color=white> credits. Use them to prove your worth to the company!",
+        "The company appreciates your loyalty. You receive </color><color=green>{amount}</color><color=white> credits",
+        "Bonus payment received: </color><color=green>{amount}</color><color=white> credits. Keep up the good work!"
+      ],
+      "shortMessages": [
+        "BONUS CREDITS: </color><color=green>{amount}",
+        "BONUS PAYMENT: </color><color=green>{amount}"
+      ]
+    },
+    "LandMine": {
+      "description": "Spawns additional landmines inside.",
+      "messages": [
+        "High security compound",
+        "They rigged this place up",
+        "Watch your step!",
+        "Expect mines",
+        "Lots of mines might block your path"
+      ],
+      "shortMessages": ["LANDMINES"]
+    },
+    "Nothing": {
+      "description": "Nothing happens - This event means there is no event.\nAdjust weight to set overall chance of getting an event vs. not getting an event for each time an event is randomly selected.",
+      "messages": [
+        "<color=white>...</color>",
+        "<color=white>---</color>",
+        "<color=white>   </color>"
+      ],
+      "shortMessages": []
+    },
+    "OnAPowderKeg": {
+      "description": "Landmines will detonate randomly. Spawns additional landmines.",
+      "messages": [
+        "Reccuring explosions",
+        "Explosions detected",
+        "They installed faulty mines",
+        "Mines explode at the slightest vibration",
+        "Tick, tick.. BOOM!"
+      ],
+      "shortMessages": ["SURPRISE", "EXPLOSIONS"]
+    },
+    "OneForAll": {
+      "description": "The ship will leave within two hours after one of the workers has died.",
+      "messages": ["<color=white>You have been selected for team building measures!</color>"],
+      "shortMessages": ["<color=red>ONE FOR ALL</color>"],
+      "deathMessage": "Employee signal lost! Ship will leave in two hours!"
+    },
+    "OpenTheNoor": {
+      "description": "All security doors spawn in closed state.",
+      "messages": [
+        "High security compound",
+        "You shall not pass!",
+        "Hodor - Hold the door!",
+        "They locked this place down",
+        "Abandoned on lockdown. All security doors are closed."
+      ],
+      "shortMessages": ["HODOR", "OPEN THE NOOR"]
+    },
+    "OutSideEnemyDay": {
+      "description": "Increased amount of outside enemies during daytime. Eclipsed without eclipse.",
+      "messages": [
+        "This place was shrouded in darkness for weeks",
+        "A prolonged eclipse has disrupted wild life's circadian rhythm",
+        "Highly populated surface area",
+        "Due to frequent weather events wildlife roams the surface during daytime"
+      ],
+      "shortMessages": ["SILENCE SEASON", "OUTSIDE PARTY", "ECLIPSED?"]
+    },
+    "SpikeTrap": {
+      "description": "Spawns additional spike traps inside.",
+      "messages": [
+        "High security compound",
+        "They rigged this place up",
+        "They call this place Takeshi's castle",
+        "Locals call this place Sen's fortress",
+        "What is that noise?"
+      ],
+      "shortMessages": ["SPIKES", "TRAPS"]
+    },
+    "TimeAnomaly": {
+      "description": "Makes day shorter i.e. time passes faster",
+      "messages": [
+        "Gravity distorts space time. You better hurry!",
+        "Let's go! In and out. Twenty minute adventure.",
+        "Gravitational anomaly nearby! Time passes at a faster rate."
+      ],
+      "shortMessages": ["TIME-"]
+    },
+    "TimeDilation": {
+      "description": "Makes day longer i.e. time passes slower",
+      "messages": [
+        "Gravity distorts space time. Take your time!",
+        "You have all the time you need.",
+        "Gravitational anomaly distorts spacetime! Time passes at a slower rate."
+      ],
+      "shortMessages": ["TIME+"]
+    },
+    "Turret": {
+      "description": "Spawns additional turrets inside.",
+      "messages": [
+        "High security compound",
+        "It's right around the corner!",
+        "Keep moving from cover to cover!",
+        "The company recommends bringing a bulletproof vest!"
+      ],
+      "shortMessages": ["TURRETS", "BULLET HELL"]
+    },
+    "Armday": {
+      "description": "Spawns a lot of heavy loot.",
+      "messages": [
+        "Expect a lot of big heavy scrap!",
+        "Grip strength required! Heavy duty scrap.",
+        "Slipped disks are not covered by company insurance!",
+        "Lift heavy objects with a jerking twisting motion!",
+        "Lower back pain"
+      ],
+      "shortMessages": ["HEAVY"]
+    },
+    "BabkinPogreb": {
+      "description": "Spawns a lot of pickle jars.",
+      "messages": [
+        "Scans indicate all scrap is.. organic?",
+        "There is something wrong with the scrap..",
+        "We lost Rick. Find him!",
+        "Quite a pickle indeed!"
+      ],
+      "shortMessages": ["QUITE A PICKLE"]
+    },
+    "ChristmasEve": {
+      "description": "Spawns a lot of gifts.",
+      "messages": [
+        "Is it Christmas already?",
+        "Help Santa collect the presents!",
+        "The Company wishes a Merry Christmas!"
+      ],
+      "shortMessages": ["XMAS"]
+    },
+    "Clownshow": {
+      "description": "Spawns a lot of noisy scrap.",
+      "messages": [
+        "This is a clown show!",
+        "Your clown nose fell off.."
+      ],
+      "shortMessages": ["CLOWN"]
+    },
+    "DayDrinking": {
+      "description": "Spawns a lot of alcoholic beverages.",
+      "messages": [
+        "Let's crack a beer or two!",
+        "Alcohol use prohibited during work hours!",
+        "There is something wrong with the scrap.."
+      ],
+      "shortMessages": ["DAYDRINKING"]
+    },
+    "Easter": {
+      "description": "Spawns a lot of easter eggs.",
+      "messages": [
+        "Festive decorations",
+        "Help the Easter bunny collect the Easter eggs!",
+        "Is this an Easter egg?",
+        "↑ ↑ ↓ ↓ ← → ← → Ⓐ Ⓑ"
+      ],
+      "shortMessages": ["EGG"]
+    },
+    "LuckyDay": {
+      "description": "Increases spawn chance of high value loot.",
+      "messages": [
+        "High value scrap detected!",
+        "Supposed to hold some very valuable scrap",
+        "Today's your lucky day!"
+      ],
+      "shortMessages": ["LUCKY"]
+    },
+    "SelfDefense": {
+      "description": "Spawns a lot of scrap that can be utilized as weapon.",
+      "messages": [
+        "Weapons scattered all around!",
+        "DIY self defense training today!"
+      ],
+      "shortMessages": ["WEAPONS"]
+    },
+    "Boomba": {
+      "description": "Increases spawn chance of Boomba and there's more of them. Also spawns more landmines.",
+      "messages": [
+        "Cleaning crew's still around",
+        "Mines left right and center",
+        "Lots of mines and some.. are moving?"
+      ],
+      "shortMessages": ["BOOM-BA"]
+    },
+    "Herobrine": {
+      "description": "Guarantees Herobrine spawn. Herobrine doesn't reduce the amount of other enemies (doesn't add to global power)",
+      "messages": [
+        "Removed.",
+        "Don't turn around.."
+      ],
+      "shortMessages": ["HAUNTED", "REMOVED"]
+    },
+    "Meltdown": {
+      "description": "Starts reactor meltdown sequence sometime during the day.",
+      "messages": [
+        "Unstable reactor core. Extract and leave immediately!",
+        "Elevated radiation levels. Reactor meltdown imminent!",
+        "Prevent a nuclear disaster by gracefully removing the apparatus core",
+        "Increased radiation levels. Don't wander too far off the ship."
+      ],
+      "shortMessages": ["SURPRISE", "MELTDOWN"],
+      "warningMessage": "NUCLEAR MELTDOWN! ABANDON MISSION!"
+    },
+    "AC_Bunny": {
+      "description": "Increases spawn chance of the unique bunny ears item (AdvancedCompany)",
+      "messages": [
+        "Jump little bunny, jump!",
+        "Hop, hop..",
+        "Reports of silly bunny ears"
+      ],
+      "shortMessages": ["BUNNY", "HOPHOP"]
+    },
+    "AC_Controller": {
+      "description": "Increases spawn chance of the green Pietsmiet controller item (AdvancedCompany)",
+      "messages": [
+        "There will be gaming!",
+        "This moon is.. doom-ed?!",
+        "The only thing they fear is you",
+        "\"Ich bin himmelblau, himmelblau.. Scha-la-la!\""
+      ],
+      "shortMessages": ["CONTROLLER", "PIETSMIET"]
+    },
+    "AC_RGBShoes": {
+      "description": "Increases spawn chance of the unique light shoes item (AdvancedCompany)",
+      "messages": [
+        "Fancy sneakers. Gaming RGB! +120fps",
+        "Run at the speed of light",
+        "Reports of RGB lights.. traveling at extreme speeds"
+      ],
+      "shortMessages": ["Shoes", "RGB"]
+    },
+    "PrisonMine": {
+      "description": "Spawns additional cage/prison mines inside. Uses TurretScale config.",
+      "messages": [
+        "High security compound",
+        "They rigged this place up",
+        "Don't get trapped.",
+        "Behind bars..",
+        "Cages used to trap wildlife are stored here"
+      ],
+      "shortMessages": ["CAGE"]
+    },
+    "GiftMimic": {
+      "description": "Spawns additional GiftMimics inside. Uses LandmineScale config divided by 3.",
+      "messages": [
+        "High security compound",
+        "They rigged this place up",
+        "Don't get fooled.",
+        "Is this a gift.. for me?"
+      ],
+      "shortMessages": ["GIFT?"]
+    },
+    "PropulsionMine": {
+      "description": "Spawns additional propulsion mines inside. Uses LandmineScale config.",
+      "messages": [
+        "High security compound",
+        "They rigged this place up",
+        "Watch your step!",
+        "Expect special mines",
+        "Riddled with propulsion mines"
+      ],
+      "shortMessages": ["YEET"]
+    },
+    "Eggman": {
+      "description": "Increases SCP3199 outside spawn frequency.",
+      "messages": [
+        "Dominated by hostile life form",
+        "Aggressive outside species",
+        "Eggs spotted outside the facility"
+      ],
+      "shortMessages": ["EGGMAN"]
+    },
+    "InvisibleGuest": {
+      "description": "Increases SCP966 spawn frequency. Spawns up to three.",
+      "messages": [
+        "Reports of paranormal activity",
+        "Paranormal signature detected",
+        "It's wearing you down..",
+        "Did you see that?!?!"
+      ],
+      "shortMessages": ["SLUGGISH", "GUEST"]
+    },
+    "RottingMan": {
+      "description": "Increases SCP106 spawn frequency and can spawn more of them.",
+      "messages": [
+        "Reports of paranormal activity",
+        "Paranormal signature detected",
+        "Stay away from any elderly 'rotting' humanoids..",
+        "No physical interaction with SCP-106 is allowed at any time."
+      ],
+      "shortMessages": ["ROTTINGMAN"]
+    },
+    "ShyGuy": {
+      "description": "Increases spawn chance of Shy Guy. Allows more than one to spawn.",
+      "messages": [
+        "Do NOT look at him!",
+        "Scopophobia..",
+        "SCP-096",
+        "When you're scared to take a look..",
+        "No one who's seen their face has survived.."
+      ],
+      "shortMessages": ["SHY"]
+    },
+    "SlimyFriend": {
+      "description": "Increases spawn chance of SCP-999 and there's more of them.",
+      "messages": [
+        "Dominated by friendly life form",
+        "Passive species detected",
+        "Large, amorphous, gelatinous mass of translucent orange slime",
+        "Inhabited by seemingly playful - dog-like - creature. "
+      ],
+      "shortMessages": ["HYDRATE"]
+    },
+    "BruceAlmighty": {
+      "description": "Increases Bruce spawn frequency. Spawns up to three.",
+      "messages": [
+        "Dominated by hostile life form",
+        "Dominant species detected",
+        "Tip: Avoid getting hurt",
+        "Watch out for sharks!",
+        "The land animals won't harm you.. unless you present yourself as food"
+      ],
+      "shortMessages": ["BRUCE", "SNACKED"]
+    },
+    "SeaMine": {
+      "description": "Spawns additional seamines inside. Uses LandmineScale config.",
+      "messages": [
+        "High security compound",
+        "They rigged this place up",
+        "Watch your head!",
+        "Expect mines",
+        "Lots of mines might block your path"
+      ],
+      "shortMessages": ["SEAMINES"]
+    },
+    "Urchin": {
+      "description": "Increases Urching spawn frequency. Spawns up to ten early.",
+      "messages": [
+        "Dominated by hostile life form",
+        "Dominant species detected",
+        "Urchin Invasion",
+        "Exponential growth",
+        "They will not stop breeding"
+      ],
+      "shortMessages": ["SPIKY", "BALLS"]
+    }
+  },
+  "config": {
+    "desc": {
+      "EventCount": "Maximum number of active events. Less are possible depending on NothingEvent's weight.",
+      "IncreaseEventCountPerDay": "Whether to increase EventCount by one for each day passed. Resets when a new quota begins.\nSetting this to \"true\" and EventCount to n will roll n events on the first day, n+1 on the second, ..",
+      "EnableEventMessages": "Enable chat event messages",
+      "UseShortChatMessages": "Use short event message",
+      "UseUniqueChatMessages": "If true will use non ambigous messages in chat. Every event has a unique message that doesn't change.",
+      "UseColoredChatMessages": "If true will use colors for event messages to indicate whether they are 'good' or 'bad' events.",
+      "LandmineScale": "The amount of additional landmines spawned by landmine event (there are more events that spawns mines and thus scale with the value set here)",
+      "TurretScale": "The amount of additional turrets spawned by turret event",
+      "SpikeTrapScale": "The amount of additional spike traps spawned by SpikeTrap event",
+      "BountyRewardMin": "Minimum amount of credits rewarded for killing an enemy during EnemyBountyEvent",
+      "BountyRewardMax": "Maximum amount of credits rewarded for killing an enemy during EnemyBountyEvent",
+      "BountyRewardLimit": "Limits the number of times you can get rewarded for kills during EnemyBountyEvent. Final reward will always pay `BountyRewardMax` * 1.5\nSet this to 0 for unlimited number of rewards.",
+      "HullBreakEventCreditsMin": "Minimum amount of credits granted by HullBreakEvent",
+      "HullBreakEventCreditsMax": "Maximum amount of credits granted by HullBreakEvent",
+      "LevelSettings": "Specifies the settings to apply to every level by default\nThese are baseline settings. Changes by events will always apply on top.\n'vanilla': keep level settings as they are\n'hullbreaker': hard difficulty. Significantly increases spawn rate inside and outside. Increases max power of inside and outside nemies by 16 and 20 respectively\n'custom': uses the values you specified below. Defaults for 'custom' are the values used in 'hullbreaker'\n",
+      "MaxEnemyPowerCount": "Increase max enemy power count by this value",
+      "MaxOutsideEnemyPowerCount": "Increase max outside enemy power count by this value (e.g. moutdog or forestgiant)",
+      "MaxDaytimeEnemyPowerCount": "Increase max daytime enemy power count by this value (e.g. bees)",
+      "SpawnCurveOverride": "Change spawn rate for inside enemies. A value of '256' will max out the amount of monsters spawned in each spawn wave starting as soon as you land."
+    }
+  }
+}

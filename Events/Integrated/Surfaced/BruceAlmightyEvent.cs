@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
-using UnityEngine.UIElements.Collections;
 
 namespace HullBreakerCompany.Events.Integrated.Surfaced;
 
 public class BruceAlmightyEvent : HullEvent
 {
-    public BruceAlmightyEvent() {
+    public BruceAlmightyEvent()
+    {
         ID = "BruceAlmighty";
         Weight = 20;
         Description = "Increases Bruce spawn frequency. Spawns up to three.";

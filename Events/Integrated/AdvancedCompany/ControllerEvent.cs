@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Integrated.AdvancedCompany;
 
 public class ControllerEvent : HullEvent
 {
-    public ControllerEvent() {
+    public ControllerEvent()
+    {
         ID = "AC_Controller";
         Weight = 3;
         Description = "Increases spawn chance of the green Pietsmiet controller item (AdvancedCompany)";

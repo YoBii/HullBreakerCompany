@@ -1,13 +1,13 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Scrap;
 
 public class LuckyDayEvent : HullEvent
 {
-    public LuckyDayEvent() {
+    public LuckyDayEvent()
+    {
         ID = "LuckyDay";
         Weight = 5;
         Description = "Increases spawn chance of high value loot.";
@@ -20,7 +20,8 @@ public class LuckyDayEvent : HullEvent
             { "LUCKY" }
         };
     }
-    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
+    {
         Dictionary<String, int> scrapToSpawn = new() {
             { "Cash register", 20 },
             { "Gold bar", 20 }
@@ -28,9 +29,12 @@ public class LuckyDayEvent : HullEvent
         scrapToSpawn = CalculateScrapRarities(scrapToSpawn, levelModifier);
         if (scrapToSpawn.Count == 0) return false;
         levelModifier.AddSpawnableScrapRarityDict(scrapToSpawn);
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "green");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

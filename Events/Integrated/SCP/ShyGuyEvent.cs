@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Integrated.SCP;
 
 public class ShyGuyEvent : HullEvent
 {
-    public ShyGuyEvent() {
+    public ShyGuyEvent()
+    {
         ID = "ShyGuy";
         Weight = 5;
         Description = "Increases spawn chance of Shy Guy. Allows more than one to spawn.";

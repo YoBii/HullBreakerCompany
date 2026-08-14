@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace HullBreakerCompany.Hull {
-    internal class Util {
+namespace HullBreakerCompany.Hull
+{
+    internal class Util
+    {
         private static Dictionary<string, Type> EnemyBase = new()
         {
             { "flowerman", typeof(FlowermanAI) },
@@ -51,27 +52,39 @@ namespace HullBreakerCompany.Hull {
             { typeof(SpikeRoofTrap), "SpikeRoofTrapHazard" }
         };
 
-        public static string getEnemyByType(Type type) {
-            try {
+        public static string getEnemyByType(Type type)
+        {
+            try
+            {
                 EnemiesByType.TryGetValue(type, out var enemy);
                 return enemy;
-            } catch {
+            }
+            catch
+            {
                 return null;
             }
         }
-        public static Type getEnemyByString(string str) {
-            try {
+        public static Type getEnemyByString(string str)
+        {
+            try
+            {
                 EnemyBase.TryGetValue(str, out var enemy);
                 return enemy;
-            } catch {
+            }
+            catch
+            {
                 return null;
             }
         }
-        public static string getTrapUnitByType(Type type) {
-            try {
+        public static string getTrapUnitByType(Type type)
+        {
+            try
+            {
                 TrapUnitsByType.TryGetValue(type, out var unit);
                 return unit;
-            } catch {
+            }
+            catch
+            {
                 return null;
             }
         }

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
-using UnityEngine.UIElements.Collections;
 
 namespace HullBreakerCompany.Events.Integrated.SCP;
 
-public class RottingManEvent: HullEvent
+public class RottingManEvent : HullEvent
 {
-    public RottingManEvent() {
+    public RottingManEvent()
+    {
         ID = "RottingMan";
         Weight = 7;
         Description = "Increases SCP106 spawn frequency and can spawn more of them.";

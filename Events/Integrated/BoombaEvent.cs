@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Integrated;
 
 public class BoombaEvent : HullEvent
 {
-    public BoombaEvent() {
+    public BoombaEvent()
+    {
         ID = "Boomba";
         Weight = 10;
         Description = "Increases spawn chance of Boomba and there's more of them. Also spawns more landmines.";

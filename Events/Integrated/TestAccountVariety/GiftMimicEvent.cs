@@ -1,12 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Misc;
 
 public class GiftMimicEvent : HullEvent
 {
-    public GiftMimicEvent() {
+    public GiftMimicEvent()
+    {
         ID = "GiftMimic";
         Weight = 15;
         Description = "Spawns additional GiftMimics inside. Uses LandmineScale config divided by 3.";
@@ -24,9 +24,12 @@ public class GiftMimicEvent : HullEvent
     {
         if (!levelModifier.IsTrapUnitSpawnable("GiftMimic")) return false;
         levelModifier.AddTrapUnit("GiftMimic", Plugin.LandmineScale / 3);
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

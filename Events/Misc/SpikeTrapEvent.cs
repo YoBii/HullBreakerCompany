@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Misc;
 
 public class SpikeTrapEvent : HullEvent
 {
-    public SpikeTrapEvent() {
+    public SpikeTrapEvent()
+    {
         ID = "SpikeTrap";
         Weight = 10;
         Description = "Spawns additional spike traps inside.";
@@ -27,9 +26,12 @@ public class SpikeTrapEvent : HullEvent
     {
         if (!levelModifier.IsTrapUnitSpawnable(Util.getTrapUnitByType(typeof(SpikeRoofTrap)))) return false;
         levelModifier.AddTrapUnit(Util.getTrapUnitByType(typeof(SpikeRoofTrap)), Plugin.SpikeTrapScale);
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

@@ -1,12 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Misc;
 
 public class CageMineEvent : HullEvent
 {
-    public CageMineEvent() {
+    public CageMineEvent()
+    {
         ID = "PrisonMine";
         Weight = 15;
         Description = "Spawns additional cage/prison mines inside. Uses TurretScale config.";
@@ -25,9 +25,12 @@ public class CageMineEvent : HullEvent
     {
         if (!levelModifier.IsTrapUnitSpawnable("CageMine")) return false;
         levelModifier.AddTrapUnit("CageMine", Plugin.TurretScale);
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

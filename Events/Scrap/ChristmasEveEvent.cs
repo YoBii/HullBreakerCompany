@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Scrap;
 
 public class ChristmasEveEvent : HullEvent
 {
-    public ChristmasEveEvent() {
+    public ChristmasEveEvent()
+    {
         ID = "ChristmasEve";
         Weight = 20;
         Description = "Spawns a lot of gifts.";
@@ -20,17 +19,24 @@ public class ChristmasEveEvent : HullEvent
             { "XMAS" }
         };
     }
-    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
+    {
         string scrapToSpawn = "Gift";
-        if (levelModifier.IsScrapSpawnable(scrapToSpawn)) {
+        if (levelModifier.IsScrapSpawnable(scrapToSpawn))
+        {
             levelModifier.AddSpawnableScrapRarity(scrapToSpawn, 300);
-            if (Plugin.ColoredEventMessages) {
+            if (Plugin.ColoredEventMessages)
+            {
                 HullManager.AddChatEventMessageColored(this, "green");
-            } else {
+            }
+            else
+            {
                 HullManager.AddChatEventMessage(this);
             }
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }

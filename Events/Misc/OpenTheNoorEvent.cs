@@ -1,12 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Misc;
 
 public class OpenTheNoorEvent : HullEvent
 {
-    public OpenTheNoorEvent() {
+    public OpenTheNoorEvent()
+    {
         ID = "OpenTheNoor";
         Weight = 15;
         Description = "All security doors spawn in closed state.";

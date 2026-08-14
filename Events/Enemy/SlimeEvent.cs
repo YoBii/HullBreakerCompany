@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Enemy;
 
 public class SlimeEvent : HullEvent
 {
-    public SlimeEvent() {
+    public SlimeEvent()
+    {
         ID = "Slime";
         Weight = 10;
         Description = "Increases spawn chance of Hygrodere (Blob/Slime) and there's more of them.";
@@ -23,7 +22,8 @@ public class SlimeEvent : HullEvent
     }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(BlobAI)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(BlobAI))))
+        {
             return false;
         }
 
@@ -31,9 +31,12 @@ public class SlimeEvent : HullEvent
         levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(BlobAI)), 5);
         levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(BlobAI)), 0);
 
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

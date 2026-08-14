@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Enemy;
 
-public class FlowerManEvent : HullEvent {
-    public FlowerManEvent() {
+public class FlowerManEvent : HullEvent
+{
+    public FlowerManEvent()
+    {
         ID = "FlowerMan";
         Weight = 10;
         Description = "Increases Bracken (Flowerman) spawn chance. Allows more than one to spawn.";
@@ -24,16 +25,21 @@ public class FlowerManEvent : HullEvent {
         };
     }
 
-    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
-        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(FlowermanAI)))) {
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
+    {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(FlowermanAI))))
+        {
             return false;
         }
         levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(FlowermanAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(FlowermanAI)), 4);
         levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(FlowermanAI)), 0);
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

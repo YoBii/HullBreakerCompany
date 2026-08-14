@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Enemy;
 
 public class SpringManEvent : HullEvent
 {
-    public SpringManEvent() {
+    public SpringManEvent()
+    {
         ID = "SpringMan";
         Weight = 10;
         Description = "Increases spawn chance of Coil-Head (SpringMan)";
@@ -25,16 +24,20 @@ public class SpringManEvent : HullEvent
     }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(SpringManAI)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(SpringManAI))))
+        {
             return false;
         }
         levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(SpringManAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(SpringManAI)), 5);
         levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(SpringManAI)), 0);
 
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

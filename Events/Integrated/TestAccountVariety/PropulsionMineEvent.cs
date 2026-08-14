@@ -1,12 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Misc;
 
 public class PropulsionMineEvent : HullEvent
 {
-    public PropulsionMineEvent() {
+    public PropulsionMineEvent()
+    {
         ID = "PropulsionMine";
         Weight = 15;
         Description = "Spawns additional propulsion mines inside. Uses LandmineScale config.";
@@ -25,9 +25,12 @@ public class PropulsionMineEvent : HullEvent
     {
         if (!levelModifier.IsTrapUnitSpawnable("Yeetmine")) return false;
         levelModifier.AddTrapUnit("Yeetmine", Plugin.LandmineScale);
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

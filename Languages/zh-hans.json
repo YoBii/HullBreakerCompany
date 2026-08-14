@@ -1,0 +1,574 @@
+{
+  "common": {
+    "notesAboutMoon": "星球情报：",
+    "eventWeightDescription": "{id} 事件: {desc}"
+  },
+  "events": {
+    "Arachnophobia": {
+      "description": "增加地堡蜘蛛（SandSpider）的刷怪概率。允许多只同时出现。",
+      "messages": [
+        "被敌对生命体统治",
+        "检测到优势物种",
+        "这个地方爬满了东西..",
+        "它们有 8 只眼睛..",
+        "天然蜘蛛栖息地"
+      ],
+      "shortMessages": ["八只眼睛", "八条腿"]
+    },
+    "Barber": {
+      "description": "增加理发师的刷怪概率，且数量更多",
+      "messages": [
+        "有报告称出现超自然现象",
+        "检测到超自然信号",
+        "急需剪个头发..？",
+        "咔嚓咔嚓"
+      ],
+      "shortMessages": ["理发师", "剪刀"]
+    },
+    "Bee": {
+      "description": "增加室外蜂巢的刷怪数量",
+      "messages": [
+        "被敌对生命体统治",
+        "检测到优势物种",
+        "黏糊糊的金色美味",
+        "采集蜂巢！",
+        "小心别被蜜蜂蛰了！"
+      ],
+      "shortMessages": ["嗡嗡嗡嗡", "黏糊的金子"]
+    },
+    "Butler": {
+      "description": "增加管家的刷怪概率，且数量更多",
+      "messages": [
+        "有报告称出现超自然现象",
+        "检测到超自然信号",
+        "有人在打理这个地方",
+        "镜面地板需要细心保养..",
+        "别弄脏地板就不会弄脏衣服。西装是公司财产！"
+      ],
+      "shortMessages": ["管家", "清洁工"]
+    },
+    "Crawler": {
+      "description": "增加半身鱼（又称 Crawler 或 Halves）的刷怪概率。允许多只同时出现并降低其能量值。",
+      "messages": [
+        "被敌对生命体统治",
+        "检测到优势物种",
+        "室内传来沉重的脚步声。可能怀有敌意。",
+        "敲它还是被敲，这是个问题",
+        "设施内传来猛烈的撞击声",
+        "把两半拼在一起能让我们重归完整吗？"
+      ],
+      "shortMessages": ["咚咚", "跺脚"]
+    },
+    "DevochkaPizdec": {
+      "description": "增加小女孩（Dressgirl）的刷怪概率。允许多只同时出现。",
+      "messages": [
+        "有报告称出现超自然现象",
+        "检测到超自然信号",
+        "员工们在关停这里之前就已精神失常。把遗留物带回来。",
+        "现在可别丢了脑袋！"
+      ],
+      "shortMessages": ["偏执", "游戏时间"]
+    },
+    "FlowerMan": {
+      "description": "增加小黑（Flowerman）的刷怪概率。允许多只同时出现。",
+      "messages": [
+        "有报告称出现超自然现象",
+        "检测到超自然信号",
+        "阴影中潜伏着什么东西",
+        "你怕黑吗？",
+        "永远在你身后..",
+        "白色的眼睛正盯着你..",
+        "有时候，瞪眼比赛你并不想赢！"
+      ],
+      "shortMessages": ["跟踪者", "怕黑"]
+    },
+    "Hell": {
+      "description": "增加八音盒的刷怪概率。允许多只同时出现。",
+      "messages": [
+        "箱子里有什么？！",
+        "一旦遭遇请立即撤离！",
+        "先生，恐怕我得请你离开了。",
+        "公司祝你好运！"
+      ],
+      "shortMessages": ["地狱", "快跑"]
+    },
+    "HoarderBug": {
+      "description": "刷新大量囤积虫，同时仍允许其他敌人刷新。",
+      "messages": [
+        "大气中检测到杀虫剂残留",
+        "废料在..动？",
+        "检测到优势物种",
+        "竞争对手已经到了",
+        "囤积虫黑帮接管了这个地方",
+        "它们在偷我们的废料！",
+        "朋友..？"
+      ],
+      "shortMessages": ["抢夺废料", "会动的废料", "竞争对手", "黑帮"]
+    },
+    "Lizards": {
+      "description": "增加孢子蜥蜴的刷怪概率，且数量更多。",
+      "messages": [
+        "被敌对生命体统治",
+        "检测到优势物种",
+        "别靠太近！",
+        "小心有毒孢子云",
+        "别吸入孢子！"
+      ],
+      "shortMessages": ["孢子粉尘"]
+    },
+    "Masked": {
+      "description": "增加假人的刷怪概率。",
+      "messages": [
+        "有报告称出现超自然现象",
+        "检测到超自然信号",
+        "歌剧魅影",
+        "新来的家伙是谁？"
+      ],
+      "shortMessages": ["假人", "信任危机"]
+    },
+    "Nutcracker": {
+      "description": "增加胡桃夹子的刷怪概率。",
+      "messages": [
+        "有报告称出现超自然现象",
+        "检测到超自然信号",
+        "别动..",
+        "把头低下",
+        "保护好你的坚果！"
+      ],
+      "shortMessages": ["坚果疯了"]
+    },
+    "Slime": {
+      "description": "增加史莱姆（Blob/Slime）的刷怪概率，且数量更多。",
+      "messages": [
+        "被敌对生命体统治",
+        "检测到优势物种",
+        "别在酱汁里迷失自我",
+        "检测到无形生物。含水量 99.9%"
+      ],
+      "shortMessages": ["地板很滑"]
+    },
+    "SpringMan": {
+      "description": "增加弹簧头（SpringMan）的刷怪概率",
+      "messages": [
+        "有报告称出现超自然现象",
+        "检测到超自然信号",
+        "它们只会在你不看它们时杀了你",
+        "现在可别丢了脑袋！",
+        "这场瞪眼比赛你可输不起！"
+      ],
+      "shortMessages": ["弹簧", "嘣！"]
+    },
+    "EnemyBounty": {
+      "description": "公司奖励击杀敌人的金钱。",
+      "messages": [
+        "公司悬赏：清除威胁",
+        "公司为击杀怪物付钱",
+        "悬赏下达：击杀敌人",
+        "公司悬赏：大开杀戒"
+      ],
+      "shortMessages": ["击杀悬赏", "公司悬赏"],
+      "killMessages": [
+        "威胁已清除！继续保持。公司发放 {amount} 金钱。",
+        "敌人已击杀！你的表现让公司满意。你获得 {amount} 金钱。",
+        "怪物已击杀！公司认可你的奉献。收到 {amount} 金钱。"
+      ],
+      "rewardMessage": "赏金奖励：{amount} 金钱"
+    },
+    "HackedTurrets": {
+      "description": "所有机枪塔永久失效。",
+      "messages": [
+        "安保系统离线",
+        "防御系统被骇后遭到遗弃",
+        "公司禁用了这颗月球上的所有机枪塔"
+      ],
+      "shortMessages": ["安保离线", "机枪塔被黑"]
+    },
+    "HordeMode": {
+      "description": "提高室内敌人刷新率。敌人更早、更频繁地刷新。",
+      "messages": [
+        "极端活跃度！",
+        "从来没人从这里回来过..",
+        "警告！活跃度 9 9 9 9 9 9 9 9 9 9 9 9",
+        "公司祝你好运！"
+      ],
+      "shortMessages": ["尸潮模式"]
+    },
+    "HullBreak": {
+      "description": "公司发放额外奖金。从高压事件中喘口气吧。",
+      "messages": [
+        "KPI 报告：表现不佳\n公司授予你 </color><color=green>{amount}</color><color=white> 金钱。用它向公司证明你的价值！",
+        "公司赞赏你的忠诚。你收到 </color><color=green>{amount}</color><color=white> 金钱",
+        "已收到奖金：</color><color=green>{amount}</color><color=white> 金钱。继续保持良好表现！"
+      ],
+      "shortMessages": [
+        "奖金：</color><color=green>{amount}",
+        "奖金发放：</color><color=green>{amount}"
+      ]
+    },
+    "LandMine": {
+      "description": "在室内生成额外地雷。",
+      "messages": [
+        "高安保区域",
+        "他们在这里布满了机关",
+        "小心脚下！",
+        "小心地雷",
+        "大量地雷可能挡住你的去路"
+      ],
+      "shortMessages": ["地雷"]
+    },
+    "Nothing": {
+      "description": "无事发生 - 该事件表示没有事件。\n调整权重可设置每次随机抽取时获得事件与没有事件的总体概率。",
+      "messages": [
+        "<color=white>...</color>",
+        "<color=white>---</color>",
+        "<color=white>   </color>"
+      ],
+      "shortMessages": []
+    },
+    "OnAPowderKeg": {
+      "description": "地雷会随机引爆。额外生成地雷。",
+      "messages": [
+        "接连不断的爆炸",
+        "检测到爆炸",
+        "他们安装了劣质地雷",
+        "地雷轻轻一碰就会爆炸",
+        "滴答，滴答..轰！"
+      ],
+      "shortMessages": ["惊喜", "爆炸"]
+    },
+    "OneForAll": {
+      "description": "一名员工死亡后，飞船将在两小时内离开。",
+      "messages": ["<color=white>你已被选中参加团建活动！</color>"],
+      "shortMessages": ["<color=red>我为人人</color>"],
+      "deathMessage": "员工信号丢失！飞船将在两小时内离开！"
+    },
+    "OpenTheNoor": {
+      "description": "所有安全门在生成时处于关闭状态。",
+      "messages": [
+        "高安保区域",
+        "此路不通！",
+        "Hodor——顶住门！",
+        "他们封锁了这里",
+        "被封锁遗弃。所有安全门都已关闭。"
+      ],
+      "shortMessages": ["HODOR", "开门"]
+    },
+    "OutSideEnemyDay": {
+      "description": "白天室外敌人数量增加。没有日食胜似日食。",
+      "messages": [
+        "这里曾被黑暗笼罩数周",
+        "持续日食打乱了野生动物的生物钟",
+        "地表生物高度密集",
+        "频繁的天气事件让野生动物在白天四处游荡"
+      ],
+      "shortMessages": ["寂静季节", "室外派对", "日食？"]
+    },
+    "SpikeTrap": {
+      "description": "在室内生成额外尖刺陷阱。",
+      "messages": [
+        "高安保区域",
+        "他们在这里布满了机关",
+        "人们称这里为「百战百胜王」",
+        "当地人管这里叫千寻的堡垒",
+        "那是什么声音？"
+      ],
+      "shortMessages": ["尖刺", "陷阱"]
+    },
+    "TimeAnomaly": {
+      "description": "缩短白天时间，即时间流逝更快",
+      "messages": [
+        "引力扭曲了时空。你最好抓紧时间！",
+        "出发！速战速决，二十分钟的冒险。",
+        "附近有引力异常！时间流逝得更快。"
+      ],
+      "shortMessages": ["时间-"]
+    },
+    "TimeDilation": {
+      "description": "延长白天时间，即时间流逝更慢",
+      "messages": [
+        "引力扭曲了时空。慢慢来！",
+        "你有充足的时间。",
+        "引力异常扭曲了时空！时间流逝得更慢。"
+      ],
+      "shortMessages": ["时间+"]
+    },
+    "Turret": {
+      "description": "在室内生成额外炮塔。",
+      "messages": [
+        "高安保区域",
+        "它就在拐角处！",
+        "不断在掩体间移动！",
+        "公司建议带上防弹背心！"
+      ],
+      "shortMessages": ["炮塔", "弹幕地狱"]
+    },
+    "Armday": {
+      "description": "生成大量重型战利品。",
+      "messages": [
+        "等着搬大件重物吧！",
+        "需要握力！重型废料。",
+        "公司保险不覆盖腰椎间盘突出！",
+        "用猛拉猛扭的姿势搬重物！",
+        "腰痛"
+      ],
+      "shortMessages": ["沉重"]
+    },
+    "BabkinPogreb": {
+      "description": "生成大量腌黄瓜罐头。",
+      "messages": [
+        "扫描显示所有废料都是..有机物？",
+        "这些废料有点不对劲..",
+        "我们弄丢了瑞克。找到他！",
+        "真是进退两难！"
+      ],
+      "shortMessages": ["腌黄瓜"]
+    },
+    "ChristmasEve": {
+      "description": "生成大量礼物。",
+      "messages": [
+        "已经到圣诞节了吗？",
+        "帮圣诞老人收集礼物！",
+        "公司祝你圣诞快乐！"
+      ],
+      "shortMessages": ["圣诞"]
+    },
+    "Clownshow": {
+      "description": "生成大量嘈杂的废料。",
+      "messages": [
+        "这是一场小丑秀！",
+        "你的小丑鼻子掉了.."
+      ],
+      "shortMessages": ["小丑"]
+    },
+    "DayDrinking": {
+      "description": "生成大量酒精饮料。",
+      "messages": [
+        "来开一两瓶啤酒！",
+        "工作时间禁止饮酒！",
+        "这些废料有点不对劲.."
+      ],
+      "shortMessages": ["白日饮酒"]
+    },
+    "Easter": {
+      "description": "生成大量复活节彩蛋。",
+      "messages": [
+        "节日装饰",
+        "帮复活节兔子收集彩蛋！",
+        "这是复活节彩蛋吗？",
+        "↑ ↑ ↓ ↓ ← → ← → Ⓐ Ⓑ"
+      ],
+      "shortMessages": ["蛋"]
+    },
+    "LuckyDay": {
+      "description": "提高高价值战利品的刷新概率。",
+      "messages": [
+        "检测到高价值废料！",
+        "据说这里有非常值钱的废料",
+        "今天是你走运的日子！"
+      ],
+      "shortMessages": ["好运"]
+    },
+    "SelfDefense": {
+      "description": "生成大量可以当作武器的废料。",
+      "messages": [
+        "到处都是武器！",
+        "今天进行 DIY 自卫训练！"
+      ],
+      "shortMessages": ["武器"]
+    },
+    "Boomba": {
+      "description": "增加 Boomba 的刷怪概率，且数量更多。同时生成更多地雷。",
+      "messages": [
+        "清洁队还没走",
+        "地雷遍地都是",
+        "大量地雷，有些..还会动？"
+      ],
+      "shortMessages": ["轰-啪"]
+    },
+    "Herobrine": {
+      "description": "必定刷新 Herobrine。Herobrine 不占用其他敌人的数量（不增加全局能量）",
+      "messages": [
+        "已移除。",
+        "别回头.."
+      ],
+      "shortMessages": ["闹鬼", "移除"]
+    },
+    "Meltdown": {
+      "description": "在一天中的某个时刻启动反应堆熔毁程序。",
+      "messages": [
+        "反应堆核心不稳定。立即撤离！",
+        "辐射水平升高。反应堆即将熔毁！",
+        "优雅地移除装置核心，防止核灾难",
+        "辐射水平上升。别离飞船太远。"
+      ],
+      "shortMessages": ["惊喜", "熔毁"],
+      "warningMessage": "核熔毁！中止任务！"
+    },
+    "AC_Bunny": {
+      "description": "增加独特的兔耳物品（AdvancedCompany）的刷新概率",
+      "messages": [
+        "跳吧小兔子，跳！",
+        "蹦，蹦..",
+        "有报告称出现了傻乎乎的兔耳朵"
+      ],
+      "shortMessages": ["兔子", "蹦蹦"]
+    },
+    "AC_Controller": {
+      "description": "增加绿色 Pietsmiet 手柄物品（AdvancedCompany）的刷新概率",
+      "messages": [
+        "要开打了！",
+        "这颗月球被..毁灭了？！",
+        "它们唯一惧怕的就是你",
+        "\"Ich bin himmelblau, himmelblau.. Scha-la-la!\""
+      ],
+      "shortMessages": ["手柄", "Pietsmiet"]
+    },
+    "AC_RGBShoes": {
+      "description": "增加独特的发光鞋物品（AdvancedCompany）的刷新概率",
+      "messages": [
+        "炫酷球鞋。电竞 RGB！+120fps",
+        "以光速奔跑",
+        "有报告称 RGB 灯光..以极速移动"
+      ],
+      "shortMessages": ["鞋", "RGB"]
+    },
+    "PrisonMine": {
+      "description": "在室内生成额外的牢笼/监狱地雷。使用 TurretScale 配置。",
+      "messages": [
+        "高安保区域",
+        "他们在这里布满了机关",
+        "别被关进去。",
+        "铁窗之内..",
+        "这里存放着捕捉野生动物用的笼子"
+      ],
+      "shortMessages": ["牢笼"]
+    },
+    "GiftMimic": {
+      "description": "在室内生成额外的礼盒拟态怪。使用 LandmineScale 配置除以 3。",
+      "messages": [
+        "高安保区域",
+        "他们在这里布满了机关",
+        "别被骗了。",
+        "这是送给..我的礼物吗？"
+      ],
+      "shortMessages": ["礼物？"]
+    },
+    "PropulsionMine": {
+      "description": "在室内生成额外的推进地雷。使用 LandmineScale 配置。",
+      "messages": [
+        "高安保区域",
+        "他们在这里布满了机关",
+        "小心脚下！",
+        "小心特殊地雷",
+        "布满推进地雷"
+      ],
+      "shortMessages": ["起飞"]
+    },
+    "Eggman": {
+      "description": "提高 SCP3199 的室外刷新频率。",
+      "messages": [
+        "被敌对生命体统治",
+        "具有攻击性的室外物种",
+        "设施外发现了蛋"
+      ],
+      "shortMessages": ["蛋男"]
+    },
+    "InvisibleGuest": {
+      "description": "提高 SCP966 的刷新频率。最多刷新三只。",
+      "messages": [
+        "有报告称出现超自然现象",
+        "检测到超自然信号",
+        "它正一点点消耗你..",
+        "你看到了吗？！？！"
+      ],
+      "shortMessages": ["无精打采", "访客"]
+    },
+    "RottingMan": {
+      "description": "提高 SCP106 的刷新频率，且可能刷新更多。",
+      "messages": [
+        "有报告称出现超自然现象",
+        "检测到超自然信号",
+        "远离任何年迈且\"腐烂\"的人形生物..",
+        "任何时候都禁止与 SCP-106 发生肢体接触。"
+      ],
+      "shortMessages": ["腐烂之人"]
+    },
+    "ShyGuy": {
+      "description": "增加害羞的家伙的刷怪概率。允许多只同时出现。",
+      "messages": [
+        "千万别看它！",
+        "被注视恐惧症..",
+        "SCP-096",
+        "当你连看一眼都害怕时..",
+        "见过它脸的人无一生还.."
+      ],
+      "shortMessages": ["害羞"]
+    },
+    "SlimyFriend": {
+      "description": "增加 SCP-999 的刷怪概率，且数量更多。",
+      "messages": [
+        "被友好生命体统治",
+        "检测到被动物种",
+        "一大团半透明橙色黏胶状的无定形物质",
+        "里面住着看似贪玩的小狗模样的生物。"
+      ],
+      "shortMessages": ["补水"]
+    },
+    "BruceAlmighty": {
+      "description": "提高 Bruce 的刷新频率。最多刷新三只。",
+      "messages": [
+        "被敌对生命体统治",
+        "检测到优势物种",
+        "提示：别受伤",
+        "小心鲨鱼！",
+        "陆生动物不会伤害你..除非你把自己当食物"
+      ],
+      "shortMessages": ["布鲁斯", "被吃了"]
+    },
+    "SeaMine": {
+      "description": "在室内生成额外水雷。使用 LandmineScale 配置。",
+      "messages": [
+        "高安保区域",
+        "他们在这里布满了机关",
+        "小心脑袋！",
+        "小心地雷",
+        "大量地雷可能挡住你的去路"
+      ],
+      "shortMessages": ["水雷"]
+    },
+    "Urchin": {
+      "description": "提高海胆的刷新频率。前期最多刷新十只。",
+      "messages": [
+        "被敌对生命体统治",
+        "检测到优势物种",
+        "海胆入侵",
+        "指数级增长",
+        "它们会不停地繁殖"
+      ],
+      "shortMessages": ["尖刺", "球"]
+    }
+  },
+  "config": {
+    "desc": {
+      "EventCount": "每轮激活事件的最大数量。实际数量可能更少，取决于 Nothing （无）事件的权重。",
+      "IncreaseEventCountPerDay": "是否随天数增加 EventCount。每过一天加一，新配额开始时重置。\n设为 \"true\" 且 EventCount 为 n 时：第一天抽取 n 个事件，第二天 n+1，以此类推。",
+      "EnableEventMessages": "在聊天中显示事件消息",
+      "UseShortChatMessages": "使用简短的事件消息",
+      "UseUniqueChatMessages": "若为 true，聊天中使用固定消息。每个事件都有一条唯一且不变的消息。",
+      "UseColoredChatMessages": "若为 true，事件消息会使用颜色来区分是\"好\"事件还是\"坏\"事件。",
+      "LandmineScale": "地雷事件额外生成的地雷数量（其他会生成地雷的事件也以此值为基准）",
+      "TurretScale": "机枪塔事件额外生成的机枪塔数量",
+      "SpikeTrapScale": "尖刺陷阱事件额外生成的尖刺陷阱数量",
+      "BountyRewardMin": "EnemyBounty 事件中击杀敌人奖励的最低金钱",
+      "BountyRewardMax": "EnemyBounty 事件中击杀敌人奖励的最高金钱",
+      "BountyRewardLimit": "EnemyBounty 事件中可领取击杀奖励的次数上限。最终奖励始终为 `BountyRewardMax` * 1.5\n设为 0 表示不限次数。",
+      "HullBreakEventCreditsMin": "HullBreak 事件奖励的最低金钱",
+      "HullBreakEventCreditsMax": "HullBreak 事件奖励的最高金钱",
+      "LevelSettings": "指定每张地图默认应用的设置\n这些是基础设置，事件的修改始终叠加其上。\n'vanilla'：保持原版设置\n'hullbreaker'：困难难度。显著提高室内外刷怪率，室内外最大敌人能量分别 +16 和 +20\n'custom'：使用下方自定义值，默认值与 'hullbreaker' 相同\n",
+      "MaxEnemyPowerCount": "室内最大敌人能量计数增加该值",
+      "MaxOutsideEnemyPowerCount": "室外最大敌人能量计数增加该值（例如 无眼狗 或 森林巨人）",
+      "MaxDaytimeEnemyPowerCount": "白天最大敌人能量计数增加该值（例如蜜蜂）",
+      "SpawnCurveOverride": "更改室内敌人的刷新率。设为 '256' 会在落地后的每次刷怪波立即刷满怪物。"
+    }
+  }
+}

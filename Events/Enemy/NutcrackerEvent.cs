@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Enemy;
 
 public class NutcrackerEvent : HullEvent
 {
-    public NutcrackerEvent() {
+    public NutcrackerEvent()
+    {
         ID = "Nutcracker";
         Weight = 10;
         Description = "Increases spawn chance of Nutcracker.";
@@ -24,16 +23,20 @@ public class NutcrackerEvent : HullEvent
     }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(NutcrackerEnemyAI)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(NutcrackerEnemyAI))))
+        {
             return false;
         }
 
         levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(NutcrackerEnemyAI)), 100);
         levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(NutcrackerEnemyAI)), 1);
 
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Enemy;
 
-public class DevochkaPizdecEvent : HullEvent {
-    public DevochkaPizdecEvent() {
+public class DevochkaPizdecEvent : HullEvent
+{
+    public DevochkaPizdecEvent()
+    {
         ID = "DevochkaPizdec";
         Weight = 5;
         Description = "Increases Ghostgirl (Dressgirl) spawn chance. Allows more than one to spawn.";
@@ -21,16 +22,21 @@ public class DevochkaPizdecEvent : HullEvent {
         };
     }
 
-    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
-        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(DressGirlAI)))) {
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
+    {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(DressGirlAI))))
+        {
             return false;
         }
         levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(DressGirlAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(DressGirlAI)), 4);
         levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(DressGirlAI)), 0);
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

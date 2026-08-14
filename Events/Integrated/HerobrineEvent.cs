@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Integrated;
 
 public class HerobrineEvent : HullEvent
 {
-    public HerobrineEvent() {
+    public HerobrineEvent()
+    {
         ID = "Herobrine";
         Weight = 5;
         Description = "Guarantees Herobrine spawn. Herobrine doesn't reduce the amount of other enemies (doesn't add to global power)";

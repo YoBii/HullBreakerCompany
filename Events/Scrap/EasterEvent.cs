@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Scrap;
 
 public class EasterEvent : HullEvent
 {
-    public EasterEvent() {
+    public EasterEvent()
+    {
         ID = "Easter";
         Weight = 10;
         Description = "Spawns a lot of easter eggs.";
@@ -21,13 +20,17 @@ public class EasterEvent : HullEvent
             { "EGG" }
         };
     }
-    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
+    {
         string scrapToSpawn = "Easter egg";
-        if (levelModifier.IsScrapSpawnable(scrapToSpawn)) {
+        if (levelModifier.IsScrapSpawnable(scrapToSpawn))
+        {
             levelModifier.AddSpawnableScrapRarity(scrapToSpawn, 33);
             HullManager.AddChatEventMessage(this);
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }

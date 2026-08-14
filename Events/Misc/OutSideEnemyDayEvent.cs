@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using HullBreakerCompany.Hull;
-using UnityEngine;
 
 namespace HullBreakerCompany.Events.Misc;
 
 public class OutSideEnemyDayEvent : HullEvent
 {
-    public OutSideEnemyDayEvent() {
+    public OutSideEnemyDayEvent()
+    {
         ID = "OutSideEnemyDay";
         Weight = 10;
         Description = "Increased amount of outside enemies during daytime. Eclipsed without eclipse.";
@@ -27,9 +26,12 @@ public class OutSideEnemyDayEvent : HullEvent
     {
         levelModifier.AddOutsideEnemySpawnChanceThroughoutDay(512);
 
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

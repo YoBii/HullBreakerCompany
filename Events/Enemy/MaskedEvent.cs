@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Enemy;
 
 public class MaskedEvent : HullEvent
 {
-    public MaskedEvent() {
+    public MaskedEvent()
+    {
         ID = "Masked";
         Weight = 10;
         Description = "Increases spawn chance of Masked.";
@@ -24,15 +23,19 @@ public class MaskedEvent : HullEvent
     }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(MaskedPlayerEnemy)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(MaskedPlayerEnemy))))
+        {
             return false;
         }
         levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(MaskedPlayerEnemy)), 100);
         levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(MaskedPlayerEnemy)), 1);
 
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

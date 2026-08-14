@@ -1,9 +1,9 @@
-﻿using System;
+﻿using BepInEx;
+using HullBreakerCompany.Events;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using BepInEx;
-using HullBreakerCompany.Events;
 
 namespace HullBreakerCompany.Hull;
 
@@ -16,68 +16,88 @@ public class CustomEventLoader
 
         foreach (var hullEventData in customEventData)
         {
-            // Building custom event from custom config event data
-            CustomEvent customEvent = new CustomEvent();
-            customEvent.SetID(hullEventData["EventID"]);
-            customEvent.SetWeight(int.Parse(hullEventData["EventWeight"]));
-            foreach (var msg in ParseMessages(hullEventData["InGameMessage"])) {
-                customEvent.AddMessage(msg);
-            }
-            foreach (var msg in ParseMessages(hullEventData["InGameShortMessage"])) {
-                customEvent.AddShortMessage(msg);
-            }
-            if (hullEventData.ContainsKey("SpawnableEnemies")) {
-                //customEvent.EnemySpawnList = new HashSet<string>(hullEvent["SpawnableEnemies"].Split(',')).ToList();
-                Plugin.Mls.LogDebug($"SpawnableEnemies defined. Parsing..");
-                customEvent.EnemySpawnList = ParseEnemies(hullEventData["SpawnableEnemies"]);
-            }
-            if (hullEventData.ContainsKey("SpawnableOutsideEnemies")) {
-                Plugin.Mls.LogDebug($"SpawnableOutsideEnemies defined. Parsing..");
-                customEvent.OutsideEnemySpawnList = ParseEnemies(hullEventData["SpawnableOutsideEnemies"]);
-            }            
-            if (hullEventData.ContainsKey("SpawnableDaytimeEnemies")) {
-                Plugin.Mls.LogDebug($"SpawnableDaytimeEnemies defined. Parsing..");
-                customEvent.DaytimeEnemySpawnList = ParseEnemies(hullEventData["SpawnableDaytimeEnemies"]);
-            }
-            if (hullEventData.ContainsKey("SpawnableScrap")) {
-                Plugin.Mls.LogDebug($"SpawnableScrap defined. Parsing..");
-                customEvent.ScrapSpawnList = ParseScrap(hullEventData["SpawnableScrap"]);
-            }
-            if (hullEventData.ContainsKey("GlobalPowerIncrease")) {
-                Plugin.Mls.LogDebug($"GlobalPowerIncrease defined. Parsing..");
-                customEvent.addPower = int.Parse(hullEventData["GlobalPowerIncrease"]);
-            }
-            if (hullEventData.ContainsKey("GlobalOutsidePowerIncrease")) {
-                Plugin.Mls.LogDebug($"GlobalOutsidePowerIncrease defined. Parsing..");
-                customEvent.addOutsidePower = int.Parse(hullEventData["GlobalOutsidePowerIncrease"]);
-            }            
-            if (hullEventData.ContainsKey("GlobalDaytimePowerIncrease")) {
-                Plugin.Mls.LogDebug($"GlobalDaytimePowerIncrease defined. Parsing..");
-                customEvent.addDaytimePower = int.Parse(hullEventData["GlobalDaytimePowerIncrease"]);
-            }
-            if (hullEventData.ContainsKey("GlobalInsideSpawnRateOverride")) {
-                Plugin.Mls.LogDebug($"GlobalInsideSpawnRateOverride defined. Parsing..");
-                customEvent.overrideSpawnRate = int.Parse(hullEventData["GlobalInsideSpawnRateOverride"]);
-            }
-            if (hullEventData.ContainsKey("GlobalOutsideSpawnRateOverride")) {
-                Plugin.Mls.LogDebug($"GlobalOutsideSpawnRateOverride defined. Parsing..");
-                customEvent.overrideOutsideSpawnRate = int.Parse(hullEventData["GlobalOutsideSpawnRateOverride"]);
-            }            
-            if (hullEventData.ContainsKey("GlobalDaytimeSpawnRateOverride")) {
-                Plugin.Mls.LogDebug($"GlobalDaytimeSpawnRateOverride defined. Parsing..");
-                customEvent.overrideDaytimeSpawnRate = int.Parse(hullEventData["GlobalDaytimeSpawnRateOverride"]);
-            }
+            try
+            {
+                // Building custom event from custom config event data
+                CustomEvent customEvent = new CustomEvent();
+                customEvent.SetID(hullEventData["EventID"]);
+                customEvent.SetWeight(int.Parse(hullEventData["EventWeight"]));
+                foreach (var msg in ParseMessages(hullEventData["InGameMessage"]))
+                {
+                    customEvent.AddMessage(msg);
+                }
+                foreach (var msg in ParseMessages(hullEventData["InGameShortMessage"]))
+                {
+                    customEvent.AddShortMessage(msg);
+                }
+                if (hullEventData.ContainsKey("SpawnableEnemies"))
+                {
+                    //customEvent.EnemySpawnList = new HashSet<string>(hullEvent["SpawnableEnemies"].Split(',')).ToList();
+                    Plugin.Mls.LogDebug($"SpawnableEnemies defined. Parsing..");
+                    customEvent.EnemySpawnList = ParseEnemies(hullEventData["SpawnableEnemies"]);
+                }
+                if (hullEventData.ContainsKey("SpawnableOutsideEnemies"))
+                {
+                    Plugin.Mls.LogDebug($"SpawnableOutsideEnemies defined. Parsing..");
+                    customEvent.OutsideEnemySpawnList = ParseEnemies(hullEventData["SpawnableOutsideEnemies"]);
+                }
+                if (hullEventData.ContainsKey("SpawnableDaytimeEnemies"))
+                {
+                    Plugin.Mls.LogDebug($"SpawnableDaytimeEnemies defined. Parsing..");
+                    customEvent.DaytimeEnemySpawnList = ParseEnemies(hullEventData["SpawnableDaytimeEnemies"]);
+                }
+                if (hullEventData.ContainsKey("SpawnableScrap"))
+                {
+                    Plugin.Mls.LogDebug($"SpawnableScrap defined. Parsing..");
+                    customEvent.ScrapSpawnList = ParseScrap(hullEventData["SpawnableScrap"]);
+                }
+                if (hullEventData.ContainsKey("GlobalPowerIncrease"))
+                {
+                    Plugin.Mls.LogDebug($"GlobalPowerIncrease defined. Parsing..");
+                    customEvent.addPower = int.Parse(hullEventData["GlobalPowerIncrease"]);
+                }
+                if (hullEventData.ContainsKey("GlobalOutsidePowerIncrease"))
+                {
+                    Plugin.Mls.LogDebug($"GlobalOutsidePowerIncrease defined. Parsing..");
+                    customEvent.addOutsidePower = int.Parse(hullEventData["GlobalOutsidePowerIncrease"]);
+                }
+                if (hullEventData.ContainsKey("GlobalDaytimePowerIncrease"))
+                {
+                    Plugin.Mls.LogDebug($"GlobalDaytimePowerIncrease defined. Parsing..");
+                    customEvent.addDaytimePower = int.Parse(hullEventData["GlobalDaytimePowerIncrease"]);
+                }
+                if (hullEventData.ContainsKey("GlobalInsideSpawnRateOverride"))
+                {
+                    Plugin.Mls.LogDebug($"GlobalInsideSpawnRateOverride defined. Parsing..");
+                    customEvent.overrideSpawnRate = int.Parse(hullEventData["GlobalInsideSpawnRateOverride"]);
+                }
+                if (hullEventData.ContainsKey("GlobalOutsideSpawnRateOverride"))
+                {
+                    Plugin.Mls.LogDebug($"GlobalOutsideSpawnRateOverride defined. Parsing..");
+                    customEvent.overrideOutsideSpawnRate = int.Parse(hullEventData["GlobalOutsideSpawnRateOverride"]);
+                }
+                if (hullEventData.ContainsKey("GlobalDaytimeSpawnRateOverride"))
+                {
+                    Plugin.Mls.LogDebug($"GlobalDaytimeSpawnRateOverride defined. Parsing..");
+                    customEvent.overrideDaytimeSpawnRate = int.Parse(hullEventData["GlobalDaytimeSpawnRateOverride"]);
+                }
 
-            // Register and enable the custom event
-            AddEvent(customEvent);
+                // Register and enable the custom event
+                AddEvent(customEvent);
+            }
+            catch (Exception e)
+            {
+                Plugin.Mls.LogWarning($"Failed to load custom event config: {e.Message}. Skipping this event.");
+            }
         }
     }
-    
+
     private static List<Dictionary<string, string>> LoadEventDataFromCfgFiles()
     {
         List<string> directoryPaths = GetCustomEventDirectoryPaths();
         List<string> cfgFiles = new List<string>();
-        foreach (string directoryPath in directoryPaths) {
+        foreach (string directoryPath in directoryPaths)
+        {
             cfgFiles.AddRange(Directory.GetFiles(directoryPath, "*.cfg"));
         }
 
@@ -85,7 +105,8 @@ public class CustomEventLoader
 
         List<Dictionary<string, string>> allEventData = new List<Dictionary<string, string>>();
 
-        foreach (string cfgFile in cfgFiles) {
+        foreach (string cfgFile in cfgFiles)
+        {
             var eventData = ParseConfigFile(cfgFile);
             if (eventData == null) continue;
             allEventData.Add(eventData);
@@ -93,29 +114,37 @@ public class CustomEventLoader
         }
         return allEventData;
     }
-    private static List<string> GetCustomEventDirectoryPaths() {
-        try {
+    private static List<string> GetCustomEventDirectoryPaths()
+    {
+        try
+        {
             return (from dir in Directory.GetDirectories(Paths.BepInExRootPath, "*", SearchOption.AllDirectories)
                     where Path.GetFileName(dir).Equals("HullEvents", StringComparison.OrdinalIgnoreCase)
                     select dir).ToList();
-        } catch (Exception ex) {
+        }
+        catch (Exception)
+        {
             Plugin.Mls.LogInfo("Custom event folder 'HullEvents' not found. Skipping custom event loading.");
             return new List<string>();
         }
     }
-    private static Dictionary<string, string> ParseConfigFile(string file) {
+    private static Dictionary<string, string> ParseConfigFile(string file)
+    {
         string[] lines = File.ReadAllLines(file);
         Dictionary<string, string> eventData = new Dictionary<string, string>();
 
-        foreach (string line in lines) {
-            if (line.StartsWith("[DISABLED]")) {
+        foreach (string line in lines)
+        {
+            if (line.StartsWith("[DISABLED]"))
+            {
                 Plugin.Mls.LogInfo($"Custom Event configuration file ({file}) is disabled. Skipping..");
                 return null;
             }
             if (line.StartsWith("[") || line.StartsWith("#") || string.IsNullOrWhiteSpace(line)) continue;
 
             string[] keyValue = line.Split('=');
-            if (keyValue.Length == 2) {
+            if (keyValue.Length == 2)
+            {
                 string key = keyValue[0].Trim();
                 string value = keyValue[1].Trim();
                 eventData.Add(key, value);
@@ -124,25 +153,31 @@ public class CustomEventLoader
 
         return eventData;
     }
-    private static List<string> ParseMessages(string configValue) {
+    private static List<string> ParseMessages(string configValue)
+    {
         List<string> result = new List<string>();
         string[] messages = configValue.Split(';');
-        if (messages.Length < 1) {
+        if (messages.Length < 1)
+        {
             Plugin.Mls.LogError($"Error while parsing custom event messages: no message defined");
             return result;
         }
-        foreach (string message in messages) {
+        foreach (string message in messages)
+        {
             if (string.IsNullOrWhiteSpace(message)) continue;
             result.Add(message.Trim());
         }
         return result;
     }
-    private static Dictionary<string, List<int>> ParseEnemies(string configValue) {
+    private static Dictionary<string, List<int>> ParseEnemies(string configValue)
+    {
         Dictionary<string, List<int>> enemies = new Dictionary<string, List<int>>();
         string[] enemyPairs = configValue.Split(',');
-        foreach (string pair in enemyPairs) {
+        foreach (string pair in enemyPairs)
+        {
             string[] values = pair.Split(":");
-            if (values.Length <2) {
+            if (values.Length < 2)
+            {
                 Plugin.Mls.LogWarning($"Invalid enemies format: {pair}");
                 continue;
             }
@@ -155,12 +190,15 @@ public class CustomEventLoader
         }
         return enemies;
     }
-    private static Dictionary<string, int> ParseScrap(string configValue) {
+    private static Dictionary<string, int> ParseScrap(string configValue)
+    {
         Dictionary<string, int> scrap = new Dictionary<string, int>();
         string[] enemyPairs = configValue.Split(',');
-        foreach (string pair in enemyPairs) {
+        foreach (string pair in enemyPairs)
+        {
             string[] values = pair.Split(":");
-            if (values.Length != 2) {
+            if (values.Length != 2)
+            {
                 Plugin.Mls.LogWarning($"Invalid scrap format: {pair}");
                 continue;
             }
@@ -174,14 +212,17 @@ public class CustomEventLoader
 
     private static void AddEvent(HullEvent newEvent)
     {
-        if (EventsManager.EventDictionary.Any(e => e.GetID() == newEvent.GetID())) {
+        if (EventsManager.EventDictionary.Any(e => e.GetID() == newEvent.GetID()))
+        {
             Plugin.Mls.LogWarning("Custom event " + newEvent.GetID() + " can't be added because an event with the same ID already exists! Check for duplicate config files.");
-        } else {
+        }
+        else
+        {
             Plugin.Mls.LogInfo("Adding " + newEvent.GetID() + " to event dictionary");
             EventsManager.EventDictionary.Add(newEvent);
         }
     }
-    
+
     public static void DebugLoadCustomEvents()
     {
         Plugin.Mls.LogInfo($"Listing all loaded custom events..");

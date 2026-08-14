@@ -1,14 +1,15 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Misc;
 
 public class OnAPowderKegEvent : HullEvent
 {
-    public OnAPowderKegEvent() {
+    public OnAPowderKegEvent()
+    {
         ID = "OnAPowderKeg";
         Weight = 10;
         Description = "Landmines will detonate randomly. Spawns additional landmines.";
@@ -28,15 +29,18 @@ public class OnAPowderKegEvent : HullEvent
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
         if (!levelModifier.IsTrapUnitSpawnable(Util.getTrapUnitByType(typeof(Landmine)))) return false;
-        levelModifier.AddTrapUnit(Util.getTrapUnitByType(typeof(Landmine)), (int)(Plugin.LandmineScale * 2 / 3));
+        levelModifier.AddTrapUnit(Util.getTrapUnitByType(typeof(Landmine)), Plugin.LandmineScale * 2 / 3);
 
         dayInSeconds = (int)HullManager.Instance.timeOfDay.lengthOfHours * HullManager.Instance.timeOfDay.numberOfHours;
         HullManager.Instance.ExecuteAfterDelay(() => { DetonateLandMine(level); }, UnityEngine.Random.Range(dayInSeconds / 6, dayInSeconds / 2));
-        
+
         EventsHandler.OnAPowderKegActive = true;
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;
@@ -57,7 +61,8 @@ public class OnAPowderKegEvent : HullEvent
         {
             if (landmine == null) continue;
             if (!landmine.IsSpawned) continue;
-            if (!EventsHandler.OnAPowderKegActive || TimeOfDay.Instance.playersManager.inShipPhase) {
+            if (!EventsHandler.OnAPowderKegActive || TimeOfDay.Instance.playersManager.inShipPhase)
+            {
                 Plugin.Mls.LogInfo($"OnAPowderKeg Event abort. Reason: OnAPowderKegActive: {EventsHandler.OnAPowderKegActive}; " +
                     $"inShipPhase: {TimeOfDay.Instance.playersManager.inShipPhase};");
                 break;

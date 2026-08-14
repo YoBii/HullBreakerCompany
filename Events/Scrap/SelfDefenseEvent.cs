@@ -1,13 +1,13 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Scrap;
 
 public class SelfDefenseEvent : HullEvent
 {
-    public SelfDefenseEvent() {
+    public SelfDefenseEvent()
+    {
         ID = "SelfDefense";
         Weight = 20;
         Description = "Spawns a lot of scrap that can be utilized as weapon.";
@@ -19,7 +19,8 @@ public class SelfDefenseEvent : HullEvent
             { "WEAPONS" }
         };
     }
-    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
+    {
         Dictionary<String, int> scrapToSpawn = new() {
             { "Plunger", 20 },
             { "Stop sign", 15 },

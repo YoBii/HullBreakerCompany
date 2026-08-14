@@ -1,12 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Misc;
 
 public class HackedTurretsEvent : HullEvent
 {
-    public HackedTurretsEvent() {
+    public HackedTurretsEvent()
+    {
         ID = "HackedTurrets";
         Weight = 20;
         Description = "All turrets are permanently disabled.";
@@ -22,11 +22,13 @@ public class HackedTurretsEvent : HullEvent
     }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (HullManager.Instance == null) {
+        if (HullManager.Instance == null)
+        {
             Plugin.Mls.LogError("HullManager.Instance is null");
             return false;
         }
-        if (level == null) {
+        if (level == null)
+        {
             Plugin.Mls.LogError("level is null");
             return false;
         }
@@ -35,9 +37,12 @@ public class HackedTurretsEvent : HullEvent
         levelModifier.AddTrapUnit(Util.getTrapUnitByType(typeof(Turret)), Plugin.TurretScale / 3 * 2);
 
         HullManager.Instance.ExecuteAfterDelay(HackTurrets, 16f);
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "green");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

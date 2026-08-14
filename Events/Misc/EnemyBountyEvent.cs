@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Misc;
 
 public class EnemyBountyEvent : HullEvent
 {
-    public EnemyBountyEvent() {
+    public EnemyBountyEvent()
+    {
         ID = "EnemyBounty";
         Weight = 30;
         Description = "Company rewards enemy kills with bonus credits.";
@@ -26,9 +25,12 @@ public class EnemyBountyEvent : HullEvent
     {
         EventsHandler.BountyIsActive = true;
         EventsHandler.BountyFirstKill = true;
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "green");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

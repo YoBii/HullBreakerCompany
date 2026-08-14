@@ -1,13 +1,13 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Scrap;
 
 public class ClownshowEvent : HullEvent
 {
-    public ClownshowEvent() {
+    public ClownshowEvent()
+    {
         ID = "Clownshow";
         Weight = 20;
         Description = "Spawns a lot of noisy scrap.";
@@ -19,7 +19,8 @@ public class ClownshowEvent : HullEvent
             { "CLOWN" }
         };
     }
-    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
+    {
         Dictionary<String, int> scrapToSpawn = new() {
             { "Airhorn", 30 },
             { "Clown horn", 30 },

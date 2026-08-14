@@ -1,14 +1,13 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
-using Mono.Cecil;
 
 namespace HullBreakerCompany.Events.Scrap;
 
 public class DayDrinkingEvent : HullEvent
 {
-    public DayDrinkingEvent() {
+    public DayDrinkingEvent()
+    {
         ID = "DayDrinking";
         Weight = 20;
         Description = "Spawns a lot of alcoholic beverages.";
@@ -21,7 +20,8 @@ public class DayDrinkingEvent : HullEvent
             { "DAYDRINKING" }
         };
     }
-    public override bool Execute(SelectableLevel level, LevelModifier levelModifier) {
+    public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
+    {
         Dictionary<String, int> scrapToSpawn = new() {
             { "Bottles", 30 },
             { "Alcohol Flask", 25 },

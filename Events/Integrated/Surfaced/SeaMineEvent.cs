@@ -1,12 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Misc;
 
 public class SeaMineEvent : HullEvent
 {
-    public SeaMineEvent() {
+    public SeaMineEvent()
+    {
         ID = "SeaMine";
         Weight = 15;
         Description = "Spawns additional seamines inside. Uses LandmineScale config.";
@@ -25,9 +25,12 @@ public class SeaMineEvent : HullEvent
     {
         if (!levelModifier.IsTrapUnitSpawnable("Old Seamine")) return false;
         levelModifier.AddTrapUnit("Old Seamine", Plugin.LandmineScale);
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

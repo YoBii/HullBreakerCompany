@@ -1,12 +1,13 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
+using System;
 using System.Collections.Generic;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Misc;
 
 public class TimeDilationEvent : HullEvent
 {
-    public TimeDilationEvent() {
+    public TimeDilationEvent()
+    {
         ID = "TimeDilation";
         Weight = 5;
         Description = "Makes day longer i.e. time passes slower";
@@ -21,10 +22,13 @@ public class TimeDilationEvent : HullEvent
     }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        try {
+        try
+        {
             Random rnd = new Random();
-            levelModifier.SetTimeScale((float) Math.Round(UnityEngine.Random.Range(0.5f, 0.75f), 2));
-        } catch (Exception e) {
+            levelModifier.SetTimeScale((float)Math.Round(UnityEngine.Random.Range(0.5f, 0.75f), 2));
+        }
+        catch (Exception e)
+        {
             Plugin.Mls.LogWarning(e.Message);
             return false;
         }

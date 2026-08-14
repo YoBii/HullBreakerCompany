@@ -1,25 +1,21 @@
-using System;
-using System.Collections.Generic;
 using HullBreakerCompany.Events.Enemy;
-using HullBreakerCompany.Events.Misc;
-using HullBreakerCompany.Events.Scrap;
-using UnityEngine;
-using System.Linq;
-using Mono.Cecil;
-using HarmonyLib;
-using LethalQuantities.Objects;
+using HullBreakerCompany.Events.Integrated.AdvancedCompany;
 using HullBreakerCompany.Events.Integrated.SCP;
 using HullBreakerCompany.Events.Integrated.Surfaced;
-using HullBreakerCompany.Events.Integrated.AdvancedCompany;
+using HullBreakerCompany.Events.Misc;
+using HullBreakerCompany.Events.Scrap;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HullBreakerCompany.Hull;
 
-public abstract class EventsManager {
+public abstract class EventsManager
+{
     //public static string CurrentMessage = "";
     public static int DaysPassed;
     public static bool modEventsLoaded = false;
     public static bool customEventsLoaded = false;
-        
+
     private static LevelModifier levelModifier;
 
     public static List<HullEvent> EventDictionary = new()
@@ -64,7 +60,8 @@ public abstract class EventsManager {
         { new SelfDefenseEvent() }, //v2.0.0
     };
 
-    public static void AddModEvents() {
+    public static void AddModEvents()
+    {
         if (modEventsLoaded) return;
         Plugin.Mls.LogInfo("Checking for compatible mods..");
         //Print all plugins
@@ -82,28 +79,35 @@ public abstract class EventsManager {
             { "Surfaced", [new BruceAlmightyEvent(), new SeaMineEvent(), new UrchinEvent()] },
             { "TestAccount666.TestAccountVariety", [new CageMineEvent(), new GiftMimicEvent(), new PropulsionMineEvent()] }
         };
-        foreach (var modEventPair in modEvents) {
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(modEventPair.Key)) {
+        foreach (var modEventPair in modEvents)
+        {
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(modEventPair.Key))
+            {
                 Plugin.Mls.LogInfo($"{BepInEx.Bootstrap.Chainloader.PluginInfos[modEventPair.Key].Metadata.Name} found! Enabling events: {string.Join(", ", modEventPair.Value.Select(e => e.GetID()))}");
-                foreach (var e in modEventPair.Value) {
+                foreach (var e in modEventPair.Value)
+                {
                     EventDictionary.Add(e);
                 }
-            } else {
+            }
+            else
+            {
                 Plugin.Mls.LogDebug($"{modEventPair.Key} not present! Not loading associated events..");
             }
         }
         modEventsLoaded = true;
     }
-    public static void AddCustomEvents() {
+    public static void AddCustomEvents()
+    {
         if (customEventsLoaded) return;
         Plugin.Mls.LogInfo("Checking for custom events..");
-        
+
         CustomEventLoader.LoadCustomEvents();
         CustomEventLoader.DebugLoadCustomEvents();
-        
+
         customEventsLoaded = true;
     }
-    public static void ExecuteEvents(SelectableLevel newLevel) {
+    public static void ExecuteEvents(SelectableLevel newLevel)
+    {
         HullManager.LogBox("EVENT EXECUTION");
 
         levelModifier = new LevelModifier(newLevel);
@@ -117,25 +121,31 @@ public abstract class EventsManager {
         Plugin.Mls.LogInfo($"Round events: {eventCount}");
 
         Plugin.Mls.LogInfo($"Start event selection..");
-        
+
         RandomSelector.InitializeWeights();
 
-        while (chosenEvents.Count() < eventCount) {
+        while (chosenEvents.Count() < eventCount)
+        {
             var newEvent = RandomSelector.GetRandomGameEvent();
-            if (newEvent == null) {
+            if (newEvent == null)
+            {
                 Plugin.Mls.LogInfo($"Event selection failed. No events left to execute..");
                 break;
             }
             var hullEvent = EventDictionary.FirstOrDefault(e => e.GetID() == newEvent);
-            if (hullEvent == null) {
+            if (hullEvent == null)
+            {
                 Plugin.Mls.LogWarning($"Couldn't find event {newEvent} in event dictionary!");
                 continue;
             }
             Plugin.Mls.LogInfo($"Got event: {hullEvent.GetID()}");
             bool success = hullEvent.Execute(newLevel, levelModifier);
-            if (success) {
+            if (success)
+            {
                 chosenEvents.Add(hullEvent);
-            } else {
+            }
+            else
+            {
                 Plugin.Mls.LogInfo($"Skipping event: {hullEvent.GetID()}");
             }
         }
@@ -152,14 +162,17 @@ public abstract class EventsManager {
         PrintDebugLogs(newLevel);
     }
 
-    private static int RefreshDaysPassed() {
+    private static int RefreshDaysPassed()
+    {
         DaysPassed = HullManager.Instance.timeOfDay.quotaVariables.deadlineDaysAmount - HullManager.Instance.timeOfDay.daysUntilDeadline;
         Plugin.Mls.LogInfo($"Days passed: {DaysPassed}");
         return DaysPassed;
     }
-    private static void UpdateLevelSettings() {
+    private static void UpdateLevelSettings()
+    {
         Plugin.Mls.LogInfo($"Level Settings config value: {Plugin.LevelSettings}");
-        switch (Plugin.LevelSettings) {
+        switch (Plugin.LevelSettings)
+        {
             case "hullbreaker":
                 Plugin.Mls.LogInfo("Applying Hullbreaker level settings");
                 levelModifier.AddMaxEnemyPower(16);
@@ -181,25 +194,14 @@ public abstract class EventsManager {
         }
     }
 
-    private static void PrintDebugLogs(SelectableLevel level) {
+    private static void PrintDebugLogs(SelectableLevel level)
+    {
         HullManager.LogEnemies(level.Enemies, "INSIDE ENEMIES");
         HullManager.LogEnemies(level.OutsideEnemies, "OUTSIDE ENEMIES");
         HullManager.LogEnemies(level.DaytimeEnemies, "DAYTIME ENEMIES");
 
         HullManager.LogScrapRarity(level.spawnableScrap, "LOOT TABLE");
-        
-        HullManager.LogMapHazards(level.spawnableMapObjects.ToList(), "MAP HAZARDS");
-    }
 
-    // LethalQuantities Compatability Patch
-    [HarmonyPatch(typeof(RoundState), nameof(RoundState.OnDestroy))]
-    [HarmonyPrefix]
-    public static void RoundStateOnDestroyPrefix() {
-        if (levelModifier == null) {
-            Plugin.Mls.LogInfo("No levelModifier found. No modifications to revert.");
-            return;
-        }
-        levelModifier.UndoModificationsEarly();
-        levelModifier = null;
+        HullManager.LogMapHazards(level.spawnableMapObjects.ToList(), "MAP HAZARDS");
     }
 }

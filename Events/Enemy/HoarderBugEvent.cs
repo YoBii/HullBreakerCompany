@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Enemy;
 
 public class HoarderBugEvent : HullEvent
 {
-    public HoarderBugEvent() {
+    public HoarderBugEvent()
+    {
         ID = "HoarderBug";
         Weight = 30;
         Description = "Spawns a lot of Hoarderbugs while still allowing other enemies to spawn.";
@@ -29,7 +28,8 @@ public class HoarderBugEvent : HullEvent
     }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(HoarderBugAI)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(HoarderBugAI))))
+        {
             return false;
         }
         levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(HoarderBugAI)), 100);

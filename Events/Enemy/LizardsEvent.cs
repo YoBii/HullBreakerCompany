@@ -1,13 +1,12 @@
-﻿using System;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
 
 namespace HullBreakerCompany.Events.Enemy;
 
 public class LizardsEvent : HullEvent
 {
-    public LizardsEvent() {
+    public LizardsEvent()
+    {
         ID = "Lizards";
         Weight = 10;
         Description = "Increases Puffer spawn chance and there's more of them.";
@@ -24,15 +23,19 @@ public class LizardsEvent : HullEvent
     }
     public override bool Execute(SelectableLevel level, LevelModifier levelModifier)
     {
-        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(PufferAI)))) {
+        if (!levelModifier.IsEnemySpawnable(Util.getEnemyByType(typeof(PufferAI))))
+        {
             return false;
         }
         levelModifier.AddEnemyComponentRarity(Util.getEnemyByType(typeof(PufferAI)), 100);
         levelModifier.AddEnemyComponentMaxCount(Util.getEnemyByType(typeof(PufferAI)), 5);
         levelModifier.AddEnemyComponentPower(Util.getEnemyByType(typeof(PufferAI)), 0);
-        if (Plugin.ColoredEventMessages) {
+        if (Plugin.ColoredEventMessages)
+        {
             HullManager.AddChatEventMessageColored(this, "red");
-        } else {
+        }
+        else
+        {
             HullManager.AddChatEventMessage(this);
         }
         return true;

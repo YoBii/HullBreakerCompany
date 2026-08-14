@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using HullBreakerCompany.Hull;
 using System.Collections.Generic;
-using System.Linq;
-using HullBreakerCompany.Hull;
-using UnityEngine.UIElements.Collections;
 
 namespace HullBreakerCompany.Events.Integrated.Surfaced;
 
 public class UrchinEvent : HullEvent
 {
-    public UrchinEvent() {
+    public UrchinEvent()
+    {
         ID = "Urchin";
         Weight = 10;
         Description = "Increases Urching spawn frequency. Spawns up to ten early.";
